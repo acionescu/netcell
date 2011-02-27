@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE command SYSTEM "../../../../dtds/script-dao-commands.dtd">
+<command name="test.http.save-url" type="SQL.QUERY">
+         <parameters>
+                     <parameter name="url" />
+               </parameters>
+      <script>
+      insert into pending_urls values('$url')
+   </script>
+</command>

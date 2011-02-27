@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE files SYSTEM "../dtds/entry-point.dtd">
+
+<files>
+	<file>root/entities/core-entities.xml</file>
+	<file>root/entities/entities2.xml</file>
+	<file>root/entities/generated-entities.xml</file>
+</files>

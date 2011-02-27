@@ -1,0 +1,42 @@
+
+#set($configData = $entityDefinition.getConfigData())
+<entity type="config-data">
+<property name="templateId" value="$configData.getTemplateId()"/>
+   #set($userInput = $configData.getUserInputParams()) #if($userInput&& $userInput.size() > 0)
+         <property name="userInputParams">
+            <value>
+               <map>
+                 #foreach($userInputParameter in $userInput.values())
+                     #parse("root/config/datasources/templates/user-input-parameter-template.xml")
+                 #end
+               </map>
+            </value>
+         </property>
+      #end
+         
+      #set($dynamicParameters = $configData.getDynamicParams())
+      #if($dynamicParameters && $dynamicParameters.size() > 0)
+         <property name="dynamicParams">
+            <value>
+               <map>
+                  #foreach($dynamicParameter in $dynamicParameters.values())
+                     #parse("root/config/datasources/templates/dynamic-parameter-template.xml")
+                  #end
+               </map>
+            </value>
+         </property>
+      #end 
+         
+      #set($staticParameters = $configData.getStaticConfigParams())
+      #if($staticParameters && $staticParameters.size() > 0)
+         <property name="staticConfigParams">
+            <value>
+               <map>
+                 #foreach($staticParameter in $staticParameters.values())
+                     #parse("root/config/datasources/templates/static-parameters-template.xml")
+                 #end
+               </map>
+            </value>
+         </property>
+      #end   
+      </entity>

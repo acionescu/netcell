@@ -1,0 +1,45 @@
+<!ELEMENT list ( value* , value-ref*) >
+
+<!ELEMENT map ( entry+ ) >
+
+<!ELEMENT property ( value? ) >
+<!ATTLIST property name CDATA #REQUIRED >
+<!ATTLIST property value CDATA #IMPLIED >
+<!ATTLIST property value-ref NMTOKEN #IMPLIED >
+<!ATTLIST property depth CDATA #IMPLIED >
+
+<!ELEMENT entry ( value? , value-ref?, value-type? ) >
+<!ATTLIST entry key NMTOKEN #REQUIRED >
+<!ATTLIST entry value CDATA #IMPLIED >
+<!ATTLIST entry type CDATA #IMPLIED >
+
+<!ELEMENT entity ( value? | entity* | entity-ref* | property* )* >
+<!ATTLIST entity type NMTOKEN #IMPLIED >
+<!ATTLIST entity logic-type NMTOKEN #IMPLIED >
+<!ATTLIST entity id NMTOKEN #IMPLIED >
+<!ATTLIST entity value NMTOKEN #IMPLIED >
+<!ATTLIST entity class NMTOKEN #IMPLIED >
+<!ATTLIST entity init-method CDATA #IMPLIED >
+<!ATTLIST entity destroy-method CDATA #IMPLIED >
+
+<!ELEMENT entity-ref EMPTY >
+<!ATTLIST entity-ref type NMTOKEN #IMPLIED >
+<!ATTLIST entity-ref ref-id NMTOKEN #REQUIRED >
+
+<!ELEMENT entities ( entity* ) >
+
+<!ELEMENT resource ( property* ) >
+<!ATTLIST resource class NMTOKEN #REQUIRED >
+<!ATTLIST resource id NMTOKEN #IMPLIED >
+<!ATTLIST resource init-method CDATA #IMPLIED >
+<!ATTLIST resource destroy-method CDATA #IMPLIED >
+
+<!ELEMENT resources ( resource* ) >
+
+<!ELEMENT value ( #PCDATA | list | map | resource | entity )* >
+
+<!ELEMENT value-ref ( #PCDATA ) >
+
+<!ELEMENT value-type EMPTY >
+<!ATTLIST value-type value NMTOKEN #REQUIRED >
+<!ATTLIST value-type type NMTOKEN #REQUIRED >

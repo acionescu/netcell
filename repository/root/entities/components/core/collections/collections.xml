@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE entities SYSTEM "../../../../../dtds/entities.dtd">
+<entities>
+   <entity id="core.collections.get-collection-size" type="component-definition"
+      logic-type="dynamic-wrapper">
+      <entity logic-type="config">
+         <entity type="definition-params" logic-type="static-parameters">
+            <value>
+               <map>
+                  <entry key="inputParameters">
+                     <value>
+                        <list>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="collection"></property>
+                                 <property name="mandatory"
+                                    value="true"></property>
+                                 <property name="logicType"
+                                    value="PARAMETER_REFERENCE"></property>
+                                 <property name="allowedTypes">
+                                    <value>
+                                       <list>
+<!--                                          <value>List\[.*\] </value>-->
+<!--                                          <value>Context\[.*\] </value>-->
+                                          <value>List[]</value>
+                                          <value>Context[]</value>
+                                       </list>
+                                    </value>
+                                 </property>
+                              </entity>
+                           </value>
+                        </list>
+                     </value>
+                  </entry>
+                  <entry key="executionEntity">
+                     <value-ref>getCollectionSize</value-ref>
+                  </entry>
+                  <entry key="outputParameters">
+                     <value>
+                        <list>
+                           <value>
+                              <entity type="output-parameter">
+                                 <property name="name" value="size"></property>
+                                 <property name="type" value="Number"></property>
+                              </entity>
+                           </value>
+                        </list>
+                     </value>
+                  </entry>
+               </map>
+            </value>
+         </entity>
+         <entity logic-type="original-input-name">
+            <value>inputContext</value>
+         </entity>
+         <entity logic-type="executor">
+            <entity-ref ref-id="executionEntityWrapper" />
+         </entity>
+      </entity>
+   </entity>
+   <entity id="core.collections.get-list-value" type="component-definition"
+      logic-type="dynamic-wrapper">
+      <entity logic-type="config">
+         <entity type="definition-params" logic-type="static-parameters">
+            <value>
+               <map>
+                  <entry key="inputParameters">
+                     <value>
+                        <list>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="list"></property>
+                                 <property name="mandatory"
+                                    value="true"></property>
+                                 <property name="logicType"
+                                    value="PARAMETER_REFERENCE"></property>
+                                 <property name="allowedTypes">
+                                    <value>
+                                       <list>
+<!--                                          <value>List\[.*\]</value>-->
+ <value>List[]</value>
+                                       </list>
+                                    </value>
+                                 </property>
+                              </entity>
+                           </value>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="index"></property>
+                                 <property name="mandatory"
+                                    value="true"></property>
+                                 <property name="type" value="Number"></property>
+                              </entity>
+                           </value>
+                        </list>
+                     </value>
+                  </entry>
+                  <entry key="executionEntity">
+                     <value-ref>getValueFromList</value-ref>
+                  </entry>
+                  <entry key="outputParameters">
+                     <value>
+                        <list>
+                           <value>
+                              <entity type="output-parameter">
+                                 <property name="name" value="value"></property>
+                                 <property name="matchingTypeParamName"
+                                    value="list.nestedType"></property>
+                              </entity>
+                           </value>
+                        </list>
+                     </value>
+                  </entry>
+               </map>
+            </value>
+         </entity>
+         <entity logic-type="original-input-name">
+            <value>inputContext</value>
+         </entity>
+         <entity logic-type="executor">
+            <entity-ref ref-id="executionEntityWrapper" />
+         </entity>
+      </entity>
+   </entity>
+   <entity id="core.collections.append-to-list" type="component-definition"
+      logic-type="dynamic-wrapper">
+      <entity logic-type="config">
+         <entity type="definition-params" logic-type="static-parameters">
+            <value>
+               <map>
+                  <entry key="inputParameters">
+                     <value>
+                        <list>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="list"></property>
+                                 <property name="mandatory"
+                                    value="true"></property>
+                                 <property name="logicType"
+                                    value="PARAMETER_REFERENCE"></property>
+                                 <property name="allowedTypes">
+                                    <value>
+                                       <list>
+<!--                                          <value>List\[.*\] </value>-->
+<value>List[]</value>
+                                       </list>
+                                    </value>
+                                 </property>
+                              </entity>
+                           </value>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="value"></property>
+                                 <property name="mandatory"
+                                    value="true"></property>
+                                 <property name="allowedTypes">
+                                    <value>
+                                       <list>
+<!--                                          <value>.*</value>-->
+<value>Any</value>
+                                       </list>
+                                    </value>
+                                 </property>
+                              </entity>
+                           </value>
+                        </list>
+                     </value>
+                  </entry>
+                  <entry key="executionEntity">
+                     <value-ref>appendToList</value-ref>
+                  </entry>
+               </map>
+            </value>
+         </entity>
+         <entity logic-type="original-input-name">
+            <value>inputContext</value>
+         </entity>
+         <entity logic-type="executor">
+            <entity-ref ref-id="executionEntityWrapper" />
+         </entity>
+      </entity>
+   </entity>
+   <entity id="core.collections.concatenate-two-lists" type="component-definition"
+      logic-type="dynamic-wrapper">
+      <entity logic-type="config">
+         <entity type="definition-params" logic-type="static-parameters">
+            <value>
+               <map>
+                  <entry key="inputParameters">
+                     <value>
+                        <list>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="first"></property>
+                                 <property name="mandatory"
+                                    value="true"></property>
+                                 <property name="logicType"
+                                    value="PARAMETER_REFERENCE"></property>
+                                 <property name="allowedTypes">
+                                    <value>
+                                       <list>
+<!--                                          <value>List\[.*\]</value>-->
+<value>List[]</value>
+                                       </list>
+                                    </value>
+                                 </property>
+                              </entity>
+                           </value>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="last"></property>
+                                 <property name="mandatory"
+                                    value="true"></property>
+                                 <property name="logicType"
+                                    value="PARAMETER_REFERENCE"></property>
+                                 <property name="allowedTypes">
+                                    <value>
+                                       <list>
+<!--                                          <value>List\[.*\]</value>-->
+<value>List[]</value>
+                                       </list>
+                                    </value>
+                                 </property>
+                              </entity>
+                           </value>
+                        </list>
+                     </value>
+                  </entry>
+                  <entry key="executionEntity">
+                     <value-ref>concatenateTwoLists</value-ref>
+                  </entry>
+                  <entry key="outputParameters">
+                     <value>
+                        <list>
+                           <value>
+                              <entity type="output-parameter">
+                                 <property name="name" value="result"></property>
+                                 <property name="matchingTypeParamName"
+                                    value="first"></property>
+                              </entity>
+                           </value>
+                        </list>
+                     </value>
+                  </entry>
+               </map>
+            </value>
+         </entity>
+         <entity logic-type="original-input-name">
+            <value>inputContext</value>
+         </entity>
+         <entity logic-type="executor">
+            <entity-ref ref-id="executionEntityWrapper" />
+         </entity>
+      </entity>
+   </entity>
+   <entity id="core.collections.add-to-context" type="component-definition"
+      logic-type="dynamic-wrapper">
+      <entity logic-type="config">
+         <entity type="definition-params" logic-type="static-parameters">
+            <value>
+               <map>
+                  <entry key="inputParameters">
+                     <value>
+                        <list>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="context"></property>
+                                 <property name="mandatory"
+                                    value="true"></property>
+                                 <property name="logicType"
+                                    value="PARAMETER_REFERENCE"></property>
+                                 <property name="allowedTypes">
+                                    <value>
+                                       <list>
+<!--                                          <value>Context\[.*\]</value>-->
+<value>Context[]</value>
+                                       </list>
+                                    </value>
+                                 </property>
+                              </entity>
+                           </value>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="name"></property>
+                                 <property name="type" value="String"></property>
+                                 <property name="mandatory"
+                                    value="true"></property>
+                              </entity>
+                           </value>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="value"></property>
+                                 <property name="mandatory"
+                                    value="true"></property>
+                                 <property name="logicType"
+                                    value="PARAMETER_REFERENCE"></property>
+                                 <property name="allowedTypes">
+                                    <value>
+                                       <list>
+<!--                                          <value>.*</value>-->
+<value>Any</value>
+                                       </list>
+                                    </value>
+                                 </property>
+                              </entity>
+                           </value>
+                        </list>
+                     </value>
+                  </entry>
+                  <entry key="executionEntity">
+                     <value>
+                        <entity logic-type="dynamic-wrapper">
+                           <entity logic-type="config">
+                              <entity logic-type="static-parameters">
+                                 <value>
+                                    <map>
+                                       <entry key="paramAsResource"
+                                          value="context" />
+                                       <entry key="method" value="put" />
+                                       <entry key="argsOrder">
+                                          <value>
+                                             <list>
+                                                <value>name</value>
+                                                <value>value</value>
+                                             </list>
+                                          </value>
+                                       </entry>
+                                       <entry key="argsTypes">
+                                          <value>
+                                             <list>
+                                                <value>java.lang.String</value>
+                                                <value>java.lang.Object</value>
+                                             </list>
+                                          </value>
+                                       </entry>
+                                    </map>
+                                 </value>
+                              </entity>
+                              <entity logic-type="original-input-name">
+                                 <value>argsContext</value>
+                              </entity>
+                              <entity logic-type="executor">
+                                 <entity-ref ref-id="methodCaller" />
+                              </entity>
+                           </entity>
+                        </entity>
+                     </value>
+                  </entry>
+               </map>
+            </value>
+         </entity>
+         <entity logic-type="original-input-name">
+            <value>inputContext</value>
+         </entity>
+         <entity logic-type="executor">
+            <entity-ref ref-id="executionEntityWrapper" />
+         </entity>
+      </entity>
+   </entity>
+   
+   <entity id="core.collections.get-context-value" type="component-definition"
+      logic-type="dynamic-wrapper">
+      <entity logic-type="config">
+         <entity type="definition-params" logic-type="static-parameters">
+            <value>
+               <map>
+                  <entry key="inputParameters">
+                     <value>
+                        <list>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="context"></property>
+                                 <property name="mandatory"
+                                    value="true"></property>
+                                 <property name="logicType"
+                                    value="PARAMETER_REFERENCE"></property>
+                                 <property name="allowedTypes">
+                                    <value>
+                                       <list>
+<!--                                          <value>Context\[.*\] </value>-->
+<value>Context[]</value>
+                                       </list>
+                                    </value>
+                                 </property>
+                              </entity>
+                           </value>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="name"></property>
+                                 <property name="type" value="String"></property>
+                                 <property name="mandatory"
+                                    value="true"></property>
+                              </entity>
+                           </value>
+                        </list>
+                     </value>
+                  </entry>
+                  <entry key="executionEntity">
+                     <value>
+                        <entity logic-type="dynamic-wrapper">
+                           <entity logic-type="config">
+                              <entity logic-type="static-parameters">
+                                 <value>
+                                    <map>
+                                       <entry key="paramAsResource"
+                                          value="context" />
+                                       <entry key="method" value="getValue" />
+                                       <entry key="argsOrder">
+                                          <value>
+                                             <list>
+                                                <value>name</value>
+                                             </list>
+                                          </value>
+                                       </entry>
+                                       <entry key="responseMappingName" value="value"></entry>
+                                    </map>
+                                 </value>
+                              </entity>
+                              <entity logic-type="original-input-name">
+                                 <value>argsContext</value>
+                              </entity>
+                              <entity logic-type="executor">
+                                 <entity-ref ref-id="methodCaller" />
+                              </entity>
+                           </entity>
+                        </entity>
+                     </value>
+                  </entry>
+                  <entry key="outputParameters">
+                     <value>
+                        <list>
+                           <value>
+                              <entity type="output-parameter">
+                                 <property name="name" value="value"></property>
+<!--                                 <property name="type" value=".*"></property>-->
+<property name="type" value="Any"></property>
+                              </entity>
+                           </value>
+                        </list>
+                     </value>
+                  </entry>
+               </map>
+            </value>
+         </entity>
+         <entity logic-type="original-input-name">
+            <value>inputContext</value>
+         </entity>
+         <entity logic-type="executor">
+            <entity-ref ref-id="executionEntityWrapper" />
+         </entity>
+      </entity>
+   </entity>
+</entities>

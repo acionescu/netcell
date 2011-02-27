@@ -1,0 +1,43 @@
+<entity type="component" logic-type="component">
+	<entity logic-type="dynamic-wrapper">
+		<entity logic-type="config">
+			<entity logic-type="executor">
+				<entity-ref ref-id="${componentConfig.getComponent()}" />
+			</entity>
+<!--			<entity logic-type="original-input-name">-->
+<!--				<value>argsContext</value>-->
+<!--			</entity>-->
+			#set($staticParams = ${componentConfig.getStaticInputParams()})
+			#if($staticParams && $staticParams.size() > 0)
+			<entity logic-type="static-parameters">
+				<value>
+					<map>
+						#foreach( $staticParamEntry in $staticParams.entrySet() )
+							#set($valueType = $staticParamEntry.getValue())
+							<entry key="$staticParamEntry.getKey()">
+                                                                                                                  #if($valueType.getValue())
+								<value-type value="$escapeUtils.escapeXml($valueType.getValue())" type="$valueType.getType()"/>
+							         #else
+                                                                                                                     <value-type value="" />
+                                                                                                                  #end
+                                                                                                         </entry>
+						#end
+					</map>
+				</value>
+			</entity>
+			#end
+			#set($dynamicParams = ${componentConfig.getDynamicInputParams()})
+			#if($dynamicParams && $dynamicParams.size() > 0)
+			<entity logic-type="dynamic-parameters">
+				<value>
+					<map>
+						#foreach( $dynamicParamEntry in $dynamicParams.entrySet() )
+							<entry key="$dynamicParamEntry.getKey()" value="$dynamicParamEntry.getValue()"/>
+						#end
+					</map>
+				</value>
+			</entity>
+			#end
+		</entity>
+	</entity>
+</entity>

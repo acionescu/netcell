@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE command SYSTEM "../../../../dtds/script-dao-commands.dtd">
+<command name="ro.problems.data.get-id-for-status" type="SQL.QUERY">
+         <parameters>
+                     <parameter name="status" />
+               </parameters>
+      <script>
+      select * from statuses where status='$status'
+   </script>
+</command>

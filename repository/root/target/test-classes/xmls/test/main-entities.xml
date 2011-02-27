@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE resources SYSTEM "../../dtds/workflow-engine.dtd">
+
+<resources>
+	<resource id="dynamicExecutionEntity" class="ro.zg.util.execution.test.DynamicExecutionEntity"></resource>
+</resources>

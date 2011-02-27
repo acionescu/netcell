@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE resources SYSTEM "../../dtds/workflow-engine.dtd">
+
+
+<resources>
+	<resource id="CommandRouter" class="ro.zg.synapse.control.commands.executors.CommandRouter">
+		<property name="commandExecutors">
+			<value>
+				<map>
+					<entry key="execute">
+						<value-ref>WorkFlowRequestExecutor</value-ref>
+					</entry>
+				</map>
+			</value>
+		</property>
+	</resource>
+	
+	<resource id="CommandRouterContext" class="ro.zg.synapse.engine.EntityExecutionContextImpl">
+		<property name="exceptionHandler" value-ref="BorderExceptionHandler"></property>
+		<property name="wrappedExecutionEntity" value-ref="CommandRouter"></property>
+	</resource>
+	
+	<resource id="CommandRouterWrapper" class="ro.zg.synapse.control.commands.executors.CommandExecutorWrapper">
+		<property name="entityExecutionContext" value-ref="CommandRouterContext"></property>
+	</resource>
+	
+	<!-- controller -->
+	<resource id="CommandController" class="ro.zg.synapse.control.commands.executors.CommandController">
+		<property name="executorComponents">
+			<value>
+				<map>
+					<entry key="execute">
+						<value-ref>WorkFlowRequestExecutorComponent</value-ref>
+					</entry>
+				</map>
+			</value>
+		</property>
+	</resource>
+	
+		
+	<resource id="CommandControllerContext" class="ro.zg.synapse.engine.EntityExecutionContextImpl">
+		<property name="exceptionHandler" value-ref="BorderExceptionHandler"></property>
+		<property name="wrappedExecutionEntity" value-ref="CommandController"></property>
+	</resource>
+	
+	<resource id="CommandControllerWrapper" class="ro.zg.synapse.control.commands.executors.CommandExecutorWrapper">
+		<property name="entityExecutionContext" value-ref="CommandControllerContext"></property>
+	</resource>
+	
+	<!-- execute -->
+	<resource id="WorkFlowRequestExecutor" class="ro.zg.synapse.control.commands.executors.WorkFlowRequestExecutor"></resource>
+	
+	
+</resources>

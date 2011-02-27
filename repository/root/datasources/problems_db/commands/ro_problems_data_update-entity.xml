@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE command SYSTEM "../../../../dtds/script-dao-commands.dtd">
+<command name="ro.problems.data.update-entity" type="SQL.UPDATE">
+         <parameters>
+                     <parameter name="entityId" />
+                     <parameter name="title" />
+                     <parameter name="content" />
+               </parameters>
+      <script>
+      update entities
+set title='$title'
+,content='$content'
+where id = $entityId
+   </script>
+</command>

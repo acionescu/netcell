@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE resources SYSTEM "../../dtds/workflow-engine.dtd">
+
+<resources>
+	<resource id="CasResponseFormatter" class="ro.zg.netcell.control.commands.formatters.AbstractObjectFormatter" init-method="init">
+		<property name="formatters">
+			<value>
+				<map>
+					<entry key="CommandResponse">
+						<value-ref>CommandResponseFormatter</value-ref>
+					</entry>
+					<entry key="GenericNameValue">
+						<value-ref>CasGenericNameValueFormatter</value-ref>
+					</entry>
+					<entry key="Collection">
+						<value-ref>CollectionFormatter</value-ref>
+					</entry>
+				</map>
+			</value>
+		</property>
+		<property name="defaultFormatter" value-ref="reflectiveFormatter"></property>
+	</resource>
+	
+	<resource id="reflectiveFormatter" class="ro.zg.netcell.control.commands.formatters.ReflectiveFormatter"></resource>
+
+	<resource id="CasGenericNameValueFormatter" class="ro.zg.netcell.control.commands.formatters.GenericNameValueFormatter">
+
+	</resource>
+	
+	<resource id="CommandResponseFormatter" class="ro.zg.netcell.control.commands.formatters.CommandResponseFormatter">
+		
+	</resource>
+	
+	<resource id="CollectionFormatter" class="ro.zg.netcell.control.commands.formatters.CollectionFormatter">
+		<property name="startElement" value="["></property>
+		<property name="endElement" value="]"></property>
+	</resource>
+	
+</resources>

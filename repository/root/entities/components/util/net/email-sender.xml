@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE entities SYSTEM "../../../../../dtds/entities.dtd">
+<entities>
+   <entity id="util.net.email-sender" type="component-definition"
+      logic-type="dynamic-wrapper">
+      <entity logic-type="config">
+         <entity type="definition-params" logic-type="static-parameters">
+            <value>
+               <map>
+                  <entry key="inputParameters">
+                     <value>
+                        <list>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="recipients"></property>
+                                 <property name="type" value="List[String]"></property>
+                                 <property name="mandatory"
+                                    value="true"></property>
+                              </entity>
+                           </value>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="subject"></property>
+                                 <property name="type" value="String"></property>
+                                 <property name="mandatory"
+                                    value="true"></property>
+                              </entity>
+                           </value>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="message"></property>
+                                 <property name="type" value="String"></property>
+                                 <property name="mandatory"
+                                    value="true"></property>
+                              </entity>
+                           </value>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="from"></property>
+                                 <property name="type" value="String"></property>
+                                 <property name="mandatory"
+                                    value="true"></property>
+                              </entity>
+                           </value>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="smtpHostName"></property>
+                                 <property name="type" value="String"></property>
+                                 <property name="mandatory"
+                                    value="true"></property>
+                              </entity>
+                           </value>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="username"></property>
+                                 <property name="type" value="String"></property>
+                                 <property name="mandatory"
+                                    value="true"></property>
+                              </entity>
+                           </value>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="password"></property>
+                                 <property name="type" value="String"></property>
+                                 <property name="mandatory"
+                                    value="true"></property>
+                              </entity>
+                           </value>
+                        </list>
+                     </value>
+                  </entry>
+                  <entry key="executionEntity">
+                     <value>
+                        <entity logic-type="dynamic-wrapper">
+                           <entity logic-type="config">
+                              <entity logic-type="static-parameters">
+                                 <value>
+                                    <map>
+                                       <entry key="resource">
+                                         <value>
+                                          <resource id="email-sender" class="ro.zg.util.mail.SendMailWithAuthentication">
+                                             <property name="useSSL" value="true"></property>
+                                          </resource>
+                                         </value>
+                                       </entry>
+                                       <entry key="method" value="postMail" />
+                                       <entry key="argsOrder">
+                                          <value>
+                                             <list>
+                                                <value>recipients</value>
+                                                <value>subject</value>
+                                                <value>message</value>
+                                                <value>from</value>
+                                                <value>smtpHostName</value>
+                                                <value>username</value>
+                                                <value>password</value>
+                                             </list>
+                                          </value>
+                                       </entry>
+                                       <entry key="argsTypes">
+                                          <value>
+                                             <list>
+                                                <value>java.util.List</value>
+                                                <value>java.lang.String</value>
+                                                <value>java.lang.String</value>
+                                                <value>java.lang.String</value>
+                                                <value>java.lang.String</value>
+                                                <value>java.lang.String</value>
+                                                <value>java.lang.String</value>
+                                             </list>
+                                          </value>
+                                       </entry>
+                                    </map>
+                                 </value>
+                              </entity>
+                              <entity logic-type="original-input-name">
+                                 <value>argsContext</value>
+                              </entity>
+                              <entity logic-type="executor">
+                                 <entity-ref ref-id="methodCaller" />
+                              </entity>
+                           </entity>
+                        </entity>
+                     </value>
+                  </entry>
+               </map>
+            </value>
+         </entity>
+         <entity logic-type="original-input-name">
+            <value>inputContext</value>
+         </entity>
+         <entity logic-type="executor">
+            <entity-ref ref-id="executionEntityWrapper" />
+         </entity>
+      </entity>
+   </entity>
+</entities>

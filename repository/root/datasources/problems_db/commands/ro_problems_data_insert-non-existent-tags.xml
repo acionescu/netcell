@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE command SYSTEM "../../../../dtds/script-dao-commands.dtd">
+<command name="ro.problems.data.insert-non-existent-tags" type="SQL.UPDATE">
+         <parameters>
+                     <parameter name="tagsList" />
+                     <parameter name="tagsWithIds" />
+               </parameters>
+      <script>
+      #foreach($t in $tagsList.getValues())
+#if(!($tagsWithIds.containsValue("$t")))
+insert into tags(tag) values('$t');
+#end
+#end
+   </script>
+</command>

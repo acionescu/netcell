@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE command SYSTEM "../../../../dtds/script-dao-commands.dtd">
+<command name="test.http.get-next-symbol-id" type="SQL.QUERY">
+      <script>
+      select nextval('symbols_seq') next_symbol_id
+   </script>
+</command>

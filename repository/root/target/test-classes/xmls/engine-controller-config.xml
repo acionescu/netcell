@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE files SYSTEM "../dtds/entry-point.dtd">
+
+<files>
+	<file>xmls/control/startup-config.xml</file>
+	<file>xmls/control/command-executors.xml</file>
+	<file>xmls/control/error-responses.xml</file>
+	<file>xmls/control/exception-handlers.xml</file>
+	<file>xmls/control/core-components.xml</file>
+</files>

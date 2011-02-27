@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE entities SYSTEM "../../dtds/entities.dtd">
+<entities>
+   <entity id="test.cmmdc" type="workflow-definition" logic-type="dynamic-wrapper">
+      <entity type="description">
+         <value>$workflowDefinition.getDescription()</value>
+      </entity>
+      <entity logic-type="config">
+         <entity type="definition-params" logic-type="static-parameters">
+            <value>
+               <map>
+                  <entry key="inputParameters">
+                     <value>
+                        <list>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="a"></property>
+                                 <property name="type" value="Number"></property>
+                                 <property name="mandatory"
+                                    value="true"></property>
+                              </entity>
+                           </value>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="b"></property>
+                                 <property name="type" value="Number"></property>
+                                 <property name="mandatory"
+                                    value="true"></property>
+                              </entity>
+                           </value>
+                        </list>
+                     </value>
+                  </entry>
+                  <entry key="localParameters">
+                     <value>
+                        <list>
+                           <value>
+                              <entity type="local-parameter">
+                                 <property name="name" value="cmmdc"></property>
+                                 <property name="type" value="Number"></property>
+                              </entity>
+                           </value>
+                        </list>
+                     </value>
+                  </entry>
+                  <entry key="executionEntity">
+                     <value>
+                        <entity type="workflow" logic-type="dynamic-wrapper">
+                           <entity logic-type="config">
+                              <entity logic-type="executor">
+                                 <entity-ref ref-id="workFlow" />
+                              </entity>
+                              <entity logic-type="original-input-name">
+                                 <value>fullInputContext</value>
+                              </entity>
+                              <entity type="workflow-params"
+                                 logic-type="static-parameters">
+                                 <value>
+                                    <map>
+                                       <entry key="defaultEntryPointId"
+                                          value="comparator_0">
+                                       </entry>
+                                       <entry key="components">
+                                          <value>
+                                             <map>
+                                                <entry key="comparator_0">
+                                                   <value>
+                                                      <entity
+                                                         type="workflow-component">
+                                                         <entity
+                                                            type="component"
+                                                            logic-type="component">
+                                                            <entity
+                                                               logic-type="dynamic-wrapper">
+                                                               <entity
+                                                                  logic-type="config">
+                                                                  <entity
+                                                                     logic-type="executor">
+                                                                     <entity-ref
+                                                                        ref-id="core.logic.comparator" />
+                                                                  </entity>
+                                                                  <!--			<entity logic-type="original-input-name">-->
+                                                                  <!--				<value>argsContext</value>-->
+                                                                  <!--			</entity>-->
+                                                                  <entity
+                                                                     logic-type="dynamic-parameters">
+                                                                     <value>
+                                                                        <map>
+                                                                           <entry key="a" value="a" />
+                                                                           <entry key="b" value="b" />
+                                                                        </map>
+                                                                     </value>
+                                                                  </entity>
+                                                               </entity>
+                                                            </entity>
+                                                         </entity>
+                                                         <entity
+                                                            type="flow-logic"
+                                                            logic-type="flow-logic">
+                                                            <property
+                                                               name="exitPointPrmName"
+                                                               value="exit" />
+                                                            <property
+                                                               name="exitValuesMappings">
+                                                               <value>
+                                                                  <map>
+                                                                     <entry
+                                                                        key="LESS">
+                                                                        <value>
+                                                                           <entity type="exit-point-mapping">
+                                                                              <property name="exitPointMapping" value="wrong params"></property>
+                                                                           </entity>
+                                                                        </value>
+                                                                     </entry>
+                                                                     <entry
+                                                                        key="EQUAL">
+                                                                        <value>
+                                                                           <entity type="exit-point-mapping">
+                                                                              <property name="nextComponentId" value="add_8"></property>
+                                                                           </entity>
+                                                                        </value>
+                                                                     </entry>
+                                                                     <entry
+                                                                        key="GREATER">
+                                                                        <value>
+                                                                           <entity type="exit-point-mapping">
+                                                                              <property name="nextComponentId" value="modulo_3"></property>
+                                                                           </entity>
+                                                                        </value>
+                                                                     </entry>
+                                                                  </map>
+                                                               </value>
+                                                            </property>
+                                                         </entity>
+                                                      </entity>
+                                                   </value>
+                                                </entry>
+                                                <entry key="modulo_3">
+                                                   <value>
+                                                      <entity
+                                                         type="workflow-component">
+                                                         <entity
+                                                            type="component"
+                                                            logic-type="component">
+                                                            <entity
+                                                               logic-type="dynamic-wrapper">
+                                                               <entity
+                                                                  logic-type="config">
+                                                                  <entity
+                                                                     logic-type="executor">
+                                                                     <entity-ref
+                                                                        ref-id="util.math.modulo" />
+                                                                  </entity>
+                                                                  <!--			<entity logic-type="original-input-name">-->
+                                                                  <!--				<value>argsContext</value>-->
+                                                                  <!--			</entity>-->
+                                                                  <entity
+                                                                     logic-type="dynamic-parameters">
+                                                                     <value>
+                                                                        <map>
+                                                                           <entry key="a" value="a" />
+                                                                           <entry key="b" value="b" />
+                                                                        </map>
+                                                                     </value>
+                                                                  </entity>
+                                                               </entity>
+                                                            </entity>
+                                                         </entity>
+                                                         <entity
+                                                            logic-type="output-params-mappings">
+                                                            <value>
+                                                               <map>
+                                                                  <entry
+                                                                     key="exit"
+                                                                     value="rest" />
+                                                               </map>
+                                                            </value>
+                                                         </entity>
+                                                         <entity
+                                                            type="flow-logic"
+                                                            logic-type="flow-logic">
+                                                            <property
+                                                               name="nextComponentId"
+                                                               value="comparator_5" />
+                                                         </entity>
+                                                      </entity>
+                                                   </value>
+                                                </entry>
+                                                <entry key="comparator_5">
+                                                   <value>
+                                                      <entity
+                                                         type="workflow-component">
+                                                         <entity
+                                                            type="component"
+                                                            logic-type="component">
+                                                            <entity
+                                                               logic-type="dynamic-wrapper">
+                                                               <entity
+                                                                  logic-type="config">
+                                                                  <entity
+                                                                     logic-type="executor">
+                                                                     <entity-ref
+                                                                        ref-id="core.logic.comparator" />
+                                                                  </entity>
+                                                                  <!--			<entity logic-type="original-input-name">-->
+                                                                  <!--				<value>argsContext</value>-->
+                                                                  <!--			</entity>-->
+                                                                  <entity
+                                                                     logic-type="static-parameters">
+                                                                     <value>
+                                                                        <map>
+                                                                           <entry key="b">
+                                                                              <value-type value="0" type="String" />
+                                                                           </entry>
+                                                                        </map>
+                                                                     </value>
+                                                                  </entity>
+                                                                  <entity
+                                                                     logic-type="dynamic-parameters">
+                                                                     <value>
+                                                                        <map>
+                                                                           <entry key="a" value="rest" />
+                                                                        </map>
+                                                                     </value>
+                                                                  </entity>
+                                                               </entity>
+                                                            </entity>
+                                                         </entity>
+                                                         <entity
+                                                            type="flow-logic"
+                                                            logic-type="flow-logic">
+                                                            <property
+                                                               name="exitPointPrmName"
+                                                               value="exit" />
+                                                            <property
+                                                               name="exitValuesMappings">
+                                                               <value>
+                                                                  <map>
+                                                                     <entry
+                                                                        key="LESS">
+                                                                        <value>
+                                                                           <entity type="exit-point-mapping">
+                                                                              <property name="exitPointMapping" value="error"></property>
+                                                                           </entity>
+                                                                        </value>
+                                                                     </entry>
+                                                                     <entry
+                                                                        key="EQUAL">
+                                                                        <value>
+                                                                           <entity type="exit-point-mapping">
+                                                                              <property name="nextComponentId" value="add_8"></property>
+                                                                           </entity>
+                                                                        </value>
+                                                                     </entry>
+                                                                     <entry
+                                                                        key="GREATER">
+                                                                        <value>
+                                                                           <entity type="exit-point-mapping">
+                                                                              <property name="nextComponentId" value="add_6"></property>
+                                                                           </entity>
+                                                                        </value>
+                                                                     </entry>
+                                                                  </map>
+                                                               </value>
+                                                            </property>
+                                                         </entity>
+                                                      </entity>
+                                                   </value>
+                                                </entry>
+                                                <entry key="add_6">
+                                                   <value>
+                                                      <entity
+                                                         type="workflow-component">
+                                                         <entity
+                                                            type="component"
+                                                            logic-type="component">
+                                                            <entity
+                                                               logic-type="dynamic-wrapper">
+                                                               <entity
+                                                                  logic-type="config">
+                                                                  <entity
+                                                                     logic-type="executor">
+                                                                     <entity-ref
+                                                                        ref-id="util.math.add" />
+                                                                  </entity>
+                                                                  <!--			<entity logic-type="original-input-name">-->
+                                                                  <!--				<value>argsContext</value>-->
+                                                                  <!--			</entity>-->
+                                                                  <entity
+                                                                     logic-type="static-parameters">
+                                                                     <value>
+                                                                        <map>
+                                                                           <entry key="b">
+                                                                              <value-type value="0" type="String" />
+                                                                           </entry>
+                                                                        </map>
+                                                                     </value>
+                                                                  </entity>
+                                                                  <entity
+                                                                     logic-type="dynamic-parameters">
+                                                                     <value>
+                                                                        <map>
+                                                                           <entry key="a" value="b" />
+                                                                        </map>
+                                                                     </value>
+                                                                  </entity>
+                                                               </entity>
+                                                            </entity>
+                                                         </entity>
+                                                         <entity
+                                                            logic-type="output-params-mappings">
+                                                            <value>
+                                                               <map>
+                                                                  <entry
+                                                                     key="exit"
+                                                                     value="a" />
+                                                               </map>
+                                                            </value>
+                                                         </entity>
+                                                         <entity
+                                                            type="flow-logic"
+                                                            logic-type="flow-logic">
+                                                            <property
+                                                               name="nextComponentId"
+                                                               value="add_7" />
+                                                         </entity>
+                                                      </entity>
+                                                   </value>
+                                                </entry>
+                                                <entry key="add_7">
+                                                   <value>
+                                                      <entity
+                                                         type="workflow-component">
+                                                         <entity
+                                                            type="component"
+                                                            logic-type="component">
+                                                            <entity
+                                                               logic-type="dynamic-wrapper">
+                                                               <entity
+                                                                  logic-type="config">
+                                                                  <entity
+                                                                     logic-type="executor">
+                                                                     <entity-ref
+                                                                        ref-id="util.math.add" />
+                                                                  </entity>
+                                                                  <!--			<entity logic-type="original-input-name">-->
+                                                                  <!--				<value>argsContext</value>-->
+                                                                  <!--			</entity>-->
+                                                                  <entity
+                                                                     logic-type="static-parameters">
+                                                                     <value>
+                                                                        <map>
+                                                                           <entry key="b">
+                                                                              <value-type value="0" type="String" />
+                                                                           </entry>
+                                                                        </map>
+                                                                     </value>
+                                                                  </entity>
+                                                                  <entity
+                                                                     logic-type="dynamic-parameters">
+                                                                     <value>
+                                                                        <map>
+                                                                           <entry key="a" value="rest" />
+                                                                        </map>
+                                                                     </value>
+                                                                  </entity>
+                                                               </entity>
+                                                            </entity>
+                                                         </entity>
+                                                         <entity
+                                                            logic-type="output-params-mappings">
+                                                            <value>
+                                                               <map>
+                                                                  <entry
+                                                                     key="exit"
+                                                                     value="b" />
+                                                               </map>
+                                                            </value>
+                                                         </entity>
+                                                         <entity
+                                                            type="flow-logic"
+                                                            logic-type="flow-logic">
+                                                            <property
+                                                               name="nextComponentId"
+                                                               value="comparator_0" />
+                                                         </entity>
+                                                      </entity>
+                                                   </value>
+                                                </entry>
+                                                <entry key="add_8">
+                                                   <value>
+                                                      <entity
+                                                         type="workflow-component">
+                                                         <entity
+                                                            type="component"
+                                                            logic-type="component">
+                                                            <entity
+                                                               logic-type="dynamic-wrapper">
+                                                               <entity
+                                                                  logic-type="config">
+                                                                  <entity
+                                                                     logic-type="executor">
+                                                                     <entity-ref
+                                                                        ref-id="util.math.add" />
+                                                                  </entity>
+                                                                  <!--			<entity logic-type="original-input-name">-->
+                                                                  <!--				<value>argsContext</value>-->
+                                                                  <!--			</entity>-->
+                                                                  <entity
+                                                                     logic-type="static-parameters">
+                                                                     <value>
+                                                                        <map>
+                                                                           <entry key="b">
+                                                                              <value-type value="0" type="String" />
+                                                                           </entry>
+                                                                        </map>
+                                                                     </value>
+                                                                  </entity>
+                                                                  <entity
+                                                                     logic-type="dynamic-parameters">
+                                                                     <value>
+                                                                        <map>
+                                                                           <entry key="a" value="b" />
+                                                                        </map>
+                                                                     </value>
+                                                                  </entity>
+                                                               </entity>
+                                                            </entity>
+                                                         </entity>
+                                                         <entity
+                                                            logic-type="output-params-mappings">
+                                                            <value>
+                                                               <map>
+                                                                  <entry
+                                                                     key="exit"
+                                                                     value="cmmdc" />
+                                                               </map>
+                                                            </value>
+                                                         </entity>
+                                                         <entity
+                                                            type="flow-logic"
+                                                            logic-type="flow-logic">
+                                                            <property
+                                                               name="exitLabel"
+                                                               value="done" />
+                                                         </entity>
+                                                      </entity>
+                                                   </value>
+                                                </entry>
+                                             </map>
+                                          </value>
+                                       </entry>
+                                    </map>
+                                 </value>
+                              </entity>
+                               <entity logic-type="dynamic-parameters">
+                                 <value>
+                                    <map>
+                                       <entry key="inputContext"
+                                          value="origContext"></entry>
+                                       <entry key="entryPointId"
+                                          value="entryPointId"></entry>
+                                       <entry key="isAsyncContext"
+                                          value="isAsyncContext"></entry>
+                                    </map>
+                                 </value>
+                              </entity>
+                           </entity>
+                        </entity>
+                     </value>
+                  </entry>
+                  <entry key="outputParameters">
+                     <value>
+                        <list>
+                           <value>
+                              <entity type="output-parameter">
+                                 <property name="name" value="exit"></property>
+                                 <property name="type" value="String"></property>
+                              </entity>
+                           </value>
+                           <value>
+                              <entity type="output-parameter">
+                                 <property name="name" value="cmmdc"></property>
+                                 <property name="type" value="Number"></property>
+                              </entity>
+                           </value>
+                        </list>
+                     </value>
+                  </entry>
+               </map>
+            </value>
+         </entity>
+         <entity logic-type="original-input-name">
+            <value>inputContext</value>
+         </entity>
+         <entity logic-type="executor">
+            <entity-ref ref-id="workflowAdapterEntity" />
+         </entity>
+      </entity>
+   </entity>
+</entities>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE entities SYSTEM "../../dtds/entities.dtd">
+<entities>
+	<entity id="dynParamsTest" type="dynamic-parameters">
+		<value>
+			<map>
+				<entry key="prmName1" value="prmMapping1"></entry>
+				<entry key="prmName2" value="prmMapping2"></entry>
+			</map>
+		</value>
+	</entity>
+	<entity id="staticParamsTest" type="static-parameters">
+			<value>
+				<map>
+					<entry key="string" value="strvalue" />
+					<entry key="integer" value="5" type="Integer"></entry>
+					<entry key="float" value="2.3" type="Float"></entry>
+				</map>
+			</value>
+		</entity>
+<!--	-->
+<!--	<entity type="workflow">-->
+<!--		<entity type="entryPoint" value="comp1" />-->
+<!--		<entity type="workflow-components">-->
+<!--			<value>-->
+<!--				<map>-->
+<!--					<entry key="comp1">-->
+<!--						<value>-->
+<!--							<entity type="workflow-component">-->
+<!--								<entity type="workflow-component-input">-->
+<!--									<entity type="dynamic-parameters">-->
+<!--										<value>-->
+<!--											<map>-->
+<!--												<entry key="prmName1" value="prmMapping1"></entry>-->
+<!--												<entry key="prmName2" value="prmMapping2"></entry>-->
+<!--											</map>-->
+<!--										</value>-->
+<!--									</entity>-->
+<!--									<entity type="static-parameters">-->
+<!--										<value>-->
+<!--											<map>-->
+<!--												<entry key="string" value="strvalue" />-->
+<!--												<entry key="integer" value="5" type="Integer"></entry>-->
+<!--												<entry key="float" value="2.3" type="Float"></entry>-->
+<!--											</map>-->
+<!--										</value>-->
+<!--									</entity>-->
+<!--									<entity-ref type="component-ref" ref-id="compRef" />-->
+<!--								</entity>-->
+<!--								<entity type="workflow-component-output">-->
+<!--									<value>-->
+<!--										<map>-->
+<!--											<entry key="prmName1" value="prmMapping1"></entry>-->
+<!--										</map>-->
+<!--									</value>-->
+<!--								</entity>-->
+<!--							</entity>-->
+<!--						</value>-->
+<!--					</entry>-->
+<!--				</map>-->
+<!--			</value>-->
+<!--		</entity>-->
+<!--	</entity>-->
+</entities>

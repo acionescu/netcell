@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE entities SYSTEM "../../dtds/entities.dtd">
+<entities>
+   <entity id="executionEntityWrapper" logic-type="dynamic-wrapper">
+      <entity logic-type="config">
+         <entity logic-type="executor">
+            <entity-ref ref-id="workFlow" />
+         </entity>
+         <entity logic-type="original-input-name">
+            <value>inputContext</value>
+         </entity>
+         <entity logic-type="static-parameters">
+            <value>
+               <map>
+                  <entry key="defaultEntryPointId" value="processInputParams"></entry>
+                  <entry key="outputParameterName" value="outputContext"></entry>
+                  <entry key="components">
+                     <value>
+                        <map>
+                           <entry key="processInputParams">
+                              <value>
+                                 <entity type="workflow-component">
+                                    <entity type="component"
+                                       logic-type="component">
+                                       <entity logic-type="dynamic-wrapper">
+                                          <entity logic-type="config">
+                                             <entity logic-type="executor">
+                                                <entity-ref
+                                                   ref-id="inputParamsProcessor" />
+                                             </entity>
+                                             <entity
+                                                logic-type="dynamic-parameters">
+                                                <value>
+                                                   <map>
+                                                      <entry
+                                                         key="inputContext"
+                                                         value="inputContext"></entry>
+                                                      <entry
+                                                         key="inputParameters"
+                                                         value="inputParameters"></entry>
+                                                   </map>
+                                                </value>
+                                             </entity>
+                                          </entity>
+                                       </entity>
+                                    </entity>
+                                    <entity logic-type="output-param-name">
+                                       <value>inputContext
+                                       </value>
+                                    </entity>
+                                    <entity type="flow-logic"
+                                       logic-type="flow-logic">
+                                       <property name="nextComponentId"
+                                          value="defineLocalParams"></property>
+                                    </entity>
+                                 </entity>
+                              </value>
+                           </entry>
+                           <entry key="defineLocalParams">
+                              <value>
+                                 <entity type="workflow-component">
+                                    <entity type="component"
+                                       logic-type="component">
+                                       <entity logic-type="dynamic-wrapper">
+                                          <entity logic-type="config">
+                                             <entity logic-type="executor">
+                                                <entity-ref
+                                                   ref-id="localParamsProcessor" />
+                                             </entity>
+                                             <entity
+                                                logic-type="dynamic-parameters">
+                                                <value>
+                                                   <map>
+                                                      <entry
+                                                         key="destination"
+                                                         value="inputContext"></entry>
+                                                      <entry key="source"
+                                                         value="localParameters"></entry>
+                                                   </map>
+                                                </value>
+                                             </entity>
+                                          </entity>
+                                       </entity>
+                                    </entity>
+                                    <entity type="flow-logic"
+                                       logic-type="flow-logic">
+                                       <property name="nextComponentId"
+                                          value="doExecution"></property>
+                                    </entity>
+                                 </entity>
+                              </value>
+                           </entry>
+                           <entry key="doExecution">
+                              <value>
+                                 <entity type="workflow-component">
+                                    <entity type="component"
+                                       logic-type="component">
+                                       <entity logic-type="dynamic-wrapper">
+                                          <entity logic-type="config">
+                                             <entity logic-type="executor">
+                                                <entity-ref
+                                                   ref-id="dynamicExecutor" />
+                                             </entity>
+                                             <entity
+                                                logic-type="dynamic-parameters">
+                                                <value>
+                                                   <map>
+                                                      <entry
+                                                         key="inputContext"
+                                                         value="inputContext"></entry>
+                                                      <entry key="executor"
+                                                         value="executionEntity"></entry>
+                                                   </map>
+                                                </value>
+                                             </entity>
+                                          </entity>
+                                       </entity>
+                                    </entity>
+                                    <entity logic-type="output-param-name">
+                                       <value>inputContext
+                                       </value>
+                                    </entity>
+                                    <entity type="flow-logic"
+                                       logic-type="flow-logic">
+                                       <property name="nextComponentId"
+                                          value="processOutputParams"></property>
+                                    </entity>
+                                 </entity>
+                              </value>
+                           </entry>
+                           <entry key="processOutputParams">
+                              <value>
+                                 <entity type="workflow-component">
+                                    <entity type="component"
+                                       logic-type="component">
+                                       <entity logic-type="dynamic-wrapper">
+                                          <entity logic-type="config">
+                                             <entity logic-type="executor">
+                                                <entity-ref
+                                                   ref-id="outputParamsProcessor" />
+                                             </entity>
+                                             <entity
+                                                logic-type="dynamic-parameters">
+                                                <value>
+                                                   <map>
+                                                      <entry
+                                                         key="inputContext"
+                                                         value="inputContext"></entry>
+                                                      <entry
+                                                         key="outputParameters"
+                                                         value="outputParameters"></entry>
+                                                      <entry key="copyAll"
+                                                         value="copyAll"></entry>
+                                                   </map>
+                                                </value>
+                                             </entity>
+                                          </entity>
+                                       </entity>
+                                    </entity>
+                                    <entity logic-type="output-param-name">
+                                       <value>outputContext
+                                       </value>
+                                    </entity>
+                                 </entity>
+                              </value>
+                           </entry>
+                        </map>
+                     </value>
+                  </entry>
+               </map>
+            </value>
+         </entity>
+      </entity>
+   </entity>
+
+
+   <!-- workflow wrapper -->
+   <entity id="workflowWrapper" logic-type="dynamic-wrapper">
+      <entity logic-type="config">
+         <entity logic-type="executor">
+            <entity-ref ref-id="workFlow" />
+         </entity>
+         <entity logic-type="original-input-name">
+            <value>inputContext</value>
+         </entity>
+         <entity logic-type="static-parameters">
+            <value>
+               <map>
+                  <entry key="defaultEntryPointId" value="processInputParams"></entry>
+                  <entry key="outputParameterName" value="outputContext"></entry>
+                  <entry key="components">
+                     <value>
+                        <map>
+                           <entry key="processInputParams">
+                              <value>
+                                 <entity type="workflow-component">
+                                    <entity type="component"
+                                       logic-type="component">
+                                       <entity logic-type="dynamic-wrapper">
+                                          <entity logic-type="config">
+                                             <entity logic-type="executor">
+                                                <entity-ref
+                                                   ref-id="inputParamsProcessor" />
+                                             </entity>
+                                             <entity
+                                                logic-type="dynamic-parameters">
+                                                <value>
+                                                   <map>
+                                                      <entry
+                                                         key="inputContext"
+                                                         value="inputContext.origContext"></entry>
+                                                      <entry
+                                                         key="inputParameters"
+                                                         value="inputParameters"></entry>
+                                                   </map>
+                                                </value>
+                                             </entity>
+                                          </entity>
+                                       </entity>
+                                    </entity>
+                                    <entity type="flow-logic"
+                                       logic-type="flow-logic">
+                                       <property name="nextComponentId"
+                                          value="defineLocalParams"></property>
+                                    </entity>
+                                 </entity>
+                              </value>
+                           </entry>
+                           <entry key="defineLocalParams">
+                              <value>
+                                 <entity type="workflow-component">
+                                    <entity type="component"
+                                       logic-type="component">
+                                       <entity logic-type="dynamic-wrapper">
+                                          <entity logic-type="config">
+                                             <entity logic-type="executor">
+                                                <entity-ref
+                                                   ref-id="localParamsProcessor" />
+                                             </entity>
+                                             <entity
+                                                logic-type="dynamic-parameters">
+                                                <value>
+                                                   <map>
+                                                      <entry
+                                                         key="destination"
+                                                         value="inputContext.origContext"></entry>
+                                                      <entry key="source"
+                                                         value="localParameters"></entry>
+                                                   </map>
+                                                </value>
+                                             </entity>
+                                          </entity>
+                                       </entity>
+                                    </entity>
+                                    <entity type="flow-logic"
+                                       logic-type="flow-logic">
+                                       <property name="nextComponentId"
+                                          value="doExecution"></property>
+                                    </entity>
+                                 </entity>
+                              </value>
+                           </entry>
+                           <entry key="doExecution">
+                              <value>
+                                 <entity type="workflow-component">
+                                    <entity type="component"
+                                       logic-type="component">
+                                       <entity logic-type="dynamic-wrapper">
+                                          <entity logic-type="config">
+                                             <entity logic-type="executor">
+                                                <entity-ref
+                                                   ref-id="dynamicExecutor" />
+                                             </entity>
+                                             <entity
+                                                logic-type="dynamic-parameters">
+                                                <value>
+                                                   <map>
+                                                      <entry
+                                                         key="inputContext"
+                                                         value="inputContext"></entry>
+                                                      <entry key="executor"
+                                                         value="executionEntity"></entry>
+                                                   </map>
+                                                </value>
+                                             </entity>
+                                          </entity>
+                                       </entity>
+                                    </entity>
+                                    <entity logic-type="output-param-name">
+                                       <value>outputContext
+                                       </value>
+                                    </entity>
+                                    <entity type="flow-logic"
+                                       logic-type="flow-logic">
+                                       <property name="nextComponentId"
+                                          value="checkAsyncContext"></property>
+                                    </entity>
+                                 </entity>
+                              </value>
+                           </entry>
+                           <entry key="checkAsyncContext">
+                              <value>
+                                 <entity>
+                                    <entity type="workflow-component">
+                                       <entity type="component"
+                                          logic-type="component">
+                                          <entity logic-type="dynamic-wrapper">
+                                             <entity logic-type="config">
+                                                <entity
+                                                   logic-type="executor">
+                                                   <entity-ref
+                                                      ref-id="core.logic.boolean-check" />
+                                                </entity>
+                                                <entity
+                                                   logic-type="dynamic-parameters">
+                                                   <value>
+                                                      <map>
+                                                         <entry
+                                                            key="parameter"
+                                                            value="inputContext.isAsyncContext"></entry>
+                                                      </map>
+                                                   </value>
+                                                </entity>
+                                             </entity>
+                                          </entity>
+                                       </entity>
+                                       <entity type="flow-logic"
+                                          logic-type="flow-logic">
+                                          <property name="exitPointPrmName"
+                                             value="exit" />
+                                          <property name="exitValuesMappings">
+                                             <value>
+                                                <map>
+                                                   <entry key="TRUE">
+                                                      <value>
+                                                         <entity
+                                                            type="exit-point-mapping">
+                                                            <property
+                                                               name="nextComponentId"
+                                                               value="outputAll"></property>
+                                                         </entity>
+                                                      </value>
+                                                   </entry>
+                                                   <entry key="FALSE">
+                                                      <value>
+                                                         <entity
+                                                            type="exit-point-mapping">
+                                                            <property
+                                                               name="nextComponentId"
+                                                               value="processOutputParams"></property>
+                                                         </entity>
+                                                      </value>
+                                                   </entry>
+                                                </map>
+                                             </value>
+                                          </property>
+                                       </entity>
+                                    </entity>
+                                 </entity>
+                              </value>
+                           </entry>
+                           <entry key="processOutputParams">
+                              <value>
+                                 <entity type="workflow-component">
+                                    <entity type="component"
+                                       logic-type="component">
+                                       <entity logic-type="dynamic-wrapper">
+                                          <entity logic-type="config">
+                                             <entity logic-type="executor">
+                                                <entity-ref
+                                                   ref-id="outputParamsProcessor" />
+                                             </entity>
+                                             <entity
+                                                logic-type="dynamic-parameters">
+                                                <value>
+                                                   <map>
+                                                      <entry
+                                                         key="inputContext"
+                                                         value="outputContext"></entry>
+                                                      <entry
+                                                         key="outputParameters"
+                                                         value="outputParameters"></entry>
+                                                      <entry key="copyAll"
+                                                         value="copyAll"></entry>
+                                                   </map>
+                                                </value>
+                                             </entity>
+                                          </entity>
+                                       </entity>
+                                    </entity>
+                                    <entity logic-type="output-param-name">
+                                       <value>outputContext
+                                       </value>
+                                    </entity>
+                                 </entity>
+                              </value>
+                           </entry>
+                           <entry key="outputAll">
+                              <value>
+                                 <entity type="workflow-component">
+                                    <entity type="component"
+                                       logic-type="component">
+                                       <entity logic-type="dynamic-wrapper">
+                                          <entity logic-type="config">
+                                             <entity logic-type="executor">
+                                                <entity-ref
+                                                   ref-id="outputParamsProcessor" />
+                                             </entity>
+                                             <entity
+                                                logic-type="dynamic-parameters">
+                                                <value>
+                                                   <map>
+                                                      <entry
+                                                         key="inputContext"
+                                                         value="outputContext"></entry>
+                                                   </map>
+                                                </value>
+                                             </entity>
+                                             <entity logic-type="static-parameters">
+                                                <value>
+                                                   <map>
+                                                      <entry key="copyAll"
+                                                         value="true"></entry>
+                                                   </map>
+                                                </value>
+                                             </entity>
+                                          </entity>
+                                       </entity>
+                                    </entity>
+                                    <entity logic-type="output-param-name">
+                                       <value>outputContext
+                                       </value>
+                                    </entity>
+                                 </entity>
+                              </value>
+                           </entry>
+                        </map>
+                     </value>
+                  </entry>
+               </map>
+            </value>
+         </entity>
+      </entity>
+   </entity>
+   <entity id="workflowAdapterEntity" logic-type="dynamic-wrapper">
+      <entity logic-type="config">
+         <entity logic-type="executor">
+            <entity-ref ref-id="workflowAdapter" />
+         </entity>
+         <entity logic-type="original-input-name">
+            <value>inputContext</value>
+         </entity>
+         <entity logic-type="static-parameters">
+            <value>
+               <map>
+                  <entry key="executionEntity">
+                     <value>
+                        <entity>
+                           <entity-ref ref-id="workflowWrapper" />
+                        </entity>
+                     </value>
+                  </entry>
+               </map>
+            </value>
+         </entity>
+      </entity>
+   </entity>
+</entities>

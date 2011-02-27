@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE command SYSTEM "../../../../dtds/script-dao-commands.dtd">
+<command name="ro.problems.data.remove-entity-vote" type="SQL.UPDATE">
+         <parameters>
+                     <parameter name="entityId" />
+                     <parameter name="userId" />
+               </parameters>
+      <script>
+      delete from entities_votes
+where entity_id=$entityId
+and user_id=$userId
+   </script>
+</command>

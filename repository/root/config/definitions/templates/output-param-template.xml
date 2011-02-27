@@ -1,0 +1,6 @@
+<entity type="output-parameter">
+	<property name="name" value="$param.getName()"></property>
+	#if($param.getType())
+	<property name="type" value="$param.getType()"></property>
+	#end
+</entity>

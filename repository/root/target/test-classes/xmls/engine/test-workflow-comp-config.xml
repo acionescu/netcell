@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components SYSTEM "../../dtds/workflow-engine.dtd">
+
+
+<workflow-component-configuration id="testWfComp">
+	<static-parameters>
+		<static-parameter name="NAME" value="COMP1" />
+	</static-parameters>
+	<dynamic-parameters>
+		<dynamic-parameter local-name="DYNAMIC_PRM" context-name="FLOW_TRACKER"/>
+	</dynamic-parameters>
+	<output-parameter-mappings>
+		<output-parameter-mapping local-name="OUTPUT_PRM"
+			context-name="FLOW_TRACKER" />
+	</output-parameter-mappings>
+</workflow-component-configuration>

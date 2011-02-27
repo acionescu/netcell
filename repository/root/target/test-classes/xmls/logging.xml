@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE resources SYSTEM "../dtds/workflow-engine.dtd">
+
+<resources>
+	<resource id="DefaultLogManager" class="ro.zg.util.logging.DefaultLogManager">
+		<property name="defaultLoggerFactory" value-ref="SystemOutLoggerFactory"></property>
+	</resource>
+	
+	<resource id="SystemOutLoggerFactory" class="ro.zg.util.logging.SystemOutLoggerFactory"></resource>
+</resources>

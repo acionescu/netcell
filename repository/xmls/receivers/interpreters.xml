@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE resources SYSTEM "../../dtds/workflow-engine.dtd">
+
+<resources>
+
+	<resource id="CasCommandInterpreter" class="ro.zg.netcell.control.commands.interpreters.cas.CasCommandInterpreter">
+		<property name="formatter" value-ref="CasResponseFormatter"></property>
+	</resource>
+	
+	
+	<resource id="CasInterpreterWrapper" class="ro.zg.netcell.entities.ExceptionHandlingWrapper">
+		<property name="exceptionHandler" value-ref="OuterBorderExceptionHandler"></property>
+		<property name="wrappedEntity" value-ref="CasCommandInterpreter"></property>
+	</resource>
+	
+</resources>

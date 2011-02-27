@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE entities SYSTEM "../../dtds/entities.dtd">
+<entities>
+   <entity id="util.data.get-column-list-from-context-list" type="workflow-definition"
+      logic-type="dynamic-wrapper">
+      <entity type="description">
+         <value>$workflowDefinition.getDescription()</value>
+      </entity>
+      <entity logic-type="config">
+         <entity type="definition-params" logic-type="static-parameters">
+            <value>
+               <map>
+                  						<entry key="inputParameters">
+							<value>
+								<list>
+																		<value>
+										<entity type="input-parameter">
+	<property name="name" value="list"></property>
+		<property name="type" value="List[Context[]]"></property>
+				<property name="mandatory" value="true"></property>
+	                              <property name="uiType" value="TEXTFIELD"/>
+               </entity>								</value>
+																		<value>
+										<entity type="input-parameter">
+	<property name="name" value="columnName"></property>
+		<property name="type" value="String"></property>
+				<property name="mandatory" value="true"></property>
+	                              <property name="uiType" value="TEXTFIELD"/>
+               </entity>								</value>
+																	</list>
+							</value>
+						</entry>
+																		<entry key="localParameters">
+							<value>
+								<list>
+																		<value>
+										<entity type="local-parameter">
+	<property name="name" value="row"></property>
+		<property name="type" value="Context[]"></property>
+		</entity>								</value>
+																		<value>
+										<entity type="local-parameter">
+	<property name="name" value="size"></property>
+		<property name="type" value="Number"></property>
+		</entity>								</value>
+																		<value>
+										<entity type="local-parameter">
+	<property name="name" value="output"></property>
+		<property name="type" value="List[String]"></property>
+		</entity>								</value>
+																		<value>
+										<entity type="local-parameter">
+	<property name="name" value="index"></property>
+		<property name="type" value="Number"></property>
+			<property name="value" value="0"></property>
+	</entity>								</value>
+																		<value>
+										<entity type="local-parameter">
+	<property name="name" value="currentValue"></property>
+		<property name="type" value="String"></property>
+		</entity>								</value>
+																	</list>
+							</value>
+						</entry>
+												<entry key="executionEntity">
+							<value>
+																<entity type="workflow" logic-type="dynamic-wrapper">
+   <entity logic-type="config">
+      <entity logic-type="executor">
+         <entity-ref ref-id="workFlow" />
+      </entity>
+<!--      <entity logic-type="original-input-name">-->
+<!--         <value>inputContext</value>-->
+<!--      </entity>-->
+      <entity type="workflow-params" logic-type="static-parameters">
+         <value>
+            <map>
+               <entry key="defaultEntryPointId" value="core.collections.get-collection-size_0">
+               </entry>
+               <entry key="components">
+                  <value>
+                     <map>
+                                                 <entry key="core.collections.get-collection-size_0">
+                           <value>                               <entity type="workflow-component">
+		<entity type="component" logic-type="component">
+	<entity logic-type="dynamic-wrapper">
+		<entity logic-type="config">
+			<entity logic-type="executor">
+				<entity-ref ref-id="core.collections.get-collection-size" />
+			</entity>
+<!--			<entity logic-type="original-input-name">-->
+<!--				<value>argsContext</value>-->
+<!--			</entity>-->
+												<entity logic-type="dynamic-parameters">
+				<value>
+					<map>
+													<entry key="collection" value="list"/>
+											</map>
+				</value>
+			</entity>
+					</entity>
+	</entity>
+</entity>		<entity logic-type="output-params-mappings">
+		<value>
+			<map>
+								<entry key="size" value="size" />
+							</map>
+		</value>
+	</entity>
+		
+		<entity type="flow-logic" logic-type="flow-logic">
+      <property name="nextComponentId" value="core.logic.comparator_1" />
+   </entity>               
+               </entity>                           </value>
+                        </entry>
+                                                <entry key="core.logic.comparator_1">
+                           <value>                               <entity type="workflow-component">
+		<entity type="component" logic-type="component">
+	<entity logic-type="dynamic-wrapper">
+		<entity logic-type="config">
+			<entity logic-type="executor">
+				<entity-ref ref-id="core.logic.comparator" />
+			</entity>
+<!--			<entity logic-type="original-input-name">-->
+<!--				<value>argsContext</value>-->
+<!--			</entity>-->
+												<entity logic-type="dynamic-parameters">
+				<value>
+					<map>
+													<entry key="a" value="index"/>
+													<entry key="b" value="size"/>
+											</map>
+				</value>
+			</entity>
+					</entity>
+	</entity>
+</entity>		
+		<entity type="flow-logic" logic-type="flow-logic">
+      <property name="exitPointPrmName" value="exit" />
+   <property name="exitValuesMappings">
+      <value>
+         <map>
+                                    <entry key="LESS">
+               <value>
+                  <entity type="exit-point-mapping">
+			<property name="nextComponentId" value="core.collections.get-list-value_5"></property>
+	</entity>               </value>
+            </entry>
+                        <entry key="EQUAL">
+               <value>
+                  <entity type="exit-point-mapping">
+			<property name="exitPointMapping" value="EQUAL"></property>
+	</entity>               </value>
+            </entry>
+                        <entry key="GREATER">
+               <value>
+                  <entity type="exit-point-mapping">
+			<property name="exitPointMapping" value="GREATER"></property>
+	</entity>               </value>
+            </entry>
+                     </map>
+      </value>
+   </property>
+   </entity>               
+                                                </entity>                           </value>
+                        </entry>
+                                                <entry key="core.collections.get-context-value_2">
+                           <value>                               <entity type="workflow-component">
+		<entity type="component" logic-type="component">
+	<entity logic-type="dynamic-wrapper">
+		<entity logic-type="config">
+			<entity logic-type="executor">
+				<entity-ref ref-id="core.collections.get-context-value" />
+			</entity>
+<!--			<entity logic-type="original-input-name">-->
+<!--				<value>argsContext</value>-->
+<!--			</entity>-->
+												<entity logic-type="dynamic-parameters">
+				<value>
+					<map>
+													<entry key="context" value="row"/>
+													<entry key="name" value="columnName"/>
+											</map>
+				</value>
+			</entity>
+					</entity>
+	</entity>
+</entity>		<entity logic-type="output-params-mappings">
+		<value>
+			<map>
+								<entry key="value" value="currentValue" />
+							</map>
+		</value>
+	</entity>
+		
+		<entity type="flow-logic" logic-type="flow-logic">
+      <property name="nextComponentId" value="core.collections.append-to-list_3" />
+   </entity>               
+                                                </entity>                           </value>
+                        </entry>
+                                                <entry key="core.collections.append-to-list_3">
+                           <value>                               <entity type="workflow-component">
+		<entity type="component" logic-type="component">
+	<entity logic-type="dynamic-wrapper">
+		<entity logic-type="config">
+			<entity logic-type="executor">
+				<entity-ref ref-id="core.collections.append-to-list" />
+			</entity>
+<!--			<entity logic-type="original-input-name">-->
+<!--				<value>argsContext</value>-->
+<!--			</entity>-->
+												<entity logic-type="dynamic-parameters">
+				<value>
+					<map>
+													<entry key="list" value="output"/>
+													<entry key="value" value="currentValue"/>
+											</map>
+				</value>
+			</entity>
+					</entity>
+	</entity>
+</entity>		
+		<entity type="flow-logic" logic-type="flow-logic">
+      <property name="nextComponentId" value="util.math.add_4" />
+   </entity>               
+                                                </entity>                           </value>
+                        </entry>
+                                                <entry key="util.math.add_4">
+                           <value>                               <entity type="workflow-component">
+		<entity type="component" logic-type="component">
+	<entity logic-type="dynamic-wrapper">
+		<entity logic-type="config">
+			<entity logic-type="executor">
+				<entity-ref ref-id="util.math.add" />
+			</entity>
+<!--			<entity logic-type="original-input-name">-->
+<!--				<value>argsContext</value>-->
+<!--			</entity>-->
+									<entity logic-type="static-parameters">
+				<value>
+					<map>
+													<entry key="b">
+                                                                                                                  								<value-type value="1" type="String"/>
+							                                                                                                                  </entry>
+											</map>
+				</value>
+			</entity>
+									<entity logic-type="dynamic-parameters">
+				<value>
+					<map>
+													<entry key="a" value="index"/>
+											</map>
+				</value>
+			</entity>
+					</entity>
+	</entity>
+</entity>		<entity logic-type="output-params-mappings">
+		<value>
+			<map>
+								<entry key="exit" value="index" />
+							</map>
+		</value>
+	</entity>
+		
+		<entity type="flow-logic" logic-type="flow-logic">
+      <property name="nextComponentId" value="core.logic.comparator_1" />
+   </entity>               
+               </entity>                           </value>
+                        </entry>
+                                                <entry key="core.collections.get-list-value_5">
+                           <value>                               <entity type="workflow-component">
+		<entity type="component" logic-type="component">
+	<entity logic-type="dynamic-wrapper">
+		<entity logic-type="config">
+			<entity logic-type="executor">
+				<entity-ref ref-id="core.collections.get-list-value" />
+			</entity>
+<!--			<entity logic-type="original-input-name">-->
+<!--				<value>argsContext</value>-->
+<!--			</entity>-->
+												<entity logic-type="dynamic-parameters">
+				<value>
+					<map>
+													<entry key="list" value="list"/>
+													<entry key="index" value="index"/>
+											</map>
+				</value>
+			</entity>
+					</entity>
+	</entity>
+</entity>		<entity logic-type="output-params-mappings">
+		<value>
+			<map>
+								<entry key="value" value="row" />
+							</map>
+		</value>
+	</entity>
+		
+		<entity type="flow-logic" logic-type="flow-logic">
+      <property name="nextComponentId" value="core.collections.get-context-value_2" />
+   </entity>               
+                                                </entity>                           </value>
+                        </entry>
+                                             </map>
+                  </value>
+               </entry>
+            </map>
+         </value>
+      </entity>
+      <entity logic-type="dynamic-parameters">
+         <value>
+            <map>
+               <entry key="inputContext" value="origContext"></entry>
+               <entry key="entryPointId" value="entryPointId"></entry>
+               <entry key="isAsyncContext" value="isAsyncContext"></entry>
+            </map>
+         </value>
+      </entity>
+   </entity>
+</entity>						</value>
+						</entry>
+												<entry key="outputParameters">
+							<value>
+								<list>
+									
+																		<value>
+										<entity type="output-parameter">
+	<property name="name" value="exit"></property>
+		<property name="type" value="String"></property>
+	</entity>								</value>
+																		<value>
+										<entity type="output-parameter">
+	<property name="name" value="output"></property>
+		<property name="type" value="List[String]"></property>
+	</entity>								</value>
+																	</list>
+							</value>
+						</entry>
+											</map>
+				</value>
+			</entity>
+			<entity logic-type="original-input-name">
+				<value>inputContext</value>
+			</entity>
+			<entity logic-type="executor">
+				<entity-ref ref-id="workflowAdapterEntity" />
+			</entity>
+		</entity>
+	</entity>
+</entities>

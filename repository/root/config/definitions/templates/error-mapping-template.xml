@@ -1,0 +1,9 @@
+#if($exitPoint.getNextComponentId() || $exitPoint.getExitPointMapping())
+<entity type="exit-point-mapping" logic-type="error-mapping">
+   #if($exitPoint.getNextComponentId())
+      <property name="nextComponentId" value="$exitPoint.getNextComponentId()"></property>
+   #elseif($exitPoint.getExitPointMapping())
+      <property name="exitPointMapping" value="$exitPoint.getExitPointMapping()"></property>
+   #end
+</entity>
+#end

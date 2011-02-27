@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE entities SYSTEM "../../dtds/entities.dtd">
+<entities>
+	<entity type="simple-component" id="paramsTesterComp"
+		class="ro.zg.netcell.test.ParamsTesterComp" />
+<!--		-->
+<!--	<entity id="wfcompinputTest" type="workflow-component-input">-->
+<!--		<entity type="dynamic-parameters">-->
+<!--			<value>-->
+<!--				<map>-->
+<!--					<entry key="prmName1" value="prmMapping1"></entry>-->
+<!--					<entry key="prmName2" value="prmMapping2"></entry>-->
+<!--				</map>-->
+<!--			</value>-->
+<!--		</entity>-->
+<!--		<entity type="static-parameters">-->
+<!--			<value>-->
+<!--				<map>-->
+<!--					<entry key="string" value="strvalue" />-->
+<!--					<entry key="integer" value="5" type="Integer"></entry>-->
+<!--					<entry key="float" value="2.3" type="Float"></entry>-->
+<!--				</map>-->
+<!--			</value>-->
+<!--		</entity>-->
+<!--		<entity-ref type="component-ref" ref-id="paramsTesterComp" />-->
+<!--	</entity>-->
+<!--	<entity id="wfCompTest" type="workflow-component" logic-type="preparator-inspector">-->
+<!--		<entity logic-type="preparator">-->
+<!--			<entity logic-type="left-join">-->
+<!--				<entity type="workflow-component-input" logic-type="left-branch">-->
+<!--					<entity type="dynamic-parameters">-->
+<!--						<value>-->
+<!--							<map>-->
+<!--								<entry key="prmName1" value="prmMapping1"></entry>-->
+<!--								<entry key="prmName2" value="prmMapping2"></entry>-->
+<!--							</map>-->
+<!--						</value>-->
+<!--					</entity>-->
+<!--					<entity type="static-parameters">-->
+<!--						<value>-->
+<!--							<map>-->
+<!--								<entry key="string" value="strvalue" />-->
+<!--								<entry key="integer" value="5" type="Integer"></entry>-->
+<!--								<entry key="float" value="2.3" type="Float"></entry>-->
+<!--							</map>-->
+<!--						</value>-->
+<!--					</entity>-->
+<!--					<entity-ref type="component-ref" ref-id="paramsTesterComp" />-->
+<!--				</entity>-->
+<!--			</entity>-->
+<!--		</entity>-->
+<!--		<entity type="workflow-component-output" logic-type="executor">-->
+<!--			<value>-->
+<!--				<map>-->
+<!--					<entry key="outputPrm" value="myInput"></entry>-->
+<!--				</map>-->
+<!--			</value>-->
+<!--		</entity>-->
+<!--		<entity logic-type="inspector">-->
+<!--			<entity-ref ref-id="joinGroupLeftFilter" />-->
+<!--		</entity>-->
+<!--	</entity>-->
+	<entity id="wfCompTest2" type="workflow-component" logic-type="preparator-inspector">
+		<entity logic-type="preparator">
+			<entity logic-type="left-join">
+				<entity logic-type="left-branch">
+					<entity logic-type="pipeline">
+						<entity logic-type="element">
+							<entity logic-type="preparator-inspector">
+								<entity logic-type="preparator">
+									<entity logic-type="right-join">
+										<entity logic-type="right-branch">
+											<entity logic-type="config-wrapper">
+												<entity logic-type="executor">
+													<entity-ref ref-id="workflowComponentContextCreator" />
+												</entity>
+												<entity logic-type="config">
+													<entity-ref ref-id="contextFactory" />
+												</entity>
+											</entity>
+										</entity>
+									</entity>
+								</entity>
+								<entity logic-type="executor">
+									<entity logic-type="config-wrapper">
+										<entity logic-type="executor">
+											<entity-ref ref-id="dynamicParametersMapper" />
+										</entity>
+										<entity logic-type="config">
+											<entity type="dynamic-parameters">
+												<value>
+													<map>
+														<entry key="prmName1" value="prmMapping1"></entry>
+														<entry key="prmName2" value="prmMapping2"></entry>
+													</map>
+												</value>
+											</entity>
+										</entity>
+									</entity>
+								</entity>
+								<entity logic-type="inspector">
+									<entity-ref ref-id="joinGroupRightFilter" />
+								</entity>
+							</entity>
+						</entity>
+						<entity logic-type="element">
+							<entity logic-type="config-wrapper">
+								<entity logic-type="executor">
+									<entity-ref ref-id="staticParametersMapper" />
+								</entity>
+								<entity logic-type="config">
+									<entity type="static-parameters">
+										<value>
+											<map>
+												<entry key="string" value="strvalue" />
+												<entry key="integer" value="5" type="Integer"></entry>
+												<entry key="float" value="2.3" type="Float"></entry>
+											</map>
+										</value>
+									</entity>
+								</entity>
+							</entity>
+						</entity>
+						<entity logic-type="element">
+							<entity-ref type="component-ref" ref-id="paramsTesterComp" />
+						</entity>
+					</entity>
+				</entity>
+			</entity>
+		</entity>
+		<entity logic-type="executor">
+			<entity logic-type="config-wrapper">
+				<entity logic-type="executor">
+					<entity-ref ref-id="dynamicParametersMapper" />
+				</entity>
+				<entity logic-type="config">
+					<entity type="workflow-component-output">
+						<value>
+							<map>
+								<entry key="outputPrm" value="myInput"></entry>
+							</map>
+						</value>
+					</entity>
+				</entity>
+			</entity>
+		</entity>
+		<entity logic-type="inspector">
+			<entity-ref ref-id="joinGroupLeftFilter" />
+		</entity>
+	</entity>
+</entities>

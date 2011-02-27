@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE resources SYSTEM "../../dtds/workflow-engine.dtd">
+
+<resources>
+<!--	-->
+	<!--  -->
+	<resource id="inputParametersProcessor" class="ro.zg.netcell.engine.core.InputParametersProcessor"></resource>
+	
+	<resource id="executionPipeline" class="ro.zg.util.execution.test.ExecutionPipeLine"></resource>
+	
+	<resource id="dynamicConfigurator" class="ro.zg.util.execution.test.func.DynamicConfiguratorEntity"></resource>
+	
+	<resource id="workFlowContextPairCreator" class="ro.zg.netcell.engine.core.WorkFlowContextPairCreator"></resource>
+	
+	<resource id="staticParametersMapper" class="ro.zg.netcell.engine.core.StaticParametersMapper"></resource>
+	
+	<resource id="dynamicParametersMapper" class="ro.zg.netcell.engine.core.DynamicParametersMapper"></resource>
+</resources>

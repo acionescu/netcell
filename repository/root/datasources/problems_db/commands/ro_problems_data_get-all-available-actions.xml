@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE command SYSTEM "../../../../dtds/script-dao-commands.dtd">
+<command name="ro.problems.data.get-all-available-actions" type="SQL.QUERY">
+      <script>
+      select 
+cet.complex_type source_entity_complex_type
+,a.action
+,a.name action_name
+,a.params action_params
+,at.type action_type
+, atg.target action_target
+, ut.type user_type
+, et.type target_entity_type 
+, cet2.complex_type target_entity_complex_type
+, acts.allow_read_to_all
+from action_strategies acts
+,actions a
+,action_types at
+,user_types ut
+,action_targets atg
+,entity_types et
+,complex_entity_type cet
+,complex_entity_type cet2
+where
+acts.complex_entity_type_id=cet.id
+and acts.action_id=a.id
+and a.action_type_id=at.id
+and acts.user_type_id = ut.id
+and acts.action_target_id=atg.id
+and acts.entity_type_id=et.id
+and acts.target_entity_complex_type_id=cet2.id
+order by acts.complex_entity_type_id,acts.order_index
+
+   </script>
+</command>

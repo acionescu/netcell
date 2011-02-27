@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration SYSTEM "../../../dtds/entry-point.dtd">
+<configuration>
+   <cfg-handler id="rootHandler"
+      class="ro.zg.cfgengine.core.configuration.handlers.BaseConfigurationHandler">
+      <property name="localConfigurationHandlers">
+         <value>
+            <map>
+               <entry key="entity">
+                  <value-ref>entityTypeResolveHandler</value-ref>
+               </entry>
+               <entry key="entity-ref">
+                  <value-ref>entityRefCfgHandler</value-ref>
+               </entry>
+               <entry key="value-type">
+                  <value-ref>valueTypeHandler</value-ref>
+               </entry>
+            </map>
+         </value>
+      </property>
+   </cfg-handler>
+   <cfg-handler id="entityRefCfgHandler"
+      class="ro.zg.cfgengine.core.configuration.handlers.TypedValueConfigurationHandler">
+      <property name="hasIdAttribute" value="false"></property>
+      <property name="valueAttributeName" value="ref-id"></property>
+      <property name="defaultType" value="String"></property>
+   </cfg-handler>
+   <cfg-handler id="valueTypeHandler"
+      class="ro.zg.cfgengine.core.configuration.handlers.CustomConfigurationHandler"
+      default-class="ro.zg.util.data.ValueType">
+      <property name="hasIdAttribute" value="false" />
+      <property name="attributesToProperties">
+         <value>
+            <map>
+               <entry key="value" value="value">
+               </entry>
+               <entry key="type" value="type"></entry>
+            </map>
+         </value>
+      </property>
+   </cfg-handler>
+   <cfg-handler id="entityTypeResolveHandler"
+      class="ro.zg.cfgengine.core.configuration.handlers.TypeConfigurationHandler">
+      <property name="hasIdAttribute" value="false" />
+      <property name="typeAttributeName" value="type"></property>
+      <property name="parseNested" value="true"></property>
+      <property name="localConfigurationHandlers">
+         <value>
+            <map>
+               <entry key="datasource-definition">
+                  <value-ref>datasourceDefinitionCfgHandler</value-ref>
+               </entry>
+               <entry key="user-input-parameter">
+                  <value-ref>userInputCfgHandler</value-ref>
+               </entry>
+               <entry key="dynamic-config-parameter">
+                  <value-ref>dynamicParamCfgHandler</value-ref>
+               </entry>
+               <entry key="static-config-parameter">
+                  <value-ref>staticParamCfgHandler</value-ref>
+               </entry>
+               <entry key="config-data">
+                  <value-ref>configDataHandler</value-ref>
+               </entry>
+            </map>
+         </value>
+      </property>
+   </cfg-handler>
+   <cfg-handler id="datasourceDefinitionCfgHandler"
+      class="ro.zg.cfgengine.core.configuration.handlers.CustomConfigurationHandler"
+      default-class="ro.zg.netcell.vo.definitions.DataSourceDefinition">
+      <property name="hasIdAttribute" value="true" />
+      <property name="attributesToProperties">
+         <value>
+            <map>
+               <entry key="type" value="type"></entry>
+            </map>
+         </value>
+      </property>
+   </cfg-handler>
+   <cfg-handler id="userInputCfgHandler"
+      class="ro.zg.cfgengine.core.configuration.handlers.BaseConfigurationHandler"
+      default-class="ro.zg.util.data.UserInputParameter">
+      <property name="hasIdAttribute" value="false" />
+   </cfg-handler>
+   <cfg-handler id="dynamicParamCfgHandler"
+      class="ro.zg.cfgengine.core.configuration.handlers.BaseConfigurationHandler"
+      default-class="ro.zg.util.data.DynamicConfigParameter">
+      <property name="hasIdAttribute" value="false" />
+   </cfg-handler>
+   <cfg-handler id="staticParamCfgHandler"
+      class="ro.zg.cfgengine.core.configuration.handlers.BaseConfigurationHandler"
+      default-class="ro.zg.util.data.GenericNameValue">
+      <property name="hasIdAttribute" value="false" />
+   </cfg-handler>
+   <cfg-handler id="configDataHandler"
+      class="ro.zg.cfgengine.core.configuration.handlers.BaseConfigurationHandler"
+      default-class="ro.zg.util.data.ConfigurationData">
+      <property name="hasIdAttribute" value="false" />
+   </cfg-handler>
+</configuration>

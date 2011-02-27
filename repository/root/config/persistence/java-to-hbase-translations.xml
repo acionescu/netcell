@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE resources SYSTEM "../../../dtds/workflow-engine.dtd">
+<resources>
+<resource id="commandIdGenerator" class="ro.zg.netcell.logging.CommandUniqueIdGenerator"></resource>
+
+   <resource id="Command_java_to_hbase" class="ro.zg.util.data.translation.DataTranslation">
+      <property name="idGenerator" value-ref="commandIdGenerator"></property>
+      <property name="sourceType" value="ro.zg.netcell.control.Command"></property>
+      <property name="destinationType" value="requests"></property>
+      <property name="dataMappings">
+         <value>
+            <map>
+               <entry key="name">
+                  <value>
+                     <resource id="Command.name_mapping"
+                        class="ro.zg.util.data.translation.EntityMapping">
+                        <property name="targetName" value="command:name"></property>
+                     </resource>
+                  </value>
+               </entry>
+               <entry key="parameters">
+                  <value>
+                     <resource id="Command.parameters_mapping"
+                        class="ro.zg.util.data.translation.EntityMapping">
+                        <property name="targetName" value="input"></property>
+                     </resource>
+                  </value>
+               </entry>
+            </map>
+         </value>
+      </property>
+   </resource>
+   
+    <resource id="CommandResponse_java_to_hbase" class="ro.zg.util.data.translation.DataTranslation">
+      <property name="idGenerator" value-ref="commandIdGenerator"></property>
+      <property name="sourceType" value="ro.zg.netcell.control.CommandResponse"></property>
+      <property name="destinationType" value="requests"></property>
+      <property name="dataMappings">
+         <value>
+            <map>
+               <entry key="responseCode">
+                  <value>
+                     <resource id="CommandResponse.responseCode_mapping"
+                        class="ro.zg.util.data.translation.EntityMapping">
+                        <property name="targetName" value="command:responseCode"></property>
+                     </resource>
+                  </value>
+               </entry>
+               <entry key="parameters">
+                  <value>
+                     <resource id="CommandResponse.parameters_mapping"
+                        class="ro.zg.util.data.translation.EntityMapping">
+                        <property name="targetName" value="output"></property>
+                     </resource>
+                  </value>
+               </entry>
+            </map>
+         </value>
+      </property>
+   </resource>
+   
+   <resource id="GenericNameValue_java_to_hbase" class="ro.zg.util.data.translation.DataTranslation">
+      <property name="sourceType" value="ro.zg.util.data.GenericNameValue"></property>
+      <property name="dataMappings">
+         <value>
+            <map>
+               <entry key="value">
+                  <value>
+                     <resource id="GenericNameValue.value_mapping"
+                        class="ro.zg.util.data.translation.EntityMapping">
+                     </resource>
+                  </value>
+               </entry>
+            </map>
+         </value>
+      </property>
+   </resource>
+</resources>

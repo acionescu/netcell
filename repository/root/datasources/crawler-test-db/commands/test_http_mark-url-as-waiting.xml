@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE command SYSTEM "../../../../dtds/script-dao-commands.dtd">
+<command name="test.http.mark-url-as-waiting" type="SQL.UPDATE">
+         <parameters>
+                     <parameter name="url" />
+               </parameters>
+      <script>
+      update pending_urls
+set status='W'
+where url='$url'
+   </script>
+</command>

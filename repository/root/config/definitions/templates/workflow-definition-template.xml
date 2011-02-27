@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE entities SYSTEM "../../dtds/entities.dtd">
+#if($entityDefinition) #set($workflowDefinition = $entityDefinition)
+#end
+<entities>
+   <entity id="$workflowDefinition.getId()" type="workflow-definition"
+      logic-type="dynamic-wrapper">
+      <entity type="description">
+         <value>$workflowDefinition.getDescription()</value>
+      </entity>
+      <entity logic-type="config">
+         <entity type="definition-params" logic-type="static-parameters">
+            <value>
+               <map>
+                  #if($workflowDefinition.getInputParameters()&& $workflowDefinition.getInputParameters().size() > 0)
+						<entry key="inputParameters">
+							<value>
+								<list>
+									#foreach($param in $workflowDefinition.getInputParameters())
+									<value>
+										#parse("root/config/definitions/templates/input-param-template.xml")
+								</value>
+									#end
+								</list>
+							</value>
+						</entry>
+						#end
+						#if($workflowDefinition.getLocalParameters())
+						<entry key="localParameters">
+							<value>
+								<list>
+									#foreach($param in $workflowDefinition.getLocalParameters())
+									<value>
+										#parse("root/config/definitions/templates/local-param-template.xml")
+								</value>
+									#end
+								</list>
+							</value>
+						</entry>
+						#end
+						<entry key="executionEntity">
+							<value>
+								#set($workflowConfig = $workflowDefinition.getWorkFlowConfig())
+								#parse("root/config/definitions/templates/workflow-template.xml")
+						</value>
+						</entry>
+						#if($workflowDefinition.getOutputParameters())
+						<entry key="outputParameters">
+							<value>
+								<list>
+									
+									#foreach($param in $workflowDefinition.getOutputParameters())
+									<value>
+										#parse("root/config/definitions/templates/output-param-template.xml")
+								</value>
+									#end
+								</list>
+							</value>
+						</entry>
+						#end
+					</map>
+				</value>
+			</entity>
+			<entity logic-type="original-input-name">
+				<value>inputContext</value>
+			</entity>
+			<entity logic-type="executor">
+				<entity-ref ref-id="workflowAdapterEntity" />
+			</entity>
+		</entity>
+	</entity>
+</entities>

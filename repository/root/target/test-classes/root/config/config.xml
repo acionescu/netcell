@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE files SYSTEM "../dtds/entry-point.dtd">
+<files>
+   <file>root/config/controller/controller-init.xml</file>
+   <file>root/config/controller/error-responses.xml</file>
+   <file>root/config/controller/exception-handlers.xml</file>
+</files>

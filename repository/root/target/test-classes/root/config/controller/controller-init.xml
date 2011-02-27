@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE resources SYSTEM "../../../dtds/workflow-engine.dtd">
+<resources>
+   
+   <resource id="distributedServicesManager" class="ro.zg.netcell.control.DistributedServicesManager">
+      <property name="entitiesManager">
+         <value>
+            <resource id="entitiesManager" class="ro.zg.netcell.distributed.EntitiesManagerProxy"></resource>
+         </value>
+      </property>
+      <property name="executionEngine">
+         <value>
+            <resource id="executionEngine" class="ro.zg.netcell.distributed.ExecutionEngineProxy"></resource>
+         </value>
+      </property>
+      <property name="monitoringManager">
+         <value>
+            <resource id="monitoringManager" class="ro.zg.netcell.distributed.MonitoringManagerProxy"></resource>
+         </value>
+      </property>
+      <property name="repositoryDir" value="file:///media/disk/work/projects/netcell/repository/"></property>
+      <property name="entryPointFile" value="root/config/distributed-services/distributed-services-config.xml"></property>
+   </resource>
+  
+   <resource id="netCellControllerConfiguration"
+      class="ro.zg.netcell.control.NetCellControllerConfiguration">
+      <property name="servicesManager" value-ref="distributedServicesManager"></property>
+   </resource>
+   <resource id="NetCellController" class="ro.zg.netcell.control.NetCellController">
+      <property name="config" value-ref="netCellControllerConfiguration"></property>
+   </resource>
+   <resource id="CommandControllerWrapper"
+      class="ro.zg.netcell.control.CommandControllerWrapper">
+      <property name="wrappedExecutionEntity" value-ref="CommandController"></property>
+      <property name="exceptionHandler" value-ref="BorderExceptionHandler"></property>
+   </resource>
+   <resource id="CommandController" class="ro.zg.netcell.control.CommandController">
+      <property name="commandExecutors">
+         <value>
+            <map>
+               <entry key="get_definitions">
+                  <value-ref>getDefinitionsCommand</value-ref>
+               </entry>
+               <entry key="execute">
+                  <value-ref>executeEntityCommand</value-ref>
+               </entry>
+               <entry key="create_entity">
+                  <value-ref>createEntityCommand</value-ref>
+               </entry>
+               <entry key="update_entity">
+                  <value-ref>updateEntityCommand</value-ref>
+               </entry>
+               <entry key="remove_entity">
+                  <value-ref>removeEntityCommand</value-ref>
+               </entry>
+               <entry key="get_definition_types">
+                  <value-ref>getDefinitionTypes</value-ref>
+               </entry>
+            </map>
+         </value>
+      </property>
+   </resource>
+   <resource id="getDefinitionsCommand" class="ro.zg.netcell.control.commands.GetDefinitions">
+      <property name="netCellController" value-ref="NetCellController"></property>
+   </resource>
+   <resource id="executeEntityCommand" class="ro.zg.netcell.control.commands.ExecuteEntity">
+      <property name="netCellController" value-ref="NetCellController"></property>
+   </resource>
+   <resource id="createEntityCommand" class="ro.zg.netcell.control.commands.CreateEntity">
+      <property name="netCellController" value-ref="NetCellController"></property>
+   </resource>
+   <resource id="updateEntityCommand" class="ro.zg.netcell.control.commands.UpdateEntity">
+      <property name="netCellController" value-ref="NetCellController"></property>
+   </resource>
+   <resource id="getDefinitionTypes" class="ro.zg.netcell.control.commands.GetDefinitionTypes">
+      <property name="netCellController" value-ref="NetCellController"></property>
+   </resource>
+   <resource id="removeEntityCommand" class="ro.zg.netcell.control.commands.RemoveEntity">
+       <property name="netCellController" value-ref="NetCellController"></property>
+   </resource>
+</resources>

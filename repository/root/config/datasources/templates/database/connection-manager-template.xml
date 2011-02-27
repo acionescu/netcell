@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE entities SYSTEM "../../../dtds/entities.dtd">
+<entities>
+   <entity id="${datasourceDefinition.getId()}-connection-manager" type="connection-manager"
+      logic-type="database">
+      <property name="dataSourceDefinition">
+         <value>
+            <entity id="${datasourceDefinition.getId()}" type="datasource-definition">
+               <property name="datasourceType" value="${datasourceDefinition.getDatasourceType()}"></property>
+               #parse("root/config/datasources/templates/config-data-template.xml")
+            </entity>
+         </value>
+      </property>
+   </entity>
+</entities>

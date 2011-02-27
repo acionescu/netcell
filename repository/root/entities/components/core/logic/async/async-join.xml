@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE entities SYSTEM "../../../../../../dtds/entities.dtd">
+<entities>
+   <entity id="core.logic.async.async-join" type="component-definition"
+      logic-type="dynamic-wrapper">
+      
+      <entity logic-type="config">
+        <property name="entityType" value="20"></property>
+      </entity>
+   </entity>
+</entities>

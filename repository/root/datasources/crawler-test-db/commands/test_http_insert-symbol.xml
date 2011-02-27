@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE command SYSTEM "../../../../dtds/script-dao-commands.dtd">
+<command name="test.http.insert-symbol" type="SQL.UPDATE">
+         <parameters>
+                     <parameter name="id" />
+                     <parameter name="symbol" />
+               </parameters>
+      <script>
+      insert into symbols values($id,'$symbol')
+   </script>
+</command>

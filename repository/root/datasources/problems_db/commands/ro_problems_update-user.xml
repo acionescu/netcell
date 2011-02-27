@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE command SYSTEM "../../../../dtds/script-dao-commands.dtd">
+<command name="ro.problems.update-user" type="SQL.UPDATE">
+         <parameters>
+                     <parameter name="password" />
+                     <parameter name="email" />
+                     <parameter name="userId" />
+                     <parameter name="userHash" />
+               </parameters>
+      <script>
+      update users
+#if($userId)
+set id=$userId
+#else
+set user_hash='$userHash'
+#end
+#if($password)
+, password='$password'
+#end
+#if($email)
+,email='$email'
+#end
+#if($userId)
+where id=$userId;
+--update user hash
+update users
+set user_hash=compute_user_hash($userId)
+where id=$userId;
+#else
+where user_hash='$userHash';
+--update user hash
+update users
+set user_hash=compute_user_hash((select id from users where user_hash='$userHash'))
+where user_hash='$userHash';
+#end
+
+   </script>
+</command>

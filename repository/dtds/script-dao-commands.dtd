@@ -1,0 +1,10 @@
+<!ELEMENT command (parameters?, script)>
+<!ATTLIST command name NMTOKEN #REQUIRED>
+<!ATTLIST command type NMTOKEN #REQUIRED>
+
+<!ELEMENT parameters (parameter*)>
+
+<!ELEMENT parameter EMPTY >
+<!ATTLIST parameter name NMTOKEN #REQUIRED>
+
+<!ELEMENT script (#PCDATA)>

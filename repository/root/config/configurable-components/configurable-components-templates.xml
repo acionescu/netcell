@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE entities SYSTEM "../../../dtds/entities.dtd">
+<entities>
+   <entity id="TEXT_PARSER" type="component-stub">
+      <property name="configData">
+         <value>
+            <entity type="config-data">
+               <property name="userInputParams">
+                  <value>
+                     <map>
+                        <entry key="CONFIG_PARAMETERS">
+                           <value>
+                              <entity type="list-user-input-parameter">
+                                 <property name="name"
+                                    value="CONFIG_PARAMETERS"></property>
+                                 <property name="nestedInputParameter">
+                                    <value>
+                                       <entity
+                                          type="map-user-input-parameter">
+                                          <property
+                                             name="nestedInputParameters">
+                                             <value>
+                                                <list>
+                                                   <value>
+                                                      <entity
+                                                         type="user-input-parameter">
+                                                         <property
+                                                            name="name"
+                                                            value="sequence"></property>
+                                                      </entity>
+                                                   </value>
+                                                   <value>
+                                                      <entity
+                                                         type="user-input-parameter">
+                                                         <property
+                                                            name="name"
+                                                            value="priority"></property>
+                                                      </entity>
+                                                   </value>
+                                                   <value>
+                                                      <entity
+                                                         type="user-input-parameter">
+                                                         <property
+                                                            name="name"
+                                                            value="type"></property>
+                                                         <property
+                                                            name="allowedValues">
+                                                            <value>
+                                                               <list>
+                                                                  <value>
+                                                                     GROUP_START
+                                                                  </value>
+                                                                  <value>
+                                                                     GROUP_END
+                                                                  </value>
+                                                                  <value>
+                                                                     UNIQUE_GROUP_SEPARATOR
+                                                                  </value>
+                                                                  <value>
+                                                                     ASSOCIATE
+                                                                  </value>
+                                                                  <value>
+                                                                     SEPARATE
+                                                                  </value>
+                                                               </list>
+                                                            </value>
+                                                         </property>
+                                                      </entity>
+                                                   </value>
+                                                </list>
+                                             </value>
+                                          </property>
+                                       </entity>
+                                    </value>
+                                 </property>
+                              </entity>
+                           </value>
+                        </entry>
+                     </map>
+                  </value>
+               </property>
+            </entity>
+         </value>
+      </property>
+   </entity>
+</entities>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE entities SYSTEM "../../dtds/entities.dtd">
+<entities>
+	<entity id="testWfComp" logic-type="dynamic-wrapper">
+		<entity logic-type="config">
+			<property name="staticParameters">
+				<value>
+					<map>
+						<entry key="output" value="CR"></entry>
+					</map>
+				</value>
+			</property>
+			<property name="dynamicParameters">
+				<value>
+					<map>
+						<entry key="global-context" value="GC"></entry>
+						<entry key="raw-static-input" value="SP"></entry>
+						<entry key="dynamic-input" value="DP"></entry>
+<!--						<entry key="output" value="OP"></entry>-->
+						<entry key="executor" value="C"></entry>
+					</map>
+				</value>
+			</property>
+			<property name="executor" value-ref="dynamicExecutionEntity" />
+<!--			<property name="executor">-->
+<!--				<value>-->
+<!--					<entity logic-type="dynamic-wrapper">-->
+<!--						<entity logic-type="config">-->
+<!--							<property name="dynamicParameters">-->
+<!--								<value>-->
+<!--									<map>-->
+<!--										<entry key="global-context" value="global-context"></entry>-->
+<!--										<entry key="static-input" value="static-input"></entry>-->
+<!--										<entry key="dynamic-input" value="dynamic-input"></entry>-->
+<!--										<entry key="output" value="output"></entry>-->
+<!--										<entry key="executor" value="executor"></entry>-->
+<!--									</map>-->
+<!--								</value>-->
+<!--							</property>-->
+<!--							<property name="executor" value-ref="dynamicExecutionEntity" />-->
+<!--						</entity>-->
+<!--					</entity>-->
+<!--				</value>-->
+<!--			</property>-->
+<!--			-->
+		</entity>
+	</entity>
+</entities>

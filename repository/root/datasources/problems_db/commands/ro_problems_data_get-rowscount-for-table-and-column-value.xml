@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE command SYSTEM "../../../../dtds/script-dao-commands.dtd">
+<command name="ro.problems.data.get-rowscount-for-table-and-column-value" type="SQL.QUERY">
+         <parameters>
+                     <parameter name="table" />
+                     <parameter name="column" />
+                     <parameter name="value" />
+               </parameters>
+      <script>
+      select count($column) from $table
+where $column='$value'
+   </script>
+</command>

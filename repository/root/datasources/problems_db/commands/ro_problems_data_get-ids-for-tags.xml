@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE command SYSTEM "../../../../dtds/script-dao-commands.dtd">
+<command name="ro.problems.data.get-ids-for-tags" type="SQL.QUERY">
+         <parameters>
+                     <parameter name="tagList" />
+               </parameters>
+      <script>
+      select * 
+from
+tags
+where 
+tag in
+(
+#foreach($t in $tagList.getValues() )
+'$t'
+#if(  ($tagList.size() - $velocityCount)  &gt; 0 ) 
+,
+#end
+#end
+)
+   </script>
+</command>

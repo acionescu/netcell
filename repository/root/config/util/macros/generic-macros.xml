@@ -1,0 +1,29 @@
+#macro(generate_generic_value $genericParameter)
+
+#set($value = $genericParameter.getValue())
+#if($value)
+   #if($genericParameter.isMap())
+   <value>
+      <map>
+         #foreach($entry in $value.entrySet())
+               #generate_generic_value($entry.getValue())
+         #end
+      </map>
+   </value>
+   
+   #elseif($genericParamter.isList())
+      <value>
+         <list>
+            #foreach($listval in $value)
+                #generate_generic_value($listval)
+            #end
+         </list>
+      </value>
+   #else
+      #set($userInputParameter = $genericParameter)
+      #parse("root/config/datasources/templates/user-input-parameter-template.xml")
+   #end 
+#end
+
+
+#end

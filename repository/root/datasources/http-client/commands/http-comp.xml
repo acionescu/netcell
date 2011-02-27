@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE command SYSTEM "../../../../dtds/script-dao-commands.dtd">
+<command name="http-comp" type="HTTP">
+      <parameters>
+            <parameter name="method" />
+            <parameter name="url" />
+            <parameter name="requestHeaders" />
+            <parameter name="returnHeaders" />
+      </parameters>
+   <script>
+   </script>
+</command>

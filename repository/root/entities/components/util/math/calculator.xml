@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE entities SYSTEM "../../dtds/entities.dtd">
+<entities>
+   <entity id="util.math.add" type="component-definition" logic-type="dynamic-wrapper">
+      <entity logic-type="config">
+         <entity type="definition-params" logic-type="static-parameters">
+            <value>
+               <map>
+                  <entry key="inputParameters">
+                     <value>
+                        <list>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="a"></property>
+                                 <property name="type" value="Number"></property>
+                                 <property name="mandatory"
+                                    value="true"></property>
+                              </entity>
+                           </value>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="b"></property>
+                                 <property name="type" value="Number"></property>
+                                 <property name="mandatory"
+                                    value="true"></property>
+                              </entity>
+                           </value>
+                        </list>
+                     </value>
+                  </entry>
+                  <entry key="executionEntity">
+                     <value>
+                        <entity logic-type="dynamic-wrapper">
+                           <entity logic-type="config">
+                              <entity logic-type="static-parameters">
+                                 <value>
+                                    <map>
+                                       <entry key="resource">
+                                          <value-ref>calculatorRes</value-ref>
+                                       </entry>
+                                       <entry key="method" value="add" />
+                                       <entry key="argsOrder">
+                                          <value>
+                                             <list>
+                                                <value>a</value>
+                                                <value>b</value>
+                                             </list>
+                                          </value>
+                                       </entry>
+                                       <entry key="argsTypes">
+                                          <value>
+                                             <list>
+                                                <value>java.lang.Number
+                                                </value>
+                                                <value>java.lang.Number
+                                                </value>
+                                             </list>
+                                          </value>
+                                       </entry>
+                                       <!--													<entry key="simpleResponse">-->
+                                       <!--														<value>-->
+                                       <!--															<map>-->
+                                       <!--																<entry key="-1" value="LESS"></entry>-->
+                                       <!--																<entry key="0" value="EQUAL"></entry>-->
+                                       <!--																<entry key="1" value="GREATER"></entry>-->
+                                       <!--															</map>-->
+                                       <!--														</value>-->
+                                       <!--													</entry>-->
+                                    </map>
+                                 </value>
+                              </entity>
+                              <entity logic-type="original-input-name">
+                                 <value>argsContext</value>
+                              </entity>
+                              <entity logic-type="executor">
+                                 <entity-ref ref-id="methodCaller" />
+                              </entity>
+                           </entity>
+                        </entity>
+                     </value>
+                  </entry>
+                  <entry key="outputParameters">
+                     <value>
+                        <list>
+                           <value>
+                              <entity type="output-parameter">
+                                 <property name="name" value="exit"></property>
+                                 <property name="type" value="Number"></property>
+                              </entity>
+                           </value>
+                        </list>
+                     </value>
+                  </entry>
+               </map>
+            </value>
+         </entity>
+         <entity logic-type="original-input-name">
+            <value>inputContext</value>
+         </entity>
+         <entity logic-type="executor">
+            <entity-ref ref-id="executionEntityWrapper" />
+         </entity>
+      </entity>
+   </entity>
+   <entity id="util.math.subtract" type="component-definition" logic-type="dynamic-wrapper">
+      <entity logic-type="config">
+         <entity type="definition-params" logic-type="static-parameters">
+            <value>
+               <map>
+                  <entry key="inputParameters">
+                     <value>
+                        <list>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="a"></property>
+                                 <property name="type" value="Number"></property>
+                                 <property name="mandatory"
+                                    value="true"></property>
+                              </entity>
+                           </value>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="b"></property>
+                                 <property name="type" value="Number"></property>
+                                 <property name="mandatory"
+                                    value="true"></property>
+                              </entity>
+                           </value>
+                        </list>
+                     </value>
+                  </entry>
+                  <entry key="executionEntity">
+                     <value>
+                        <entity logic-type="dynamic-wrapper">
+                           <entity logic-type="config">
+                              <entity logic-type="static-parameters">
+                                 <value>
+                                    <map>
+                                       <entry key="resource">
+                                          <value-ref>calculatorRes</value-ref>
+                                       </entry>
+                                       <entry key="method" value="subtract" />
+                                       <entry key="argsOrder">
+                                          <value>
+                                             <list>
+                                                <value>a</value>
+                                                <value>b</value>
+                                             </list>
+                                          </value>
+                                       </entry>
+                                       <entry key="argsTypes">
+                                          <value>
+                                             <list>
+                                                <value>java.lang.Number
+                                                </value>
+                                                <value>java.lang.Number
+                                                </value>
+                                             </list>
+                                          </value>
+                                       </entry>
+                                    </map>
+                                 </value>
+                              </entity>
+                              <entity logic-type="original-input-name">
+                                 <value>argsContext</value>
+                              </entity>
+                              <entity logic-type="executor">
+                                 <entity-ref ref-id="methodCaller" />
+                              </entity>
+                           </entity>
+                        </entity>
+                     </value>
+                  </entry>
+                  <entry key="outputParameters">
+                     <value>
+                        <list>
+                           <value>
+                              <entity type="output-parameter">
+                                 <property name="name" value="exit"></property>
+                                 <property name="type" value="Number"></property>
+                              </entity>
+                           </value>
+                        </list>
+                     </value>
+                  </entry>
+               </map>
+            </value>
+         </entity>
+         <entity logic-type="original-input-name">
+            <value>inputContext</value>
+         </entity>
+         <entity logic-type="executor">
+            <entity-ref ref-id="executionEntityWrapper" />
+         </entity>
+      </entity>
+   </entity>
+   <entity id="util.math.divide" type="component-definition" logic-type="dynamic-wrapper">
+      <entity logic-type="config">
+         <entity type="definition-params" logic-type="static-parameters">
+            <value>
+               <map>
+                  <entry key="inputParameters">
+                     <value>
+                        <list>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="a"></property>
+                                 <property name="type" value="Number"></property>
+                                 <property name="mandatory"
+                                    value="true"></property>
+                              </entity>
+                           </value>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="b"></property>
+                                 <property name="type" value="Number"></property>
+                                 <property name="mandatory"
+                                    value="true"></property>
+                              </entity>
+                           </value>
+                        </list>
+                     </value>
+                  </entry>
+                  <entry key="executionEntity">
+                     <value>
+                        <entity logic-type="dynamic-wrapper">
+                           <entity logic-type="config">
+                              <entity logic-type="static-parameters">
+                                 <value>
+                                    <map>
+                                       <entry key="resource">
+                                          <value-ref>calculatorRes</value-ref>
+                                       </entry>
+                                       <entry key="method" value="div" />
+                                       <entry key="argsOrder">
+                                          <value>
+                                             <list>
+                                                <value>a</value>
+                                                <value>b</value>
+                                             </list>
+                                          </value>
+                                       </entry>
+                                       <entry key="argsTypes">
+                                          <value>
+                                             <list>
+                                                <value>java.lang.Number
+                                                </value>
+                                                <value>java.lang.Number
+                                                </value>
+                                             </list>
+                                          </value>
+                                       </entry>
+                                    </map>
+                                 </value>
+                              </entity>
+                              <entity logic-type="original-input-name">
+                                 <value>argsContext</value>
+                              </entity>
+                              <entity logic-type="executor">
+                                 <entity-ref ref-id="methodCaller" />
+                              </entity>
+                           </entity>
+                        </entity>
+                     </value>
+                  </entry>
+                  <entry key="outputParameters">
+                     <value>
+                        <list>
+                           <value>
+                              <entity type="output-parameter">
+                                 <property name="name" value="exit"></property>
+                                 <property name="type" value="Number"></property>
+                              </entity>
+                           </value>
+                        </list>
+                     </value>
+                  </entry>
+               </map>
+            </value>
+         </entity>
+         <entity logic-type="original-input-name">
+            <value>inputContext</value>
+         </entity>
+         <entity logic-type="executor">
+            <entity-ref ref-id="executionEntityWrapper" />
+         </entity>
+      </entity>
+   </entity>
+   <entity id="util.math.multiply" type="component-definition" logic-type="dynamic-wrapper">
+      <entity logic-type="config">
+         <entity type="definition-params" logic-type="static-parameters">
+            <value>
+               <map>
+                  <entry key="inputParameters">
+                     <value>
+                        <list>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="a"></property>
+                                 <property name="type" value="Number"></property>
+                                 <property name="mandatory"
+                                    value="true"></property>
+                              </entity>
+                           </value>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="b"></property>
+                                 <property name="type" value="Number"></property>
+                                 <property name="mandatory"
+                                    value="true"></property>
+                              </entity>
+                           </value>
+                        </list>
+                     </value>
+                  </entry>
+                  <entry key="executionEntity">
+                     <value>
+                        <entity logic-type="dynamic-wrapper">
+                           <entity logic-type="config">
+                              <entity logic-type="static-parameters">
+                                 <value>
+                                    <map>
+                                       <entry key="resource">
+                                          <value-ref>calculatorRes</value-ref>
+                                       </entry>
+                                       <entry key="method" value="multiply" />
+                                       <entry key="argsOrder">
+                                          <value>
+                                             <list>
+                                                <value>a</value>
+                                                <value>b</value>
+                                             </list>
+                                          </value>
+                                       </entry>
+                                       <entry key="argsTypes">
+                                          <value>
+                                             <list>
+                                                <value>java.lang.Number
+                                                </value>
+                                                <value>java.lang.Number
+                                                </value>
+                                             </list>
+                                          </value>
+                                       </entry>
+                                    </map>
+                                 </value>
+                              </entity>
+                              <entity logic-type="original-input-name">
+                                 <value>argsContext</value>
+                              </entity>
+                              <entity logic-type="executor">
+                                 <entity-ref ref-id="methodCaller" />
+                              </entity>
+                           </entity>
+                        </entity>
+                     </value>
+                  </entry>
+                  <entry key="outputParameters">
+                     <value>
+                        <list>
+                           <value>
+                              <entity type="output-parameter">
+                                 <property name="name" value="exit"></property>
+                                 <property name="type" value="Number"></property>
+                              </entity>
+                           </value>
+                        </list>
+                     </value>
+                  </entry>
+               </map>
+            </value>
+         </entity>
+         <entity logic-type="original-input-name">
+            <value>inputContext</value>
+         </entity>
+         <entity logic-type="executor">
+            <entity-ref ref-id="executionEntityWrapper" />
+         </entity>
+      </entity>
+   </entity>
+   <entity id="util.math.modulo" type="component-definition" logic-type="dynamic-wrapper">
+      <entity logic-type="config">
+         <entity type="definition-params" logic-type="static-parameters">
+            <value>
+               <map>
+                  <entry key="inputParameters">
+                     <value>
+                        <list>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="a"></property>
+                                 <property name="type" value="Number"></property>
+                                 <property name="mandatory"
+                                    value="true"></property>
+                              </entity>
+                           </value>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="b"></property>
+                                 <property name="type" value="Number"></property>
+                                 <property name="mandatory"
+                                    value="true"></property>
+                              </entity>
+                           </value>
+                        </list>
+                     </value>
+                  </entry>
+                  <entry key="executionEntity">
+                     <value>
+                        <entity logic-type="dynamic-wrapper">
+                           <entity logic-type="config">
+                              <entity logic-type="static-parameters">
+                                 <value>
+                                    <map>
+                                       <entry key="resource">
+                                          <value-ref>calculatorRes</value-ref>
+                                       </entry>
+                                       <entry key="method" value="modulo" />
+                                       <entry key="argsOrder">
+                                          <value>
+                                             <list>
+                                                <value>a</value>
+                                                <value>b</value>
+                                             </list>
+                                          </value>
+                                       </entry>
+                                       <entry key="argsTypes">
+                                          <value>
+                                             <list>
+                                                <value>java.lang.Number
+                                                </value>
+                                                <value>java.lang.Number
+                                                </value>
+                                             </list>
+                                          </value>
+                                       </entry>
+                                    </map>
+                                 </value>
+                              </entity>
+                              <entity logic-type="original-input-name">
+                                 <value>argsContext</value>
+                              </entity>
+                              <entity logic-type="executor">
+                                 <entity-ref ref-id="methodCaller" />
+                              </entity>
+                           </entity>
+                        </entity>
+                     </value>
+                  </entry>
+                  <entry key="outputParameters">
+                     <value>
+                        <list>
+                           <value>
+                              <entity type="output-parameter">
+                                 <property name="name" value="exit"></property>
+                                 <property name="type" value="Number"></property>
+                              </entity>
+                           </value>
+                        </list>
+                     </value>
+                  </entry>
+               </map>
+            </value>
+         </entity>
+         <entity logic-type="original-input-name">
+            <value>inputContext</value>
+         </entity>
+         <entity logic-type="executor">
+            <entity-ref ref-id="executionEntityWrapper" />
+         </entity>
+      </entity>
+   </entity>
+</entities>

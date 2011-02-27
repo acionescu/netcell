@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE command SYSTEM "../../../../dtds/script-dao-commands.dtd">
+<command name="test.http.urls-processor" type="SQL.QUERY">
+         <parameters>
+                     <parameter name="urlCount" />
+               </parameters>
+      <script>
+      select url from pending_urls where status='N'
+limit $urlCount
+   </script>
+</command>

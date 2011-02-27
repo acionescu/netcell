@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE entities SYSTEM "../../dtds/entities.dtd">
+<entities>
+   <entity id="ro.problems.flows.get-most-popular-issues" type="workflow-definition"
+      logic-type="dynamic-wrapper">
+      <entity type="description">
+         <value>$workflowDefinition.getDescription()</value>
+      </entity>
+      <entity logic-type="config">
+         <entity type="definition-params" logic-type="static-parameters">
+            <value>
+               <map>
+                  						<entry key="inputParameters">
+							<value>
+								<list>
+																		<value>
+										<entity type="input-parameter">
+	<property name="name" value="pageNumber"></property>
+		<property name="type" value="Number"></property>
+				<property name="mandatory" value="true"></property>
+	                              <property name="uiType" value="TEXTFIELD"/>
+               </entity>								</value>
+																		<value>
+										<entity type="input-parameter">
+	<property name="name" value="itemsPerPage"></property>
+		<property name="type" value="Number"></property>
+				<property name="mandatory" value="true"></property>
+	                              <property name="uiType" value="TEXTFIELD"/>
+               </entity>								</value>
+																	</list>
+							</value>
+						</entry>
+																		<entry key="localParameters">
+							<value>
+								<list>
+																		<value>
+										<entity type="local-parameter">
+	<property name="name" value="totalIssuesCount"></property>
+		<property name="type" value="Number"></property>
+		</entity>								</value>
+																		<value>
+										<entity type="local-parameter">
+	<property name="name" value="result"></property>
+		<property name="type" value="List[Context[]]"></property>
+		</entity>								</value>
+																		<value>
+										<entity type="local-parameter">
+	<property name="name" value="row"></property>
+		<property name="type" value="Context[]"></property>
+		</entity>								</value>
+																		<value>
+										<entity type="local-parameter">
+	<property name="name" value="idsList"></property>
+		<property name="type" value="List[Context[id=String]]"></property>
+		</entity>								</value>
+																		<value>
+										<entity type="local-parameter">
+	<property name="name" value="issuesIdsList"></property>
+		<property name="type" value="String"></property>
+		</entity>								</value>
+																		<value>
+										<entity type="local-parameter">
+	<property name="name" value="sortList"></property>
+		<property name="type" value="String"></property>
+			<property name="value" value="pro_votes"></property>
+	</entity>								</value>
+																	</list>
+							</value>
+						</entry>
+												<entry key="executionEntity">
+							<value>
+																<entity type="workflow" logic-type="dynamic-wrapper">
+   <entity logic-type="config">
+      <entity logic-type="executor">
+         <entity-ref ref-id="workFlow" />
+      </entity>
+<!--      <entity logic-type="original-input-name">-->
+<!--         <value>inputContext</value>-->
+<!--      </entity>-->
+      <entity type="workflow-params" logic-type="static-parameters">
+         <value>
+            <map>
+               <entry key="defaultEntryPointId" value="ro.problems.data.get-most-popular-issues-count_0">
+               </entry>
+               <entry key="components">
+                  <value>
+                     <map>
+                                                 <entry key="ro.problems.data.get-most-popular-issues-count_0">
+                           <value>                               <entity type="workflow-component">
+		<entity type="component" logic-type="component">
+	<entity logic-type="dynamic-wrapper">
+		<entity logic-type="config">
+			<entity logic-type="executor">
+				<entity-ref ref-id="ro.problems.data.get-most-popular-issues-count" />
+			</entity>
+<!--			<entity logic-type="original-input-name">-->
+<!--				<value>argsContext</value>-->
+<!--			</entity>-->
+											</entity>
+	</entity>
+</entity>		<entity logic-type="output-params-mappings">
+		<value>
+			<map>
+								<entry key="result" value="result" />
+							</map>
+		</value>
+	</entity>
+		
+		<entity type="flow-logic" logic-type="flow-logic">
+      <property name="nextComponentId" value="core.collections.get-list-value_1" />
+   </entity>               
+                                                </entity>                           </value>
+                        </entry>
+                                                <entry key="core.collections.get-list-value_1">
+                           <value>                               <entity type="workflow-component">
+		<entity type="component" logic-type="component">
+	<entity logic-type="dynamic-wrapper">
+		<entity logic-type="config">
+			<entity logic-type="executor">
+				<entity-ref ref-id="core.collections.get-list-value" />
+			</entity>
+<!--			<entity logic-type="original-input-name">-->
+<!--				<value>argsContext</value>-->
+<!--			</entity>-->
+									<entity logic-type="static-parameters">
+				<value>
+					<map>
+													<entry key="index">
+                                                                                                                  								<value-type value="0" type="String"/>
+							                                                                                                                  </entry>
+											</map>
+				</value>
+			</entity>
+									<entity logic-type="dynamic-parameters">
+				<value>
+					<map>
+													<entry key="list" value="result"/>
+											</map>
+				</value>
+			</entity>
+					</entity>
+	</entity>
+</entity>		<entity logic-type="output-params-mappings">
+		<value>
+			<map>
+								<entry key="value" value="row" />
+							</map>
+		</value>
+	</entity>
+		
+		<entity type="flow-logic" logic-type="flow-logic">
+      <property name="nextComponentId" value="core.collections.get-context-value_2" />
+   </entity>               
+                                                </entity>                           </value>
+                        </entry>
+                                                <entry key="core.collections.get-context-value_2">
+                           <value>                               <entity type="workflow-component">
+		<entity type="component" logic-type="component">
+	<entity logic-type="dynamic-wrapper">
+		<entity logic-type="config">
+			<entity logic-type="executor">
+				<entity-ref ref-id="core.collections.get-context-value" />
+			</entity>
+<!--			<entity logic-type="original-input-name">-->
+<!--				<value>argsContext</value>-->
+<!--			</entity>-->
+									<entity logic-type="static-parameters">
+				<value>
+					<map>
+													<entry key="name">
+                                                                                                                  								<value-type value="count" type="String"/>
+							                                                                                                                  </entry>
+											</map>
+				</value>
+			</entity>
+									<entity logic-type="dynamic-parameters">
+				<value>
+					<map>
+													<entry key="context" value="row"/>
+											</map>
+				</value>
+			</entity>
+					</entity>
+	</entity>
+</entity>		<entity logic-type="output-params-mappings">
+		<value>
+			<map>
+								<entry key="value" value="totalIssuesCount" />
+							</map>
+		</value>
+	</entity>
+		
+		<entity type="flow-logic" logic-type="flow-logic">
+      <property name="nextComponentId" value="ro.problems.data.get-most-popular-issues_3" />
+   </entity>               
+                                                </entity>                           </value>
+                        </entry>
+                                                <entry key="ro.problems.data.get-most-popular-issues_3">
+                           <value>                               <entity type="workflow-component">
+		<entity type="component" logic-type="component">
+	<entity logic-type="dynamic-wrapper">
+		<entity logic-type="config">
+			<entity logic-type="executor">
+				<entity-ref ref-id="ro.problems.data.get-most-popular-issues" />
+			</entity>
+<!--			<entity logic-type="original-input-name">-->
+<!--				<value>argsContext</value>-->
+<!--			</entity>-->
+												<entity logic-type="dynamic-parameters">
+				<value>
+					<map>
+													<entry key="pageNumber" value="pageNumber"/>
+													<entry key="itemsOnPage" value="itemsPerPage"/>
+											</map>
+				</value>
+			</entity>
+					</entity>
+	</entity>
+</entity>		<entity logic-type="output-params-mappings">
+		<value>
+			<map>
+								<entry key="result" value="idsList" />
+							</map>
+		</value>
+	</entity>
+		
+		<entity type="flow-logic" logic-type="flow-logic">
+      <property name="nextComponentId" value="util.data.sqlResult-to-sqllist_4" />
+   </entity>               
+                                                </entity>                           </value>
+                        </entry>
+                                                <entry key="util.data.sqlResult-to-sqllist_4">
+                           <value>                               <entity type="workflow-component">
+		<entity type="component" logic-type="component">
+	<entity logic-type="dynamic-wrapper">
+		<entity logic-type="config">
+			<entity logic-type="executor">
+				<entity-ref ref-id="util.data.sqlResult-to-sqllist" />
+			</entity>
+<!--			<entity logic-type="original-input-name">-->
+<!--				<value>argsContext</value>-->
+<!--			</entity>-->
+									<entity logic-type="static-parameters">
+				<value>
+					<map>
+													<entry key="columnName">
+                                                                                                                  								<value-type value="id" type="String"/>
+							                                                                                                                  </entry>
+													<entry key="wrapAsString">
+                                                                                                                  								<value-type value="false" type="String"/>
+							                                                                                                                  </entry>
+											</map>
+				</value>
+			</entity>
+									<entity logic-type="dynamic-parameters">
+				<value>
+					<map>
+													<entry key="result" value="idsList"/>
+											</map>
+				</value>
+			</entity>
+					</entity>
+	</entity>
+</entity>		<entity logic-type="output-params-mappings">
+		<value>
+			<map>
+								<entry key="output" value="issuesIdsList" />
+							</map>
+		</value>
+	</entity>
+		
+		<entity type="flow-logic" logic-type="flow-logic">
+      <property name="nextComponentId" value="ro.problems.data.get-issues-summaries-list_5" />
+   </entity>               
+                                                </entity>                           </value>
+                        </entry>
+                                                <entry key="ro.problems.data.get-issues-summaries-list_5">
+                           <value>                               <entity type="workflow-component">
+		<entity type="component" logic-type="component">
+	<entity logic-type="dynamic-wrapper">
+		<entity logic-type="config">
+			<entity logic-type="executor">
+				<entity-ref ref-id="ro.problems.data.get-issues-summaries-list" />
+			</entity>
+<!--			<entity logic-type="original-input-name">-->
+<!--				<value>argsContext</value>-->
+<!--			</entity>-->
+												<entity logic-type="dynamic-parameters">
+				<value>
+					<map>
+													<entry key="idsList" value="issuesIdsList"/>
+													<entry key="sortList" value="sortList"/>
+											</map>
+				</value>
+			</entity>
+					</entity>
+	</entity>
+</entity>		<entity logic-type="output-params-mappings">
+		<value>
+			<map>
+								<entry key="result" value="result" />
+							</map>
+		</value>
+	</entity>
+		
+		<entity type="flow-logic" logic-type="flow-logic">
+      <property name="exitLabel" value="exit" />
+   </entity>               
+                                                </entity>                           </value>
+                        </entry>
+                                             </map>
+                  </value>
+               </entry>
+            </map>
+         </value>
+      </entity>
+      <entity logic-type="dynamic-parameters">
+         <value>
+            <map>
+               <entry key="inputContext" value="origContext"></entry>
+               <entry key="entryPointId" value="entryPointId"></entry>
+               <entry key="isAsyncContext" value="isAsyncContext"></entry>
+            </map>
+         </value>
+      </entity>
+   </entity>
+</entity>						</value>
+						</entry>
+												<entry key="outputParameters">
+							<value>
+								<list>
+									
+																		<value>
+										<entity type="output-parameter">
+	<property name="name" value="exit"></property>
+		<property name="type" value="String"></property>
+	</entity>								</value>
+																		<value>
+										<entity type="output-parameter">
+	<property name="name" value="result"></property>
+		<property name="type" value="List[Context[]]"></property>
+	</entity>								</value>
+																	</list>
+							</value>
+						</entry>
+											</map>
+				</value>
+			</entity>
+			<entity logic-type="original-input-name">
+				<value>inputContext</value>
+			</entity>
+			<entity logic-type="executor">
+				<entity-ref ref-id="workflowAdapterEntity" />
+			</entity>
+		</entity>
+	</entity>
+</entities>

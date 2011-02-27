@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration SYSTEM "../../../dtds/entry-point.dtd">
+<configuration>
+   <cfg-handler id="entityRefCfgHandler"
+      class="ro.zg.cfgengine.core.configuration.handlers.TypedValueConfigurationHandler">
+      <property name="hasIdAttribute" value="false"></property>
+      <property name="valueAttributeName" value="ref-id"></property>
+      <property name="defaultType" value="String"></property>
+   </cfg-handler>
+   <cfg-handler id="valueTypeHandler"
+      class="ro.zg.cfgengine.core.configuration.handlers.CustomConfigurationHandler"
+      default-class="ro.zg.util.data.ValueType">
+      <property name="hasIdAttribute" value="false" />
+      <property name="attributesToProperties">
+         <value>
+            <map>
+               <entry key="value" value="value">
+               </entry>
+               <entry key="type" value="type"></entry>
+            </map>
+         </value>
+      </property>
+   </cfg-handler>
+   <cfg-handler id="simpleCustomCfgHandler"
+      class="ro.zg.cfgengine.core.configuration.handlers.BaseConfigurationHandler">
+      <property name="hasIdAttribute" value="false"></property>
+   </cfg-handler>
+   <cfg-handler id="inputParamsHandler"
+      class="ro.zg.cfgengine.core.configuration.handlers.BaseConfigurationHandler"
+      default-class="ro.zg.netcell.vo.InputParameter">
+      <property name="hasIdAttribute" value="false" />
+   </cfg-handler>
+   <cfg-handler id="localParamsHandler"
+      class="ro.zg.cfgengine.core.configuration.handlers.BaseConfigurationHandler"
+      default-class="ro.zg.util.data.GenericNameValue">
+      <property name="hasIdAttribute" value="false" />
+   </cfg-handler>
+   <cfg-handler id="outputParamsHandler"
+      class="ro.zg.cfgengine.core.configuration.handlers.BaseConfigurationHandler"
+      default-class="ro.zg.netcell.vo.OutputParameter">
+      <property name="hasIdAttribute" value="false" />
+   </cfg-handler>
+   <cfg-handler id="fixedExitPointsHandler"
+      class="ro.zg.cfgengine.core.configuration.handlers.BaseConfigurationHandler"
+      default-class="ro.zg.netcell.vo.configurations.FixedExitPoints">
+      <property name="hasIdAttribute" value="false" />
+   </cfg-handler>
+   <cfg-handler id="flowLogicHandler"
+      class="ro.zg.cfgengine.core.configuration.handlers.BaseConfigurationHandler"
+      default-class="ro.zg.netcell.vo.configurations.ComponentExitPointsMapping">
+      <property name="hasIdAttribute" value="false" />
+   </cfg-handler>
+   <cfg-handler id="exitPointHandler"
+      class="ro.zg.cfgengine.core.configuration.handlers.BaseConfigurationHandler"
+      default-class="ro.zg.netcell.vo.configurations.ComponentExitPoint">
+      <property name="hasIdAttribute" value="false" />
+   </cfg-handler>
+   <cfg-handler id="workflowComponentConfigurationHandler"
+      class="ro.zg.cfgengine.core.configuration.handlers.TypeDecoratorConfigurationHandler"
+      default-class="ro.zg.netcell.vo.configurations.WorkFlowComponentConfiguration">
+      <property name="hasIdAttribute" value="false" />
+      <property name="typeAttributeName" value="logic-type" />
+      <property name="typesToProperties">
+         <value>
+            <map>
+               <entry key="component" value="componentConfig"></entry>
+               <entry key="flow-logic" value="componentMapping"></entry>
+               <entry key="error-mapping" value="errorMapping"></entry>
+               <entry key="output-params-mappings" value="outputParamsMappings"></entry>
+            </map>
+         </value>
+      </property>
+      <property name="overRiddenProps">
+         <value>
+            <list>
+               <value>outputParamsMappings</value>
+            </list>
+         </value>
+      </property>
+   </cfg-handler>
+   <cfg-handler id="componentConfigurationHandler"
+      class="ro.zg.cfgengine.core.configuration.handlers.TypeDecoratorConfigurationHandler"
+      default-class="ro.zg.netcell.vo.configurations.ComponentConfiguration">
+      <property name="hasIdAttribute" value="false" />
+      <property name="typeAttributeName" value="logic-type" />
+      <property name="typesToProperties">
+         <value>
+            <map>
+               <entry key="static-parameters" value="staticInputParams"></entry>
+               <entry key="dynamic-parameters" value="dynamicInputParams"></entry>
+               <entry key="executor" value="component"></entry>
+            </map>
+         </value>
+      </property>
+      <property name="overRiddenProps">
+         <value>
+            <list>
+               <value>staticInputParams</value>
+               <value>dynamicInputParams</value>
+            </list>
+         </value>
+      </property>
+   </cfg-handler>
+   <cfg-handler id="workflowConfigurationHandler"
+      class="ro.zg.cfgengine.core.configuration.handlers.TypeDecoratorConfigurationHandler"
+      default-class="ro.zg.netcell.vo.configurations.WorkFlowConfiguration">
+      <property name="defaultInitMethod" value="init"></property>
+      <property name="hasIdAttribute" value="false"></property>
+      <property name="typeAttributeName" value="type" />
+      <property name="typesToProperties">
+         <value>
+            <map>
+               <entry key="workflow-params" value="workflowParams"></entry>
+            </map>
+         </value>
+      </property>
+      <property name="overRiddenProps">
+         <value>
+            <list>
+               <value>workflowParams</value>
+            </list>
+         </value>
+      </property>
+   </cfg-handler>
+   <cfg-handler id="mainWorkflowDefinitionHandler"
+      class="ro.zg.cfgengine.core.configuration.handlers.CustomConfigurationHandler"
+      default-class="ro.zg.netcell.vo.definitions.WorkFlowDefinition">
+      <property name="defaultInitMethod" value="init"></property>
+      <property name="attributesToProperties">
+         <value>
+            <map>
+               <entry key="type" value="type"></entry>
+            </map>
+         </value>
+      </property>
+   </cfg-handler>
+   <cfg-handler id="mainEntityDefinitionHandler"
+      class="ro.zg.cfgengine.core.configuration.handlers.CustomConfigurationHandler"
+      default-class="ro.zg.netcell.vo.definitions.ComponentDefinition">
+      <property name="defaultInitMethod" value="init"></property>
+      <property name="attributesToProperties">
+         <value>
+            <map>
+               <entry key="type" value="type"></entry>
+            </map>
+         </value>
+      </property>
+   </cfg-handler>
+   <cfg-handler id="workflowDefinitionHandler"
+      class="ro.zg.cfgengine.core.configuration.handlers.TypeDecoratorConfigurationHandler"
+      default-class="ro.zg.netcell.vo.definitions.WorkFlowDefinition">
+      <property name="defaultInitMethod" value="init"></property>
+      <property name="typeAttributeName" value="type" />
+      <property name="mainNodeHandler" value-ref="mainWorkflowDefinitionHandler"></property>
+      <property name="typesToProperties">
+         <value>
+            <map>
+               <entry key="definition-params" value="definitionParams"></entry>
+               <entry key="description" value="description"></entry>
+            </map>
+         </value>
+      </property>
+      <property name="overRiddenProps">
+         <value>
+            <list>
+               <value>definitionParams</value>
+            </list>
+         </value>
+      </property>
+   </cfg-handler>
+   <cfg-handler id="entityDefinitionHandler"
+      class="ro.zg.cfgengine.core.configuration.handlers.TypeDecoratorConfigurationHandler"
+      default-class="ro.zg.netcell.vo.definitions.ComponentDefinition">
+      <property name="defaultInitMethod" value="init"></property>
+      <property name="typeAttributeName" value="type" />
+      <property name="mainNodeHandler" value-ref="mainEntityDefinitionHandler"></property>
+      <property name="typesToProperties">
+         <value>
+            <map>
+               <entry key="definition-params" value="definitionParams"></entry>
+               <entry key="description" value="description"></entry>
+            </map>
+         </value>
+      </property>
+      <property name="overRiddenProps">
+         <value>
+            <list>
+               <value>definitionParams</value>
+            </list>
+         </value>
+      </property>
+   </cfg-handler>
+   <cfg-handler id="configurableComponentDefinitionHandler"
+      class="ro.zg.cfgengine.core.configuration.handlers.TypeDecoratorConfigurationHandler"
+      default-class="ro.zg.netcell.vo.definitions.ConfigurableComponentDefinition">
+      <property name="defaultInitMethod" value="init"></property>
+      <property name="typeAttributeName" value="type" />
+       <property name="attributesToProperties">
+         <value>
+            <map>
+               <entry key="type" value="type"></entry>
+            </map>
+         </value>
+      </property>
+      <property name="typesToProperties">
+         <value>
+            <map>
+               <entry key="definition-params" value="definitionParams"></entry>
+               <entry key="user-params" value="configData"></entry>
+               <entry key="description" value="description"></entry>
+            </map>
+         </value>
+      </property>
+      <property name="overRiddenProps">
+         <value>
+            <list>
+               <value>definitionParams</value>
+            </list>
+         </value>
+      </property>
+   </cfg-handler>
+   <cfg-handler id="mainDataAccessEntityDefinitionHandler"
+      class="ro.zg.cfgengine.core.configuration.handlers.CustomConfigurationHandler"
+      default-class="ro.zg.netcell.vo.definitions.DataAccessComponentDefinition">
+      <property name="defaultInitMethod" value="init"></property>
+      <property name="attributesToProperties">
+         <value>
+            <map>
+               <entry key="type" value="type"></entry>
+            </map>
+         </value>
+      </property>
+   </cfg-handler>
+   <cfg-handler id="dataAccessEntityDefinitionHandler"
+      class="ro.zg.cfgengine.core.configuration.handlers.TypeDecoratorConfigurationHandler"
+      default-class="ro.zg.netcell.vo.definitions.DataAccessComponentDefinition">
+      <property name="defaultInitMethod" value="init"></property>
+      <property name="typeAttributeName" value="type" />
+      <property name="mainNodeHandler" value-ref="mainDataAccessEntityDefinitionHandler"></property>
+      <property name="typesToProperties">
+         <value>
+            <map>
+               <entry key="definition-params" value="definitionParams"></entry>
+               <entry key="description" value="description"></entry>
+            </map>
+         </value>
+      </property>
+      <property name="overRiddenProps">
+         <value>
+            <list>
+               <value>definitionParams</value>
+            </list>
+         </value>
+      </property>
+   </cfg-handler>
+   <cfg-handler id="userInputCfgHandler"
+      class="ro.zg.cfgengine.core.configuration.handlers.BaseConfigurationHandler"
+      default-class="ro.zg.util.data.UserInputParameter">
+      <property name="hasIdAttribute" value="false" />
+   </cfg-handler>
+   <cfg-handler id="dynamicParamCfgHandler"
+      class="ro.zg.cfgengine.core.configuration.handlers.BaseConfigurationHandler"
+      default-class="ro.zg.util.data.DynamicConfigParameter">
+      <property name="hasIdAttribute" value="false" />
+   </cfg-handler>
+   <cfg-handler id="staticParamCfgHandler"
+      class="ro.zg.cfgengine.core.configuration.handlers.BaseConfigurationHandler"
+      default-class="ro.zg.util.data.GenericNameValue">
+      <property name="hasIdAttribute" value="false" />
+   </cfg-handler>
+   <cfg-handler id="configDataHandler"
+      class="ro.zg.cfgengine.core.configuration.handlers.BaseConfigurationHandler"
+      default-class="ro.zg.util.data.ConfigurationData">
+      <property name="hasIdAttribute" value="false" />
+   </cfg-handler>
+   <cfg-handler id="entityTypeResolveHandler"
+      class="ro.zg.cfgengine.core.configuration.handlers.TypeConfigurationHandler">
+      <property name="hasIdAttribute" value="false" />
+      <property name="typeAttributeName" value="type"></property>
+      <property name="localConfigurationHandlers">
+         <value>
+            <map>
+               <entry key="input-parameter">
+                  <value-ref>inputParamsHandler</value-ref>
+               </entry>
+               <entry key="local-parameter">
+                  <value-ref>localParamsHandler</value-ref>
+               </entry>
+               <entry key="output-parameter">
+                  <value-ref>outputParamsHandler</value-ref>
+               </entry>
+               <entry key="workflow-component">
+                  <value-ref>workflowComponentConfigurationHandler</value-ref>
+               </entry>
+               <entry key="flow-logic">
+                  <value-ref>flowLogicHandler</value-ref>
+               </entry>
+               <entry key="exit-point-mapping">
+                  <value-ref>exitPointHandler</value-ref>
+               </entry>
+               <entry key="component">
+                  <value-ref>componentConfigurationHandler</value-ref>
+               </entry>
+               <entry key="workflow">
+                  <value-ref>workflowConfigurationHandler</value-ref>
+               </entry>
+               <entry key="workflow-definition">
+                  <value-ref>workflowDefinitionHandler</value-ref>
+               </entry>
+               <entry key="component-definition">
+                  <value-ref>entityDefinitionHandler</value-ref>
+               </entry>
+               <entry key="data-access-component-definition">
+                  <value-ref>dataAccessEntityDefinitionHandler</value-ref>
+               </entry>
+               <entry key="fixed-exit-points">
+                  <value-ref>fixedExitPointsHandler</value-ref>
+               </entry>
+               <entry key="user-input-parameter">
+                  <value-ref>userInputCfgHandler</value-ref>
+               </entry>
+               <entry key="dynamic-config-parameter">
+                  <value-ref>dynamicParamCfgHandler</value-ref>
+               </entry>
+               <entry key="static-config-parameter">
+                  <value-ref>staticParamCfgHandler</value-ref>
+               </entry>
+               <entry key="config-data">
+                  <value-ref>configDataHandler</value-ref>
+               </entry>
+               <entry key="configurable-component-definition">
+                  <value-ref>configurableComponentDefinitionHandler</value-ref>
+               </entry>
+            </map>
+         </value>
+      </property>
+   </cfg-handler>
+   <cfg-handler id="rootHandler"
+      class="ro.zg.cfgengine.core.configuration.handlers.BaseConfigurationHandler">
+      <property name="localConfigurationHandlers">
+         <value>
+            <map>
+               <entry key="entity">
+                  <value-ref>entityTypeResolveHandler</value-ref>
+               </entry>
+               <entry key="entity-ref">
+                  <value-ref>entityRefCfgHandler</value-ref>
+               </entry>
+               <entry key="value-type">
+                  <value-ref>valueTypeHandler</value-ref>
+               </entry>
+            </map>
+         </value>
+      </property>
+   </cfg-handler>
+</configuration>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE resources SYSTEM "../../dtds/workflow-engine.dtd">
+
+<resources>
+	<resource id="CasCommandsSocketReceiver" class="ro.zg.util.io.SocketReceiver">
+		<property name="listenPort" value="9000"></property>
+		<property name="processor" value-ref="CasCommandsProcessor"></property>
+	</resource>
+	
+	<resource id="CasCommandsProcessor" class="ro.zg.util.io.SocketProcessor">
+		<property name="socketWorkerFactory" value-ref="CasCommandsWorkerFactory"></property>
+	</resource>
+	
+	<resource id="CasCommandsWorkerFactory" class="ro.zg.netcell.control.receivers.CasCommandReceiverFactory">
+		<property name="interpreter" value-ref="CasInterpreterWrapper"></property>
+	</resource>
+	
+	<!-- RMI -->
+	<resource id="RmiCommandReceiver" class="ro.zg.netcell.control.receivers.RmiCommandReceiver">
+		<property name="bindName" value="NetcellRmiReceiver"></property>
+		<property name="bindPort" value="9001"></property>
+		<property name="registryPort" value="2000"></property>
+	</resource>
+</resources>

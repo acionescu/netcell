@@ -1,0 +1,1017 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE entities SYSTEM "../../../../../dtds/entities.dtd">
+<entities>
+   <entity id="core.string.indexof" type="component-definition"
+      logic-type="dynamic-wrapper">
+      <entity logic-type="config">
+         <entity type="definition-params" logic-type="static-parameters">
+            <value>
+               <map>
+                  <entry key="inputParameters">
+                     <value>
+                        <list>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="string"></property>
+                                 <property name="type" value="String"></property>
+                                 <property name="mandatory"
+                                    value="true"></property>
+                              </entity>
+                           </value>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="search"></property>
+                                 <property name="type" value="String"></property>
+                                 <property name="mandatory"
+                                    value="true"></property>
+                              </entity>
+                           </value>
+                        </list>
+                     </value>
+                  </entry>
+                  <entry key="executionEntity">
+                     <value>
+                        <entity logic-type="dynamic-wrapper">
+                           <entity logic-type="config">
+                              <entity logic-type="static-parameters">
+                                 <value>
+                                    <map>
+                                       <entry key="paramAsResource"
+                                          value="string" />
+                                       <entry key="method" value="indexOf" />
+                                       <entry key="argsOrder">
+                                          <value>
+                                             <list>
+                                                <value>search</value>
+                                             </list>
+                                          </value>
+                                       </entry>
+                                       <entry key="responseMappingName"
+                                          value="index">
+                                       </entry>
+                                    </map>
+                                 </value>
+                              </entity>
+                              <entity logic-type="original-input-name">
+                                 <value>argsContext</value>
+                              </entity>
+                              <entity logic-type="executor">
+                                 <entity-ref ref-id="methodCaller" />
+                              </entity>
+                           </entity>
+                        </entity>
+                     </value>
+                  </entry>
+                  <entry key="outputParameters">
+                     <value>
+                        <list>
+                           <value>
+                              <entity type="output-parameter">
+                                 <property name="name" value="index"></property>
+                                 <property name="type" value="Number"></property>
+                              </entity>
+                           </value>
+                        </list>
+                     </value>
+                  </entry>
+               </map>
+            </value>
+         </entity>
+         <entity logic-type="original-input-name">
+            <value>inputContext</value>
+         </entity>
+         <entity logic-type="executor">
+            <entity-ref ref-id="executionEntityWrapper" />
+         </entity>
+      </entity>
+   </entity>
+   <entity id="core.string.offset-indexof" type="component-definition"
+      logic-type="dynamic-wrapper">
+      <entity logic-type="config">
+         <entity type="definition-params" logic-type="static-parameters">
+            <value>
+               <map>
+                  <entry key="inputParameters">
+                     <value>
+                        <list>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="string"></property>
+                                 <property name="type" value="String"></property>
+                                 <property name="mandatory"
+                                    value="true"></property>
+                              </entity>
+                           </value>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="search"></property>
+                                 <property name="type" value="String"></property>
+                                 <property name="mandatory"
+                                    value="true"></property>
+                              </entity>
+                           </value>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="offset"></property>
+                                 <property name="type" value="Number"></property>
+                                 <property name="mandatory"
+                                    value="true"></property>
+                              </entity>
+                           </value>
+                        </list>
+                     </value>
+                  </entry>
+                  <entry key="executionEntity">
+                     <value>
+                        <entity logic-type="dynamic-wrapper">
+                           <entity logic-type="config">
+                              <entity logic-type="static-parameters">
+                                 <value>
+                                    <map>
+                                       <entry key="paramAsResource"
+                                          value="string" />
+                                       <entry key="method" value="indexOf" />
+                                       <entry key="argsOrder">
+                                          <value>
+                                             <list>
+                                                <value>search</value>
+                                                <value>offset</value>
+                                             </list>
+                                          </value>
+                                       </entry>
+                                       <entry key="argsTypes">
+                                          <value>
+                                             <list>
+                                                <value>java.lang.String
+                                                </value>
+                                                <value>java.lang.Integer
+                                                </value>
+                                             </list>
+                                          </value>
+                                       </entry>
+                                       <entry key="responseMappingName"
+                                          value="index" />
+                                    </map>
+                                 </value>
+                              </entity>
+                              <entity logic-type="original-input-name">
+                                 <value>argsContext</value>
+                              </entity>
+                              <entity logic-type="executor">
+                                 <entity-ref ref-id="methodCaller" />
+                              </entity>
+                           </entity>
+                        </entity>
+                     </value>
+                  </entry>
+                  <entry key="outputParameters">
+                     <value>
+                        <list>
+                           <value>
+                              <entity type="output-parameter">
+                                 <property name="name" value="index"></property>
+                                 <property name="type" value="Number"></property>
+                              </entity>
+                           </value>
+                        </list>
+                     </value>
+                  </entry>
+               </map>
+            </value>
+         </entity>
+         <entity logic-type="original-input-name">
+            <value>inputContext</value>
+         </entity>
+         <entity logic-type="executor">
+            <entity-ref ref-id="executionEntityWrapper" />
+         </entity>
+      </entity>
+   </entity>
+   <entity id="core.string.lastindexof" type="component-definition"
+      logic-type="dynamic-wrapper">
+      <entity logic-type="config">
+         <entity type="definition-params" logic-type="static-parameters">
+            <value>
+               <map>
+                  <entry key="inputParameters">
+                     <value>
+                        <list>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="string"></property>
+                                 <property name="type" value="String"></property>
+                                 <property name="mandatory"
+                                    value="true"></property>
+                              </entity>
+                           </value>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="search"></property>
+                                 <property name="type" value="String"></property>
+                                 <property name="mandatory"
+                                    value="true"></property>
+                              </entity>
+                           </value>
+                        </list>
+                     </value>
+                  </entry>
+                  <entry key="executionEntity">
+                     <value>
+                        <entity logic-type="dynamic-wrapper">
+                           <entity logic-type="config">
+                              <entity logic-type="static-parameters">
+                                 <value>
+                                    <map>
+                                       <entry key="paramAsResource"
+                                          value="string" />
+                                       <entry key="method" value="lastIndexOf" />
+                                       <entry key="argsOrder">
+                                          <value>
+                                             <list>
+                                                <value>search</value>
+                                             </list>
+                                          </value>
+                                       </entry>
+                                       <entry key="responseMappingName"
+                                          value="index" />
+                                    </map>
+                                 </value>
+                              </entity>
+                              <entity logic-type="original-input-name">
+                                 <value>argsContext</value>
+                              </entity>
+                              <entity logic-type="executor">
+                                 <entity-ref ref-id="methodCaller" />
+                              </entity>
+                           </entity>
+                        </entity>
+                     </value>
+                  </entry>
+                  <entry key="outputParameters">
+                     <value>
+                        <list>
+                           <value>
+                              <entity type="output-parameter">
+                                 <property name="name" value="index"></property>
+                                 <property name="type" value="Number"></property>
+                              </entity>
+                           </value>
+                        </list>
+                     </value>
+                  </entry>
+               </map>
+            </value>
+         </entity>
+         <entity logic-type="original-input-name">
+            <value>inputContext</value>
+         </entity>
+         <entity logic-type="executor">
+            <entity-ref ref-id="executionEntityWrapper" />
+         </entity>
+      </entity>
+   </entity>
+   <entity id="core.string.offset-substring" type="component-definition"
+      logic-type="dynamic-wrapper">
+      <entity logic-type="config">
+         <entity type="definition-params" logic-type="static-parameters">
+            <value>
+               <map>
+                  <entry key="inputParameters">
+                     <value>
+                        <list>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="string"></property>
+                                 <property name="type" value="String"></property>
+                                 <property name="mandatory"
+                                    value="true"></property>
+                              </entity>
+                           </value>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="offset"></property>
+                                 <property name="type" value="Number"></property>
+                                 <property name="mandatory"
+                                    value="true"></property>
+                              </entity>
+                           </value>
+                        </list>
+                     </value>
+                  </entry>
+                  <entry key="executionEntity">
+                     <value>
+                        <entity logic-type="dynamic-wrapper">
+                           <entity logic-type="config">
+                              <entity logic-type="static-parameters">
+                                 <value>
+                                    <map>
+                                       <entry key="paramAsResource"
+                                          value="string" />
+                                       <entry key="method" value="substring" />
+                                       <entry key="argsOrder">
+                                          <value>
+                                             <list>
+                                                <value>offset</value>
+                                             </list>
+                                          </value>
+                                       </entry>
+                                       <entry key="argsTypes">
+                                          <value>
+                                             <list>
+                                                <value>
+                                                   primitive:java.lang.Integer
+                                                </value>
+                                             </list>
+                                          </value>
+                                       </entry>
+                                       <entry key="responseMappingName"
+                                          value="substring">
+                                       </entry>
+                                    </map>
+                                 </value>
+                              </entity>
+                              <entity logic-type="original-input-name">
+                                 <value>argsContext</value>
+                              </entity>
+                              <entity logic-type="executor">
+                                 <entity-ref ref-id="methodCaller" />
+                              </entity>
+                           </entity>
+                        </entity>
+                     </value>
+                  </entry>
+                  <entry key="outputParameters">
+                     <value>
+                        <list>
+                           <value>
+                              <entity type="output-parameter">
+                                 <property name="name" value="substring"></property>
+                                 <property name="type" value="String"></property>
+                              </entity>
+                           </value>
+                        </list>
+                     </value>
+                  </entry>
+               </map>
+            </value>
+         </entity>
+         <entity logic-type="original-input-name">
+            <value>inputContext</value>
+         </entity>
+         <entity logic-type="executor">
+            <entity-ref ref-id="executionEntityWrapper" />
+         </entity>
+      </entity>
+   </entity>
+   <entity id="core.string.full-substring" type="component-definition"
+      logic-type="dynamic-wrapper">
+      <entity logic-type="config">
+         <entity type="definition-params" logic-type="static-parameters">
+            <value>
+               <map>
+                  <entry key="inputParameters">
+                     <value>
+                        <list>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="string"></property>
+                                 <property name="type" value="String"></property>
+                                 <property name="mandatory"
+                                    value="true"></property>
+                              </entity>
+                           </value>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="start"></property>
+                                 <property name="type" value="Number"></property>
+                                 <property name="mandatory"
+                                    value="true"></property>
+                              </entity>
+                           </value>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="end"></property>
+                                 <property name="type" value="Number"></property>
+                                 <property name="mandatory"
+                                    value="true"></property>
+                              </entity>
+                           </value>
+                        </list>
+                     </value>
+                  </entry>
+                  <entry key="executionEntity">
+                     <value>
+                        <entity logic-type="dynamic-wrapper">
+                           <entity logic-type="config">
+                              <entity logic-type="static-parameters">
+                                 <value>
+                                    <map>
+                                       <entry key="paramAsResource"
+                                          value="string" />
+                                       <entry key="method" value="substring" />
+                                       <entry key="argsOrder">
+                                          <value>
+                                             <list>
+                                                <value>start</value>
+                                                <value>end</value>
+                                             </list>
+                                          </value>
+                                       </entry>
+                                       <entry key="argsTypes">
+                                          <value>
+                                             <list>
+                                                <value>
+                                                   primitive:java.lang.Integer
+                                                </value>
+                                                <value>
+                                                   primitive:java.lang.Integer
+                                                </value>
+                                             </list>
+                                          </value>
+                                       </entry>
+                                       <entry key="responseMappingName"
+                                          value="substring">
+                                       </entry>
+                                    </map>
+                                 </value>
+                              </entity>
+                              <entity logic-type="original-input-name">
+                                 <value>argsContext</value>
+                              </entity>
+                              <entity logic-type="executor">
+                                 <entity-ref ref-id="methodCaller" />
+                              </entity>
+                           </entity>
+                        </entity>
+                     </value>
+                  </entry>
+                  <entry key="outputParameters">
+                     <value>
+                        <list>
+                           <value>
+                              <entity type="output-parameter">
+                                 <property name="name" value="substring"></property>
+                                 <property name="type" value="String"></property>
+                              </entity>
+                           </value>
+                        </list>
+                     </value>
+                  </entry>
+               </map>
+            </value>
+         </entity>
+         <entity logic-type="original-input-name">
+            <value>inputContext</value>
+         </entity>
+         <entity logic-type="executor">
+            <entity-ref ref-id="executionEntityWrapper" />
+         </entity>
+      </entity>
+   </entity>
+   <entity id="core.string.concat" type="component-definition"
+      logic-type="dynamic-wrapper">
+      <entity logic-type="config">
+         <entity type="definition-params" logic-type="static-parameters">
+            <value>
+               <map>
+                  <entry key="inputParameters">
+                     <value>
+                        <list>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="string"></property>
+                                 <property name="type" value="String"></property>
+                                 <property name="mandatory"
+                                    value="true"></property>
+                              </entity>
+                           </value>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="tail"></property>
+                                 <property name="type" value="String"></property>
+                                 <property name="mandatory"
+                                    value="true"></property>
+                              </entity>
+                           </value>
+                        </list>
+                     </value>
+                  </entry>
+                  <entry key="executionEntity">
+                     <value>
+                        <entity logic-type="dynamic-wrapper">
+                           <entity logic-type="config">
+                              <entity logic-type="static-parameters">
+                                 <value>
+                                    <map>
+                                       <entry key="paramAsResource"
+                                          value="string" />
+                                       <entry key="method" value="concat" />
+                                       <entry key="argsOrder">
+                                          <value>
+                                             <list>
+                                                <value>tail</value>
+                                             </list>
+                                          </value>
+                                       </entry>
+                                       <entry key="responseMappingName"
+                                          value="result">
+                                       </entry>
+                                    </map>
+                                 </value>
+                              </entity>
+                              <entity logic-type="original-input-name">
+                                 <value>argsContext</value>
+                              </entity>
+                              <entity logic-type="executor">
+                                 <entity-ref ref-id="methodCaller" />
+                              </entity>
+                           </entity>
+                        </entity>
+                     </value>
+                  </entry>
+                  <entry key="outputParameters">
+                     <value>
+                        <list>
+                           <value>
+                              <entity type="output-parameter">
+                                 <property name="name" value="result"></property>
+                                 <property name="type" value="String"></property>
+                              </entity>
+                           </value>
+                        </list>
+                     </value>
+                  </entry>
+               </map>
+            </value>
+         </entity>
+         <entity logic-type="original-input-name">
+            <value>inputContext</value>
+         </entity>
+         <entity logic-type="executor">
+            <entity-ref ref-id="executionEntityWrapper" />
+         </entity>
+      </entity>
+   </entity>
+   <!-- split -->
+   <entity id="core.string.split" type="component-definition"
+      logic-type="dynamic-wrapper">
+      <entity logic-type="config">
+         <entity type="definition-params" logic-type="static-parameters">
+            <value>
+               <map>
+                  <entry key="inputParameters">
+                     <value>
+                        <list>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="string"></property>
+                                 <property name="type" value="String"></property>
+                                 <property name="mandatory"
+                                    value="true"></property>
+                              </entity>
+                           </value>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="splitValue"></property>
+                                 <property name="type" value="String"></property>
+                                 <property name="mandatory"
+                                    value="true"></property>
+                              </entity>
+                           </value>
+                        </list>
+                     </value>
+                  </entry>
+                  <entry key="executionEntity">
+                     <value>
+                        <entity logic-type="dynamic-wrapper">
+                           <entity logic-type="config">
+                              <entity logic-type="static-parameters">
+                                 <value>
+                                    <map>
+                                       <entry key="paramAsResource"
+                                          value="string" />
+                                       <entry key="method" value="split" />
+                                       <entry key="argsOrder">
+                                          <value>
+                                             <list>
+                                                <value>splitValue</value>
+                                             </list>
+                                          </value>
+                                       </entry>
+                                       <entry key="responseMappingName"
+                                          value="elements">
+                                       </entry>
+                                       <entry key="convertToKnownType" value="true"></entry>
+                                    </map>
+                                 </value>
+                              </entity>
+                              <entity logic-type="original-input-name">
+                                 <value>argsContext</value>
+                              </entity>
+                              <entity logic-type="executor">
+                                 <entity-ref ref-id="methodCaller" />
+                              </entity>
+                           </entity>
+                        </entity>
+                     </value>
+                  </entry>
+                  <entry key="outputParameters">
+                     <value>
+                        <list>
+                           <value>
+                              <entity type="output-parameter">
+                                 <property name="name" value="elements"></property>
+                                 <property name="type" value="List[String]"></property>
+                              </entity>
+                           </value>
+                        </list>
+                     </value>
+                  </entry>
+               </map>
+            </value>
+         </entity>
+         <entity logic-type="original-input-name">
+            <value>inputContext</value>
+         </entity>
+         <entity logic-type="executor">
+            <entity-ref ref-id="executionEntityWrapper" />
+         </entity>
+      </entity>
+   </entity>
+   <!-- trim -->
+   <entity id="core.string.trim" type="component-definition"
+      logic-type="dynamic-wrapper">
+      <entity logic-type="config">
+         <entity type="definition-params" logic-type="static-parameters">
+            <value>
+               <map>
+                  <entry key="inputParameters">
+                     <value>
+                        <list>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="string"></property>
+                                 <property name="type" value="String"></property>
+                                 <property name="mandatory"
+                                    value="true"></property>
+                              </entity>
+                           </value>
+                        </list>
+                     </value>
+                  </entry>
+                  <entry key="executionEntity">
+                     <value>
+                        <entity logic-type="dynamic-wrapper">
+                           <entity logic-type="config">
+                              <entity logic-type="static-parameters">
+                                 <value>
+                                    <map>
+                                       <entry key="paramAsResource"
+                                          value="string" />
+                                       <entry key="method" value="trim" />
+                                       <entry key="responseMappingName"
+                                          value="trimmed">
+                                       </entry>
+                                    </map>
+                                 </value>
+                              </entity>
+                              <entity logic-type="original-input-name">
+                                 <value>argsContext</value>
+                              </entity>
+                              <entity logic-type="executor">
+                                 <entity-ref ref-id="methodCaller" />
+                              </entity>
+                           </entity>
+                        </entity>
+                     </value>
+                  </entry>
+                  <entry key="outputParameters">
+                     <value>
+                        <list>
+                           <value>
+                              <entity type="output-parameter">
+                                 <property name="name" value="trimmed"></property>
+                                 <property name="type" value="String"></property>
+                              </entity>
+                           </value>
+                        </list>
+                     </value>
+                  </entry>
+               </map>
+            </value>
+         </entity>
+         <entity logic-type="original-input-name">
+            <value>inputContext</value>
+         </entity>
+         <entity logic-type="executor">
+            <entity-ref ref-id="executionEntityWrapper" />
+         </entity>
+      </entity>
+   </entity>
+   <!-- is-empty -->
+   <entity id="core.string.is-empty" type="component-definition"
+      logic-type="dynamic-wrapper">
+      <entity logic-type="config">
+         <entity type="definition-params" logic-type="static-parameters">
+            <value>
+               <map>
+                  <entry key="inputParameters">
+                     <value>
+                        <list>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="string"></property>
+                                 <property name="type" value="String"></property>
+                                 <property name="mandatory"
+                                    value="true"></property>
+                              </entity>
+                           </value>
+                        </list>
+                     </value>
+                  </entry>
+                  <entry key="executionEntity">
+                     <value>
+                        <entity logic-type="dynamic-wrapper">
+                           <entity logic-type="config">
+                              <entity logic-type="static-parameters">
+                                 <value>
+                                    <map>
+                                       <entry key="paramAsResource"
+                                          value="string" />
+                                       <entry key="method" value="isEmpty" />
+                                       <entry key="simpleResponseWithMappings">
+                                          <value>
+                                             <map>
+                                                <entry key="true"
+                                                   value="TRUE"></entry>
+                                                <entry key="false"
+                                                   value="FALSE"></entry>
+                                             </map>
+                                          </value>
+                                       </entry>
+                                    </map>
+                                 </value>
+                              </entity>
+                              <entity logic-type="original-input-name">
+                                 <value>argsContext</value>
+                              </entity>
+                              <entity logic-type="executor">
+                                 <entity-ref ref-id="methodCaller" />
+                              </entity>
+                           </entity>
+                        </entity>
+                     </value>
+                  </entry>
+                  <entry key="outputParameters">
+                     <value>
+                        <list>
+                           <value>
+                              <entity type="output-parameter">
+                                 <property name="name" value="exit"></property>
+                                 <property name="type" value="Boolean"></property>
+                              </entity>
+                           </value>
+                        </list>
+                     </value>
+                  </entry>
+               </map>
+            </value>
+         </entity>
+         <entity logic-type="original-input-name">
+            <value>inputContext</value>
+         </entity>
+         <entity logic-type="executor">
+            <entity-ref ref-id="executionEntityWrapper" />
+         </entity>
+      </entity>
+   </entity>
+   <!-- to lower case -->
+   <entity id="core.string.to-lower-case" type="component-definition"
+      logic-type="dynamic-wrapper">
+      <entity logic-type="config">
+         <entity type="definition-params" logic-type="static-parameters">
+            <value>
+               <map>
+                  <entry key="inputParameters">
+                     <value>
+                        <list>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="string"></property>
+                                 <property name="type" value="String"></property>
+                                 <property name="mandatory"
+                                    value="true"></property>
+                              </entity>
+                           </value>
+                        </list>
+                     </value>
+                  </entry>
+                  <entry key="executionEntity">
+                     <value>
+                        <entity logic-type="dynamic-wrapper">
+                           <entity logic-type="config">
+                              <entity logic-type="static-parameters">
+                                 <value>
+                                    <map>
+                                       <entry key="paramAsResource"
+                                          value="string" />
+                                       <entry key="method" value="toLowerCase" />
+                                       <entry key="responseMappingName"
+                                          value="lowerCase">
+                                       </entry>
+                                    </map>
+                                 </value>
+                              </entity>
+                              <entity logic-type="original-input-name">
+                                 <value>argsContext</value>
+                              </entity>
+                              <entity logic-type="executor">
+                                 <entity-ref ref-id="methodCaller" />
+                              </entity>
+                           </entity>
+                        </entity>
+                     </value>
+                  </entry>
+                  <entry key="outputParameters">
+                     <value>
+                        <list>
+                           <value>
+                              <entity type="output-parameter">
+                                 <property name="name" value="lowerCase"></property>
+                                 <property name="type" value="String"></property>
+                              </entity>
+                           </value>
+                        </list>
+                     </value>
+                  </entry>
+               </map>
+            </value>
+         </entity>
+         <entity logic-type="original-input-name">
+            <value>inputContext</value>
+         </entity>
+         <entity logic-type="executor">
+            <entity-ref ref-id="executionEntityWrapper" />
+         </entity>
+      </entity>
+   </entity>
+   <!-- unescape html -->
+   <entity id="core.string.unescape-html" type="component-definition"
+      logic-type="dynamic-wrapper">
+      <entity logic-type="config">
+         <entity type="definition-params" logic-type="static-parameters">
+            <value>
+               <map>
+                  <entry key="inputParameters">
+                     <value>
+                        <list>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="string"></property>
+                                 <property name="type" value="String"></property>
+                                 <property name="mandatory"
+                                    value="true"></property>
+                              </entity>
+                           </value>
+                        </list>
+                     </value>
+                  </entry>
+                  <entry key="executionEntity">
+                     <value>
+                        <entity logic-type="dynamic-wrapper">
+                           <entity logic-type="config">
+                              <entity logic-type="static-parameters">
+                                 <value>
+                                    <map>
+                                    <entry key="resourceClass" value="org.apache.commons.lang.StringEscapeUtils"></entry>
+                                       <entry key="method" value="unescapeHtml" />
+                                       <entry key="argsOrder">
+                                          <value>
+                                             <list>
+                                                <value>string</value>
+                                             </list>
+                                          </value>
+                                       </entry>
+                                       <entry key="responseMappingName"
+                                          value="unescapedHtml">
+                                       </entry>
+                                    </map>
+                                 </value>
+                              </entity>
+                              <entity logic-type="original-input-name">
+                                 <value>argsContext</value>
+                              </entity>
+                              <entity logic-type="executor">
+                                 <entity-ref ref-id="methodCaller" />
+                              </entity>
+                           </entity>
+                        </entity>
+                     </value>
+                  </entry>
+                  <entry key="outputParameters">
+                     <value>
+                        <list>
+                           <value>
+                              <entity type="output-parameter">
+                                 <property name="name" value="unescapedHtml"></property>
+                                 <property name="type" value="String"></property>
+                              </entity>
+                           </value>
+                        </list>
+                     </value>
+                  </entry>
+               </map>
+            </value>
+         </entity>
+         <entity logic-type="original-input-name">
+            <value>inputContext</value>
+         </entity>
+         <entity logic-type="executor">
+            <entity-ref ref-id="executionEntityWrapper" />
+         </entity>
+      </entity>
+   </entity>
+   <!-- strip -->
+   <entity id="core.string.strip" type="component-definition"
+      logic-type="dynamic-wrapper">
+      <entity logic-type="config">
+         <entity type="definition-params" logic-type="static-parameters">
+            <value>
+               <map>
+                  <entry key="inputParameters">
+                     <value>
+                        <list>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="string"></property>
+                                 <property name="type" value="String"></property>
+                                 <property name="mandatory"
+                                    value="true"></property>
+                              </entity>
+                           </value>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="stripChars"></property>
+                                 <property name="type" value="String"></property>
+                              </entity>
+                           </value>
+                        </list>
+                     </value>
+                  </entry>
+                  <entry key="executionEntity">
+                     <value>
+                        <entity logic-type="dynamic-wrapper">
+                           <entity logic-type="config">
+                              <entity logic-type="static-parameters">
+                                 <value>
+                                    <map>
+                                    <entry key="resourceClass" value="org.apache.commons.lang.StringUtils"></entry>
+                                       <entry key="method" value="strip" />
+                                       <entry key="argsOrder">
+                                          <value>
+                                             <list>
+                                                <value>string</value>
+                                                <value>stripChars</value>
+                                             </list>
+                                          </value>
+                                       </entry>
+                                       <entry key="responseMappingName"
+                                          value="stripped">
+                                       </entry>
+                                    </map>
+                                 </value>
+                              </entity>
+                              <entity logic-type="original-input-name">
+                                 <value>argsContext</value>
+                              </entity>
+                              <entity logic-type="executor">
+                                 <entity-ref ref-id="methodCaller" />
+                              </entity>
+                           </entity>
+                        </entity>
+                     </value>
+                  </entry>
+                  <entry key="outputParameters">
+                     <value>
+                        <list>
+                           <value>
+                              <entity type="output-parameter">
+                                 <property name="name" value="stripped"></property>
+                                 <property name="type" value="String"></property>
+                              </entity>
+                           </value>
+                        </list>
+                     </value>
+                  </entry>
+               </map>
+            </value>
+         </entity>
+         <entity logic-type="original-input-name">
+            <value>inputContext</value>
+         </entity>
+         <entity logic-type="executor">
+            <entity-ref ref-id="executionEntityWrapper" />
+         </entity>
+      </entity>
+   </entity>
+</entities>

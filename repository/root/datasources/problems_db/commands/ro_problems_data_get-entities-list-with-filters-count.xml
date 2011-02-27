@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE command SYSTEM "../../../../dtds/script-dao-commands.dtd">
+<command name="ro.problems.data.get-entities-list-with-filters-count" type="SQL.QUERY">
+         <parameters>
+                     <parameter name="parentId" />
+                     <parameter name="depth" />
+                     <parameter name="searchString" />
+                     <parameter name="entityType" />
+                     <parameter name="tag" />
+                     <parameter name="status" />
+                     <parameter name="globalStatus" />
+                     <parameter name="userId" />
+                     <parameter name="userActionColumn" />
+                     <parameter name="filterByUser" />
+               </parameters>
+      <script>
+      WITH RECURSIVE subentities_list(id, complex_type_id,complex_type, parent_entity_id, depth) AS (
+        SELECT e.id, cet.id complex_type_id,cet.complex_type, e.parent_entity_id, 0
+        FROM entities e, complex_entity_type cet
+        where e.parent_entity_id=$parentId
+        and e.complex_entity_type_id=cet.id
+        
+      UNION ALL
+        SELECT e.id, cet.id complex_type_id,cet.complex_type, e.parent_entity_id, eg.depth + 1
+        FROM entities e, subentities_list eg, complex_entity_type cet
+        WHERE eg.id = e.parent_entity_id
+        and e.complex_entity_type_id=cet.id
+        #if($depth)
+        and eg.depth &lt; $depth
+        #end
+)
+select 
+#if($entityType || $userActionColumn)
+count(distinct(e.id)) 
+#else
+count(*)
+#end
+from entities e
+join subentities_list sl on (e.id=sl.id)
+#if(!$entityType &amp;&amp; !$userActionColumn)
+join activity_log al on (e.id=al.entity_id)
+#end
+where 1=1
+#if($entityType)
+and sl.complex_type='$entityType'
+#end
+#if($searchString)
+and (lower(e.title) like '%$searchString%' or lower(e.content) like '%$searchString%')
+#end
+#if($tag)
+and exists (select 1 from entities_tags et,tags t where et.entity_id=e.id and et.tag_id=t.id and t.tag='$tag')
+#end
+#if($status)
+and exists (select 1 from entities_users eu,statuses s where eu.entity_id=e.id and eu.status_id=s.id and s.status='$status')
+#end
+#if($globalStatus)
+and exists (select 1 from entities_statuses es,statuses s where entity_id=e.id and es.status_id=s.id and s.status='$globalStatus')
+#end
+#if($userActionColumn)
+and exists (select 1 from entities_users where entity_id=e.id #if($filterByUser)and user_id=$userId#end and $userActionColumn is not null)
+#end
+
+   </script>
+</command>

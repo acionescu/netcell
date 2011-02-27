@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE command SYSTEM "../../../../dtds/script-dao-commands.dtd">
+<command name="ro.problems.data.get-statuses-most-used" type="SQL.QUERY">
+      <script>
+      select s.id,s.status,count(*) from entities_users eu, statuses s
+where eu.status_id=s.id
+group by s.id,s.status
+order by count desc
+   </script>
+</command>

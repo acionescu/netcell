@@ -1,0 +1,40 @@
+<entity type="flow-logic" logic-type="flow-logic">
+   #if($compMapping.getNextComponentId())
+   <property name="nextComponentId" value="$compMapping.getNextComponentId()" />
+   #elseif($compMapping.getExitLabel())
+   <property name="exitLabel" value="$compMapping.getExitLabel()" />
+   #elseif($compMapping.getExitPointPrmName())
+   <property name="exitPointPrmName" value="$compMapping.getExitPointPrmName()" />
+   <property name="exitValuesMappings">
+      <value>
+         <map>
+            #set($exitPoints = $compMapping.getExitValuesMappings())
+            #foreach($entry in $exitPoints.entrySet()) #set($exitPoint =
+            $entry.getValue())
+            <entry key="$entry.getKey()">
+               <value>
+                  #parse("root/config/definitions/templates/exit-point-mapping-template.xml")
+               </value>
+            </entry>
+            #end
+         </map>
+      </value>
+   </property>
+   #elseif($compMapping.getFixedMappings())
+   <property name="fixedMappings">
+      <value>
+         <map>
+            #set($exitPoints = $compMapping.getFixedMappings())
+            #foreach($entry in $exitPoints.entrySet()) #set($exitPoint =
+            $entry.getValue())
+            <entry key="$entry.getKey()">
+               <value>
+                  #parse("root/config/definitions/templates/exit-point-mapping-template.xml")
+               </value>
+            </entry>
+            #end
+         </map>
+      </value>
+   </property>
+   #end
+</entity>

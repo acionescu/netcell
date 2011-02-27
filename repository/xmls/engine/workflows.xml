@@ -1,0 +1,549 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE workflows SYSTEM "../../dtds/workflow-engine.dtd">
+<workflows>
+	<workflow-context id="FirstWorkflow">
+		<listener id-ref="defaultWorkFlowInitDestroyListener" />
+		<listener id-ref="defaultWorkFlowLogger" />
+		<input-parameters id-ref="inputParametersProcessor">
+			<input-parameter name="FLOW_TRACKER" value="START" />
+		</input-parameters>
+	
+		<session session-manager-ref="defaultSessionManager">
+			<session-config has-id-params="false" timeout="1">
+				<params-to-save>
+					<parameter-to-save name="FLOW_TRACKER" />
+				</params-to-save>
+				<session-actions>
+					<session-action exit-point="EXIT" action="SAVE"
+						next-comp-id-ref="comp2" />
+				</session-actions>
+			</session-config>
+		</session>
+		<listener id-ref="defaultWorkFlowLogger" />
+		<workflow start-comp-id="comp1">
+			<workflow-components>
+				<workflow-component local-id="comp1" id-ref="DummyComponent">
+					<listener id-ref="defaultWorkFlowLogger" />
+					<workflow-component-configuration>
+						<static-parameters>
+							<parameter name="NAME" value="COMP1" />
+						</static-parameters>
+						<dynamic-parameters>
+							<dynamic-parameter local-name="DYNAMIC_PRM"
+								context-name="FLOW_TRACKER" />
+						</dynamic-parameters>
+						<output-parameter-mappings>
+							<output-parameter-mapping local-name="OUTPUT_PRM"
+								context-name="FLOW_TRACKER" />
+						</output-parameter-mappings>
+					</workflow-component-configuration>
+					<listener id-ref="defaultWorkFlowLogger" />
+				</workflow-component>
+				<workflow-component local-id="comp2" id-ref="DummyComponent">
+					<listener id-ref="defaultWorkFlowLogger" />
+					<workflow-component-configuration>
+						<static-parameters>
+							<parameter name="NAME" value="comp2" />
+						</static-parameters>
+						<dynamic-parameters>
+							<dynamic-parameter local-name="DYNAMIC_PRM"
+								context-name="FLOW_TRACKER" />
+						</dynamic-parameters>
+						<output-parameter-mappings>
+							<output-parameter-mapping local-name="OUTPUT_PRM"
+								context-name="FLOW_TRACKER" />
+						</output-parameter-mappings>
+					</workflow-component-configuration>
+					<listener id-ref="defaultWorkFlowLogger" />
+				</workflow-component>
+				<workflow-component local-id="comp3" id-ref="DummyComponent">
+					<listener id-ref="defaultWorkFlowLogger" />
+					<workflow-component-configuration>
+						<static-parameters>
+							<parameter name="NAME" value="comp3" />
+						</static-parameters>
+						<dynamic-parameters>
+							<dynamic-parameter local-name="DYNAMIC_PRM"
+								context-name="FLOW_TRACKER" />
+						</dynamic-parameters>
+						<output-parameter-mappings>
+							<output-parameter-mapping local-name="OUTPUT_PRM"
+								context-name="FLOW_TRACKER" />
+						</output-parameter-mappings>
+					</workflow-component-configuration>
+					<listener id-ref="defaultWorkFlowLogger" />
+				</workflow-component>
+			</workflow-components>
+			<workflow-logic>
+				<component-exit-points-mappings
+					local-comp-id="comp1">
+					<exit-point-mapping exit-point="OK"
+						next-comp-id="comp2" />
+				</component-exit-points-mappings>
+				<component-exit-points-mappings
+					local-comp-id="comp2">
+					<exit-point-mapping exit-point="OK"
+						next-comp-id="comp3" />
+				</component-exit-points-mappings>
+				<component-exit-points-mappings
+					local-comp-id="comp3">
+					<exit-point-mapping exit-point="OK" exit="EXIT" />
+				</component-exit-points-mappings>
+			</workflow-logic>
+		</workflow>
+		<output-parameters>
+				<output-parameter>FLOW_TRACKER</output-parameter>
+				<output-parameter>prm2</output-parameter>
+			</output-parameters>
+	</workflow-context>
+	
+	<!-- second -->
+	<workflow-context id="SecondWorkflow">
+		<listener id-ref="defaultWorkFlowInitDestroyListener" />
+		<listener id-ref="defaultWorkFlowLogger" />
+		<workflow-configuration>
+			<input-parameters>
+				<input-parameter name="FLOW_TRACKER" value="START" />
+			</input-parameters>
+			<output-parameters>
+				<output-parameter>FLOW_TRACKER</output-parameter>
+				<output-parameter>prm2</output-parameter>
+			</output-parameters>
+		</workflow-configuration>
+		<session session-manager-ref="defaultSessionManager">
+			<session-config has-id-params="true" timeout="1">
+				<id-params>
+					<id-param name="paramForSession1" />
+					<id-param name="paramForSession2" />
+				</id-params>
+				<params-to-save>
+					<parameter-to-save name="FLOW_TRACKER" />
+				</params-to-save>
+				<session-actions>
+					<session-action exit-point="EXIT" action="SAVE"
+						next-comp-id-ref="comp2" />
+				</session-actions>
+			</session-config>
+		</session>
+		<listener id-ref="defaultWorkFlowLogger" />
+		<workflow start-comp-id="comp1">
+			<workflow-components>
+				<workflow-component local-id="comp1" id-ref="DummyComponent">
+					<listener id-ref="defaultWorkFlowLogger" />
+					<workflow-component-configuration>
+						<static-parameters>
+							<parameter name="NAME" value="COMP1" />
+						</static-parameters>
+						<dynamic-parameters>
+							<dynamic-parameter local-name="DYNAMIC_PRM"
+								context-name="FLOW_TRACKER" />
+						</dynamic-parameters>
+						<output-parameter-mappings>
+							<output-parameter-mapping local-name="OUTPUT_PRM"
+								context-name="FLOW_TRACKER" />
+						</output-parameter-mappings>
+					</workflow-component-configuration>
+					<listener id-ref="defaultWorkFlowLogger" />
+				</workflow-component>
+				<workflow-component local-id="comp2" id-ref="DummyComponent">
+					<listener id-ref="defaultWorkFlowLogger" />
+					<workflow-component-configuration>
+						<static-parameters>
+							<parameter name="NAME" value="comp2" />
+						</static-parameters>
+						<dynamic-parameters>
+							<dynamic-parameter local-name="DYNAMIC_PRM"
+								context-name="FLOW_TRACKER" />
+						</dynamic-parameters>
+						<output-parameter-mappings>
+							<output-parameter-mapping local-name="OUTPUT_PRM"
+								context-name="FLOW_TRACKER" />
+						</output-parameter-mappings>
+					</workflow-component-configuration>
+					<listener id-ref="defaultWorkFlowLogger" />
+				</workflow-component>
+				<workflow-component local-id="comp3" id-ref="DummyComponent">
+					<listener id-ref="defaultWorkFlowLogger" />
+					<workflow-component-configuration>
+						<static-parameters>
+							<parameter name="NAME" value="comp3" />
+						</static-parameters>
+						<dynamic-parameters>
+							<dynamic-parameter local-name="DYNAMIC_PRM"
+								context-name="FLOW_TRACKER" />
+						</dynamic-parameters>
+						<output-parameter-mappings>
+							<output-parameter-mapping local-name="OUTPUT_PRM"
+								context-name="FLOW_TRACKER" />
+						</output-parameter-mappings>
+					</workflow-component-configuration>
+					<listener id-ref="defaultWorkFlowLogger" />
+				</workflow-component>
+			</workflow-components>
+			<workflow-logic>
+				<component-exit-points-mappings
+					local-comp-id="comp1">
+					<exit-point-mapping exit-point="OK"
+						next-comp-id="comp2" />
+				</component-exit-points-mappings>
+				<component-exit-points-mappings
+					local-comp-id="comp2">
+					<exit-point-mapping exit-point="OK"
+						next-comp-id="comp3" />
+				</component-exit-points-mappings>
+				<component-exit-points-mappings
+					local-comp-id="comp3">
+					<exit-point-mapping exit-point="OK" exit="EXIT" />
+				</component-exit-points-mappings>
+			</workflow-logic>
+		</workflow>
+	</workflow-context>
+	<workflow-context id="FlowWithBadComponent">
+		<listener id-ref="defaultWorkFlowInitDestroyListener" />
+		<listener id-ref="defaultWorkFlowLogger" />
+		<workflow start-comp-id="c1">
+			<workflow-components>
+				<workflow-component id-ref="ExceptionalComponent"
+					local-id="c1">
+					<listener id-ref="defaultWorkFlowLogger" />
+				</workflow-component>
+			</workflow-components>
+			<workflow-logic>
+				<component-exit-points-mappings
+					local-comp-id="c1">
+					<exit-point-mapping exit-point="ERROR" exit="BAD" />
+				</component-exit-points-mappings>
+			</workflow-logic>
+		</workflow>
+	</workflow-context>
+	<workflow-context id="ValidationFlow">
+		<listener id-ref="defaultWorkFlowInitDestroyListener" />
+		<listener id-ref="defaultWorkFlowLogger" />
+		<workflow-configuration>
+			<input-parameters>
+				<input-parameter name="FLOW_TRACKER" mandatory="true" />
+				<input-parameter name="intParam" type="Integer"></input-parameter>
+				<input-parameter name="floatParam" type="Float"></input-parameter>
+			</input-parameters>
+			<output-parameters>
+				<output-parameter>FLOW_TRACKER</output-parameter>
+			</output-parameters>
+		</workflow-configuration>
+		<workflow start-comp-id="comp1">
+			<workflow-components>
+				<workflow-component local-id="comp1" id-ref="DummyComponent">
+					<listener id-ref="defaultWorkFlowLogger" />
+					<workflow-component-configuration>
+						<static-parameters>
+							<parameter name="NAME" value="noname" />
+						</static-parameters>
+						<dynamic-parameters>
+							<dynamic-parameter local-name="DYNAMIC_PRM"
+								context-name="FLOW_TRACKER" />
+						</dynamic-parameters>
+						<output-parameter-mappings>
+							<output-parameter-mapping local-name="OUTPUT_PRM"
+								context-name="FLOW_TRACKER" />
+						</output-parameter-mappings>
+					</workflow-component-configuration>
+					<listener id-ref="defaultWorkFlowLogger" />
+				</workflow-component>
+			</workflow-components>
+			<workflow-logic>
+				<component-exit-points-mappings
+					local-comp-id="comp1">
+					<exit-point-mapping exit-point="OK" exit="DONE" />
+				</component-exit-points-mappings>
+			</workflow-logic>
+		</workflow>
+	</workflow-context>
+	<workflow-context id="ComponentValidationFlow">
+		<listener id-ref="defaultWorkFlowInitDestroyListener" />
+		<listener id-ref="defaultWorkFlowLogger" />
+		<workflow-configuration>
+			<input-parameters>
+				<input-parameter name="FLOW_TRACKER" value="" />
+				<input-parameter name="refParam" type="Integer"></input-parameter>
+				<input-parameter name="valParam" type="Integer"></input-parameter>
+			</input-parameters>
+			<output-parameters>
+				<output-parameter>FLOW_TRACKER</output-parameter>
+			</output-parameters>
+		</workflow-configuration>
+		<workflow start-comp-id="comp1">
+			<workflow-components>
+				<workflow-component local-id="comp1" id-ref="Comparator">
+					<listener id-ref="defaultWorkFlowLogger" />
+					<workflow-component-configuration>
+						<dynamic-parameters>
+							<dynamic-parameter local-name="referenceValue"
+								context-name="refParam" />
+							<dynamic-parameter context-name="valParam"
+								local-name="comparedValue" />
+						</dynamic-parameters>
+					</workflow-component-configuration>
+					<listener id-ref="defaultWorkFlowLogger" />
+				</workflow-component>
+			</workflow-components>
+			<workflow-logic>
+				<component-exit-points-mappings
+					local-comp-id="comp1">
+					<exit-point-mapping exit-point="EQ" exit="EQ" />
+					<exit-point-mapping exit-point="LT" exit="LT" />
+					<exit-point-mapping exit-point="GT" exit="GT" />
+				</component-exit-points-mappings>
+			</workflow-logic>
+		</workflow>
+	</workflow-context>
+	
+	<!-- executor -->
+	<workflow-context id="CommandExecutorFlow">
+		<listener id-ref="defaultWorkFlowInitDestroyListener" />
+		<listener id-ref="defaultWorkFlowLogger" />
+		<workflow-configuration>
+			<input-parameters>
+				<input-parameter name="commandName" mandatory="true"></input-parameter>
+			</input-parameters>
+		</workflow-configuration>
+		<workflow start-comp-id="pickCommandExecutor">
+			<workflow-components>
+				<workflow-component id-ref="InputMapper"
+					local-id="pickCommandExecutor">
+					<workflow-component-configuration>
+						<static-parameters>
+							<parameter name="mappedOutput">
+								<value>
+									<map>
+										<entry key="execute" value="execute"></entry>
+									</map>
+								</value>
+							</parameter>
+						</static-parameters>
+						<dynamic-parameters>
+							<dynamic-parameter context-name="commandName,"
+								local-name="filterParameters" />
+						</dynamic-parameters>
+					</workflow-component-configuration>
+				</workflow-component>
+			</workflow-components>
+			<workflow-logic>
+				<component-exit-points-mappings
+					local-comp-id="pickCommandExecutor">
+					<exit-point-mapping exit-point="execute" exit="execute" />
+				</component-exit-points-mappings>
+			</workflow-logic>
+		</workflow>
+	</workflow-context>
+	
+	<!--  clatite -->
+	<workflow-context id="ClatiteMaker">
+		<listener id-ref="defaultWorkFlowInitDestroyListener" />
+		<listener id-ref="defaultWorkFlowLogger" />
+		<workflow-configuration>
+			<input-parameters>
+				<input-parameter name="FLOW_TRACKER" value="START" />
+				<input-parameter name="CASTRON" value="gol"></input-parameter>
+				<input-parameter name="TIGAIE" value="goala"></input-parameter>
+				<input-parameter name="OUTPUT" value=":"></input-parameter>
+			</input-parameters>
+			<output-parameters>
+				<output-parameter>CASTRON</output-parameter>
+				<output-parameter>TIGAIE</output-parameter>
+				<output-parameter>OUTPUT</output-parameter>
+			</output-parameters>
+		</workflow-configuration>
+		<session session-manager-ref="defaultSessionManager">
+			<session-config has-id-params="false" timeout="1">
+				<params-to-save>
+					<parameter-to-save name="OUTPUT" />
+				</params-to-save>
+				<session-actions>
+					<session-action exit-point="EXIT" action="SAVE"
+						next-comp-id-ref="step1" />
+				</session-actions>
+			</session-config>
+		</session>
+		<listener id-ref="defaultWorkFlowLogger" />
+		<workflow start-comp-id="step1">
+			<workflow-components>
+				<workflow-component local-id="step1" id-ref="DummyComponent">
+					<listener id-ref="defaultWorkFlowLogger" />
+					<workflow-component-configuration>
+						<static-parameters>
+							<parameter name="NAME" value="oua" />
+						</static-parameters>
+						<dynamic-parameters>
+							<dynamic-parameter local-name="DYNAMIC_PRM"
+								context-name="CASTRON" />
+						</dynamic-parameters>
+						<output-parameter-mappings>
+							<output-parameter-mapping local-name="OUTPUT_PRM"
+								context-name="CASTRON" />
+						</output-parameter-mappings>
+					</workflow-component-configuration>
+					<listener id-ref="defaultWorkFlowLogger" />
+				</workflow-component>
+				<workflow-component local-id="step2" id-ref="DummyComponent">
+					<listener id-ref="defaultWorkFlowLogger" />
+					<workflow-component-configuration>
+						<static-parameters>
+							<parameter name="NAME" value="lapte" />
+						</static-parameters>
+						<dynamic-parameters>
+							<dynamic-parameter local-name="DYNAMIC_PRM"
+								context-name="CASTRON" />
+						</dynamic-parameters>
+						<output-parameter-mappings>
+							<output-parameter-mapping local-name="OUTPUT_PRM"
+								context-name="CASTRON" />
+						</output-parameter-mappings>
+					</workflow-component-configuration>
+					<listener id-ref="defaultWorkFlowLogger" />
+				</workflow-component>
+				<workflow-component local-id="step3" id-ref="DummyComponent">
+					<listener id-ref="defaultWorkFlowLogger" />
+					<workflow-component-configuration>
+						<static-parameters>
+							<parameter name="NAME" value="faina" />
+						</static-parameters>
+						<dynamic-parameters>
+							<dynamic-parameter local-name="DYNAMIC_PRM"
+								context-name="CASTRON" />
+						</dynamic-parameters>
+						<output-parameter-mappings>
+							<output-parameter-mapping local-name="OUTPUT_PRM"
+								context-name="CASTRON" />
+						</output-parameter-mappings>
+					</workflow-component-configuration>
+					<listener id-ref="defaultWorkFlowLogger" />
+				</workflow-component>
+				<workflow-component local-id="step4" id-ref="DummyComponent">
+					<listener id-ref="defaultWorkFlowLogger" />
+					<workflow-component-configuration>
+						<static-parameters>
+							<parameter name="NAME" value="amestec" />
+						</static-parameters>
+						<dynamic-parameters>
+							<dynamic-parameter local-name="DYNAMIC_PRM"
+								context-name="CASTRON" />
+						</dynamic-parameters>
+						<output-parameter-mappings>
+							<output-parameter-mapping local-name="OUTPUT_PRM"
+								context-name="CASTRON" />
+						</output-parameter-mappings>
+					</workflow-component-configuration>
+					<listener id-ref="defaultWorkFlowLogger" />
+				</workflow-component>
+				<workflow-component local-id="step5" id-ref="DummyComponent">
+					<listener id-ref="defaultWorkFlowLogger" />
+					<workflow-component-configuration>
+						<static-parameters>
+							<parameter name="NAME" value="amestec" />
+						</static-parameters>
+						<dynamic-parameters>
+							<dynamic-parameter local-name="DYNAMIC_PRM"
+								context-name="TIGAIE" />
+						</dynamic-parameters>
+						<output-parameter-mappings>
+							<output-parameter-mapping local-name="OUTPUT_PRM"
+								context-name="TIGAIE" />
+						</output-parameter-mappings>
+					</workflow-component-configuration>
+					<listener id-ref="defaultWorkFlowLogger" />
+				</workflow-component>
+				<workflow-component local-id="step6" id-ref="DummyComponent">
+					<listener id-ref="defaultWorkFlowLogger" />
+					<workflow-component-configuration>
+						<static-parameters>
+							<parameter name="NAME" value="clatita" />
+						</static-parameters>
+						<dynamic-parameters>
+							<dynamic-parameter local-name="DYNAMIC_PRM"
+								context-name="TIGAIE" />
+						</dynamic-parameters>
+						<output-parameter-mappings>
+							<output-parameter-mapping local-name="OUTPUT_PRM"
+								context-name="TIGAIE" />
+						</output-parameter-mappings>
+					</workflow-component-configuration>
+					<listener id-ref="defaultWorkFlowLogger" />
+				</workflow-component>
+				<workflow-component local-id="step7" id-ref="DummyComponent">
+					<listener id-ref="defaultWorkFlowLogger" />
+					<workflow-component-configuration>
+						<static-parameters>
+							<parameter name="NAME" value="clatita" />
+						</static-parameters>
+						<dynamic-parameters>
+							<dynamic-parameter local-name="DYNAMIC_PRM"
+								context-name="OUTPUT" />
+						</dynamic-parameters>
+						<output-parameter-mappings>
+							<output-parameter-mapping local-name="OUTPUT_PRM"
+								context-name="OUTPUT" />
+						</output-parameter-mappings>
+					</workflow-component-configuration>
+					<listener id-ref="defaultWorkFlowLogger" />
+				</workflow-component>
+				<workflow-component local-id="step8" id-ref="DummyComponent">
+					<listener id-ref="defaultWorkFlowLogger" />
+					<workflow-component-configuration>
+						<static-parameters>
+							<parameter name="NAME" value="clatita cu gem" />
+						</static-parameters>
+						<dynamic-parameters>
+							<dynamic-parameter local-name="DYNAMIC_PRM"
+								context-name="OUTPUT" />
+						</dynamic-parameters>
+						<output-parameter-mappings>
+							<output-parameter-mapping local-name="OUTPUT_PRM"
+								context-name="OUTPUT" />
+						</output-parameter-mappings>
+					</workflow-component-configuration>
+					<listener id-ref="defaultWorkFlowLogger" />
+				</workflow-component>
+			</workflow-components>
+			<workflow-logic>
+				<component-exit-points-mappings
+					local-comp-id="step1">
+					<exit-point-mapping exit-point="OK"
+						next-comp-id="step2" />
+				</component-exit-points-mappings>
+				<component-exit-points-mappings
+					local-comp-id="step2">
+					<exit-point-mapping exit-point="OK"
+						next-comp-id="step3" />
+				</component-exit-points-mappings>
+				<component-exit-points-mappings
+					local-comp-id="step3">
+					<exit-point-mapping exit-point="OK"
+						next-comp-id="step4" />
+				</component-exit-points-mappings>
+				<component-exit-points-mappings
+					local-comp-id="step4">
+					<exit-point-mapping exit-point="OK"
+						next-comp-id="step5" />
+				</component-exit-points-mappings>
+				<component-exit-points-mappings
+					local-comp-id="step5">
+					<exit-point-mapping exit-point="OK"
+						next-comp-id="step6" />
+				</component-exit-points-mappings>
+				<component-exit-points-mappings
+					local-comp-id="step6">
+					<exit-point-mapping exit-point="OK"
+						next-comp-id="step7" />
+				</component-exit-points-mappings>
+				<component-exit-points-mappings
+					local-comp-id="step7">
+					<exit-point-mapping exit-point="OK"
+						next-comp-id="step8" />
+				</component-exit-points-mappings>
+				<component-exit-points-mappings
+					local-comp-id="step8">
+					<exit-point-mapping exit-point="OK" exit="DONE" />
+				</component-exit-points-mappings>
+			</workflow-logic>
+		</workflow>
+	</workflow-context>
+</workflows>

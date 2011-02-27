@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE command SYSTEM "../../../../dtds/script-dao-commands.dtd">
+<command name="ro.problems.data.get-application-config-params" type="SQL.QUERY">
+      <script>
+      select * from application_config
+   </script>
+</command>

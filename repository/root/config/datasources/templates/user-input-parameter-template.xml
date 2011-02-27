@@ -1,0 +1,29 @@
+<entry key="${userInputParameter.getName()}">
+   <value>
+      <entity type="user-input-parameter">
+         <property name="name" value="${userInputParameter.getName()}"></property>
+         #if($userInputParameter.getValue())
+         <property name="value" value="$escapeUtils.escapeXml(${userInputParameter.getValue()})"></property>
+         #end 
+         #if($userInputParameter.getType())
+         <property name="type" value="${userInputParameter.getType()}"></property>
+         #end 
+         #if($userInputParameter.getInputType())
+         <property name="inputType" value="${userInputParameter.getInputType()}"></property>
+         #end
+         #set($allowedValues = false)
+         #set($allowedValues=$userInputParameter.getAllowedValues()) 
+         #if($allowedValues && $allowedValues.size() >0 )
+            <property name="allowedValues">
+            <value>
+               <list>
+                  #foreach($allowedValue in $allowedValues)
+                     <value>$allowedValue</value>
+                  #end
+               </list>
+            </value>
+         </property>
+         #end
+      </entity>
+   </value>
+</entry>

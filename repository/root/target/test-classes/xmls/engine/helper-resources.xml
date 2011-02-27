@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE resources SYSTEM "../../dtds/workflow-engine.dtd">
+
+<resources>
+<!--	-->
+<!--	<resource id="defaultWorkFlowInitDestroyListener" class="ro.zg.synapse.engine.listeners.WorkFlowContextInitDestroyListener">-->
+<!--	</resource>-->
+<!--	-->
+<!--	<resource id="defaultWorkFlowLogger" class="ro.zg.synapse.engine.listeners.util.WorkFlowLoggingListener"></resource>-->
+<!--	-->
+<!--	-->
+<!--	<resource id="resourceManager" class="ro.zg.synapse.engine.resources.ResourcesManager">-->
+<!--		<property name="rootDir" value="/home/adi/test/synapse/testground"></property>-->
+<!--		<property name="sessionsSerDir" value="sessions"></property>-->
+<!--	</resource>-->
+<!--	-->
+<!--	<resource id="serializableSessionHandler" class="ro.zg.synapse.engine.session.SerializableWorkFlowSessionHandler">-->
+<!--		<property name="resourcesManager" value-ref="resourceManager"></property>-->
+<!--	</resource>-->
+<!--	-->
+<!--	<resource id="defaultSessionManager" class="ro.zg.synapse.engine.session.DefaultWorkFlowSessionManager">-->
+<!--		<property name="workFlowSessionHandler" value-ref="serializableSessionHandler"></property>-->
+<!--	</resource>-->
+<!--	-->
+	<!--  -->
+	<resource id="inputParametersProcessor" class="ro.zg.netcell.engine.core.InputParametersProcessor"></resource>
+	
+	<resource id="executionPipeline" class="ro.zg.util.execution.test.ExecutionPipeLine"></resource>
+	
+	<resource id="dynamicParametersMapper" class="ro.zg.netcell.engine.core.DynamicParametersMapper"></resource>
+	
+	<resource id="staticParametersMapper" class="ro.zg.netcell.engine.core.StaticParametersMapper"></resource>
+
+	<resource id="contextFactory" class="ro.zg.netcell.engine.core.DefaultWorkFlowEntityExecutionContextFactory"></resource>
+	
+	<resource id="workflowComponentContextCreator" class="ro.zg.netcell.engine.core.WorkflowComponentContextCreator"></resource>
+	
+	<resource id="wfCompContextCreatorWrapper" class="ro.zg.util.execution.test.ExecutionEntityWrapper">
+		<property name="config" value-ref="wfCompContextCreatorWrapperConfig"></property>
+	</resource>
+	
+	<resource id="wfCompContextCreatorWrapperConfig" class="ro.zg.util.execution.test.ExecutionEntityWrapperConfiguration">
+		<property name="wrappedEntity" value-ref="workflowComponentContextCreator"></property>
+		<property name="wrappedEntityConfiguration" value-ref="contextFactory"></property>
+	</resource>
+	
+	<resource id="rightJoin" class="ro.zg.util.execution.test.func.RightJoinEntity"></resource>
+	
+	<resource id="leftJoin" class="ro.zg.util.execution.test.func.LeftJoinEntity"></resource>
+	
+	<!-- creates a join group with the global context and local context -->
+	<resource id="wfCompContextGroupCreatorConfig" class="ro.zg.util.execution.test.ExecutionEntityWrapperConfiguration">
+		<property name="wrappedEntity" value-ref="rightJoin"></property>
+		<property name="wrappedEntityConfiguration" value-ref="wfCompContextCreatorWrapper"></property>
+	</resource>
+	<resource id="wfCompContextGroupCreator" class="ro.zg.util.execution.test.ExecutionEntityWrapper">
+		<property name="config" value-ref="wfCompContextGroupCreatorConfig"></property>
+	</resource>
+	
+	<resource id="joinGroupRightFilter" class="ro.zg.util.execution.test.func.JoinGroupRightFilter">
+	</resource>
+	
+	<resource id="joinGroupLeftFilter" class="ro.zg.util.execution.test.func.JoinGroupLeftFilter"></resource>
+	
+	<resource id="preparatorInspectorEntity" class="ro.zg.util.execution.test.func.PreparatorInspectorEntity"></resource>
+</resources>

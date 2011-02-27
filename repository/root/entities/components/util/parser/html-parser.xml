@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE entities SYSTEM "../../../../../dtds/entities.dtd">
+<entities>
+   <entity id="util.parser.html-parser" type="component-definition"
+      logic-type="dynamic-wrapper">
+      <entity logic-type="config">
+         <entity type="definition-params" logic-type="static-parameters">
+            <value>
+               <map>
+                  <entry key="inputParameters">
+                     <value>
+                        <list>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="input"></property>
+                                 <property name="type" value="String"></property>
+                                 <property name="mandatory"
+                                    value="true"></property>
+                              </entity>
+                           </value>
+                        </list>
+                     </value>
+                  </entry>
+                  <entry key="executionEntity">
+                     <value>
+                        <entity logic-type="dynamic-wrapper">
+                           <entity logic-type="config">
+                              <entity logic-type="static-parameters">
+                                 <value>
+                                    <map>
+                                       <entry key="resource">
+                                          <value>
+                                             <resource
+                                                id="native.html.parser"
+                                                class="ro.zg.util.parser.Parser">
+                                                <property
+                                                   name="listOfStringSymbols">
+                                                   <value>
+                                                      <list>
+                                                         <value>[&lt;a ,GROUP_START,start_a,true,end_a,end_a2,script_start,apos_start,quot_start,comma,equals],[&gt;,GROUP_END,end_a],[/&gt;,GROUP_END,end_a2],[script&gt;,GROUP_START,script_start,false,script_end],[&lt;/script,GROUP_END,script_end],['\'',GROUP_START:SIMPLE,apos_start,false,apos_end],['\'',GROUP_END,apos_end],[\",GROUP_START:SIMPLE,quot_start,false,quot_end],[\",GROUP_END,quot_end],[ ,SEPARATE,comma],[=,ASSOCIATE,equals]</value>
+                                                      </list>
+                                                   </value>
+                                                </property>
+                                             </resource>
+                                          </value>
+                                       </entry>
+                                       <entry key="method" value="parse" />
+                                       <entry key="argsOrder">
+                                          <value>
+                                             <list>
+                                                <value>input</value>
+                                             </list>
+                                          </value>
+                                       </entry>
+                                       <entry key="complexResponseMappings">
+                                          <value>
+                                             <list>
+                                                <value>
+                                                   <map>
+                                                      <entry key="methodName" value="getObjectsList"></entry>
+                                                      <entry key="mappingName" value="result"></entry>
+                                                   </map>
+                                                </value>      
+                                             </list>
+                                          </value>
+                                       </entry>
+                                    </map>
+                                 </value>
+                              </entity>
+                              <entity logic-type="original-input-name">
+                                 <value>argsContext</value>
+                              </entity>
+                              <entity logic-type="executor">
+                                 <entity-ref ref-id="methodCaller" />
+                              </entity>
+                           </entity>
+                        </entity>
+                     </value>
+                  </entry>
+                  <entry key="outputParameters">
+                     <value>
+                        <list>
+                           <value>
+                              <entity type="output-parameter">
+                                 <property name="name" value="result"></property>
+                                 <property name="type" value="List[Context[]]"></property>
+                              </entity>
+                           </value>
+                        </list>
+                     </value>
+                  </entry>
+               </map>
+            </value>
+         </entity>
+                        
+         <entity logic-type="original-input-name">
+            <value>inputContext</value>
+         </entity>
+         <entity logic-type="executor">
+            <entity-ref ref-id="executionEntityWrapper" />
+         </entity>
+      </entity>
+   </entity>
+</entities>

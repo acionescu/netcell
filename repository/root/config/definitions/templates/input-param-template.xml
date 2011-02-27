@@ -1,0 +1,15 @@
+<entity type="input-parameter">
+	<property name="name" value="$param.getName()"></property>
+	#if($param.getType())
+	<property name="type" value="$param.getType()"></property>
+	#end
+	#if($param.getValue())
+	<property name="value" value="$escapeUtils.escapeXml($param.getValue())"></property>
+	#end
+	#if($param.isMandatory())
+	<property name="mandatory" value="$param.isMandatory()"></property>
+	#end
+               #if($param.getUiType())
+               <property name="uiType" value="$param.getUiType()"/>
+               #end
+</entity>

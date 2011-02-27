@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE command SYSTEM "../../../../dtds/script-dao-commands.dtd">
+<command name="ro.problems.update-user-logout-timestamp" type="SQL.UPDATE">
+         <parameters>
+                     <parameter name="userId" />
+               </parameters>
+      <script>
+      update users
+set last_logout=localtimestamp
+where id=$userId;
+   </script>
+</command>

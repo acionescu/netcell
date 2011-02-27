@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE command SYSTEM "../../../../dtds/script-dao-commands.dtd">
+<command name="${command.getName()}" type="${command.getType()}">
+   #if($command.getParameterNames().size() > 0)
+      <parameters>
+         #foreach($param in $command.getParameterNames())
+            <parameter name="${param}" />
+         #end
+      </parameters>
+   #end
+   <script>
+      $escapeUtils.escapeXml($command.getScript())
+   </script>
+</command>

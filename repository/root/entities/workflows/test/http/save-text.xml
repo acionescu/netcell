@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE entities SYSTEM "../../dtds/entities.dtd">
+<entities>
+   <entity id="test.http.save-text" type="workflow-definition"
+      logic-type="dynamic-wrapper">
+      <entity type="description">
+         <value>$workflowDefinition.getDescription()</value>
+      </entity>
+      <entity logic-type="config">
+         <entity type="definition-params" logic-type="static-parameters">
+            <value>
+               <map>
+                  						<entry key="inputParameters">
+							<value>
+								<list>
+																		<value>
+										<entity type="input-parameter">
+	<property name="name" value="urlId"></property>
+		<property name="type" value="Number"></property>
+				<property name="mandatory" value="true"></property>
+	                              <property name="uiType" value="TEXTFIELD"/>
+               </entity>								</value>
+																		<value>
+										<entity type="input-parameter">
+	<property name="name" value="text"></property>
+		<property name="type" value="String"></property>
+				<property name="mandatory" value="true"></property>
+	                              <property name="uiType" value="TEXTFIELD"/>
+               </entity>								</value>
+																	</list>
+							</value>
+						</entry>
+																		<entry key="localParameters">
+							<value>
+								<list>
+																		<value>
+										<entity type="local-parameter">
+	<property name="name" value="fragmentsList"></property>
+		<property name="type" value="List[Any]"></property>
+		</entity>								</value>
+																	</list>
+							</value>
+						</entry>
+												<entry key="executionEntity">
+							<value>
+																<entity type="workflow" logic-type="dynamic-wrapper">
+   <entity logic-type="config">
+      <entity logic-type="executor">
+         <entity-ref ref-id="workFlow" />
+      </entity>
+<!--      <entity logic-type="original-input-name">-->
+<!--         <value>inputContext</value>-->
+<!--      </entity>-->
+      <entity type="workflow-params" logic-type="static-parameters">
+         <value>
+            <map>
+               <entry key="defaultEntryPointId" value="test.html-text-extractor_0">
+               </entry>
+               <entry key="components">
+                  <value>
+                     <map>
+                                                 <entry key="test.html-text-extractor_0">
+                           <value>                               <entity type="workflow-component">
+		<entity type="component" logic-type="component">
+	<entity logic-type="dynamic-wrapper">
+		<entity logic-type="config">
+			<entity logic-type="executor">
+				<entity-ref ref-id="test.html-text-extractor" />
+			</entity>
+<!--			<entity logic-type="original-input-name">-->
+<!--				<value>argsContext</value>-->
+<!--			</entity>-->
+												<entity logic-type="dynamic-parameters">
+				<value>
+					<map>
+													<entry key="input" value="text"/>
+											</map>
+				</value>
+			</entity>
+					</entity>
+	</entity>
+</entity>		<entity logic-type="output-params-mappings">
+		<value>
+			<map>
+								<entry key="result" value="fragmentsList" />
+							</map>
+		</value>
+	</entity>
+		
+		<entity type="flow-logic" logic-type="flow-logic">
+      <property name="nextComponentId" value="core.collections.get-list-value_2" />
+   </entity>               
+                                                </entity>                           </value>
+                        </entry>
+                                                <entry key="test.http.process-fragments-list_1">
+                           <value>                               <entity type="workflow-component">
+		<entity type="component" logic-type="component">
+	<entity logic-type="dynamic-wrapper">
+		<entity logic-type="config">
+			<entity logic-type="executor">
+				<entity-ref ref-id="test.http.process-fragments-list" />
+			</entity>
+<!--			<entity logic-type="original-input-name">-->
+<!--				<value>argsContext</value>-->
+<!--			</entity>-->
+									<entity logic-type="static-parameters">
+				<value>
+					<map>
+													<entry key="parentFragmentIndex">
+                                                                                                                  								<value-type value="0" type="String"/>
+							                                                                                                                  </entry>
+											</map>
+				</value>
+			</entity>
+									<entity logic-type="dynamic-parameters">
+				<value>
+					<map>
+													<entry key="fragmentsList" value="fragmentsList"/>
+													<entry key="urlId" value="urlId"/>
+											</map>
+				</value>
+			</entity>
+					</entity>
+	</entity>
+</entity>		
+		<entity type="flow-logic" logic-type="flow-logic">
+      <property name="exitLabel" value="exit" />
+   </entity>               
+                                                </entity>                           </value>
+                        </entry>
+                                                <entry key="core.collections.get-list-value_2">
+                           <value>                               <entity type="workflow-component">
+		<entity type="component" logic-type="component">
+	<entity logic-type="dynamic-wrapper">
+		<entity logic-type="config">
+			<entity logic-type="executor">
+				<entity-ref ref-id="core.collections.get-list-value" />
+			</entity>
+<!--			<entity logic-type="original-input-name">-->
+<!--				<value>argsContext</value>-->
+<!--			</entity>-->
+									<entity logic-type="static-parameters">
+				<value>
+					<map>
+													<entry key="index">
+                                                                                                                  								<value-type value="0" type="String"/>
+							                                                                                                                  </entry>
+											</map>
+				</value>
+			</entity>
+									<entity logic-type="dynamic-parameters">
+				<value>
+					<map>
+													<entry key="list" value="fragmentsList"/>
+											</map>
+				</value>
+			</entity>
+					</entity>
+	</entity>
+</entity>		<entity logic-type="output-params-mappings">
+		<value>
+			<map>
+								<entry key="value" value="fragmentsList" />
+							</map>
+		</value>
+	</entity>
+		
+		<entity type="flow-logic" logic-type="flow-logic">
+      <property name="nextComponentId" value="test.http.process-fragments-list_1" />
+   </entity>               
+                                                </entity>                           </value>
+                        </entry>
+                                             </map>
+                  </value>
+               </entry>
+            </map>
+         </value>
+      </entity>
+      <entity logic-type="dynamic-parameters">
+         <value>
+            <map>
+               <entry key="inputContext" value="origContext"></entry>
+               <entry key="entryPointId" value="entryPointId"></entry>
+               <entry key="isAsyncContext" value="isAsyncContext"></entry>
+            </map>
+         </value>
+      </entity>
+   </entity>
+</entity>						</value>
+						</entry>
+												<entry key="outputParameters">
+							<value>
+								<list>
+									
+																	</list>
+							</value>
+						</entry>
+											</map>
+				</value>
+			</entity>
+			<entity logic-type="original-input-name">
+				<value>inputContext</value>
+			</entity>
+			<entity logic-type="executor">
+				<entity-ref ref-id="workflowAdapterEntity" />
+			</entity>
+		</entity>
+	</entity>
+</entities>

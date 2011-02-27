@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE resources SYSTEM "../../dtds/workflow-engine.dtd">
+
+<resources>
+	<resource id="EngineControllerConfig" class="ro.zg.synapse.control.WorkFlowEngineControllerConfiguration">
+		<property name="engineDir" value="engine"></property>
+		<property name="engineLoader" value-ref="WorkFlowEngineLoader"/>
+	</resource>
+	
+	<resource id="BusController" class="ro.zg.synapse.control.BusController">
+		<property name="config" value-ref="BusConfiguration"></property>
+	</resource>
+	
+	<resource id="BusConfiguration" class="ro.zg.synapse.control.BusConfiguration">
+		<property name="engineLoader" value-ref="WorkFlowEngineLoader"/>
+		<property name="resourcesManager" value-ref="BusResourcesManager"></property>
+		<property name="publicEntities">
+			<value>
+				<map>
+					<entry key="COMPONENT" value="component"></entry>
+					<entry key="WORKFLOW" value="workflow-context"></entry>
+					<entry key="DATACOMPONENT" value="dataflow"></entry>
+					<entry key="DATASOURCE" value="datasource"></entry>
+				</map>
+			</value>
+		</property>
+	</resource>
+	
+	<resource id="BusResourcesManager" class="ro.zg.synapse.control.ResourcesManager">
+		<property name="entitiesRelativePaths">
+			<value>
+				<map>
+					<entry key="ENGINE" value="engine"></entry>
+					<entry key="DEFINITIONS_CFG_HANDLERS" value="core/entities-definition-cfg-handlers.xml"></entry>
+					<entry key="DEFINITIONS_ENTRY_POINT" value="/core/entities-definition-entry-point.xml"></entry>
+				</map>
+			</value>
+		</property>
+	</resource>
+	
+	<resource id="WorkFlowEngineLoader" class="ro.zg.synapse.engine.WorkFlowEngineLoader"></resource>
+</resources>

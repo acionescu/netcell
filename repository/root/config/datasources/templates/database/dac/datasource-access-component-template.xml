@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE entities SYSTEM "../../../dtds/entities.dtd">
+<entities>
+   <entity id="${entityDefinition.getId()}" type="data-access-component-definition"
+      logic-type="dynamic-wrapper">
+      <entity logic-type="config">
+         <entity type="definition-params" logic-type="static-parameters">
+            <value>
+               <map>
+                  #if($entityDefinition.getInputParameters()&& $entityDefinition.getInputParameters().size() > 0)
+                  <entry key="inputParameters">
+                     <value>
+                        <list>
+                           #foreach($param in $entityDefinition.getInputParameters())
+                           <value>
+                              #parse("root/config/definitions/templates/input-param-template.xml")
+                           </value>
+                           #end
+                        </list>
+                     </value>
+                  </entry>
+                  #end
+                  <entry key="executionEntity">
+                     <value>
+                        <entity logic-type="dynamic-wrapper">
+                           <entity logic-type="config">
+                              <entity 
+                                 logic-type="static-parameters">
+                                 <value>
+                                    <map>
+                                       <entry key="commandName"
+                                          value="${entityDefinition.getCommandName()}"></entry>
+                                       <entry key="commandManager">
+                                          <value>
+                                             <entity>
+                                                <entity-ref
+                                                   ref-id="${entityDefinition.getDataSourceName()}" />
+                                             </entity>
+                                          </value>
+                                       </entry>
+                                    </map>
+                                 </value>
+                              </entity>
+                              <entity logic-type="executor">
+                                 <entity-ref ref-id="dataAccessEntity" />
+                              </entity>
+                              <entity logic-type="original-input-name">
+                                 <value>argsContext</value>
+                              </entity>
+                           </entity>
+                        </entity>
+                     </value>
+                  </entry>
+                  <entry key="outputParameters">
+                     <value>
+                        <list>
+                           <value>
+                              <entity type="output-parameter">
+                                 <property name="name" value="count"></property>
+                                 <property name="type" value="Number"></property>
+                              </entity>
+                           </value>
+                           <value>
+                              <entity type="output-parameter">
+                                 <property name="name" value="result"></property>
+                                 <property name="type"
+                                    value="List[Context[]]"></property>
+                              </entity>
+                           </value>
+                        </list>
+                     </value>
+                  </entry>
+               </map>
+            </value>
+         </entity>
+         <entity logic-type="original-input-name">
+            <value>inputContext</value>
+         </entity>
+         <entity logic-type="executor">
+            <entity-ref ref-id="executionEntityWrapper" />
+         </entity>
+      </entity>
+   </entity>
+</entities>

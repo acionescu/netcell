@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE command SYSTEM "../../../../dtds/script-dao-commands.dtd">
+<command name="ro.problems.data.get-all-from-table" type="SQL.QUERY">
+         <parameters>
+                     <parameter name="tableName" />
+               </parameters>
+      <script>
+      select * from $tableName
+   </script>
+</command>

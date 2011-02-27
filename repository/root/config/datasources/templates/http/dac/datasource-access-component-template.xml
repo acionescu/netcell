@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE entities SYSTEM "../../../dtds/entities.dtd">
+<entities>
+   <entity id="${entityDefinition.getId()}" type="data-access-component-definition"
+      logic-type="dynamic-wrapper">
+      <entity logic-type="config">
+         <entity type="definition-params" logic-type="static-parameters">
+            <value>
+               <map>
+                  <entry key="inputParameters">
+                     <value>
+                        <list>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="method"></property>
+                                 <property name="mandatory"
+                                    value="true"></property>
+                                 <property name="logicType"
+                                    value="GENERIC_VALUE"></property>
+                                 <property name="allowedTypes">
+                                    <value>
+                                       <list>
+                                          <value>String</value>
+                                       </list>
+                                    </value>
+                                 </property>
+                              </entity>
+                           </value>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="url"></property>
+                                 <property name="mandatory"
+                                    value="true"></property>
+                                 <property name="logicType"
+                                    value="GENERIC_VALUE"></property>
+                                 <property name="allowedTypes">
+                                    <value>
+                                       <list>
+                                          <value>String</value>
+                                       </list>
+                                    </value>
+                                 </property>
+                              </entity>
+                           </value>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name"
+                                    value="requestHeaders"></property>
+                                 <property name="mandatory"
+                                    value="false"></property>
+                                 <property name="logicType"
+                                    value="GENERIC_VALUE"></property>
+                                 <property name="allowedTypes">
+                                    <value>
+                                       <list>
+<!--                                          <value>Context\[.*\]</value>-->
+<value>Context[]</value>
+                                       </list>
+                                    </value>
+                                 </property>
+                              </entity>
+                           </value>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="returnHeaders"></property>
+                                 <property name="mandatory"
+                                    value="false"></property>
+                                 <property name="logicType"
+                                    value="GENERIC_VALUE"></property>
+                                 <property name="allowedTypes">
+                                    <value>
+                                       <list>
+                                          <value>Boolean</value>
+                                       </list>
+                                    </value>
+                                 </property>
+                              </entity>
+                           </value>
+                        </list>
+                     </value>
+                  </entry>
+                  <entry key="executionEntity">
+                     <value>
+                        <entity logic-type="dynamic-wrapper">
+                           <entity logic-type="config">
+                              <entity logic-type="static-parameters">
+                                 <value>
+                                    <map>
+                                       <entry key="commandName"
+                                          value="${entityDefinition.getCommandName()}"></entry>
+                                       <entry key="commandManager">
+                                          <value>
+                                             <entity>
+                                                <entity-ref
+                                                   ref-id="${entityDefinition.getDataSourceName()}" />
+                                             </entity>
+                                          </value>
+                                       </entry>
+                                    </map>
+                                 </value>
+                              </entity>
+                              <entity logic-type="executor">
+                                 <entity-ref ref-id="dataAccessEntity" />
+                              </entity>
+                              <entity logic-type="original-input-name">
+                                 <value>argsContext</value>
+                              </entity>
+                           </entity>
+                        </entity>
+                     </value>
+                  </entry>
+                  <entry key="outputParameters">
+                     <value>
+                        <list>
+                           <value>
+                              <entity type="output-parameter">
+                                 <property name="name" value="length"></property>
+                                 <property name="type" value="Number"></property>
+                              </entity>
+                           </value>
+                           <value>
+                              <entity type="output-parameter">
+                                 <property name="name" value="content"></property>
+                                 <property name="type" value="String"></property>
+                              </entity>
+                           </value>
+                           <value>
+                              <entity type="output-parameter">
+                                 <property name="name" value="statusCode"></property>
+                                 <property name="type" value="Number"></property>
+                              </entity>
+                           </value>
+                           <value>
+                              <entity type="output-parameter">
+                                 <property name="name" value="requestUrl"></property>
+                                 <property name="type" value="String"></property>
+                              </entity>
+                           </value>
+                           <value>
+                              <entity type="output-parameter">
+                                 <property name="name" value="targetUrl"></property>
+                                 <property name="type" value="String"></property>
+                              </entity>
+                           </value>
+                           <value>
+                              <entity type="output-parameter">
+                                 <property name="name" value="headers"></property>
+                                 <property name="type" value="Context[]"></property>
+                              </entity>
+                           </value>
+                        </list>
+                     </value>
+                  </entry>
+               </map>
+            </value>
+         </entity>
+         <entity logic-type="original-input-name">
+            <value>inputContext</value>
+         </entity>
+         <entity logic-type="executor">
+            <entity-ref ref-id="executionEntityWrapper" />
+         </entity>
+      </entity>
+   </entity>
+</entities>

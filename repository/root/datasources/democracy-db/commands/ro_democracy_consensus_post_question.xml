@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE command SYSTEM "../../../../dtds/script-dao-commands.dtd">
+<command name="ro.democracy.consensus.post_question" type="SQL.UPDATE">
+         <parameters>
+                     <parameter name="user_id" />
+                     <parameter name="question" />
+               </parameters>
+      <script>
+      insert into questions(content,user_id) values('$question', $user_id)
+   </script>
+</command>

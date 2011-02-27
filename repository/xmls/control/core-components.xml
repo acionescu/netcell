@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components SYSTEM "../../dtds/workflow-engine.dtd">
+<components>
+	<component id="WorkFlowRequestExecutorComponent" class="ro.zg.synapse.engine.components.core.WorkFlowRequestExecutorComponent">
+		<component-configuration>
+			<input-parameters>
+				<input-parameter name="fid" mandatory="true"></input-parameter>
+			</input-parameters>
+		</component-configuration>
+		<property name="busController" value-ref="BusController"></property>
+	</component>
+</components>

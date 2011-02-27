@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE entities SYSTEM "../../../../../../dtds/entities.dtd">
+<entities>
+   <entity id="core.logic.async.async-call" type="component-definition"
+      logic-type="dynamic-wrapper">
+      <entity logic-type="config">
+         <entity type="definition-params" logic-type="static-parameters">
+            <value>
+               <map>
+                  <entry key="fixedExitPoints">
+                     <value>
+                        <entity type="fixed-exit-points">
+                           <property name="exitLabels">
+                              <value>
+                                 <list>
+                                    <value>MAIN</value>
+                                    <value>ASYNC</value>
+                                 </list>
+                              </value>
+                           </property>
+                           <property name="allowedMappingTypes">
+                              <value>
+                                 <list>
+                                    <value>COMPONENT</value>
+                                 </list>
+                              </value>
+                           </property>
+                        </entity>
+                     </value>
+                  </entry>
+               </map>
+            </value>
+         </entity>
+         <property name="entityType" value="10"></property>
+      </entity>
+   </entity>
+</entities>

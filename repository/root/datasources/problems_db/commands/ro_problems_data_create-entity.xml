@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE command SYSTEM "../../../../dtds/script-dao-commands.dtd">
+<command name="ro.problems.data.create-entity" type="SQL.UPDATE">
+         <parameters>
+                     <parameter name="userId" />
+                     <parameter name="entityType" />
+                     <parameter name="complexType" />
+                     <parameter name="parentId" />
+                     <parameter name="title" />
+                     <parameter name="content" />
+                     <parameter name="entityId" />
+               </parameters>
+      <script>
+      insert into entities(id,creator_id,entity_type_id,complex_entity_type_id,parent_entity_id,title,content)
+values(
+$entityId
+,$userId
+,(select id from entity_types  where type='$entityType')
+,(select id from complex_entity_type  where complex_type ='$complexType')
+,$parentId
+,'$title'
+,'$content'
+)
+   </script>
+</command>

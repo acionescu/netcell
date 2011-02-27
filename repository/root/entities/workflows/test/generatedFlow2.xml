@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE entities SYSTEM "../../dtds/entities.dtd">
+<entities>
+   <entity id="test.generatedFlow2" type="workflow-definition"
+      logic-type="dynamic-wrapper">
+      <entity type="description">
+         <value>This is how a workflow will look like</value>
+      </entity>
+      <entity logic-type="config">
+         <entity type="definition-params" logic-type="static-parameters">
+            <value>
+               <map>
+                  <entry key="inputParameters">
+                     <value>
+                        <list>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="enteredValue"></property>
+                                 <property name="type" value="Number"></property>
+                                 <property name="mandatory"
+                                    value="true"></property>
+                              </entity>
+                           </value>
+                        </list>
+                     </value>
+                  </entry>
+                  <entry key="executionEntity">
+                     <value>
+                        <entity type="workflow" logic-type="dynamic-wrapper">
+                           <entity logic-type="config">
+                              <entity logic-type="executor">
+                                 <entity-ref ref-id="workFlow" />
+                              </entity>
+                              <entity logic-type="original-input-name">
+                                 <value>inputContext</value>
+                              </entity>
+                              <entity type="workflow-params"
+                                 logic-type="static-parameters">
+                                 <value>
+                                    <map>
+                                       <entry key="entryPointId"
+                                          value="comp1">
+                                       </entry>
+                                       <entry key="components">
+                                          <value>
+                                             <map>
+                                                <entry key="comp1">
+                                                   <value>
+                                                      <entity
+                                                         type="workflow-component">
+                                                         <entity
+                                                            type="component"
+                                                            logic-type="component">
+                                                            <entity
+                                                               logic-type="dynamic-wrapper">
+                                                               <entity
+                                                                  logic-type="config">
+                                                                  <entity
+                                                                     logic-type="executor">
+                                                                     <entity-ref
+                                                                        ref-id="core.logic.comparator" />
+                                                                  </entity>
+                                                                  <entity
+                                                                     logic-type="original-input-name">
+                                                                     <value>
+                                                                        argsContext
+                                                                     </value>
+                                                                  </entity>
+                                                                  <entity
+                                                                     logic-type="static-parameters">
+                                                                     <value>
+                                                                        <map>
+                                                                           <entry key="b">
+                                                                              <value-type value="5" type="BigDecimal" />
+                                                                           </entry>
+                                                                        </map>
+                                                                     </value>
+                                                                  </entity>
+                                                                  <entity
+                                                                     logic-type="dynamic-parameters">
+                                                                     <value>
+                                                                        <map>
+                                                                           <entry key="a" value="enteredValue" />
+                                                                        </map>
+                                                                     </value>
+                                                                  </entity>
+                                                               </entity>
+                                                            </entity>
+                                                         </entity>
+                                                         <entity
+                                                            type="flow-logic"
+                                                            logic-type="flow-logic">
+                                                            <property
+                                                               name="exitPointPrmName"
+                                                               value="exit" />
+                                                            <property
+                                                               name="exitValuesMappings">
+                                                               <value>
+                                                                  <map>
+                                                                     <entry
+                                                                        key="LESS">
+                                                                        <value>
+                                                                           <entity type="exit-point-mapping">
+                                                                              <property name="exitPointMapping" value="less than 5"></property>
+                                                                           </entity>
+                                                                        </value>
+                                                                     </entry>
+                                                                     <entry
+                                                                        key="EQUAL">
+                                                                        <value>
+                                                                           <entity type="exit-point-mapping">
+                                                                              <property name="exitPointMapping" value="it's 5"></property>
+                                                                           </entity>
+                                                                        </value>
+                                                                     </entry>
+                                                                     <entry
+                                                                        key="GREATER">
+                                                                        <value>
+                                                                           <entity type="exit-point-mapping">
+                                                                              <property name="nextComponentId" value="comp2"></property>
+                                                                           </entity>
+                                                                        </value>
+                                                                     </entry>
+                                                                  </map>
+                                                               </value>
+                                                            </property>
+                                                         </entity>
+                                                      </entity>
+                                                   </value>
+                                                </entry>
+                                                <entry key="comp2">
+                                                   <value>
+                                                      <entity
+                                                         type="workflow-component">
+                                                         <entity
+                                                            type="component"
+                                                            logic-type="component">
+                                                            <entity
+                                                               logic-type="dynamic-wrapper">
+                                                               <entity
+                                                                  logic-type="config">
+                                                                  <entity
+                                                                     logic-type="executor">
+                                                                     <entity-ref
+                                                                        ref-id="core.logic.comparator" />
+                                                                  </entity>
+                                                                  <entity
+                                                                     logic-type="original-input-name">
+                                                                     <value>
+                                                                        argsContext
+                                                                     </value>
+                                                                  </entity>
+                                                                  <entity
+                                                                     logic-type="static-parameters">
+                                                                     <value>
+                                                                        <map>
+                                                                           <entry key="b">
+                                                                              <value-type value="10" type="BigDecimal" />
+                                                                           </entry>
+                                                                        </map>
+                                                                     </value>
+                                                                  </entity>
+                                                                  <entity
+                                                                     logic-type="dynamic-parameters">
+                                                                     <value>
+                                                                        <map>
+                                                                           <entry key="a" value="enteredValue" />
+                                                                        </map>
+                                                                     </value>
+                                                                  </entity>
+                                                               </entity>
+                                                            </entity>
+                                                         </entity>
+                                                         <entity
+                                                            logic-type="output-params-mappings">
+                                                            <value>
+                                                               <map>
+                                                                  <entry
+                                                                     key="exit"
+                                                                     value="exit2" />
+                                                               </map>
+                                                            </value>
+                                                         </entity>
+                                                         <entity
+                                                            type="flow-logic"
+                                                            logic-type="flow-logic">
+                                                            <property
+                                                               name="exitPointPrmName"
+                                                               value="exit" />
+                                                            <property
+                                                               name="exitValuesMappings">
+                                                               <value>
+                                                                  <map>
+                                                                     <entry
+                                                                        key="LESS">
+                                                                        <value>
+                                                                           <entity type="exit-point-mapping">
+                                                                              <property name="exitPointMapping" value="between 5 and 10"></property>
+                                                                           </entity>
+                                                                        </value>
+                                                                     </entry>
+                                                                     <entry
+                                                                        key="EQUAL">
+                                                                        <value>
+                                                                           <entity type="exit-point-mapping">
+                                                                              <property name="exitPointMapping" value="it's 10"></property>
+                                                                           </entity>
+                                                                        </value>
+                                                                     </entry>
+                                                                     <entry
+                                                                        key="GREATER">
+                                                                        <value>
+                                                                           <entity type="exit-point-mapping">
+                                                                              <property name="exitPointMapping" value="greater then 10"></property>
+                                                                           </entity>
+                                                                        </value>
+                                                                     </entry>
+                                                                  </map>
+                                                               </value>
+                                                            </property>
+                                                         </entity>
+                                                      </entity>
+                                                   </value>
+                                                </entry>
+                                             </map>
+                                          </value>
+                                       </entry>
+                                    </map>
+                                 </value>
+                              </entity>
+                           </entity>
+                        </entity>
+                     </value>
+                  </entry>
+                  <entry key="outputParameters">
+                     <value>
+                        <list>
+                           <value>
+                              <entity type="output-parameter">
+                                 <property name="name" value="exit"></property>
+                                 <property name="type" value="String"></property>
+                              </entity>
+                           </value>
+                        </list>
+                     </value>
+                  </entry>
+               </map>
+            </value>
+         </entity>
+         <entity logic-type="original-input-name">
+            <value>inputContext</value>
+         </entity>
+         <entity logic-type="executor">
+            <entity-ref ref-id="executionEntityWrapper" />
+         </entity>
+      </entity>
+   </entity>
+</entities>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE resources SYSTEM "../../../dtds/workflow-engine.dtd">
+<resources>
+   <resource id="hbasePersistenceAgent" class="ro.zg.persistence.hbase.HbasePersistenceAgent">
+      <property name="dataTranslationManager" value-ref="hbaseTranslationManager"></property>
+   </resource>
+   <resource id="hbaseTranslationManager"
+      class="ro.zg.persistence.hbase.DefaultDataTranslationManager">
+      <property name="translators">
+         <value>
+            <map>
+               <entry key="JAVA_TO_HBASE">
+                  <value-ref>javaToHbaseTranslator</value-ref>
+               </entry>
+            </map>
+         </value>
+      </property>
+   </resource>
+   <resource id="javaToHbaseTranslator" class="ro.zg.persistence.hbase.JavaToHbaseTranslator">
+      <property name="translations">
+         <value>
+            <map>
+               <entry key="ro.zg.netcell.control.Command">
+                  <value-ref>Command_java_to_hbase</value-ref>
+               </entry>
+               <entry key="ro.zg.netcell.control.CommandResponse">
+                  <value-ref>CommandResponse_java_to_hbase</value-ref>
+               </entry>
+               <entry key="ro.zg.util.data.GenericNameValue">
+                  <value-ref>GenericNameValue_java_to_hbase</value-ref>
+               </entry>
+            </map>
+         </value>
+      </property>
+   </resource>
+</resources>

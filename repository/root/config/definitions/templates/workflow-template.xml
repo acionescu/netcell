@@ -1,0 +1,43 @@
+<entity type="workflow" logic-type="dynamic-wrapper">
+   <entity logic-type="config">
+      <entity logic-type="executor">
+         <entity-ref ref-id="workFlow" />
+      </entity>
+<!--      <entity logic-type="original-input-name">-->
+<!--         <value>inputContext</value>-->
+<!--      </entity>-->
+      <entity type="workflow-params" logic-type="static-parameters">
+         <value>
+            <map>
+               <entry key="defaultEntryPointId" value="$workflowConfig.getEntryPointId()">
+               </entry>
+               <entry key="components">
+                  <value>
+                     <map>
+                        #set($components =
+                        $workflowConfig.getComponents()) #foreach($entry
+                        in $components.entrySet())
+                        <entry key="$entry.getKey()">
+                           <value> #set($workflowComponent =
+                              $entry.getValue())
+                              #parse("root/config/definitions/templates/workflow-component-template.xml")
+                           </value>
+                        </entry>
+                        #end
+                     </map>
+                  </value>
+               </entry>
+            </map>
+         </value>
+      </entity>
+      <entity logic-type="dynamic-parameters">
+         <value>
+            <map>
+               <entry key="inputContext" value="origContext"></entry>
+               <entry key="entryPointId" value="entryPointId"></entry>
+               <entry key="isAsyncContext" value="isAsyncContext"></entry>
+            </map>
+         </value>
+      </entity>
+   </entity>
+</entity>

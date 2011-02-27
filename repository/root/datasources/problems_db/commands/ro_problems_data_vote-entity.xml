@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE command SYSTEM "../../../../dtds/script-dao-commands.dtd">
+<command name="ro.problems.data.vote-entity" type="SQL.UPDATE">
+         <parameters>
+                     <parameter name="entityId" />
+                     <parameter name="userId" />
+                     <parameter name="vote" />
+               </parameters>
+      <script>
+      insert into entities_votes(entity_id,user_id,vote) values($entityId,$userId,'$vote');
+   </script>
+</command>

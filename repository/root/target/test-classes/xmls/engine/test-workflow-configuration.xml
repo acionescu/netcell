@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components SYSTEM "../../dtds/workflow-engine.dtd">
+
+<workflow-configuration id="test-workflow-configuration">
+	<input-parameters>
+		<input-parameter name="FLOW_TRACKER" value="START"/>
+	</input-parameters>
+	<output-parameters>
+		<output-parameter>prm1</output-parameter>
+		<output-parameter>prm2</output-parameter>
+	</output-parameters>
+</workflow-configuration>

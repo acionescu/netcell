@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE command SYSTEM "../../../../dtds/script-dao-commands.dtd">
+<command name="test.http.change-url-status" type="SQL.UPDATE">
+         <parameters>
+                     <parameter name="url" />
+                     <parameter name="status" />
+               </parameters>
+      <script>
+      update pending_urls
+set status='$status'
+, last_update=now()
+where url='$url'
+   </script>
+</command>

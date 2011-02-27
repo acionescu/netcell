@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE command SYSTEM "../../../../dtds/script-dao-commands.dtd">
+<command name="ro.problems.data.get-all-subtypes" type="SQL.QUERY">
+      <script>
+      select 
+id
+, complex_type complex_subtype
+, complex_type simple_subtype
+from complex_entity_type
+where is_subtype='y'
+order by id
+   </script>
+</command>

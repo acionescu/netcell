@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE resources SYSTEM "../../dtds/workflow-engine.dtd">
+
+<resources>
+	<resource id="BorderExceptionHandler" class="ro.zg.netcell.control.exceptions.BorderExceptionHandler">
+		<property name="responsesManager" value-ref="ErrorResponsesManager"></property>
+	</resource>
+	
+	<resource id="OuterBorderExceptionHandler" class="ro.zg.netcell.control.exceptions.OuterBorderExceptionHandler">
+		<property name="borderExceptionHandler" value-ref="BorderExceptionHandler"></property>
+		<property name="formatter" value-ref="CasResponseFormatter"></property>
+	</resource>
+</resources>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE entities SYSTEM "../../../dtds/entities.dtd">
+<entities>
+   <entity id="http-client" type="command-manager">
+      <property name="commandLoader">
+         <value>
+            <entity type="resource-loader" logic-type="classpath-loader">
+               <property name="path" value="root/datasources/http-client/commands/"></property>
+            </entity>
+         </value>
+      </property>
+      <property name="commandBuilder" value-ref="velocityCommandBuilder"/>
+      <property name="commandExecutor" value-ref="httpCommandExecutor"></property>
+      <property name="connectionManager" value-ref="http-client-connection-manager"></property>
+      <property name="translator" value-ref="httpResponseTranslator"></property>
+   </entity>
+</entities>

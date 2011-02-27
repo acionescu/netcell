@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE command SYSTEM "../../../../dtds/script-dao-commands.dtd">
+<command name="ro.problems.data.get-tags-most-used" type="SQL.QUERY">
+      <script>
+      select tag_id,t.tag,count(*) from entities_tags et,tags t
+where et.tag_id=t.id
+group by tag_id,t.tag
+order by count desc
+   </script>
+</command>

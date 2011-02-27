@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE entities SYSTEM "../../../../../dtds/entities.dtd">
+<entities>
+   <entity id="TEXT_PARSER" type="configurable-component-definition"
+      logic-type="dynamic-wrapper">
+      <entity logic-type="config">
+         <entity type="definition-params" logic-type="static-parameters">
+            <value>
+               <map>
+                  <entry key="inputParameters">
+                     <value>
+                        <list>
+                           <value>
+                              <entity type="input-parameter">
+                                 <property name="name" value="input"></property>
+                                 <property name="type" value="String"></property>
+                                 <property name="mandatory"
+                                    value="true"></property>
+                              </entity>
+                           </value>
+                        </list>
+                     </value>
+                  </entry>
+                  <entry key="executionEntity">
+                     <value-ref>parserEntity</value-ref>
+                  </entry>
+                  <entry key="outputParameters">
+                     <value>
+                        <list>
+                           <value>
+                              <entity type="output-parameter">
+                                 <property name="name" value="result"></property>
+                                 <property name="type"
+                                    value="List[]"></property>
+                              </entity>
+                           </value>
+                        </list>
+                     </value>
+                  </entry>
+               </map>
+            </value>
+         </entity>
+         <entity type="user-params" logic-type="user-parameters">
+            <entity type="config-data">
+               <property name="userInputParams">
+                  <value>
+                     <map>
+                        <entry key="PARSER_SYMBOLS">
+                           <value>
+                              <entity type="user-input-parameter">
+                                 <property name="name"
+                                    value="PARSER_SYMBOLS"></property>
+                                 <property name="value"
+                                    value="[',',SEPARATE,comma,true]"></property>
+                                 <property name="type" value="String"></property>
+                                 <property name="inputType"
+                                    value="UNKNOWN_LARGE_VALUE"></property>
+                              </entity>
+                           </value>
+                        </entry>
+                     </map>
+                  </value>
+               </property>
+            </entity>
+         </entity>
+         <entity logic-type="original-input-name">
+            <value>inputContext</value>
+         </entity>
+         <entity logic-type="executor">
+            <entity-ref ref-id="executionEntityWrapper" />
+         </entity>
+      </entity>
+   </entity>
+</entities>

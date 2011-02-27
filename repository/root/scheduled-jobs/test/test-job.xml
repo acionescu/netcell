@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE entities SYSTEM "../../../dtds/entities.dtd">
+<entities>
+   <entity id="test.test-job" type="scheduled-job-definition">
+      <property name="configData">
+         <value>
+            <entity type="config-data">
+               <property name="userInputParams">
+                  <value>
+                     <map>
+                        <entry key="FLOW_ID">
+                           <value>
+                              <entity>
+                                 <entity type="user-input-parameter">
+                                    <property name="name"
+                                       value="FLOW_ID"></property>
+                                    <property name="value"
+                                       value="test.http.urls-processor"></property>
+                                    <property name="type"
+                                       value="String"></property>
+                                 </entity>
+                              </entity>
+                           </value>
+                        </entry>
+                        <entry key="FLOW_INPUT_PARAMS">
+                           <value>
+                              <entity type="user-input-parameter">
+                                 <property name="name"
+                                    value="FLOW_INPUT_PARAMS"></property>
+                                 <property name="value">
+                                    <value>
+                                       <list>
+                                          <value>
+                                             <entity
+                                                type="user-input-parameter">
+                                                <property name="name"
+                                                   value="urlCount"></property>
+                                                <property name="value"
+                                                   value="20"></property>
+                                                <property name="type"
+                                                   value="Integer"></property>
+                                             </entity>
+                                          </value>
+                                       </list>
+                                    </value>
+                                 </property>
+                              </entity>
+                           </value>
+                        </entry>
+                        <entry key="CRON_TRIGGER">
+                           <value>
+                              <entity type="user-input-parameter">
+                                 <property name="name" value="CRON_TRIGGER"></property>
+                                 <property name="value"
+                                    value="0/10 * * * * ?"></property>
+                                 <property name="type" value="String"></property>
+                              </entity>
+                           </value>
+                        </entry>
+                        <entry key="ALLOWED_CONCURENT_JOBS">
+                           <value>
+                              <entity type="user-input-parameter">
+                                 <property name="name"
+                                    value="ALLOWED_CONCURENT_JOBS"></property>
+                                 <property name="value" value="1"></property>
+                                 <property name="type" value="Integer"></property>
+                              </entity>
+                           </value>
+                        </entry>
+                        <entry key="MISSFIRE_INSTRUCTION">
+                           <value>
+                              <entity type="user-input-parameter">
+                                 <property name="name"
+                                    value="MISSFIRE_INSTRUCTION"></property>
+                                 <property name="value"
+                                    value="FIRE_WHEN_POSSIBLE"></property>
+                                 <property name="type" value="String"></property>
+                                 <property name="inputType"
+                                    value="VALUE_FROM_LIST"></property>
+                                 <property name="allowedValues">
+                                    <value>
+                                       <list>
+                                          <value>FIRE_ONCE_NOW</value>
+                                          <value>DO_NOTHING</value>
+                                          <value>FIRE_WHEN_POSSIBLE
+                                          </value>
+                                       </list>
+                                    </value>
+                                 </property>
+                              </entity>
+                           </value>
+                        </entry>
+                     </map>
+                  </value>
+               </property>
+               <property name="dynamicParams">
+                  <value>
+                     <map>
+                        <entry key="MISSFIRE_VALUE">
+                           <value>
+                              <entity type="dynamic-config-parameter">
+                                 <property name="name"
+                                    value="MISSFIRE_VALUE"></property>
+                                 <property name="sourceParamName"
+                                    value="MISSFIRE_INSTRUCTION"></property>
+                                 <property name="mappedValues">
+                                    <value>
+                                       <map>
+                                          <entry key="FIRE_ONCE_NOW"
+                                             value="1" type="Integer"></entry>
+                                          <entry key="DO_NOTHING"
+                                             value="2" type="Integer"></entry>
+                                          <entry key="FIRE_WHEN_POSSIBLE"
+                                             value="3" type="Integer"></entry>
+                                       </map>
+                                    </value>
+                                 </property>
+                              </entity>
+                           </value>
+                        </entry>
+                     </map>
+                  </value>
+               </property>
+            </entity>
+         </value>
+      </property>
+   </entity>
+</entities>

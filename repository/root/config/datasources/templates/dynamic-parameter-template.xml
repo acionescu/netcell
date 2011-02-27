@@ -1,0 +1,20 @@
+<entry key="${dynamicParameter.getName()}">
+   <value>
+      <entity type="dynamic-config-parameter">
+         <property name="name" value="${dynamicParameter.getName()}"></property>
+         <property name="sourceParamName" value="${dynamicParameter.getSourceParamName()}"></property>
+         #set($mappedValues = $dynamicParameter.getMappedValues())
+         #if($mappedValues && $mappedValues.size() > 0)
+            <property name="mappedValues">
+            <value>
+               <map>
+                  #foreach($mappedValueEntry in $mappedValues.entrySet())
+                     <entry key="$mappedValueEntry.getKey()" value="$mappedValueEntry.getValue()"></entry>
+                  #end
+               </map>
+            </value>
+         </property>
+         #end
+      </entity>
+   </value>
+</entry>

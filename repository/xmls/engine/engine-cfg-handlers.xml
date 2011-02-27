@@ -1,0 +1,588 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration SYSTEM "../../dtds/entry-point.dtd">
+<configuration>
+	<cfg-handler id="valueCfgHandler"
+		class="ro.zg.cfgengine.core.configuration.handlers.ValueConfigurationHandler" />
+	<cfg-handler id="defaultCfgHandler"
+		class="ro.zg.cfgengine.core.configuration.handlers.BaseConfigurationHandler">
+	</cfg-handler>
+	<cfg-handler id="simpleCustomCfgHandler"
+		class="ro.zg.cfgengine.core.configuration.handlers.CustomConfigurationHandler">
+		<property name="hasIdAttribute" value="false"></property>
+	</cfg-handler>
+	<cfg-handler id="componentWrapperCfgHandler"
+		class="ro.zg.cfgengine.core.configuration.handlers.CustomConfigurationHandler"
+		default-class="ro.zg.synapse.engine.WorkFlowExecutionEntityWrapper">
+		<property name="alwaysUseDefaultClass" value="true"></property>
+		<property name="wrappedPropertiesHandlers">
+			<value>
+				<map>
+					<entry key="entityExecutionContext">
+						<value-ref>componentExecutionContextCfgHandler</value-ref>
+					</entry>
+				</map>
+			</value>
+		</property>
+		<property name="defaultValuesForProperties">
+			<value>
+				<map>
+					<entry key="type" value="COMPONENT"></entry>
+				</map>
+			</value>
+		</property>
+	</cfg-handler>
+	<cfg-handler id="componentExecutionContextCfgHandler"
+		class="ro.zg.cfgengine.core.configuration.handlers.CustomConfigurationHandler"
+		default-class="ro.zg.synapse.engine.EntityExecutionContextImpl">
+		<property name="alwaysUseDefaultClass" value="true"></property>
+		<property name="wrappedPropertiesHandlers">
+			<value>
+				<map>
+					<entry key="wrappedExecutionEntity">
+						<value-ref>defaultCfgHandler</value-ref>
+					</entry>
+				</map>
+			</value>
+		</property>
+		<property name="tagsToProperties">
+			<value>
+				<map>
+					<entry key="component-configuration" value="listeners" />
+				</map>
+			</value>
+		</property>
+		<property name="localConfigurationHandlers">
+			<value>
+				<map>
+					<entry key="component-configuration">
+						<value-ref>componentInputParamsListenerCfgHandler</value-ref>
+					</entry>
+				</map>
+			</value>
+		</property>
+	</cfg-handler>
+	<cfg-handler id="componentInputParamsListenerCfgHandler"
+		class="ro.zg.cfgengine.core.configuration.handlers.CustomConfigurationHandler"
+		default-class="ro.zg.synapse.engine.listeners.ComponentInputParametersProcessingListener">
+		<property name="hasIdAttribute" value="false"></property>
+		<property name="tagsToProperties">
+			<value>
+				<map>
+					<entry key="input-parameters" value="inputParametersProcessor" />
+				</map>
+			</value>
+		</property>
+		<property name="localConfigurationHandlers">
+			<value>
+				<map>
+					<entry key="input-parameters">
+						<value-ref>inputParametersProcessorCfgHandler</value-ref>
+					</entry>
+				</map>
+			</value>
+		</property>
+	</cfg-handler>
+	<cfg-handler id="workFlowContextCfgHandler"
+		class="ro.zg.cfgengine.core.configuration.handlers.CustomConfigurationHandler"
+		default-class="ro.zg.synapse.engine.WorkFlowExecutionEntityWrapper">
+		<property name="attributesToProperties">
+			<value>
+				<map>
+					<entry key="id" value="id" />
+				</map>
+			</value>
+		</property>
+		<property name="wrappedPropertiesHandlers">
+			<value>
+				<map>
+					<entry key="entityExecutionContext">
+						<value-ref>workFlowExecutionContextCfgHandler</value-ref>
+					</entry>
+				</map>
+			</value>
+		</property>
+	</cfg-handler>
+	<cfg-handler id="workFlowExecutionContextCfgHandler"
+		class="ro.zg.cfgengine.core.configuration.handlers.CustomConfigurationHandler"
+		default-class="ro.zg.synapse.engine.EntityExecutionContextImpl">
+		<property name="hasIdAttribute" value="false"></property>
+		<property name="defaultInitMethod" value="init"></property>
+		<property name="attributesToProperties">
+			<value>
+				<map>
+					<entry key="id" value="id" />
+				</map>
+			</value>
+		</property>
+		<property name="tagsToProperties">
+			<value>
+				<map>
+					<entry key="workflow-configuration" value="listeners" />
+					<entry key="workflow" value="wrappedExecutionEntity" />
+					<entry key="logging" value="listeners"></entry>
+					<entry key="listener" value="listeners"></entry>
+					<entry key="session" value="listeners"></entry>
+				</map>
+			</value>
+		</property>
+		<property name="referenceTags">
+			<value>
+				<map>
+					<entry key="listener" value="id-ref"></entry>
+				</map>
+			</value>
+		</property>
+		<property name="localConfigurationHandlers">
+			<value>
+				<map>
+					<entry key="workflow-configuration">
+						<value-ref>workflowParamMappingListenerHandler</value-ref>
+					</entry>
+					<entry key="workflow">
+						<value-ref>workFlowCfgHandler</value-ref>
+					</entry>
+					<entry key="logging">
+						<value-ref>workFlowLoggingListenerHandler</value-ref>
+					</entry>
+					<entry key="session">
+						<value-ref>sessionListenerCfgHandler</value-ref>
+					</entry>
+				</map>
+			</value>
+		</property>
+	</cfg-handler>
+	<cfg-handler id="sessionListenerCfgHandler"
+		class="ro.zg.cfgengine.core.configuration.handlers.CustomConfigurationHandler"
+		default-class="ro.zg.synapse.engine.listeners.WorkFlowSessionHandlingListener">
+		<property name="hasIdAttribute" value="false"></property>
+		<property name="attributesToProperties">
+			<value>
+				<map>
+					<entry key="session-manager-ref" value="sessionManager"></entry>
+				</map>
+			</value>
+		</property>
+		<property name="referenceAttributes">
+			<value>
+				<list>
+					<value>session-manager-ref</value>
+				</list>
+			</value>
+		</property>
+		<property name="tagsToProperties">
+			<value>
+				<map>
+					<entry key="session-config" value="sessionConfig"></entry>
+				</map>
+			</value>
+		</property>
+		<property name="localConfigurationHandlers">
+			<value>
+				<map>
+					<entry key="session-config">
+						<value-ref>sessionConfigHandler</value-ref>
+					</entry>
+				</map>
+			</value>
+		</property>
+	</cfg-handler>
+	<cfg-handler id="sessionConfigHandler"
+		class="ro.zg.cfgengine.core.configuration.handlers.CustomConfigurationHandler"
+		default-class="ro.zg.synapse.engine.session.WorkFlowSessionConfiguration">
+		<property name="hasIdAttribute" value="false"></property>
+		<property name="attributesToProperties">
+			<value>
+				<map>
+					<entry key="timeout" value="timeout"></entry>
+					<entry key="has-id-params" value="composedFromParameters"></entry>
+				</map>
+			</value>
+		</property>
+		<property name="tagsToProperties">
+			<value>
+				<map>
+					<entry key="parameter-to-save" value="parametersToSave"></entry>
+					<entry key="id-param" value="sessionIdParameters"></entry>
+					<entry key="session-action" value="sessionActions"></entry>
+				</map>
+			</value>
+		</property>
+		<property name="attributesAsIdsForTags">
+			<value>
+				<map>
+					<entry key="session-action" value="exit-point"></entry>
+				</map>
+			</value>
+		</property>
+		<property name="localConfigurationHandlers">
+			<value>
+				<map>
+					<entry key="parameter-to-save">
+						<value-ref>sessionParametersHandler</value-ref>
+					</entry>
+					<entry key="parameter-to-save">
+						<value-ref>sessionParametersHandler</value-ref>
+					</entry>
+					<entry key="id-param">
+						<value-ref>sessionParametersHandler</value-ref>
+					</entry>
+					<entry key="session-action">
+						<value-ref>sessionActionCfgHandler</value-ref>
+					</entry>
+				</map>
+			</value>
+		</property>
+	</cfg-handler>
+	<cfg-handler id="sessionActionCfgHandler"
+		class="ro.zg.cfgengine.core.configuration.handlers.CustomConfigurationHandler"
+		default-class="ro.zg.synapse.engine.session.SessionActionConfiguration">
+		<property name="hasIdAttribute" value="false"></property>
+		<property name="attributesToProperties">
+			<value>
+				<map>
+					<entry key="exit-point" value="exitPoint"></entry>
+					<entry key="action" value="action"></entry>
+					<entry key="next-comp-id-ref" value="nextCompIdRef"></entry>
+				</map>
+			</value>
+		</property>
+	</cfg-handler>
+	<cfg-handler id="sessionParametersHandler"
+		class="ro.zg.cfgengine.core.configuration.handlers.TypedValueConfigurationHandler">
+		<property name="valueAttributeName" value="name"></property>
+	</cfg-handler>
+	<cfg-handler id="workflowParamMappingListenerHandler"
+		class="ro.zg.cfgengine.core.configuration.handlers.CustomConfigurationHandler"
+		default-class="ro.zg.synapse.engine.listeners.WorkFlowInputOutputParameterProcessingListener">
+		<property name="hasIdAttribute" value="false"></property>
+		<property name="tagsToProperties">
+			<value>
+				<map>
+					<entry key="input-parameters" value="inputParametersProcessor" />
+					<entry key="output-parameter" value="outputParameters" />
+				</map>
+			</value>
+		</property>
+		<property name="localConfigurationHandlers">
+			<value>
+				<map>
+					<entry key="input-parameters">
+						<value-ref>inputParametersProcessorCfgHandler</value-ref>
+					</entry>
+					<entry key="output-parameter">
+						<value-ref>valueCfgHandler</value-ref>
+					</entry>
+				</map>
+			</value>
+		</property>
+	</cfg-handler>
+	<cfg-handler id="inputParametersProcessorCfgHandler"
+		class="ro.zg.cfgengine.core.configuration.handlers.CustomConfigurationHandler"
+		default-class="ro.zg.synapse.engine.util.GenericInputParametersProcessor">
+		<property name="hasIdAttribute" value="false"></property>
+		<property name="tagsToProperties">
+			<value>
+				<map>
+					<entry key="input-parameters" value="inputParametersProcessor" />
+				</map>
+			</value>
+		</property>
+		<property name="localConfigurationHandlers">
+			<value>
+				<map>
+					<entry key="input-parameters">
+						<value-ref>inputParametersProcessorCfgHandler</value-ref>
+					</entry>
+				</map>
+			</value>
+		</property>
+	</cfg-handler>
+	<cfg-handler id="workFlowInputParameterCfgHandler"
+		class="ro.zg.cfgengine.core.configuration.handlers.CustomConfigurationHandler"
+		default-class="ro.zg.synapse.engine.vo.WorkFlowInputParameter">
+		<property name="hasIdAttribute" value="false"></property>
+<!--		<property name="defaultInitMethod" value="init"></property>-->
+		<property name="attributesToProperties">
+			<value>
+				<map>
+					<entry key="name" value="name" />
+					<entry key="value" value="value" />
+					<entry key="type" value="type" />
+					<entry key="mandatory" value="mandatory"></entry>
+				</map>
+			</value>
+		</property>
+		<property name="tagsToProperties">
+			<value>
+				<map>
+					<entry key="validation-rule" value="validationRules" />
+					<entry key="translation-rule" value="translationRules" />
+				</map>
+			</value>
+		</property>
+		<property name="localConfigurationHandlers">
+			<value>
+				<map>
+					<entry key="validation-rule">
+						<value-ref>workFlowParameterCfgHandler</value-ref>
+					</entry>
+					<entry key="translation-rule">
+						<value-ref>valueCfgHandler</value-ref>
+					</entry>
+				</map>
+			</value>
+		</property>
+	</cfg-handler>
+	<cfg-handler id="workFlowParameterCfgHandler"
+		class="ro.zg.cfgengine.core.configuration.handlers.CustomConfigurationHandler"
+		default-class="ro.zg.util.data.GenericNameValue">
+		<property name="hasIdAttribute" value="false"></property>
+<!--		<property name="defaultInitMethod" value="init"></property>-->
+		<property name="attributesToProperties">
+			<value>
+				<map>
+					<entry key="name" value="name" />
+					<entry key="value" value="value" />
+					<entry key="type" value="type" />
+				</map>
+			</value>
+		</property>
+		<property name="tagsToProperties">
+			<value>
+				<map>
+					<entry key="value" value="value"></entry>
+				</map>
+			</value>
+		</property>
+	</cfg-handler>
+	<cfg-handler id="workFlowComponentParameterMappingListenerHandler"
+		class="ro.zg.cfgengine.core.configuration.handlers.CustomConfigurationHandler"
+		default-class="ro.zg.synapse.engine.listeners.ComponentParameterMappingListener">
+		<property name="hasIdAttribute" value="false"></property>
+		<property name="defaultInitMethod" value="init"></property>
+		<property name="tagsToProperties">
+			<value>
+				<map>
+					<entry key="parameter" value="staticInputParametersMap" />
+					<entry key="dynamic-parameter" value="dynamicInputParametersMap" />
+					<entry key="output-parameter-mapping" value="outputParametersMap" />
+				</map>
+			</value>
+		</property>
+		<property name="attributesAsIdsForTags">
+			<value>
+				<map>
+					<entry key="parameter" value="name"></entry>
+					<entry key="dynamic-parameter" value="local-name"></entry>
+					<entry key="output-parameter-mapping" value="local-name"></entry>
+				</map>
+			</value>
+		</property>
+		<property name="localConfigurationHandlers">
+			<value>
+				<map>
+					<entry key="parameter">
+						<value-ref>workFlowParameterCfgHandler</value-ref>
+					</entry>
+					<entry key="dynamic-parameter">
+						<value-ref>wfParameterMappingHandler</value-ref>
+					</entry>
+					<entry key="output-parameter-mapping">
+						<value-ref>wfParameterMappingHandler</value-ref>
+					</entry>
+				</map>
+			</value>
+		</property>
+	</cfg-handler>
+	<cfg-handler id="wfParameterMappingHandler"
+		class="ro.zg.cfgengine.core.configuration.handlers.TypedValueConfigurationHandler">
+		<property name="valueAttributeName" value="context-name"></property>
+	</cfg-handler>
+	<cfg-handler id="workFlowComponentCfgHandler"
+		class="ro.zg.cfgengine.core.configuration.handlers.CustomConfigurationHandler"
+		default-class="ro.zg.synapse.engine.WorkFlowExecutionEntityWrapper">
+		<property name="hasIdAttribute" value="false"></property>
+		<property name="attributesToProperties">
+			<value>
+				<map>
+					<entry key="local-id" value="id"></entry>
+				</map>
+			</value>
+		</property>
+		<property name="wrappedPropertiesHandlers">
+			<value>
+				<map>
+					<entry key="entityExecutionContext">
+						<value-ref>workFlowComponentExecutionContextCfgHandler</value-ref>
+					</entry>
+				</map>
+			</value>
+		</property>
+	</cfg-handler>
+	<cfg-handler id="workFlowComponentExecutionContextCfgHandler"
+		class="ro.zg.cfgengine.core.configuration.handlers.CustomConfigurationHandler"
+		default-class="ro.zg.synapse.engine.EntityExecutionContextImpl">
+		<property name="hasIdAttribute" value="false"></property>
+		<property name="defaultInitMethod" value="init"></property>
+		<property name="defaultReferencesForProperties">
+			<value>
+				<map>
+					<entry key="exceptionHandler" value="WorkFlowComponentExceptionHandler">
+					</entry>
+				</map>
+			</value>
+		</property>
+		<property name="tagsToProperties">
+			<value>
+				<map>
+					<entry key="workflow-component-configuration" value="listeners" />
+					<entry key="listener" value="listeners"></entry>
+				</map>
+			</value>
+		</property>
+		<property name="attributesToProperties">
+			<value>
+				<map>
+					<entry key="local-id" value="id"></entry>
+					<entry key="id-ref" value="wrappedExecutionEntity"></entry>
+				</map>
+			</value>
+		</property>
+		<property name="referenceAttributes">
+			<value>
+				<list>
+					<value>id-ref</value>
+				</list>
+			</value>
+		</property>
+		<property name="referenceTags">
+			<value>
+				<map>
+					<entry key="listener" value="id-ref"></entry>
+				</map>
+			</value>
+		</property>
+		<property name="localConfigurationHandlers">
+			<value>
+				<map>
+					<entry key="workflow-component-configuration">
+						<value-ref>workFlowComponentParameterMappingListenerHandler</value-ref>
+					</entry>
+				</map>
+			</value>
+		</property>
+	</cfg-handler>
+	
+	<!-- workflow configuration -->
+	<cfg-handler id="workFlowCfgHandler"
+		class="ro.zg.cfgengine.core.configuration.handlers.CustomConfigurationHandler"
+		default-class="ro.zg.synapse.engine.WorkFlow">
+		<property name="hasIdAttribute" value="false"></property>
+		<property name="tagsToProperties">
+			<value>
+				<map>
+					<entry key="workflow-component" value="componentExecutionContexts" />
+					<entry key="component-exit-points-mappings" value="flowInfo"></entry>
+				</map>
+			</value>
+		</property>
+		<property name="attributesToProperties">
+			<value>
+				<map>
+					<entry key="start-comp-id" value="entryPoint" />
+				</map>
+			</value>
+		</property>
+		<property name="attributesAsIdsForTags">
+			<value>
+				<map>
+					<entry key="workflow-component" value="local-id"></entry>
+					<entry key="component-exit-points-mappings" value="local-comp-id"></entry>
+				</map>
+			</value>
+		</property>
+		<property name="defaultReferencesForProperties">
+			<value>
+				<map>
+					<entry key="exceptionHandler" value="InternalWorkFlowExceptionHandler">
+					</entry>
+				</map>
+			</value>
+		</property>
+		<property name="localConfigurationHandlers">
+			<value>
+				<map>
+					<entry key="workflow-component">
+						<value-ref>workFlowComponentCfgHandler</value-ref>
+					</entry>
+					<entry key="component-exit-points-mappings">
+						<value-ref>componentExitPointsMappingsHandler</value-ref>
+					</entry>
+				</map>
+			</value>
+		</property>
+	</cfg-handler>
+	<cfg-handler id="componentExitPointsMappingsHandler"
+		class="ro.zg.cfgengine.core.configuration.handlers.CustomMapConfigurationHandler"
+		default-class="java.util.HashMap">
+		<property name="hasIdAttribute" value="false"></property>
+		<property name="keyAttributeNames">
+			<value>
+				<map>
+					<entry key="exit-point-mapping" value="exit-point"></entry>
+				</map>
+			</value>
+		</property>
+		<property name="localConfigurationHandlers">
+			<value>
+				<map>
+					<entry key="exit-point-mapping">
+						<value-ref>compExitPointMappingHandler</value-ref>
+					</entry>
+				</map>
+			</value>
+		</property>
+	</cfg-handler>
+	<cfg-handler id="compExitPointMappingHandler"
+		class="ro.zg.cfgengine.core.configuration.handlers.CustomConfigurationHandler"
+		default-class="ro.zg.synapse.engine.vo.ComponentExitPointMapping">
+		<property name="hasIdAttribute" value="false"></property>
+		<property name="attributesToProperties">
+			<value>
+				<map>
+					<entry key="exit-point" value="exitPoint" />
+					<entry key="next-comp-id" value="nextComponentIdRef"></entry>
+					<entry key="exit" value="exitPointMapping"></entry>
+				</map>
+			</value>
+		</property>
+	</cfg-handler>
+	<cfg-handler id="workFlowLoggingListenerHandler"
+		class="ro.zg.cfgengine.core.configuration.handlers.CustomConfigurationHandler"
+		default-class="ro.zg.synapse.engine.listeners.util.WorkFlowLoggingListener">
+		<property name="hasIdAttribute" value="false"></property>
+	</cfg-handler>
+	<cfg-handler id="rootHandler"
+		class="ro.zg.cfgengine.core.configuration.handlers.BaseConfigurationHandler">
+		<property name="localConfigurationHandlers">
+			<value>
+				<map>
+					<entry key="component">
+						<value-ref>componentWrapperCfgHandler</value-ref>
+					</entry>
+					<entry key="workflow-context">
+						<value-ref>workFlowContextCfgHandler</value-ref>
+					</entry>
+					
+					<!-- for testing -->
+					<entry key="workflow-configuration">
+						<value-ref>workflowParamMappingListenerHandler</value-ref>
+					</entry>
+					<entry key="workflow-component-configuration">
+						<value-ref>workFlowComponentParameterMappingListenerHandler</value-ref>
+					</entry>
+				</map>
+			</value>
+		</property>
+	</cfg-handler>
+</configuration>

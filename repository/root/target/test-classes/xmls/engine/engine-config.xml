@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE files SYSTEM "../../dtds/entry-point.dtd">
+
+<files>
+	<file>xmls/engine/components.xml</file>
+	<file>xmls/engine/helper-resources.xml</file>
+	<file>xmls/engine/workflows.xml</file>
+	<file>xmls/engine/exception-handlers.xml</file>
+</files>

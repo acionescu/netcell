@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE resources SYSTEM "../../../dtds/resources.dtd">
+<resources>
+   <resource id="resourcesManager" class="ro.zg.netcell.control.ResourcesManager"
+      init-method="init">
+      <property name="rootDir" value="root"></property>
+      <property name="resourcesRelativePaths">
+         <value>
+            <map>
+               <entry key="DEFINITIONS_HANDLER_FILE"
+                  value="config/definitions/definitions-handlers.xml"></entry>
+               <entry key="DEFINITIONS_CONFIG_FILE"
+                  value="config/definitions/definitions-config.xml"></entry>
+               <entry key="ENGINE_HANDLER_FILE" value="config/engine/engine-handlers.xml"></entry>
+               <entry key="ENGINE_CONFIG_FILE" value="config/engine/engine-config.xml"></entry>
+               <entry key="EXECUTABLE_ENTITIES_DIR" value="entities/workflows/"></entry>
+               <entry key="BACKUP_DIR" value="backup/entities/"></entry>
+               <entry key="DEFINITIONS_TEMPLATES_DIR" value="config/definitions/templates/"></entry>
+               <entry key="DATASOURCES_HANDLER_FILE"
+                  value="config/datasources/datasources-handlers.xml"></entry>
+               <entry key="DATASOURCES_TEMPLATES_CONFIG_FILE"
+                  value="config/datasources/data-sources-templates.xml"></entry>
+               <entry key="DATASOURCES_DEFINITIONS_CONFIG_FILE"
+                  value="config/datasources/datasources-config.xml"></entry>
+               <entry key="DATASOURCES_COMMANDS_HANDLER_FILE"
+                  value="config/datasources/datasources-commands-handlers.xml"></entry>
+               <entry key="DATASOURCES_COMMANDS_CONFIG_FILE"
+                  value="config/datasources/datasources-commands-config.xml"></entry>
+               <entry key="DATASOURCES_DIR" value="datasources/"></entry>
+               <entry key="DATASOURCES_TEMPLATES_DIR" value="config/datasources/templates/"></entry>
+               <entry key="DATA_ACCESS_COMPONENTS_TEMPLATES_DIR"
+                  value="config/datasources/templates/dac/"></entry>
+               <entry key="DATA_ACCESS_COMPONENTS_CONFIG_FILE"
+                  value="config/datasources/data-access-components-config.xml"></entry>
+               <entry key="DATA_ACCESS_COMPONENTS_DIR" value="entities/data-access-entities/"></entry>
+               <entry key="DATASOURCES_COMMAND_TEMPLATE"
+                  value="config/datasources/templates/commands/command-template.xml"></entry>
+               <entry key="DISTRIBUTED_SERVICES_CONFIG_FILE"
+                  value="config/distributed-services/distributed-services-config.xml"></entry>
+               <entry key="CONFIGURABLE_COMPONENTS_HANDLERS_FILE"
+                  value="config/configurable-components/configurable-components-handlers.xml"></entry>
+               <entry key="CONFIGURABLE_COMPONENTS_CONFIG_FILE"
+                  value="config/configurable-components/configurable-components-templates-config.xml"></entry>
+               <entry key="CONFIGURABLE_COMPONENTS_STUBS_DIR" value="config/configurable-components/templates/stubs"></entry>
+               <entry key="CONFIGURABLE_COMPONENTS_DIR" value="entities/configurable-components"></entry>   
+               <entry key="SCHEDULER_PROPERTIES_FILE" value="config/scheduled-jobs/quartz-scheduler.properties"></entry>
+               <entry key="SCHEDULED_JOBS_HANDLERS_FILE" value="config/scheduled-jobs/scheduled-jobs-handlers.xml"></entry>
+               <entry key="SCHEDULED_JOBS_CONFIG_FILE" value="config/scheduled-jobs/scheduled-jobs-config.xml"></entry>
+            </map>
+         </value>
+      </property>
+   </resource>
+</resources>

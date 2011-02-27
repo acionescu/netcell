@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE entities SYSTEM "../../dtds/entities.dtd">
+<entities>
+   <entity id="ro.problems.flows.get-all-entities-types-relations" type="workflow-definition"
+      logic-type="dynamic-wrapper">
+      <entity type="description">
+         <value>$workflowDefinition.getDescription()</value>
+      </entity>
+      <entity logic-type="config">
+         <entity type="definition-params" logic-type="static-parameters">
+            <value>
+               <map>
+                  												<entry key="localParameters">
+							<value>
+								<list>
+																		<value>
+										<entity type="local-parameter">
+	<property name="name" value="result"></property>
+		<property name="type" value="List[Context[]]"></property>
+		</entity>								</value>
+																	</list>
+							</value>
+						</entry>
+												<entry key="executionEntity">
+							<value>
+																<entity type="workflow" logic-type="dynamic-wrapper">
+   <entity logic-type="config">
+      <entity logic-type="executor">
+         <entity-ref ref-id="workFlow" />
+      </entity>
+<!--      <entity logic-type="original-input-name">-->
+<!--         <value>inputContext</value>-->
+<!--      </entity>-->
+      <entity type="workflow-params" logic-type="static-parameters">
+         <value>
+            <map>
+               <entry key="defaultEntryPointId" value="ro.problems.data.get-all-entities-types-relations_0">
+               </entry>
+               <entry key="components">
+                  <value>
+                     <map>
+                                                 <entry key="ro.problems.data.get-all-entities-types-relations_0">
+                           <value>                               <entity type="workflow-component">
+		<entity type="component" logic-type="component">
+	<entity logic-type="dynamic-wrapper">
+		<entity logic-type="config">
+			<entity logic-type="executor">
+				<entity-ref ref-id="ro.problems.data.get-all-entities-types-relations" />
+			</entity>
+<!--			<entity logic-type="original-input-name">-->
+<!--				<value>argsContext</value>-->
+<!--			</entity>-->
+											</entity>
+	</entity>
+</entity>		<entity logic-type="output-params-mappings">
+		<value>
+			<map>
+								<entry key="result" value="result" />
+							</map>
+		</value>
+	</entity>
+		
+		<entity type="flow-logic" logic-type="flow-logic">
+      <property name="exitLabel" value="exit" />
+   </entity>               
+                                                </entity>                           </value>
+                        </entry>
+                                             </map>
+                  </value>
+               </entry>
+            </map>
+         </value>
+      </entity>
+      <entity logic-type="dynamic-parameters">
+         <value>
+            <map>
+               <entry key="inputContext" value="origContext"></entry>
+               <entry key="entryPointId" value="entryPointId"></entry>
+               <entry key="isAsyncContext" value="isAsyncContext"></entry>
+            </map>
+         </value>
+      </entity>
+   </entity>
+</entity>						</value>
+						</entry>
+												<entry key="outputParameters">
+							<value>
+								<list>
+									
+																		<value>
+										<entity type="output-parameter">
+	<property name="name" value="exit"></property>
+		<property name="type" value="String"></property>
+	</entity>								</value>
+																		<value>
+										<entity type="output-parameter">
+	<property name="name" value="result"></property>
+		<property name="type" value="List[Context[]]"></property>
+	</entity>								</value>
+																	</list>
+							</value>
+						</entry>
+											</map>
+				</value>
+			</entity>
+			<entity logic-type="original-input-name">
+				<value>inputContext</value>
+			</entity>
+			<entity logic-type="executor">
+				<entity-ref ref-id="workflowAdapterEntity" />
+			</entity>
+		</entity>
+	</entity>
+</entities>

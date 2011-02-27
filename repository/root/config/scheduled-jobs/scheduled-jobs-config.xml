@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE files SYSTEM "../../../dtds/entry-point.dtd">
+<files>
+   <dir recursive="true" >root/scheduled-jobs/</dir>
+</files>

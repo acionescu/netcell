@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components SYSTEM "../../dtds/workflow-engine.dtd">
+<components>
+	<component id="DummyComponent" class="ro.zg.synapse.engine.configuration.DummyWorkFlowComponent">
+	</component>
+	
+	<component id="ExceptionalComponent" class="ro.zg.synapse.engine.configuration.ExceptionThrowingComponent">
+	</component>
+	
+	<component id="Comparator" class="ro.zg.synapse.engine.components.ComparatorComponent">
+		<component-configuration>
+			<input-parameters>
+				<input-parameter name="referenceValue" mandatory="true"/>
+				<input-parameter name="comparedValue" mandatory="true"/>
+			</input-parameters>
+		</component-configuration>
+	</component>
+	
+	<component id="InputMapper" class="ro.zg.synapse.engine.components.InputMapperComponent">
+		<component-configuration>
+			<input-parameters>
+				<input-parameter name="filterParameters" mandatory="true"></input-parameter>
+				<input-parameter name="mappedOutput" mandatory="true"></input-parameter>
+			</input-parameters>
+		</component-configuration>
+	</component>
+</components>

@@ -1,0 +1,27 @@
+<entity type="workflow-component">
+	#set($componentConfig = $workflowComponent.getComponentConfig())
+	#parse("root/config/definitions/templates/component-template.xml")
+	#if($workflowComponent.getOutputParamsMappings() && $workflowComponent.getOutputParamsMappings().size() > 0)
+	<entity logic-type="output-params-mappings">
+		<value>
+			<map>
+				#foreach($entry in $workflowComponent.getOutputParamsMappings().entrySet())
+				<entry key="$entry.getKey()" value="$entry.getValue()" />
+				#end
+			</map>
+		</value>
+	</entity>
+	#elseif($workflowComponent.getOutputParamName()) 
+		<entity logic-type="output-param-name">
+			<value>$workflowComponent.getOutputParamName()</value>
+		</entity>
+	#end 
+	
+	#set($compMapping = $workflowComponent.getComponentMapping())
+	#parse("root/config/definitions/templates/flow-logic-template.xml")
+               
+               #if($workflowComponent.getErrorMapping())
+                  #set($exitPoint = $workflowComponent.getErrorMapping())
+                  #parse("root/config/definitions/templates/error-mapping-template.xml")
+               #end
+</entity>

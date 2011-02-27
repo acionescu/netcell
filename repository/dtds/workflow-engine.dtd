@@ -1,0 +1,139 @@
+<!ELEMENT list ( value* , value-ref*) >
+
+<!ELEMENT map ( entry+ ) >
+
+<!ELEMENT property ( value? ) >
+<!ATTLIST property name CDATA #REQUIRED >
+<!ATTLIST property value CDATA #IMPLIED >
+<!ATTLIST property value-ref NMTOKEN #IMPLIED >
+<!ATTLIST property depth CDATA #IMPLIED >
+
+<!ELEMENT entry ( value? , value-ref?, value-type? ) >
+<!ATTLIST entry key CDATA #REQUIRED >
+<!ATTLIST entry value CDATA #IMPLIED >
+
+<!ELEMENT resource ( property* ) >
+<!ATTLIST resource class CDATA #REQUIRED >
+<!ATTLIST resource id NMTOKEN #IMPLIED >
+<!ATTLIST resource init-method CDATA #IMPLIED >
+<!ATTLIST resource destroy-method CDATA #IMPLIED >
+
+<!ELEMENT resources ( resource* ) >
+
+<!ELEMENT value ( #PCDATA | list | map | resource)* >
+
+<!ELEMENT value-ref ( #PCDATA ) >
+
+<!ELEMENT value-type EMPTY >
+<!ATTLIST value-type value CDATA #REQUIRED >
+<!ATTLIST value-type type CDATA #REQUIRED >
+
+<!ELEMENT components ( component*,component-context* ) >
+
+<!ELEMENT component-context ( input-parameters?, component) >
+<!ATTLIST component-context id NMTOKEN #REQUIRED >
+
+<!ELEMENT component ( component-configuration?) >
+<!ATTLIST component class CDATA #REQUIRED >
+<!ATTLIST component id NMTOKEN #IMPLIED >
+
+<!ELEMENT component-configuration ( property* )>
+<!ATTLIST component-configuration class CDATA #REQUIRED >
+<!ATTLIST component-configuration id NMTOKEN #IMPLIED >
+<!ATTLIST component-configuration init-method CDATA #IMPLIED >
+<!ATTLIST component-configuration destroy-method CDATA #IMPLIED >
+
+<!ELEMENT workflows ( workflow-context* ) >
+
+<!ELEMENT workflow-context ( listener*, workflow-configuration?, session?, listener*, workflow ) >
+<!ATTLIST workflow-context id NMTOKEN #REQUIRED >
+
+<!ELEMENT session ( session-config ) >
+<!ATTLIST session session-manager-ref NMTOKEN #REQUIRED >
+
+<!ELEMENT session-config ( id-params?, params-to-save, session-actions ) >
+<!ATTLIST session-config timeout CDATA #REQUIRED >
+<!ATTLIST session-config has-id-params CDATA #REQUIRED >
+
+<!ELEMENT id-params ( id-param* )>
+
+<!ELEMENT id-param EMPTY>
+<!ATTLIST id-param name CDATA #REQUIRED >
+
+<!ELEMENT params-to-save ( parameter-to-save* )>
+
+<!ELEMENT parameter-to-save EMPTY >
+<!ATTLIST parameter-to-save name CDATA #REQUIRED >
+ 
+ <!ELEMENT session-actions ( session-action* ) >
+ 
+ <!ELEMENT session-action EMPTY>
+ <!ATTLIST session-action exit-point CDATA #REQUIRED >
+ <!ATTLIST session-action action ( SAVE | DELETE ) #REQUIRED >
+ <!ATTLIST session-action next-comp-id-ref CDATA #IMPLIED >
+ 
+<!ELEMENT listener EMPTY >
+<!ATTLIST listener id-ref NMTOKEN #REQUIRED >
+
+<!ELEMENT workflow ( workflow-components, workflow-logic ) >
+<!ATTLIST workflow start-comp-id NMTOKEN #REQUIRED >
+
+<!ELEMENT workflow-configuration ( input-parameters?, output-parameters? ) >
+
+<!ELEMENT input-parameters ( input-parameter* ) >
+
+<!ELEMENT input-parameter (validation-rules?, translation-rules?) >
+<!ATTLIST input-parameter name CDATA #REQUIRED >
+<!ATTLIST input-parameter value CDATA #IMPLIED >
+<!ATTLIST input-parameter type CDATA #IMPLIED >
+<!ATTLIST input-parameter mandatory ( true | false ) #IMPLIED >
+
+<!ELEMENT validation-rules ( validation-rule* ) >
+
+<!ELEMENT validation-rule ( parameter* ) >
+
+<!ELEMENT translation-rules ( translation-rule* ) >
+
+<!ELEMENT translation-rule ( parameter* ) >
+
+<!ELEMENT output-parameters ( output-parameter* ) >
+
+<!ELEMENT output-parameter ( #PCDATA ) >
+<!ATTLIST output-parameter name CDATA #IMPLIED >
+
+<!ELEMENT workflow-components ( workflow-component* ) >
+
+<!ELEMENT workflow-component ( listener*, workflow-component-configuration?, listener* ) >
+<!ATTLIST workflow-component local-id CDATA #REQUIRED >
+<!ATTLIST workflow-component id-ref CDATA #REQUIRED >
+
+<!ELEMENT workflow-component-configuration ( static-parameters?, dynamic-parameters?, output-parameter-mappings? ) >
+
+<!ELEMENT static-parameters ( parameter* ) >
+
+<!ELEMENT parameter ( value?) >
+<!ATTLIST parameter name CDATA #REQUIRED >
+<!ATTLIST parameter value CDATA #IMPLIED >
+<!ATTLIST parameter type CDATA #IMPLIED >
+
+<!ELEMENT dynamic-parameters ( dynamic-parameter* ) >
+
+<!ELEMENT dynamic-parameter EMPTY >
+<!ATTLIST dynamic-parameter local-name CDATA #REQUIRED >
+<!ATTLIST dynamic-parameter context-name CDATA #REQUIRED >
+
+<!ELEMENT output-parameter-mappings ( output-parameter-mapping* ) >
+
+<!ELEMENT output-parameter-mapping EMPTY >
+<!ATTLIST output-parameter-mapping local-name CDATA #REQUIRED >
+<!ATTLIST output-parameter-mapping context-name CDATA #REQUIRED >
+
+<!ELEMENT workflow-logic ( component-exit-points-mappings* ) >
+
+<!ELEMENT component-exit-points-mappings ( exit-point-mapping* ) >
+<!ATTLIST component-exit-points-mappings local-comp-id CDATA #REQUIRED >
+
+<!ELEMENT exit-point-mapping EMPTY >
+<!ATTLIST exit-point-mapping exit-point CDATA #REQUIRED >
+<!ATTLIST exit-point-mapping next-comp-id NMTOKEN #IMPLIED >
+<!ATTLIST exit-point-mapping exit CDATA #IMPLIED >

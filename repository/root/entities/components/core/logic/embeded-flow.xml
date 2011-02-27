@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE entities SYSTEM "../../dtds/entities.dtd">
+<entities>
+    <entity id="core.logic.embeded-flow" type="component-definition"
+        logic-type="dynamic-wrapper">
+        <entity logic-type="config">
+            <entity type="definition-params" logic-type="static-parameters">
+                <value>
+                    <map>
+                        <entry key="inputParameters">
+                            <value>
+                                <list>
+                                    <value>
+                                        <entity type="input-parameter">
+                                            <property name="name"
+                                                value="fid"></property>
+                                            <property name="type"
+                                                value="String"></property>
+                                            <property name="mandatory"
+                                                value="true"></property>
+                                        </entity>
+                                    </value>
+                                </list>
+                            </value>
+                        </entry>
+                        <entry key="executionEntity">
+                            <value-ref>flowCaller</value-ref>
+                        </entry>
+                        <!--						<entry key="outputParameters">-->
+                        <!--							<value>-->
+                        <!--								<list>-->
+                        <!--									<value>-->
+                        <!--										<entity type="output-parameter">-->
+                        <!--											<property name="name" value="exit"></property>-->
+                        <!--										</entity>-->
+                        <!--									</value>-->
+                        <!--								</list>-->
+                        <!--							</value>-->
+                        <!--						</entry>-->
+                        <entry key="copyAll" value="true"></entry>
+                    </map>
+                </value>
+            </entity>
+            <entity logic-type="original-input-name">
+                <value>inputContext</value>
+            </entity>
+            <entity logic-type="executor">
+                <entity-ref ref-id="executionEntityWrapper" />
+            </entity>
+        </entity>
+    </entity>
+</entities>

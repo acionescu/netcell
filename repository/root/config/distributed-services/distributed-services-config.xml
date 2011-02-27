@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE files SYSTEM "../../../dtds/entry-point.dtd">
+
+<files>
+   <file>root/config/controller/resources-manager.xml</file>
+   <file>root/config/distributed-services/processing-node-config.xml</file>
+   <file>root/config/distributed-services/resources.xml</file>
+</files>

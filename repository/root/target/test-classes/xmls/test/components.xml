@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components SYSTEM "../../dtds/workflow-engine.dtd">
+<components>
+	<component id="fighter1" class="ro.zg.netcell.test.FighterPlaneComponent">
+		<component-configuration
+			class="ro.zg.netcell.test.FighterPlaneConfiguration">
+			<property name="primaryWeapon" value="nails"></property>
+			<property name="secondaryWeapon" value="axes"></property>
+		</component-configuration>
+	</component>
+	<component-context id="fighter2">
+		<component class="ro.zg.netcell.test.FighterPlaneComponent">
+			<component-configuration
+				class="ro.zg.netcell.test.FighterPlaneConfiguration">
+				<property name="primaryWeapon" value="lasear-beam"></property>
+				<property name="secondaryWeapon" value="heat-rocket"></property>
+			</component-configuration>
+		</component>
+	</component-context>
+	<component-context id="fighter3">
+		<input-parameters>
+			<input-parameter name="target" mandatory="true"></input-parameter>
+		</input-parameters>
+		<component class="ro.zg.netcell.test.FighterPlaneComponent">
+			<component-configuration
+				class="ro.zg.netcell.test.FighterPlaneConfiguration">
+				<property name="primaryWeapon" value="flowers"></property>
+				<property name="secondaryWeapon" value="teddy-bears"></property>
+			</component-configuration>
+		</component>
+	</component-context>
+	
+</components>

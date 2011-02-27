@@ -1,0 +1,10 @@
+<entry key="${staticParameter.getName()}">
+   <value>
+      <entity type="static-config-parameter">
+         <property name="name" value="${staticParameter.getName()}"></property>
+         <property name="value">
+            #generate_generic_value($staticParameter)
+         </property>
+      </entity>
+   </value>
+</entry>

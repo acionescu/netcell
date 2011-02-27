@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE command SYSTEM "../../../../dtds/script-dao-commands.dtd">
+<command name="ro.problems.data.get-entities-list" type="SQL.QUERY">
+         <parameters>
+                     <parameter name="withContent" />
+                     <parameter name="subtypesList" />
+                     <parameter name="parentId" />
+                     <parameter name="entityType" />
+                     <parameter name="sortList" />
+                     <parameter name="itemsOnPage" />
+                     <parameter name="pageNumber" />
+                     <parameter name="userId" />
+                     <parameter name="depth" />
+                     <parameter name="entityId" />
+                     <parameter name="searchString" />
+                     <parameter name="complexTypesIds" />
+                     <parameter name="tag" />
+                     <parameter name="status" />
+                     <parameter name="globalStatus" />
+                     <parameter name="userActionColumn" />
+                     <parameter name="filterByUser" />
+               </parameters>
+      <script>
+      #if($parentId)
+WITH RECURSIVE subentities_list(id, complex_type_id,complex_type, parent_entity_id, depth) AS (
+        SELECT e.id, cet.id complex_type_id,cet.complex_type, e.parent_entity_id, 0
+        FROM entities e, complex_entity_type cet
+        where e.parent_entity_id=$parentId
+        and e.complex_entity_type_id=cet.id
+        
+      UNION ALL
+        SELECT e.id, cet.id complex_type_id,cet.complex_type, e.parent_entity_id, eg.depth + 1
+        FROM entities e, subentities_list eg, complex_entity_type cet
+        WHERE eg.id = e.parent_entity_id
+        and e.complex_entity_type_id=cet.id
+        #if($depth)
+        and eg.depth &lt; $depth
+        #end
+)
+#elseif($entityId)
+WITH RECURSIVE entity_upstream_hierarchy(id, complex_type, parent_entity_id, depth) AS (
+        SELECT e.id, cet.complex_type, e.parent_entity_id, 0
+        FROM entities e, complex_entity_type cet
+        where e.id=$entityId
+        and e.complex_entity_type_id=cet.id
+        
+      UNION ALL
+        SELECT e.id, cet.complex_type, e.parent_entity_id, eg.depth + 1
+        FROM entities e, entity_upstream_hierarchy eg, complex_entity_type cet
+        WHERE e.id = eg.parent_entity_id
+	and cet.complex_type in ('ISSUE','SOLUTION')
+        and e.complex_entity_type_id=cet.id
+       #if($depth)
+        and eg.depth &lt; $depth
+       #end
+)
+#end
+select 
+e.id
+, e.title
+#if($withContent)
+, e.content
+#else
+, substring(e.content from 1 for 1000) content_preview
+#end
+, e.insert_date
+, cet.complex_type 
+, e.creator_id
+, idsList.depth
+,votes.pro_votes
+,votes.opposed_votes	
+,votes.total_votes
+, case (votes.total_votes)
+when 0 then 0
+else (votes.pro_votes-votes.opposed_votes)
+end popularity_index
+,ep.priority general_priority
+,gs.status general_status
+#if($userId)
+,eu.vote user_vote
+,eu.last_vote_update
+,eu.priority
+,eu.last_priority_update
+,st.status
+,eu.last_status_update
+#end
+#if($subtypesList)
+, $subtypesList.size() subtypes_count
+#foreach( $entityContext in $subtypesList.getValues())
+#set($currentTable = "e${velocityCount}.id")
+,count(distinct($currentTable)) $entityContext.getValue("simple_subtype")_subtype_count
+#end	
+#end
+--if is a recent activity list
+#if($parentId &amp;&amp; !$entityType &amp;&amp; !$userActionColumn)
+-- bring the action type
+,actLog.action_type_id
+,(select type from action_types where id=actLog.action_type_id) action_type
+-- bring also the parent id and title
+,e.parent_entity_id
+,(select title from entities where id=e.parent_entity_id) parent_title
+#end
+from entities e
+left outer join (
+select 
+e2.id entity_id
+,sum(case v.vote
+	when 'y' then 1
+	else 0
+	end) pro_votes
+,sum(case v.vote
+	when 'n' then 1
+	else 0
+	end) opposed_votes
+,count(v.vote) total_votes	
+from entities e2
+left outer join entities_users v on (e2.id = v.entity_id)
+group by e2.id	
+) votes on (e.id = votes.entity_id)
+#if($subtypesList)
+#foreach( $entityContext in $subtypesList.getValues())
+#set($currentTable = "e${velocityCount}")
+left outer join entities $currentTable on (e.id = ${currentTable}.parent_entity_id and ${currentTable}.complex_entity_type_id=$entityContext.getValue("id"))
+#end
+#end
+#if($userId)
+left outer join entities_users eu on(e.id = eu.entity_id and eu.user_id=$userId)
+left outer join statuses st on(eu.status_id = st.id)
+#end
+left outer join entities_priorities ep on (e.id=ep.entity_id)
+left outer join entities_statuses es on (e.id=es.entity_id)
+left outer join statuses gs on(es.status_id=gs.id)
+inner join complex_entity_type cet on (e.complex_entity_type_id = cet.id)
+#if($parentId)
+#if($entityType)
+join subentities_list idsList on (e.id = idsList.id and idsList.complex_type='$entityType')
+#elseif($complexTypesIds)
+join subentities_list idsList on (e.id = idsList.id and idsList.complex_type_id in $complexTypeIds)
+#else
+join subentities_list idsList on (e.id = idsList.id)
+#if(!$userActionColumn)
+join activity_log actLog on (e.id = actLog.entity_id)
+#end
+#end
+#elseif($entityId)
+join entity_upstream_hierarchy idsList on (e.id = idsList.id )
+#end
+where 1=1
+#if($searchString)
+and lower(e.title) like '%$searchString%' or lower(e.content) like '%$searchString%'
+#end
+#if($tag)
+and exists (select 1 from entities_tags et,tags t where et.entity_id=e.id and et.tag_id=t.id and t.tag='$tag')
+#end
+#if($status)
+and st.status='$status'
+#end
+#if($globalStatus)
+and gs.status='$globalStatus'
+#end
+#if($userActionColumn)
+and exists (select 1 from entities_users where entity_id=e.id #if($filterByUser)and user_id=$userId#end and $userActionColumn is not null)
+#end
+group by 
+e.id
+, e.title
+#if($withContent)
+, e.content
+#else
+,content_preview
+#end
+, e.insert_date
+, e.last_update
+, cet.complex_type
+, e.creator_id
+, idsList.depth
+,votes.pro_votes,votes.opposed_votes,votes.total_votes
+,ep.priority,gs.status
+#if($userId)
+,eu.vote
+,eu.last_vote_update
+,eu.priority
+,eu.last_priority_update
+,st.status
+,eu.last_status_update
+#end
+#if($parentId &amp;&amp; !$entityType &amp;&amp; !$userActionColumn)
+,e.parent_entity_id
+,actLog.action_type_id
+,actLog.action_timestamp
+#end
+order by $sortList
+limit $itemsOnPage offset $itemsOnPage * ( $pageNumber - 1 )
+
+   </script>
+</command>

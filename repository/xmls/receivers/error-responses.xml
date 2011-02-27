@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE resources SYSTEM "../../dtds/workflow-engine.dtd">
+
+<resources>
+	
+	<resource id="ErrorResponsesManager" class="ro.zg.netcell.control.exceptions.CommandResponsesManager">
+		<property name="internalErrorResponseCode" value="rc9999"/>
+		
+		<property name="exceptionsResponseCodesMap">
+			<value>
+				<map>
+					<entry key="SERVICE_NOT_AVAILABLE">
+						<value>
+							<resource id="SERVICE_NOT_AVAILABLE" class="ro.zg.netcell.control.exceptions.DefaultResponseBuilder">
+								<property name="responseCode" value="rc100"></property>
+							</resource>
+						</value>
+					</entry>
+					
+					<entry key="WRONG_COMMAND_FORMAT">
+						<value>
+							<resource  id="WRONG_COMMAND_FORMAT" class="ro.zg.netcell.control.exceptions.DefaultResponseBuilder">
+								<property name="responseCode" value="rc101"></property>
+							</resource>
+						</value>
+					</entry>
+					
+					<entry key="UNKNOWN_COMMAND">
+						<value>
+							<resource id="UNKNOWN_COMMAND" class="ro.zg.netcell.control.exceptions.DefaultResponseBuilder">
+								<property name="responseCode" value="rc102"></property>
+								<property name="parameterNames">
+									<value>
+										<list>
+											<value>commandName</value>
+										</list>
+									</value>
+								</property>
+							</resource>
+						</value>
+					</entry>
+					
+					<entry key="INTERNAL_ERROR">
+						<value>
+							<resource id="INTERNAL_ERROR" class="ro.zg.netcell.control.exceptions.DefaultResponseBuilder">
+								<property name="responseCode" value="rc9999"></property>
+							</resource>
+						</value>
+					</entry>
+					
+					<entry key="MANDATORY_PARAMETER_VALIDATION_ERROR">
+						<value>
+							<resource id="MANDATORY_PARAMETER_VALIDATION_ERROR" class="ro.zg.netcell.control.exceptions.DefaultResponseBuilder">
+								<property name="responseCode" value="rc103"></property>
+								<property name="parameterNames">
+									<value>
+										<list>
+											<value>name</value>
+										</list>
+									</value>
+								</property>
+							</resource>
+						</value>
+					</entry>
+					
+					<entry key="VALIDATION_ERROR">
+						<value>
+							<resource id="VALIDATION_ERROR" class="ro.zg.netcell.control.exceptions.DefaultResponseBuilder">
+								<property name="responseCode" value="rc104"></property>
+								<property name="parameterNames">
+									<value>
+										<list>
+											<value>name</value>
+											<value>value</value>
+											<value>rule</value>
+										</list>
+									</value>
+								</property>
+							</resource>
+						</value>
+					</entry>
+				</map>
+			</value>
+		</property>
+	</resource>
+</resources>

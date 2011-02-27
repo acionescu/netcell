@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE entities SYSTEM "../../../dtds/entities.dtd">
+<entities>
+   <entity id="problems_db" type="command-manager">
+      <property name="commandLoader">
+         <value>
+            <entity type="resource-loader" logic-type="classpath-loader">
+               <property name="path" value="root/datasources/problems_db/commands/"></property>
+            </entity>
+         </value>
+      </property>
+      <property name="commandBuilder" value-ref="velocityCommandBuilder"/>
+      <property name="commandExecutor" value-ref="databaseCommandExecutor"></property>
+      <property name="connectionManager" value-ref="problems_db-connection-manager"></property>
+      <property name="translator" value-ref="databaseResponseTranslator"></property>
+   </entity>
+</entities>

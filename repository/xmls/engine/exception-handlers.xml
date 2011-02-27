@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE resources SYSTEM "../../dtds/workflow-engine.dtd">
+
+<resources>
+	<resource id="WorkFlowComponentExceptionHandler" class="ro.zg.synapse.engine.exceptions.WorkFlowComponentExceptionHandler">
+		<property name="exceptionHandlingManager" value-ref="WorkFlowExceptionHandlingManager"></property>
+	</resource>
+	
+<!--	<resource id="LoggingComponentExceptionHandler" class="ro.zg.synapse.engine.exceptions.WorkFlowExecutionEntityExceptionHandler">-->
+<!--		<property name="wrappedExceptionHandler" value-ref="WorkFlowComponentExceptionHandler"></property>-->
+<!--		<property name="exceptionHandlingManager" value-ref="WorkFlowExceptionHandlingManager"></property>-->
+<!--	</resource>-->
+
+	<resource id="InternalWorkFlowExceptionHandler" class="ro.zg.synapse.engine.exceptions.InternalWorkFlowExceptionHandler">
+		<property name="exceptionHandlingManager" value-ref="WorkFlowExceptionHandlingManager"></property>
+	</resource>
+	
+	<resource id="WorkFlowExceptionHandlingManager" class="ro.zg.synapse.engine.exceptions.WorkFlowExceptionHandlingManager"></resource>
+</resources>

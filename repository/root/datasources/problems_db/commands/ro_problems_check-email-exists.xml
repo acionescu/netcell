@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE command SYSTEM "../../../../dtds/script-dao-commands.dtd">
+<command name="ro.problems.check-email-exists" type="SQL.QUERY">
+         <parameters>
+                     <parameter name="userId" />
+                     <parameter name="email" />
+               </parameters>
+      <script>
+      select count(*) from users
+where email='$email'
+#if($userId)
+and id != $userId
+#end
+   </script>
+</command>
