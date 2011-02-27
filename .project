@@ -20,11 +20,4 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.maven.ide.eclipse.maven2Nature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>hbase-conf</name>
-			<type>2</type>
-			<location>/opt/hbase/conf</location>
-		</link>
-	</linkedResources>
 </projectDescription>
