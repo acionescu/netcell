@@ -1,0 +1,26 @@
+- Mai multe sisteme şi necesitatea integrării intre ele
+- Un proces de business poate conţine sau coincide (în cazul ideal, automatizare 100%) cu un proces informatic
+- Un proces nu este alceva decât o suită de acţiuni executate secvenţial sau simultan
+- Procese complexe -> necesitatea:
+				+ uşurinţei în exploatare, menţinere şi dezvoltare
+				+ perfomanţă (număr mare de cereri procesate pe secundă)
+				+ securităţii
+				+ diagnosticării şi remedierii rapide a problemelor
+				+ monitorizării(performanţă,logare interacţiuni)
+				+ scalabilităţii
+				+ eficienţă reutilizare
+
+- Avantajele aplicaţiei:
++ Interfaţă grafică, nu este nevoie să se scrie cod. Business analiştii pot opera direct cu aplicaţia, fără să mai fie nevoie de dezvoltatori.
++ Maximizarea dezideratelor mai sus menţionate
++ Vizualizarea proceselor (un format mai uman, dar în acelaşi timp eficient) 
++ Grad mare de reutilizare a componentelor, eficienţă în utilizarea de resurse
++ Extinderea facilă cu noi componente/funcţionalităţi			
++ Arhitectură distribuită
++ Grad mare de scalabilitate
++ No single point of failure
++ Suportă majoritatea protocoalelor utilizate la comunicarea interaplicaţii
++ Administrarea automată a conexiunii la bazele de date sau alte sisteme third party
++ Posibilitatea programării unor procese pentru a rula la diverse momente de timp
+
+

@@ -1,0 +1,7 @@
+input param:
+-name
+-type
+-default value
+-value type : (unknown value(textfield), single value from a list(combo box), multiple values from a list(list), large unknown value(text area)
+-list of possible values if the case 
+-mandatory
