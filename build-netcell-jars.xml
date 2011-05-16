@@ -6,7 +6,7 @@
         <jar destfile="/media/netcell-node/netcell.jar">
             <manifest>
                 <attribute name="Main-Class" value="ro.zg.netcell.control.NodeStarter"/>
-                <attribute name="Class-Path" value=". netcell_lib/AgileJSON-2009-03-30.jar netcell_lib/commons-cli-2.0-SNAPSHOT.jar netcell_lib/commons-el-from-jetty-5.1.4.jar netcell_lib/commons-httpclient-3.0.1.jar netcell_lib/commons-logging-1.0.4.jar netcell_lib/commons-logging-api-1.0.4.jar netcell_lib/commons-math-1.1.jar netcell_lib/jasper-compiler-5.5.12.jar netcell_lib/jasper-runtime-5.5.12.jar netcell_lib/jetty-6.1.14.jar netcell_lib/jetty-util-6.1.14.jar netcell_lib/jruby-complete-1.2.0.jar netcell_lib/json.jar netcell_lib/junit-3.8.1.jar netcell_lib/libthrift-r771587.jar netcell_lib/log4j-1.2.15.jar netcell_lib/lucene-core-2.2.0.jar netcell_lib/servlet-api-2.5-6.1.14.jar netcell_lib/xmlenc-0.52.jar netcell_lib/hbase-0.20.1.jar netcell_lib/hbase-0.20.1-test.jar netcell_lib/hadoop-0.20.1-hdfs127-core.jar netcell_lib/hadoop-0.20.1-test.jar netcell_lib/jgroups-2.10.0.GA.jar netcell_lib/mail.jar netcell_lib/dsn.jar netcell_lib/imap.jar netcell_lib/mailapi.jar netcell_lib/pop3.jar netcell_lib/smtp.jar netcell_lib/log4j-1.2.14.jar netcell_lib/commons-logging-1.1.1.jar netcell_lib/httpclient-4.0.1.jar netcell_lib/httpcore-4.0.1.jar netcell_lib/commons-codec-1.3.jar netcell_lib/commons-dbcp-20030825.184428.jar netcell_lib/commons-pool-20030825.183949.jar netcell_lib/postgresql-8.3-603.jdbc4.jar netcell_lib/commons-collections-3.2.1.jar netcell_lib/velocity-1.6.2.jar netcell_lib/commons-lang-2.4.jar netcell_lib/oro-2.0.8.jar netcell_lib/velocity-1.6.2-src.jar netcell_lib/quartz-1.8.4.jar netcell_lib/jta-1.1.jar netcell_lib/slf4j-api-1.6.1.jar netcell_lib/sli4j-slf4j-simple-2.0.jar netcell_lib/sli4j-core-2.0.jar netcell_lib/guice-2.0.jar netcell_lib/aopalliance-1.0.jar netcell_lib/slf4j-simple-1.5.10.jar"/>
+                <attribute name="Class-Path" value=". netcell_lib/AgileJSON-2009-03-30.jar netcell_lib/commons-cli-2.0-SNAPSHOT.jar netcell_lib/commons-el-from-jetty-5.1.4.jar netcell_lib/commons-httpclient-3.0.1.jar netcell_lib/commons-logging-1.0.4.jar netcell_lib/commons-logging-api-1.0.4.jar netcell_lib/commons-math-1.1.jar netcell_lib/jasper-compiler-5.5.12.jar netcell_lib/jasper-runtime-5.5.12.jar netcell_lib/jetty-6.1.14.jar netcell_lib/jetty-util-6.1.14.jar netcell_lib/jruby-complete-1.2.0.jar netcell_lib/json.jar netcell_lib/junit-3.8.1.jar netcell_lib/libthrift-r771587.jar netcell_lib/log4j-1.2.15.jar netcell_lib/lucene-core-2.2.0.jar netcell_lib/servlet-api-2.5-6.1.14.jar netcell_lib/xmlenc-0.52.jar netcell_lib/hbase-0.20.1.jar netcell_lib/hbase-0.20.1-test.jar netcell_lib/hadoop-0.20.1-hdfs127-core.jar netcell_lib/hadoop-0.20.1-test.jar netcell_lib/jgroups-2.10.0.GA.jar netcell_lib/mail-1.4.3.jar netcell_lib/activation-1.1.jar netcell_lib/commons-net-2.2.jar netcell_lib/log4j-1.2.14.jar netcell_lib/commons-logging-1.1.1.jar netcell_lib/commons-dbcp-20030825.184428.jar netcell_lib/commons-pool-20030825.183949.jar netcell_lib/postgresql-8.3-603.jdbc4.jar netcell_lib/commons-collections-3.2.1.jar netcell_lib/velocity-1.6.2.jar netcell_lib/commons-lang-2.4.jar netcell_lib/oro-2.0.8.jar netcell_lib/velocity-1.6.2-src.jar netcell_lib/httpclient-4.0.1.jar netcell_lib/httpcore-4.0.1.jar netcell_lib/commons-codec-1.3.jar netcell_lib/quartz-1.8.4.jar netcell_lib/jta-1.1.jar netcell_lib/slf4j-api-1.6.1.jar netcell_lib/sli4j-slf4j-simple-2.0.jar netcell_lib/sli4j-core-2.0.jar netcell_lib/guice-2.0.jar netcell_lib/aopalliance-1.0.jar netcell_lib/slf4j-simple-1.5.10.jar"/>
             </manifest>
             <fileset dir="/home/adi/workspace/projects/netcell/target/classes"/>
             <fileset dir="/home/adi/workspace/projects/cfg-engine/target/classes"/>
@@ -42,17 +42,11 @@
         <copy file="/opt/hbase/lib/hadoop-0.20.1-hdfs127-core.jar" todir="/media/netcell-node/netcell_lib"/>
         <copy file="/opt/hbase/lib/hadoop-0.20.1-test.jar" todir="/media/netcell-node/netcell_lib"/>
         <copy file="/home/adi/workspace/projects/distributed-processor/lib/jgroups-2.10.0.GA.jar" todir="/media/netcell-node/netcell_lib"/>
-        <copy file="/home/adi/workspace/lib/javamail-1.4.3/mail.jar" todir="/media/netcell-node/netcell_lib"/>
-        <copy file="/home/adi/workspace/lib/javamail-1.4.3/lib/dsn.jar" todir="/media/netcell-node/netcell_lib"/>
-        <copy file="/home/adi/workspace/lib/javamail-1.4.3/lib/imap.jar" todir="/media/netcell-node/netcell_lib"/>
-        <copy file="/home/adi/workspace/lib/javamail-1.4.3/lib/mailapi.jar" todir="/media/netcell-node/netcell_lib"/>
-        <copy file="/home/adi/workspace/lib/javamail-1.4.3/lib/pop3.jar" todir="/media/netcell-node/netcell_lib"/>
-        <copy file="/home/adi/workspace/lib/javamail-1.4.3/lib/smtp.jar" todir="/media/netcell-node/netcell_lib"/>
+        <copy file="/home/adi/.m2/repository/javax/mail/mail/1.4.3/mail-1.4.3.jar" todir="/media/netcell-node/netcell_lib"/>
+        <copy file="/home/adi/.m2/repository/javax/activation/activation/1.1/activation-1.1.jar" todir="/media/netcell-node/netcell_lib"/>
+        <copy file="/home/adi/.m2/repository/commons-net/commons-net/2.2/commons-net-2.2.jar" todir="/media/netcell-node/netcell_lib"/>
         <copy file="/home/adi/.m2/repository/log4j/log4j/1.2.14/log4j-1.2.14.jar" todir="/media/netcell-node/netcell_lib"/>
         <copy file="/home/adi/.m2/repository/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar" todir="/media/netcell-node/netcell_lib"/>
-        <copy file="/home/adi/.m2/repository/org/apache/httpcomponents/httpclient/4.0.1/httpclient-4.0.1.jar" todir="/media/netcell-node/netcell_lib"/>
-        <copy file="/home/adi/.m2/repository/org/apache/httpcomponents/httpcore/4.0.1/httpcore-4.0.1.jar" todir="/media/netcell-node/netcell_lib"/>
-        <copy file="/home/adi/.m2/repository/commons-codec/commons-codec/1.3/commons-codec-1.3.jar" todir="/media/netcell-node/netcell_lib"/>
         <copy file="/home/adi/.m2/repository/commons-dbcp/commons-dbcp/20030825.184428/commons-dbcp-20030825.184428.jar" todir="/media/netcell-node/netcell_lib"/>
         <copy file="/home/adi/.m2/repository/commons-pool/commons-pool/20030825.183949/commons-pool-20030825.183949.jar" todir="/media/netcell-node/netcell_lib"/>
         <copy file="/home/adi/.m2/repository/postgresql/postgresql/8.3-603.jdbc4/postgresql-8.3-603.jdbc4.jar" todir="/media/netcell-node/netcell_lib"/>
@@ -61,6 +55,9 @@
         <copy file="/home/adi/.m2/repository/commons-lang/commons-lang/2.4/commons-lang-2.4.jar" todir="/media/netcell-node/netcell_lib"/>
         <copy file="/home/adi/.m2/repository/oro/oro/2.0.8/oro-2.0.8.jar" todir="/media/netcell-node/netcell_lib"/>
         <copy file="/home/adi/.m2/repository/org/apache/velocity/velocity/1.6.2/velocity-1.6.2-src.jar" todir="/media/netcell-node/netcell_lib"/>
+        <copy file="/home/adi/.m2/repository/org/apache/httpcomponents/httpclient/4.0.1/httpclient-4.0.1.jar" todir="/media/netcell-node/netcell_lib"/>
+        <copy file="/home/adi/.m2/repository/org/apache/httpcomponents/httpcore/4.0.1/httpcore-4.0.1.jar" todir="/media/netcell-node/netcell_lib"/>
+        <copy file="/home/adi/.m2/repository/commons-codec/commons-codec/1.3/commons-codec-1.3.jar" todir="/media/netcell-node/netcell_lib"/>
         <copy file="/home/adi/.m2/repository/org/quartz-scheduler/quartz/1.8.4/quartz-1.8.4.jar" todir="/media/netcell-node/netcell_lib"/>
         <copy file="/home/adi/.m2/repository/javax/transaction/jta/1.1/jta-1.1.jar" todir="/media/netcell-node/netcell_lib"/>
         <copy file="/home/adi/.m2/repository/org/slf4j/slf4j-api/1.6.1/slf4j-api-1.6.1.jar" todir="/media/netcell-node/netcell_lib"/>

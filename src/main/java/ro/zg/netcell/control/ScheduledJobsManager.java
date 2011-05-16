@@ -45,19 +45,19 @@ public class ScheduledJobsManager extends BaseEntityManager<ScheduledJobDefiniti
     private ResourcesManager resourcesManager;
     private Scheduler scheduler;
     private ExtendedJobExecutionController jobsController;
-    private int startDelay=10;
-    
-    private Map<String,ScheduledJobDefinition> scheduledJobs=new LinkedHashMap<String, ScheduledJobDefinition>();
+    private int startDelay = 10;
+
+    private Map<String, ScheduledJobDefinition> scheduledJobs = new LinkedHashMap<String, ScheduledJobDefinition>();
 
     public void init() throws ContextAwareException {
 	try {
 	    loadJobs();
 	    initScheduler();
 	    scheduleJobs();
-//	    scheduler.startDelayed(startDelay);
+	    // scheduler.startDelayed(startDelay);
 	} catch (Exception e) {
-	    throw new ContextAwareException("SCHEDULER_INIT_ERROR",e);
-	} 
+	    throw new ContextAwareException("SCHEDULER_INIT_ERROR", e);
+	}
 	MasterLogManager.getLogger("SCHEDULER").info("Scheduler successfuly initialized");
     }
 
@@ -66,7 +66,13 @@ public class ScheduledJobsManager extends BaseEntityManager<ScheduledJobDefiniti
 	Properties prop = new Properties();
 	prop.load(resourcesLoader.getResourceAsStream(propertiesFile));
 	scheduler = new StdSchedulerFactory(prop).getScheduler();
-	jobsController=new ExtendedJobExecutionController("Netcell-Job-Controller");
+	/* delete current jobs */
+	for (String jobGroup : scheduler.getJobGroupNames()) {
+	    for (String jobName : scheduler.getJobNames(jobGroup)) {
+		scheduler.deleteJob(jobName, jobGroup);
+	    }
+	}
+	jobsController = new ExtendedJobExecutionController("Netcell-Job-Controller");
 	scheduler.addTriggerListener(jobsController);
 	scheduler.addJobListener(jobsController);
     }
@@ -78,22 +84,22 @@ public class ScheduledJobsManager extends BaseEntityManager<ScheduledJobDefiniti
 	try {
 	    cfgManager = PackageCfgLoader.getInstance().load(handlersFile, configFile, getResourcesLoader());
 	} catch (ConfigurationException e) {
-	    throw new ContextAwareException("ERROR_LOADING_SCHEDULED_JOBS",e);
+	    throw new ContextAwareException("ERROR_LOADING_SCHEDULED_JOBS", e);
 	}
-	
-	for(Map.Entry<String, Object> entry :  cfgManager.getAllObjects().entrySet()) {
-	    if(entry.getValue() instanceof ScheduledJobDefinition) {
-		scheduledJobs.put(entry.getKey(), (ScheduledJobDefinition)entry.getValue());
+
+	for (Map.Entry<String, Object> entry : cfgManager.getAllObjects().entrySet()) {
+	    if (entry.getValue() instanceof ScheduledJobDefinition) {
+		scheduledJobs.put(entry.getKey(), (ScheduledJobDefinition) entry.getValue());
 	    }
 	}
     }
-    
+
     private void scheduleJobs() throws SchedulerException {
-	for(ScheduledJobDefinition sjd : scheduledJobs.values()) {
+	for (ScheduledJobDefinition sjd : scheduledJobs.values()) {
 	    scheduleJob(sjd);
 	}
     }
-    
+
     private void scheduleJob(ScheduledJobDefinition sjd) throws SchedulerException {
 	JobDetail jd = getJobDetailFromDefinition(sjd);
 	Trigger trigger;
@@ -102,13 +108,13 @@ public class ScheduledJobsManager extends BaseEntityManager<ScheduledJobDefiniti
 	} catch (ParseException e) {
 	    throw new SchedulerException(e);
 	}
-	
-	String jobsControllerName = jobsController.getName(); 
+
+	String jobsControllerName = jobsController.getName();
 	jd.addJobListener(jobsControllerName);
 	trigger.addTriggerListener(jobsControllerName);
 	scheduler.scheduleJob(jd, trigger);
     }
-    
+
     private JobDetail getJobDetailFromDefinition(ScheduledJobDefinition sjd) {
 	JobDetail jobDetail = new JobDetail();
 	jobDetail.setName(sjd.getId());
@@ -116,36 +122,37 @@ public class ScheduledJobsManager extends BaseEntityManager<ScheduledJobDefiniti
 	jobDetail.setJobClass(WorkflowExecutionJob.class);
 	JobDataMap dataMap = new JobDataMap();
 	dataMap.put(ScheduledJobDefinition.FLOW_ID, sjd.getConfigParamValue(ScheduledJobDefinition.FLOW_ID));
-	dataMap.put(ScheduledJobDefinition.FLOW_INPUT_PARAMS, sjd.getConfigParamValue(ScheduledJobDefinition.FLOW_INPUT_PARAMS));
-	
+	dataMap.put(ScheduledJobDefinition.FLOW_INPUT_PARAMS, sjd
+		.getConfigParamValue(ScheduledJobDefinition.FLOW_INPUT_PARAMS));
+
 	jobDetail.setJobDataMap(dataMap);
 	return jobDetail;
     }
-    
+
     private Trigger getTriggerFromDefinition(ScheduledJobDefinition sjd) throws ParseException {
 	ExtendedCronTrigger trigger = new ExtendedCronTrigger();
-	trigger.setName(sjd.getId()+"-trigger");
-	trigger.setCronExpression((String)sjd.getConfigParamValue(ScheduledJobDefinition.CRON_TRIGGER));
-	trigger.setAllowedConcurentJobsCount((Integer)sjd.getConfigParamValue(ScheduledJobDefinition.ALLOWED_CONCURENT_JOBS));
-	trigger.setMisfireInstruction((Integer)sjd.getConfigParamValue(ScheduledJobDefinition.MISSFIRE_VALUE));
-	
+	trigger.setName(sjd.getId() + "-trigger");
+	trigger.setCronExpression((String) sjd.getConfigParamValue(ScheduledJobDefinition.CRON_TRIGGER));
+	trigger.setAllowedConcurentJobsCount((Integer) sjd
+		.getConfigParamValue(ScheduledJobDefinition.ALLOWED_CONCURENT_JOBS));
+	trigger.setMisfireInstruction((Integer) sjd.getConfigParamValue(ScheduledJobDefinition.MISSFIRE_VALUE));
+
 	return trigger;
     }
-    
-    
 
     /**
      * @return the startDelay
      */
     public int getStartDelay() {
-        return startDelay;
+	return startDelay;
     }
 
     /**
-     * @param startDelay the startDelay to set
+     * @param startDelay
+     *            the startDelay to set
      */
     public void setStartDelay(int startDelay) {
-        this.startDelay = startDelay;
+	this.startDelay = startDelay;
     }
 
     public boolean reload() throws Exception {
