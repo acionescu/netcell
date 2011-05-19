@@ -27,7 +27,7 @@ public class NodeStarter {
 //	System.out.println("starting... for ip "+host);
 //	System.setProperty("jgroups.bind_addr", host);
 //	NetCell nc = new NetCellLoader().load("root");
-	NetCell nc = new NodeLoader().load("root");
+	NetCell nc = NodeLoader.load("root");
 	ReceiversController rc = new ReceiversController();
 	rc.start("xmls", nc);
     }

@@ -29,8 +29,11 @@ import ro.zg.distributed.framework.cfg.ProcessingNodeConfiguration;
 import ro.zg.netcell.distributed.EntitiesManagerProxy;
 import ro.zg.netcell.distributed.ExecutionEngineProxy;
 import ro.zg.netcell.distributed.MonitoringManagerProxy;
+import ro.zg.util.logging.Logger;
+import ro.zg.util.logging.MasterLogManager;
 
 public class DistributedServicesManager {
+    private static final Logger logger = MasterLogManager.getLogger("DistributedServicesManager");
     private ProcessingNode processingNode;
     private SynchronousProcessingNodeClient synchronousProcessingNodeClient;
     private EntitiesManagerProxy entitiesManager;
@@ -41,7 +44,7 @@ public class DistributedServicesManager {
     private String entryPointFile;
     
     public void init() throws ContextAwareException{
-//	String configFile = resourcesManager.getFullSystemPath(ResourcesTypes.DISTRIBUTED_SERVICES_CONFIG_FILE);
+	logger.info("Start initializing DistributedServicesManager");
 	try {
 //	    ConfigurationManager cfgManager = PackageCfgLoader.getInstance().load(configFile);
 	    ConfigurationManager cfgManager = UrlCfgLoader.getInstance().load(repositoryDir, entryPointFile);
@@ -66,6 +69,7 @@ public class DistributedServicesManager {
 	} catch (Exception e) {
 	    throw new ContextAwareException("FAILED_TO_START_DISTRIBUTED_NODE",e);
 	}
+	logger.info("DistributedServicesManager successfuly initialized");
     }
     
     public SubmitTaskResponse processAsynchronousTask(SimpleTask task, ProcessingResponseReceiver receiver) {
