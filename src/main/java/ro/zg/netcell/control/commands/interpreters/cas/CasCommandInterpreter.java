@@ -167,7 +167,7 @@ class CasParserEvent implements ParseEventHandler {
 	if (seq.equals("(")) {
 	    Command c = new Command();
 	    c.setName(event.getPrefixValue().toString().trim());
-	    c.putAll(event.getObjects());
+	    c.putAll((List)event.getObjects());
 	    return c;
 	} else if (seq.equals("[")) {
 	    GenericNameValueList list = new GenericNameValueList();
@@ -179,7 +179,7 @@ class CasParserEvent implements ParseEventHandler {
 	    return list;
 	} else if (seq.equals("{")) {
 	    GenericNameValueContext map = new GenericNameValueContext();
-	    map.putAll(event.getObjects());
+	    map.putAll((List)event.getObjects());
 	    return map;
 	}
 	else if(seq.equals("\"")) {
