@@ -28,5 +28,9 @@ public class RmiClient {
 	CommandResponse cr = client.execute(c);
 	
 	System.out.println(cr);
+	
+//	 Registry registry = LocateRegistry.getRegistry("localhost", 9001);
+//         NetCell stub = (NetCell) registry.lookup("Hello");
+//         System.out.println(stub.execute(c));
     }
 }

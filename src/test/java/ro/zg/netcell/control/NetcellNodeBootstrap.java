@@ -15,11 +15,34 @@
  ******************************************************************************/
 package ro.zg.netcell.control;
 
+import java.net.URI;
+import java.net.URL;
+
 import ro.zg.util.bootstrap.GenericBootstrap;
 
 public class NetcellNodeBootstrap {
     public static void main(String[] args) throws Exception {
-	String[] grr = new String[] {ClassLoader.getSystemClassLoader().getResource("bootstrap.properties").getFile()};
-	GenericBootstrap.start(grr); 
+	String os = System.getProperty("os.name");
+	String boostrapFile = "bootstrap.properties";
+	if (os.toLowerCase().contains("windows")) {
+	    boostrapFile = "win-" + boostrapFile;
+	}
+	String filePath = ClassLoader.getSystemClassLoader()
+		.getResource(boostrapFile).getFile();
+	
+	
+//	if (os.toLowerCase().contains("windows")) {
+//	    boostrapFile = "win-" + boostrapFile;
+//	    URL fileUrl = ClassLoader.getSystemClassLoader().getResource(
+//		    boostrapFile);
+//	    filePath = fileUrl.getPath().substring(1);
+//	    URI uri = new URI("file:///" + filePath);
+//	    GenericBootstrap.start(uri);
+
+//	} 
+//	else {
+	    String[] grr = new String[] { filePath };
+	    GenericBootstrap.start(grr);
+//	}
     }
 }
