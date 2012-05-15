@@ -26,7 +26,7 @@ import ro.zg.util.logging.Logger;
 import ro.zg.util.logging.MasterLogManager;
 
 public class NetCellLoader {
-    private String defaulCfgEntryPoint = "config/config.xml";
+    private String defaulCfgEntryPoint = "config"+File.separator+"config.xml";
     private static NetCellControllerContract netcellControllerInstance;
     private static Logger logger = MasterLogManager.getLogger("NetCellLoader");
     

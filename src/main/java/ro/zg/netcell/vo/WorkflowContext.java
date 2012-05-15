@@ -26,6 +26,7 @@ import ro.zg.netcell.async.AsyncCallManager;
 import ro.zg.netcell.async.AsyncResponseHandler;
 import ro.zg.netcell.constants.ComponentTypes;
 import ro.zg.netcell.control.NetCellLoader;
+import ro.zg.netcell.control.NodeLoader;
 import ro.zg.netcell.entities.GenericEntity;
 import ro.zg.netcell.vo.configurations.ComponentExitPoint;
 import ro.zg.netcell.vo.configurations.ComponentExitPointsMapping;
@@ -93,7 +94,7 @@ public class WorkflowContext implements Serializable {
 		    if(e.getType().equals("NO_RESOURCES_AVAILABLE")) {
 			WorkflowContext input = arh.getInput();
 			input.setRetry(true);
-			childResponses.add(NetCellLoader.getNetcellControllerInstance().execute(input));
+			childResponses.add(NodeLoader.getNetcellControllerInstance().execute(input));
 			continue;
 		    }
 		}

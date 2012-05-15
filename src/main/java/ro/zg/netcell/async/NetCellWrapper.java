@@ -15,7 +15,7 @@
  ******************************************************************************/
 package ro.zg.netcell.async;
 
-import ro.zg.netcell.control.NetCellLoader;
+import ro.zg.netcell.control.NodeLoader;
 import ro.zg.netcell.vo.WorkflowContext;
 import ro.zg.util.data.GenericNameValueContext;
 import ro.zg.util.processing.Processor;
@@ -23,7 +23,8 @@ import ro.zg.util.processing.Processor;
 public class NetCellWrapper implements Processor<WorkflowContext, GenericNameValueContext>{
 
     public GenericNameValueContext process(WorkflowContext input) throws Exception {
-	return NetCellLoader.getNetcellControllerInstance().execute(input);
+//	return NetCellLoader.getNetcellControllerInstance().execute(input);
+	return NodeLoader.getNetcellControllerInstance().execute(input);
     }
 
 }

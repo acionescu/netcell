@@ -15,12 +15,12 @@
  ******************************************************************************/
 package ro.zg.netcell.control.receivers;
 
-import java.net.Inet4Address;
-import java.net.InterfaceAddress;
+import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.Collections;
 import java.util.Enumeration;
 
 import ro.zg.netcell.control.NetCell;
@@ -29,7 +29,8 @@ import ro.zg.util.logging.Logger;
 import ro.zg.util.logging.MasterLogManager;
 
 public class RmiCommandReceiver implements Receiver {
-    private static Logger logger = MasterLogManager.getLogger("RmiCommandReceiver");
+    private static Logger logger = MasterLogManager
+	    .getLogger("RmiCommandReceiver");
     private String bindName;
     private int bindPort;
     private int registryPort;
@@ -37,20 +38,57 @@ public class RmiCommandReceiver implements Receiver {
     private Registry registry;
 
     public void listen() throws Exception {
-	Enumeration<NetworkInterface> nie = NetworkInterface.getNetworkInterfaces();
+	Enumeration<NetworkInterface> nie = NetworkInterface
+		.getNetworkInterfaces();
 	String bindAddress = "localhost";
-	for (NetworkInterface ni = nie.nextElement(); nie.hasMoreElements(); ni = nie.nextElement()) {
-	    for (InterfaceAddress ia : ni.getInterfaceAddresses()) {
-		if (ia.getAddress() instanceof Inet4Address) {
-		    bindAddress = ia.getAddress().getHostAddress();
-		    break;
-		}
+	// for (NetworkInterface ni = nie.nextElement(); nie.hasMoreElements();
+	// ni = nie
+	// .nextElement()) {
+	// System.out.println(ni.getDisplayName());
+	// for (InterfaceAddress ia : ni.getInterfaceAddresses()) {
+	// if (ia.getAddress() instanceof Inet4Address) {
+	// bindAddress = ia.getAddress().getHostAddress();
+	//
+	// if (!bindAddress.equals("127.0.0.1")) {
+	// break;
+	// }
+	// logger.info("skipping bind address: "+bindAddress);
+	// }
+	// }
+	// }
+
+	Enumeration<NetworkInterface> nets = NetworkInterface
+		.getNetworkInterfaces();
+
+	for (NetworkInterface netIf : Collections.list(nets)) {
+	    System.out.printf("Display name: %s\n", netIf.getDisplayName());
+	    System.out.printf("Name: %s\n", netIf.getName());
+
+	    if ("lo".equals(netIf.getName())) {
+		continue;
 	    }
+	    Enumeration<InetAddress> inetAddresses = netIf.getInetAddresses();
+	    for (InetAddress ia : Collections.list(inetAddresses)) {
+		System.out.println(ia.getHostAddress());
+		bindAddress = ia.getHostAddress();
+	    }
+
+	    Enumeration<NetworkInterface> subIfs = netIf.getSubInterfaces();
+	    for (NetworkInterface subIf : Collections.list(subIfs)) {
+		System.out.printf("\tSub Interface Display name: %s\n",
+			subIf.getDisplayName());
+		System.out
+			.printf("\tSub Interface Name: %s\n", subIf.getName());
+	    }
+	    System.out.printf("\n");
 	}
-	logger.info("Using " + bindAddress + " as rmi hostname");
+
+	logger.info("Using " + bindAddress + " as rmi hostname and " + bindPort
+		+ " as bind port.");
 	System.setProperty("java.rmi.server.hostname", bindAddress);
-	
-	NetCell stub = (NetCell) UnicastRemoteObject.exportObject(engine, bindPort);
+
+	NetCell stub = (NetCell) UnicastRemoteObject.exportObject(engine,
+		bindPort);
 	registry = LocateRegistry.createRegistry(registryPort);
 	registry.bind(bindName, stub);
     }

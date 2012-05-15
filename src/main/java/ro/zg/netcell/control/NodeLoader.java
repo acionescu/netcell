@@ -25,14 +25,19 @@ import ro.zg.util.logging.Logger;
 import ro.zg.util.logging.MasterLogManager;
 
 public class NodeLoader {
-    private static String defaulCfgEntryPoint = "config/config.xml";
+    private static String defaulCfgEntryPoint = "config"+File.separator+"config.xml";
     private static Logger logger = MasterLogManager.getLogger("NodeLoader");
     
     private static NetCell netcellInstance;
+    private static NetCellControllerContract netcellControllerInstance;
     
     public static NetCell getNetCellInstance() {
 	return netcellInstance;
     }
+    
+    public static NetCellControllerContract getNetcellControllerInstance() {
+   	return netcellControllerInstance;
+       }
     
     public static NetCell load(String rootDir) throws ContextAwareException{
 	return load(rootDir,defaulCfgEntryPoint);
@@ -51,6 +56,8 @@ public class NodeLoader {
 	}
 	NetCell commandController = (NetCell)cfgManager.getObjectById("CommandControllerWrapper");
 	netcellInstance=commandController;
+	NetCellController netCellController = (NetCellController)cfgManager.getObjectById("NetCellController");
+	netcellControllerInstance = netCellController;
 	return commandController;
     }
     

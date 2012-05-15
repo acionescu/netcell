@@ -16,6 +16,7 @@
 package ro.zg.netcell.vo;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -47,7 +48,7 @@ public class DefinitionsRepository extends ObjectsRepository<EntityDefinition>{
 	 return getSingleObjectForProperty(ID, id);
     }
     
-    public Map<String,List<EntityDefinition>> getDefinitionsByType(){
+    public Map<String,Collection<EntityDefinition>> getDefinitionsByType(){
 	return (Map)getObjectsByProperty(TYPE);
     }
     

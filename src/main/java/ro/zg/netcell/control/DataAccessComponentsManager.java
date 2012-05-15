@@ -34,11 +34,14 @@ import ro.zg.netcell.vo.definitions.EntityType;
 import ro.zg.scriptdao.core.CommandTemplate;
 import ro.zg.util.data.ListMap;
 import ro.zg.util.data.UserInputParameter;
+import ro.zg.util.logging.Logger;
+import ro.zg.util.logging.MasterLogManager;
 
 public class DataAccessComponentsManager extends BaseEntityManager<DataAccessComponentDefinition> {
     private String handlersFile;
     private String configFile;
     private DatasourcesCommandsManager datasourceCommandsController;
+    private static final Logger logger = MasterLogManager.getLogger(DataAccessComponentsManager.class.getName());
 
     public void init() throws ContextAwareException {
 	String dataSourcesCommandsHandler = resourcesManager
@@ -140,6 +143,7 @@ public class DataAccessComponentsManager extends BaseEntityManager<DataAccessCom
 	String dacDir = resourcesManager.getResourceFullPath(ResourcesTypes.DATA_ACCESS_COMPONENTS_DIR);
 	// String entityFilePath = resourcesManager.getFullSystemPath(ResourcesTypes.DATA_ACCESS_COMPONENTS_DIR, entity
 	// .getId());
+	logger.debug("saving entity in dif: "+dacDir);
 	URL entityUrl = resourcesManager.getUrl(dacDir, getEntityFileForId(entity.getId()), true);
 	generateDefinition(entityUrl, entity, templatePath, "entityDefinition");
 

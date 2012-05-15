@@ -61,7 +61,7 @@ public abstract class BaseEntityDefinitionGenerator<E extends EntityDefinition> 
 	    params.put(definitionContextName, entity);
 	    getDefinitionsGenerator().generateXmlDefinition(fw, templatePath, params);
 	    fw.close();
-	} catch (IOException e) {
+	} catch (Exception e) {
 	    ExceptionContext ec = new ExceptionContext();
 	    ec.put(new GenericNameValue("file", entityFileUrl.toString()));
 	    throw new ContextAwareException("ERROR_CREATING_DEFINITION_FILE", e, ec);
@@ -80,7 +80,7 @@ public abstract class BaseEntityDefinitionGenerator<E extends EntityDefinition> 
 	return entityFilePath+".xml";
     }
     
-    private Writer getWriterForUrl(URL url) throws IOException {
+    private Writer getWriterForUrl(URL url) throws Exception {
 	String protocol = url.getProtocol();
 	if(protocol.equals("ftp")) {
 	    BufferedWriter fw = new BufferedWriter(new OutputStreamWriter(url.openConnection()
@@ -88,7 +88,8 @@ public abstract class BaseEntityDefinitionGenerator<E extends EntityDefinition> 
 	    return fw;
 	}
 	else if(protocol.equals("file")) {
-	    return new FileWriter(url.getPath());
+//	    return new FileWriter(url.getPath());
+	    return new FileWriter(new File(url.toURI()));
 	}
 	throw new IOException("Unknown protocol "+protocol);
     }
