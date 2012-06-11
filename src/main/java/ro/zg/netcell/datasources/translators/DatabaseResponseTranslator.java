@@ -17,8 +17,8 @@ package ro.zg.netcell.datasources.translators;
 
 import java.util.Map;
 
+import ro.zg.netcell.datasources.executors.db.SqlCommandResponse;
 import ro.zg.scriptdao.core.ResponseTranslator;
-import ro.zg.scriptdao.util.db.SqlCommandResponse;
 import ro.zg.util.data.GenericNameValueContext;
 import ro.zg.util.data.GenericNameValueList;
 

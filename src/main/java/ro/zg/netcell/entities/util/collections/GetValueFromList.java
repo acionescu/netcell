@@ -33,7 +33,7 @@ public class GetValueFromList extends GenericEntity<GenericNameValueContext> {
 	    ExceptionContext ec = new ExceptionContext();
 	    ec.put("index", index);
 	    ec.put("size", list.size());
-	    throw new ContextAwareException(ExceptionTypes.INDEX_OUT_OF_BOUNDS);
+	    throw new ContextAwareException(ExceptionTypes.INDEX_OUT_OF_BOUNDS,ec);
 	}
 	GenericNameValueContext response = new GenericNameValueContext();
 	response.put("value", list.getValueForIndex(i));

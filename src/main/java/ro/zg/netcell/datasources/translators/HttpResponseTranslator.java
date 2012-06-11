@@ -15,8 +15,8 @@
  ******************************************************************************/
 package ro.zg.netcell.datasources.translators;
 
+import ro.zg.netcell.datasources.executors.http.HttpCommandResponse;
 import ro.zg.scriptdao.core.ResponseTranslator;
-import ro.zg.scriptdao.util.http.HttpCommandResponse;
 import ro.zg.util.data.GenericNameValueContext;
 
 public class HttpResponseTranslator implements ResponseTranslator<HttpCommandResponse, GenericNameValueContext> {

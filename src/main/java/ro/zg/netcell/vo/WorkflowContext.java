@@ -25,7 +25,6 @@ import ro.zg.commons.exceptions.ExceptionContext;
 import ro.zg.netcell.async.AsyncCallManager;
 import ro.zg.netcell.async.AsyncResponseHandler;
 import ro.zg.netcell.constants.ComponentTypes;
-import ro.zg.netcell.control.NetCellLoader;
 import ro.zg.netcell.control.NodeLoader;
 import ro.zg.netcell.entities.GenericEntity;
 import ro.zg.netcell.vo.configurations.ComponentExitPoint;
@@ -35,6 +34,7 @@ import ro.zg.util.data.GenericNameValue;
 import ro.zg.util.data.GenericNameValueContext;
 import ro.zg.util.data.NameValue;
 import ro.zg.util.data.ObjectsUtil;
+import ro.zg.util.logging.MasterLogManager;
 
 public class WorkflowContext implements Serializable {
     /**
@@ -190,8 +190,8 @@ public class WorkflowContext implements Serializable {
 	    prevErrorComp = currentComponentId + "=>" + prevErrorComp;
 	}
 	cae.getExceptionContext().put("componentId", prevErrorComp);
-//	cae.getExceptionContext().put("parametersContext",parametersContext);
-//	MasterLogManager.getLogger(flowId).debug("parametersContext:"+parametersContext,cae);
+//	cae.getExceptionContext().put("componentContext",currentComponentContext);
+//	MasterLogManager.getLogger(flowId).debug("parametersContext:"+parametersContext);
 	
 	if (errorMapping != null) {
 	    nextCompId = errorMapping.getNextComponentId();
