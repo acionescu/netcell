@@ -38,6 +38,7 @@ import ro.zg.netcell.scheduler.ExtendedCronTrigger;
 import ro.zg.netcell.scheduler.ExtendedJobExecutionController;
 import ro.zg.netcell.vo.definitions.EntityType;
 import ro.zg.netcell.vo.definitions.ScheduledJobDefinition;
+import ro.zg.util.logging.Logger;
 import ro.zg.util.logging.MasterLogManager;
 
 public class ScheduledJobsManager extends BaseEntityManager<ScheduledJobDefinition> implements JobSchedulerContract {
@@ -46,7 +47,7 @@ public class ScheduledJobsManager extends BaseEntityManager<ScheduledJobDefiniti
     private Scheduler scheduler;
     private ExtendedJobExecutionController jobsController;
     private int startDelay = 10;
-
+    private static Logger logger = MasterLogManager.getLogger("SCHEDULER");
     private Map<String, ScheduledJobDefinition> scheduledJobs = new LinkedHashMap<String, ScheduledJobDefinition>();
 
     public void init() throws ContextAwareException {
@@ -54,11 +55,11 @@ public class ScheduledJobsManager extends BaseEntityManager<ScheduledJobDefiniti
 	    loadJobs();
 	    initScheduler();
 	    scheduleJobs();
-	    // scheduler.startDelayed(startDelay);
+	     scheduler.startDelayed(startDelay);
 	} catch (Exception e) {
 	    throw new ContextAwareException("SCHEDULER_INIT_ERROR", e);
 	}
-	MasterLogManager.getLogger("SCHEDULER").info("Scheduler successfuly initialized");
+	logger.info("Scheduler successfuly initialized");
     }
 
     private void initScheduler() throws IOException, SchedulerException {
@@ -101,6 +102,10 @@ public class ScheduledJobsManager extends BaseEntityManager<ScheduledJobDefiniti
     }
 
     private void scheduleJob(ScheduledJobDefinition sjd) throws SchedulerException {
+	if(!(Boolean)sjd.getConfigParamValue(ScheduledJobDefinition.ACTIVE)){
+	    logger.info("Job "+sjd.getId()+" bypassed because it's not active");
+	    return;
+	}
 	JobDetail jd = getJobDetailFromDefinition(sjd);
 	Trigger trigger;
 	try {
@@ -113,6 +118,7 @@ public class ScheduledJobsManager extends BaseEntityManager<ScheduledJobDefiniti
 	jd.addJobListener(jobsControllerName);
 	trigger.addTriggerListener(jobsControllerName);
 	scheduler.scheduleJob(jd, trigger);
+	logger.info("Job "+sjd.getId() +" scheduled with params: "+sjd.getConfigData());
     }
 
     private JobDetail getJobDetailFromDefinition(ScheduledJobDefinition sjd) {
@@ -136,7 +142,7 @@ public class ScheduledJobsManager extends BaseEntityManager<ScheduledJobDefiniti
 	trigger.setAllowedConcurentJobsCount((Integer) sjd
 		.getConfigParamValue(ScheduledJobDefinition.ALLOWED_CONCURENT_JOBS));
 	trigger.setMisfireInstruction((Integer) sjd.getConfigParamValue(ScheduledJobDefinition.MISSFIRE_VALUE));
-
+	
 	return trigger;
     }
 

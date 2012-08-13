@@ -22,30 +22,40 @@ import ro.zg.util.logging.Logger;
 import ro.zg.util.logging.MasterLogManager;
 
 /**
- * Maps all exceptions on {@link CommandResponse} instances in order to provide the client
- * with a useful error response
+ * Maps all exceptions on {@link CommandResponse} instances in order to provide
+ * the client with a useful error response
+ * 
  * @author adi
- *
+ * 
  */
-public class BorderExceptionHandler implements ExceptionHandler<CommandResponse>{
+public class BorderExceptionHandler implements
+	ExceptionHandler<CommandResponse> {
     private CommandResponsesManager responsesManager;
     private Logger globalErrorLogger;
 
-    public CommandResponse handle(ContextAwareException cause) throws ContextAwareException {
-	getGlobalErrorsLogger().error("Error: ",cause);
-	return responsesManager.getResponseForException(cause);
+    public CommandResponse handle(ContextAwareException cause)
+	    throws ContextAwareException {
+
+	CommandResponse response = responsesManager
+		.getResponseForException(cause);
+	/* if internal error code, then some unexpected error happened, log it */
+	if (response.getResponseCode().equals(
+		responsesManager.getInternalErrorResponseCode())) {
+	    getGlobalErrorsLogger().error("Error: ", cause);
+	}
+	return response;
     }
 
     public CommandResponsesManager getResponsesManager() {
-        return responsesManager;
+	return responsesManager;
     }
 
     public void setResponsesManager(CommandResponsesManager responsesManager) {
-        this.responsesManager = responsesManager;
+	this.responsesManager = responsesManager;
     }
-    
-    private Logger getGlobalErrorsLogger(){
-	if(globalErrorLogger == null){
+
+    private Logger getGlobalErrorsLogger() {
+	if (globalErrorLogger == null) {
 	    globalErrorLogger = MasterLogManager.getLogger("ALL_ERRORS");
 	}
 	return globalErrorLogger;

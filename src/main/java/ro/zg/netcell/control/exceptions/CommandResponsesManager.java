@@ -22,29 +22,39 @@ import ro.zg.netcell.control.CommandResponse;
 
 public class CommandResponsesManager {
     /**
-     * Holds the mappings between Exceptions and responses descriptions </br> key - full name of the exception </br>
-     * value - the ResponseDescription - code, and parameter names
+     * Holds the mappings between Exceptions and responses descriptions </br>
+     * key - full name of the exception </br> value - the ResponseDescription -
+     * code, and parameter names
      */
     private Map<String, ResponseBuilder> exceptionsResponseCodesMap;
 
     private String internalErrorResponseCode;
 
     /**
-     * If this is not a {@link ContextAwareException} assume it's an internal error
+     * If this is not a {@link ContextAwareException} assume it's an internal
+     * error
      */
-    public CommandResponse getResponseForException(Exception e) {
-	if( e instanceof ContextAwareException){
-	    return getSpecificResponseForException((ContextAwareException)e);
+    public CommandResponse getResponseForException(Throwable e) {
+	if (e == null) {
+	    return getInternalErrorResponse();
 	}
-	return getInternalErrorResponse();
+	/* try to get a response */
+	if (e instanceof ContextAwareException) {
+	    return getSpecificResponseForException((ContextAwareException) e);
+	}
+	/* if not ContextAwareException try to get some hint from the cause */
+	return getResponseForException(e.getCause());
+
     }
 
-    public CommandResponse getSpecificResponseForException(ContextAwareException e) {
+    public CommandResponse getSpecificResponseForException(
+	    ContextAwareException e) {
 	ResponseBuilder rd = exceptionsResponseCodesMap.get(e.getType());
 	if (rd != null) {
-	   return rd.buildResponse(e);
+	    return rd.buildResponse(e);
 	} else {
-	    return getInternalErrorResponse();
+	    /* if no recognized message found, try to dig deeper */
+	    return getResponseForException(e.getCause());
 	}
     }
 
@@ -55,18 +65,19 @@ public class CommandResponsesManager {
     }
 
     public Map<String, ResponseBuilder> getExceptionsResponseCodesMap() {
-        return exceptionsResponseCodesMap;
+	return exceptionsResponseCodesMap;
     }
 
     public String getInternalErrorResponseCode() {
-        return internalErrorResponseCode;
+	return internalErrorResponseCode;
     }
 
-    public void setExceptionsResponseCodesMap(Map<String, ResponseBuilder> exceptionsResponseCodesMap) {
-        this.exceptionsResponseCodesMap = exceptionsResponseCodesMap;
+    public void setExceptionsResponseCodesMap(
+	    Map<String, ResponseBuilder> exceptionsResponseCodesMap) {
+	this.exceptionsResponseCodesMap = exceptionsResponseCodesMap;
     }
 
     public void setInternalErrorResponseCode(String internalErrorResponseCode) {
-        this.internalErrorResponseCode = internalErrorResponseCode;
+	this.internalErrorResponseCode = internalErrorResponseCode;
     }
 }
