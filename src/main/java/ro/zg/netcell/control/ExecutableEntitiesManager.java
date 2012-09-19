@@ -226,7 +226,7 @@ public class ExecutableEntitiesManager extends BaseEntityManager<ExecutableEntit
 //	String entityFilePath = resourcesManager.getFullSystemPath(ResourcesTypes.EXECUTABLE_ENTITIES_DIR, entity
 //		.getId()
 //		+ ".xml");
-	String entitiesDir = resourcesManager.getFullSystemPath(ResourcesTypes.EXECUTABLE_ENTITIES_DIR);
+	String entitiesDir = resourcesManager.getResourceFullPath(ResourcesTypes.EXECUTABLE_ENTITIES_DIR);
 	URL entityUrl = resourcesManager.getUrl(entitiesDir, getEntityFileForId(entity.getId()), false);
 	return removeResource(entityUrl);
     }
