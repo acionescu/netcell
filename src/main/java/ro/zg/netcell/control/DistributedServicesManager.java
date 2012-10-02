@@ -18,6 +18,8 @@ package ro.zg.netcell.control;
 import ro.zg.cfgengine.core.configuration.ConfigurationManager;
 import ro.zg.cfgengine.util.UrlCfgLoader;
 import ro.zg.commons.exceptions.ContextAwareException;
+import ro.zg.distributed.framework.DistributedService;
+import ro.zg.distributed.framework.DistributedServiceDescription;
 import ro.zg.distributed.framework.ProcessingNode;
 import ro.zg.distributed.framework.ProcessingResponseReceiver;
 import ro.zg.distributed.framework.SimpleTask;
@@ -33,125 +35,148 @@ import ro.zg.util.logging.Logger;
 import ro.zg.util.logging.MasterLogManager;
 
 public class DistributedServicesManager {
-    private static final Logger logger = MasterLogManager.getLogger("DistributedServicesManager");
+    private static final Logger logger = MasterLogManager
+	    .getLogger("DistributedServicesManager");
     private ProcessingNode processingNode;
     private SynchronousProcessingNodeClient synchronousProcessingNodeClient;
     private EntitiesManagerProxy entitiesManager;
     private ExecutionEngineProxy executionEngine;
     private MonitoringManagerProxy monitoringManager;
-    
+
     private String repositoryDir;
     private String entryPointFile;
-    
-    public void init() throws ContextAwareException{
+
+    public void init() throws ContextAwareException {
 	logger.info("Start initializing DistributedServicesManager");
 	try {
-//	    ConfigurationManager cfgManager = PackageCfgLoader.getInstance().load(configFile);
-	    ConfigurationManager cfgManager = UrlCfgLoader.getInstance().load(repositoryDir, entryPointFile);
-	    ProcessingNodeConfiguration nodeCfg = (ProcessingNodeConfiguration)cfgManager.getObjectById("mainNodeConfiguration");
+	    // ConfigurationManager cfgManager =
+	    // PackageCfgLoader.getInstance().load(configFile);
+	    ConfigurationManager cfgManager = UrlCfgLoader.getInstance().load(
+		    repositoryDir, entryPointFile);
+	    ProcessingNodeConfiguration nodeCfg = (ProcessingNodeConfiguration) cfgManager
+		    .getObjectById("mainNodeConfiguration");
 	    nodeCfg.setResourcesLoader(cfgManager.getResourcesLoader());
-	    ResourcesManager resourcesManager = (ResourcesManager)cfgManager.getObjectById("resourcesManager");
-	    resourcesManager.setResourcesLoader(cfgManager.getResourcesLoader());
-	    processingNode = new DefaultProcessingNodeFactory().createObject(nodeCfg);
+	    ResourcesManager resourcesManager = (ResourcesManager) cfgManager
+		    .getObjectById("resourcesManager");
+	    resourcesManager
+		    .setResourcesLoader(cfgManager.getResourcesLoader());
+	    processingNode = new DefaultProcessingNodeFactory()
+		    .createObject(nodeCfg);
 	} catch (Exception e) {
-	    throw new ContextAwareException("ERROR_LOADING_DISTRIBUTED_MANAGER",e);
+	    throw new ContextAwareException(
+		    "ERROR_LOADING_DISTRIBUTED_MANAGER", e);
 	}
-	
-	synchronousProcessingNodeClient=new SynchronousProcessingNodeClient();
+
+	synchronousProcessingNodeClient = new SynchronousProcessingNodeClient();
 	synchronousProcessingNodeClient.setProcessingNode(processingNode);
-	
+
 	entitiesManager.setProcessingNode(processingNode);
 	executionEngine.setProcessingNode(processingNode);
 	monitoringManager.setProcessingNode(processingNode);
-	
+
 	try {
 	    processingNode.start();
 	} catch (Exception e) {
-	    throw new ContextAwareException("FAILED_TO_START_DISTRIBUTED_NODE",e);
+	    throw new ContextAwareException("FAILED_TO_START_DISTRIBUTED_NODE",
+		    e);
 	}
 	logger.info("DistributedServicesManager successfuly initialized");
     }
-    
-    public SubmitTaskResponse processAsynchronousTask(SimpleTask task, ProcessingResponseReceiver receiver) {
+
+    public SubmitTaskResponse processAsynchronousTask(SimpleTask task,
+	    ProcessingResponseReceiver receiver) {
 	return processingNode.submitTask(task, receiver);
     }
-    
-    public TaskProcessingResponse processSynchronousTask(SimpleTask task) throws ContextAwareException {
+
+    public TaskProcessingResponse processSynchronousTask(SimpleTask task)
+	    throws ContextAwareException {
 	return synchronousProcessingNodeClient.processTask(task);
     }
-    
 
     /**
      * @return the entitiesManager
      */
     public EntitiesManagerProxy getEntitiesManager() {
-        return entitiesManager;
+	return entitiesManager;
     }
 
     /**
-     * @param entitiesManager the entitiesManager to set
+     * @param entitiesManager
+     *            the entitiesManager to set
      */
     public void setEntitiesManager(EntitiesManagerProxy entitiesManager) {
-        this.entitiesManager = entitiesManager;
+	this.entitiesManager = entitiesManager;
     }
 
     /**
      * @return the executionEngine
      */
     public ExecutionEngineProxy getExecutionEngine() {
-        return executionEngine;
+	return executionEngine;
     }
 
     /**
-     * @param executionEngine the executionEngine to set
+     * @param executionEngine
+     *            the executionEngine to set
      */
     public void setExecutionEngine(ExecutionEngineProxy executionEngine) {
-        this.executionEngine = executionEngine;
+	this.executionEngine = executionEngine;
     }
 
     /**
      * @return the repositoryDir
      */
     public String getRepositoryDir() {
-        return repositoryDir;
+	return repositoryDir;
     }
 
     /**
      * @return the entryPointFile
      */
     public String getEntryPointFile() {
-        return entryPointFile;
+	return entryPointFile;
     }
 
     /**
-     * @param repositoryDir the repositoryDir to set
+     * @param repositoryDir
+     *            the repositoryDir to set
      */
     public void setRepositoryDir(String repositoryDir) {
-        this.repositoryDir = repositoryDir;
+	this.repositoryDir = repositoryDir;
     }
 
     /**
-     * @param entryPointFile the entryPointFile to set
+     * @param entryPointFile
+     *            the entryPointFile to set
      */
     public void setEntryPointFile(String entryPointFile) {
-        this.entryPointFile = entryPointFile;
+	this.entryPointFile = entryPointFile;
     }
 
     /**
      * @return the monitoringManager
      */
     public MonitoringManagerProxy getMonitoringManager() {
-        return monitoringManager;
+	return monitoringManager;
     }
 
     /**
-     * @param monitoringManager the monitoringManager to set
+     * @param monitoringManager
+     *            the monitoringManager to set
      */
     public void setMonitoringManager(MonitoringManagerProxy monitoringManager) {
-        this.monitoringManager = monitoringManager;
+	this.monitoringManager = monitoringManager;
     }
-    
+
     public String getProcessingNodeId() {
 	return processingNode.getLocalNodeAddress().toString();
+    }
+
+    public DistributedService getDistributedService(
+	    DistributedServiceDescription desc) {
+	if (processingNode != null) {
+	    return processingNode.getLocalServiceByDesc(desc);
+	}
+	return null;
     }
 }

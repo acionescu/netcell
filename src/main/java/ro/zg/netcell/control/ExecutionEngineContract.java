@@ -15,10 +15,12 @@
  ******************************************************************************/
 package ro.zg.netcell.control;
 
+import ro.zg.netcell.vo.WorkflowContext;
 import ro.zg.util.data.GenericNameValueContext;
 import ro.zg.util.execution.ExecutionEntity;
 
 public interface ExecutionEngineContract extends ExecutionEntity<GenericNameValueContext, GenericNameValueContext>{
 
     boolean reload() throws Exception;
+    GenericNameValueContext execute(WorkflowContext wfContext) throws Exception;
 }

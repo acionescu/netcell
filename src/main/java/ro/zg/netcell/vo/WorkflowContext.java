@@ -94,7 +94,7 @@ public class WorkflowContext implements Serializable {
 		    if(e.getType().equals("NO_RESOURCES_AVAILABLE")) {
 			WorkflowContext input = arh.getInput();
 			input.setRetry(true);
-			childResponses.add(NodeLoader.getNetcellControllerInstance().execute(input));
+			childResponses.add(NodeLoader.getExecutionEngineInstance().execute(input));
 			continue;
 		    }
 		}

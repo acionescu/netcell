@@ -96,10 +96,10 @@ public class ExecutionEngineController implements ExecutionEngineContract {
     }
 
     private void initSpecialEntities() {
-	FlowCallerEntity fce = (FlowCallerEntity) entities.get("flowCaller");
-	if (fce != null) {
-	    fce.setEngineController(this);
-	}
+//	FlowCallerEntity fce = (FlowCallerEntity) entities.get("flowCaller");
+//	if (fce != null) {
+//	    fce.setEngineController(this);
+//	}
     }
 
     public boolean containsEntityWithId(String id) {

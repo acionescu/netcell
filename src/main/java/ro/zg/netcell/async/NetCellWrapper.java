@@ -24,7 +24,7 @@ public class NetCellWrapper implements Processor<WorkflowContext, GenericNameVal
 
     public GenericNameValueContext process(WorkflowContext input) throws Exception {
 //	return NetCellLoader.getNetcellControllerInstance().execute(input);
-	return NodeLoader.getNetcellControllerInstance().execute(input);
+	return NodeLoader.getExecutionEngineInstance().execute(input);
     }
 
 }

@@ -15,24 +15,17 @@
  ******************************************************************************/
 package ro.zg.netcell.entities;
 
-import ro.zg.netcell.control.ExecutionEngineController;
+import ro.zg.netcell.control.NodeLoader;
 import ro.zg.util.data.GenericNameValueContext;
 
-public class FlowCallerEntity extends GenericEntity<GenericNameValueContext>{
-    private ExecutionEngineController engineController;
-    
-    public GenericNameValueContext execute(GenericNameValueContext input) throws Exception {
-	return engineController.execute(input);
-    }
+public class FlowCallerEntity extends GenericEntity<GenericNameValueContext> {
 
-    public ExecutionEngineController getEngineController() {
-        return engineController;
+    public GenericNameValueContext execute(GenericNameValueContext input)
+	    throws Exception {
+	GenericNameValueContext result = NodeLoader
+		.getExecutionEngineInstance().execute(input);
+	GenericNameValueContext output = new GenericNameValueContext();
+	output.put("result", result);
+	return output;
     }
-
-    public void setEngineController(ExecutionEngineController engineController) {
-        this.engineController = engineController;
-    }
-
-    
-    
 }
