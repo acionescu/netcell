@@ -21,47 +21,60 @@ import ro.zg.cfgengine.core.configuration.ConfigurationManager;
 import ro.zg.cfgengine.core.exceptions.ConfigurationException;
 import ro.zg.cfgengine.util.PackageCfgLoader;
 import ro.zg.commons.exceptions.ContextAwareException;
+import ro.zg.distributed.framework.ReflectionBasedDistributedService;
+import ro.zg.netcell.constants.DistributedServicesTypes;
+import ro.zg.netcell.distributed.ExecutionEngineDS;
 import ro.zg.util.logging.Logger;
 import ro.zg.util.logging.MasterLogManager;
 
 public class NodeLoader {
-    private static String defaulCfgEntryPoint = "config"+File.separator+"config.xml";
+    private static String defaulCfgEntryPoint = "config" + File.separator
+	    + "config.xml";
     private static Logger logger = MasterLogManager.getLogger("NodeLoader");
-    
+
     private static NetCell netcellInstance;
-    private static NetCellControllerContract netcellControllerInstance;
-    
+    private static ExecutionEngineContract executionEngineInstance;
+
     public static NetCell getNetCellInstance() {
 	return netcellInstance;
     }
-    
-    public static NetCellControllerContract getNetcellControllerInstance() {
-   	return netcellControllerInstance;
-       }
-    
-    public static NetCell load(String rootDir) throws ContextAwareException{
-	return load(rootDir,defaulCfgEntryPoint);
+
+    public static ExecutionEngineContract getExecutionEngineInstance() {
+	return executionEngineInstance;
     }
-    
-    public static NetCell load(String rootDir, String entryPoint) throws ContextAwareException{
+
+    public static NetCell load(String rootDir) throws ContextAwareException {
+	return load(rootDir, defaulCfgEntryPoint);
+    }
+
+    public static NetCell load(String rootDir, String entryPoint)
+	    throws ContextAwareException {
 	ConfigurationManager cfgManager = null;
 	try {
-	    String configFileName = getFullEntryPointPath(rootDir,entryPoint);
-//	    ClassLoader classLoader = this.getClass().getClassLoader();
+	    String configFileName = getFullEntryPointPath(rootDir, entryPoint);
+	    // ClassLoader classLoader = this.getClass().getClassLoader();
 	    ClassLoader classLoader = NodeLoader.class.getClassLoader();
-	    logger.info("Loading node from "+classLoader.getResource(configFileName));
-	    cfgManager = PackageCfgLoader.getInstance().load(configFileName,classLoader);
+	    logger.info("Loading node from "
+		    + classLoader.getResource(configFileName));
+	    cfgManager = PackageCfgLoader.getInstance().load(configFileName,
+		    classLoader);
 	} catch (ConfigurationException e) {
-	   throw new ContextAwareException("INITIALIZATION_EXCEPTION",e);
+	    throw new ContextAwareException("INITIALIZATION_EXCEPTION", e);
 	}
-	NetCell commandController = (NetCell)cfgManager.getObjectById("CommandControllerWrapper");
-	netcellInstance=commandController;
-	NetCellController netCellController = (NetCellController)cfgManager.getObjectById("NetCellController");
-	netcellControllerInstance = netCellController;
+	NetCell commandController = (NetCell) cfgManager
+		.getObjectById("CommandControllerWrapper");
+	netcellInstance = commandController;
+	
+	/* get local instance of the execution engine */
+	DistributedServicesManager distributedServicesManager =(DistributedServicesManager) cfgManager
+		.getObjectById("distributedServicesManager");
+	ReflectionBasedDistributedService rfds = (ReflectionBasedDistributedService)distributedServicesManager.getDistributedService(DistributedServicesTypes.EXECUTION_ENGINE_DESC);
+	executionEngineInstance = (ExecutionEngineContract)rfds.getTargetObject();
 	return commandController;
     }
-    
-    private static String getFullEntryPointPath(String rootDir, String entryPoint){
-	return rootDir+File.separator+entryPoint;
+
+    private static String getFullEntryPointPath(String rootDir,
+	    String entryPoint) {
+	return rootDir + File.separator + entryPoint;
     }
 }

@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE command SYSTEM "../../../../dtds/script-dao-commands.dtd">
-<command name="ro.problems.data.get-newest-issues-count" type="SQL.QUERY">
-      <script>
-      select count(id) from entities
-where entity_type_id=(select id from entity_types where type='ISSUE')
-
-   </script>
-</command>

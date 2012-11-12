@@ -36,7 +36,7 @@ public class DefinitionsGenerator {
     
     
     private void initEngine() throws ContextAwareException{
-	velocityEngine = new VelocityEngine();
+	velocityEngine = new VelocityEngine();String s = VelocityEngine.SET_NULL_ALLOWED;
 	Properties p = new Properties();
 	p.setProperty("resource.loader", "instance");
 	p.setProperty(VelocityEngine.FILE_RESOURCE_LOADER_CACHE, "true");

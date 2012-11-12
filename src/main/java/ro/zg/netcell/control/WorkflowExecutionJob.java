@@ -34,7 +34,7 @@ public class WorkflowExecutionJob implements Job{
 	JobDetail jobDetail = context.getJobDetail();
 	Command command = getCommandFromJobDetail(jobDetail);
 	try {
-	    logger.info("executing "+command);
+	    logger.info("Job executing "+command);
 	    CommandResponse response = NodeLoader.getNetCellInstance().execute(command);
 	} catch (Exception e) {
 	    // TODO Auto-generated catch block

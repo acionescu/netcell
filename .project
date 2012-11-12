@@ -26,11 +26,4 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.maven.ide.eclipse.maven2Nature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>repository</name>
-			<type>2</type>
-			<location>/media/netcell-node/repository</location>
-		</link>
-	</linkedResources>
 </projectDescription>

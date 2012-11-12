@@ -13,19 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-import java.io.File;
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.Collections;
-import java.util.Enumeration;
-
-import org.apache.commons.lang.StringEscapeUtils;
-import org.apache.commons.lang.StringUtils;
-import org.apache.http.HttpHost;
-
-import ro.zg.util.data.reflection.ReflectionUtility;
+import com.unboundid.ldap.sdk.BindResult;
+import com.unboundid.ldap.sdk.LDAPConnection;
+import com.unboundid.ldap.sdk.LDAPException;
+import com.unboundid.ldap.sdk.ResultCode;
+import com.unboundid.ldap.sdk.RootDSE;
+import com.unboundid.ldap.sdk.SearchResult;
+import com.unboundid.ldap.sdk.SearchScope;
 
 public class Dummy {
     public static void main(String[] args) throws Exception {
@@ -45,32 +39,62 @@ public class Dummy {
 	// "";
 	// System.out.println(s.contains("\t"));
 
-//	Enumeration<NetworkInterface> nets = NetworkInterface
-//		.getNetworkInterfaces();
-//
-//	for (NetworkInterface netIf : Collections.list(nets)) {
-//	    System.out.printf("Display name: %s\n", netIf.getDisplayName());
-//	    System.out.printf("Name: %s\n", netIf.getName());
-//
-//	    Enumeration<InetAddress> inetAddresses = netIf.getInetAddresses();
-//	    for (InetAddress ia : Collections.list(inetAddresses)) {
-//		System.out.println(ia.getHostAddress());
-//	    }
-//
-//	    Enumeration<NetworkInterface> subIfs = netIf.getSubInterfaces();
-//	    for (NetworkInterface subIf : Collections.list(subIfs)) {
-//		System.out.printf("\tSub Interface Display name: %s\n",
-//			subIf.getDisplayName());
-//		System.out
-//			.printf("\tSub Interface Name: %s\n", subIf.getName());
-//	    }
-//	    System.out.printf("\n");
-//	}
+	// Enumeration<NetworkInterface> nets = NetworkInterface
+	// .getNetworkInterfaces();
+	//
+	// for (NetworkInterface netIf : Collections.list(nets)) {
+	// System.out.printf("Display name: %s\n", netIf.getDisplayName());
+	// System.out.printf("Name: %s\n", netIf.getName());
+	//
+	// Enumeration<InetAddress> inetAddresses = netIf.getInetAddresses();
+	// for (InetAddress ia : Collections.list(inetAddresses)) {
+	// System.out.println(ia.getHostAddress());
+	// }
+	//
+	// Enumeration<NetworkInterface> subIfs = netIf.getSubInterfaces();
+	// for (NetworkInterface subIf : Collections.list(subIfs)) {
+	// System.out.printf("\tSub Interface Display name: %s\n",
+	// subIf.getDisplayName());
+	// System.out
+	// .printf("\tSub Interface Name: %s\n", subIf.getName());
+	// }
+	// System.out.printf("\n");
+	// }
 
-	File f = new File("/D:/Adrian Ionescu/work/dev/eclipse-workspace/netcell/target/test-classes/");
-	System.out.println(f.exists());
-	for(String name : f.list()){
-	    System.out.println(name);
+	// File f = new File("/D:/Adrian Ionescu/work/dev/eclipse-workspace/netcell/target/test-classes/");
+	// System.out.println(f.exists());
+	// for(String name : f.list()){
+	// System.out.println(name);
+	// }
+
+	String serverName = "localhost";
+	boolean res = false;
+	String username = "ggheorghe";
+	String password = "gigi";
+
+	LDAPConnection ldap = new LDAPConnection(serverName, 389);
+	RootDSE rd = ldap.getRootDSE();
+	System.out.println(rd.getAttributes());
+	SearchResult sr = ldap.search("ou=People,dc=example,dc=org", SearchScope.ONE, "(uid=" + username + ")");
+	if (sr.getEntryCount() > 0) {
+
+	    String dn = sr.getSearchEntries().get(0).getDN();
+	    System.out.println("using dn "+dn);
+	    try {
+		// ldap = new LDAPConnection(serverName, 389, dn, password);
+		// res = true;
+		BindResult result = ldap.bind(dn, password);
+		ResultCode rc = result.getResultCode();
+		System.out.println(result.getServerSASLCredentials());
+		res = (rc == ResultCode.SUCCESS);
+	    } catch (LDAPException e) {
+		if (e.getResultCode() == ResultCode.INVALID_CREDENTIALS)
+		    res = false;
+		else
+		    throw e;
+	    }
 	}
+
+	System.out.println(username + " bind " + res);
     }
 }

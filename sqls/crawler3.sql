@@ -1,4 +1,4 @@
-select * from pending_urls
+﻿select * from pending_urls
 where status='W'
 order by last_update desc
 limit 100
@@ -9,6 +9,8 @@ set status='N'
 where status='E'
 
 select * from symbols order by id desc limit 100
+
+select * from pending_urls
 
 select s.id,s.symbol,count(*) from symbols s, urls_symbols us
 where

@@ -1,10 +1,10 @@
-select * from pending_urls 
-where status='P'
+﻿select * from pending_urls 
+where status='W'
 --and position('.ro/' in  url) > 0
 order by last_update desc
 limit 1000
 
-select count(*) from links
+select count(*) from pending_urls where status='P'
 
 select count(*) from pending_urls 
 
@@ -50,12 +50,17 @@ update pending_urls
 set status='N' where status='W'
 --and last_update > timestamp '2010-04-27 00:00'
 
+
+select * from links
+
 --domains
 
-select DISTINCT(split_part(substring(url,position('//' in url)+2),'/',1)) as domain from pending_urls
+select DISTINCT(split_part(substring(url,position('//' in url)+2),'/',1)) as domain,count(*) from pending_urls
 where strpos(url,'http') = 1
+and status='P'
 --and split_part(substring(url,position('//' in url)+2),'/',1) like '%.ro'
-
+group by domain
+order by count(*) desc
 --non domains
 select * from pending_urls
 where strpos(url,'ftp') = 1
@@ -96,6 +101,25 @@ l.dest_url_id in
 select id from pending_urls 
 where split_part(substring(url,position('//' in url)+2),'/',1) = 'www.appleinsider.com'
 )
+
+--symbols
+
+select s.id,s.symbol,count(*) from symbols s, urls_symbols us
+where
+s.id=us.symbol_id
+--and s.symbol='lemn'
+group by s.id,s.symbol
+order by count(*) desc
+
+
+select url from pending_urls pu
+where 
+exists ( select 1 from urls_symbols us, symbols s where s.id=us.symbol_id and pu.id=us.url_id and s.symbol='lemn')
+and exists ( select 1 from urls_symbols us, symbols s where s.id=us.symbol_id and pu.id=us.url_id and s.symbol='casa')
+
+
+
+select * from urls_symbols 
 
 --pending urls
 

@@ -195,7 +195,7 @@ public class DataAccessComponentsManager extends BaseEntityManager<DataAccessCom
     }
 
     public boolean removeEntity(DataAccessComponentDefinition entity) throws ContextAwareException {
-	String dacDir = resourcesManager.getFullSystemPath(ResourcesTypes.DATA_ACCESS_COMPONENTS_DIR);
+	String dacDir = resourcesManager.getResourceFullPath(ResourcesTypes.DATA_ACCESS_COMPONENTS_DIR);
 	URL entityUrl = resourcesManager.getUrl(dacDir, getEntityFileForId(entity.getId()), false);
 	if (entityUrl != null) {
 	    /* remove component definition */

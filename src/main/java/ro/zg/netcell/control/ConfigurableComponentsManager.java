@@ -101,7 +101,7 @@ public class ConfigurableComponentsManager extends BaseEntityManager<Configurabl
     }
 
     public boolean removeEntity(ConfigurableComponentDefinition entity) throws ContextAwareException {
-	String entitiesDir = resourcesManager.getFullSystemPath(ResourcesTypes.CONFIGURABLE_COMPONENTS_DIR);
+	String entitiesDir = resourcesManager.getResourceFullPath(ResourcesTypes.CONFIGURABLE_COMPONENTS_DIR);
 	URL entityUrl = resourcesManager.getUrl(entitiesDir, getEntityFileForId(entity.getId()), false);
 	if (entityUrl != null) {
 	    /* remove component definition */

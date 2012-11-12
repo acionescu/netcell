@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE command SYSTEM "../../../../dtds/script-dao-commands.dtd">
-<command name="ro.problems.data.get-complex-entity-types" type="SQL.QUERY">
-      <script>
-      select * from complex_entity_type
-   </script>
-</command>
