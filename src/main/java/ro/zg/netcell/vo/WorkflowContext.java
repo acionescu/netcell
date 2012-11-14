@@ -104,6 +104,8 @@ public class WorkflowContext implements Serializable {
 	}
 	if (childResponses.size() > 0) {
 	    mergeChildResponsesWithLocalContext(childResponses);
+	    /* also clean the childCalls */
+	    childCalls.clear();
 	}
 	/*
 	 * now we're done with the children contexts, further, decide if this is a context spawned after an async call
