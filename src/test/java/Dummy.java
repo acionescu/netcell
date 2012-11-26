@@ -85,7 +85,7 @@ public class Dummy {
 		// res = true;
 		BindResult result = ldap.bind(dn, password);
 		ResultCode rc = result.getResultCode();
-		System.out.println(result.getServerSASLCredentials());
+//		System.out.println(result.getServerSASLCredentials());
 		res = (rc == ResultCode.SUCCESS);
 	    } catch (LDAPException e) {
 		if (e.getResultCode() == ResultCode.INVALID_CREDENTIALS)

@@ -34,7 +34,6 @@ import ro.zg.util.data.GenericNameValue;
 import ro.zg.util.data.GenericNameValueContext;
 import ro.zg.util.data.NameValue;
 import ro.zg.util.data.ObjectsUtil;
-import ro.zg.util.logging.MasterLogManager;
 
 public class WorkflowContext implements Serializable {
     /**
