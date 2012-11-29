@@ -29,6 +29,9 @@ public class AbstractObjectFormatter implements ObjectFormatter<Object> {
     }
 
     public String format(Object obj) throws Exception {
+	if(obj==null) {
+	    return "null";
+	}
 	ObjectFormatter<Object> formatter = formatters.get(obj.getClass().getName());
 	if (formatter == null) {
 	    formatter = formatters.get(obj.getClass().getSimpleName());

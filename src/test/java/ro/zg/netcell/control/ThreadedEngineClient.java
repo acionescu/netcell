@@ -35,7 +35,7 @@ public class ThreadedEngineClient {
 	    Thread t = new Thread(new SortListRequest(engineClient,i));
 	    threads.add(t);
 	    t.start();
-	    Thread.sleep(20);
+	    Thread.sleep(5);
 	}
 	for (Thread t : threads) {
 	    if (t.isAlive()) {
@@ -65,6 +65,7 @@ class SortListRequest implements Runnable {
     }
 
     public void run() {
+	System.out.println("Start "+Thread.currentThread());
 	String input = getUnsortedList().toString();
 	RspHandler handler = new RspHandler();
 	try {
@@ -72,7 +73,7 @@ class SortListRequest implements Runnable {
 	    Monitor execMon = Monitor.getMonitor("execMon");
 	    long counterId = execMon.startCounter();
 	    client.send(command.getBytes(), handler);
-	    String output = handler.getResponse();
+	    String output = handler.getResponseAsString();
 	    execMon.stopCounter(counterId);
 	    System.out.println(Thread.currentThread() + " : " + input + " -> " + output);
 	    ;

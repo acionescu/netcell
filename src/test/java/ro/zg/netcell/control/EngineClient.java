@@ -27,7 +27,7 @@ import java.net.SocketAddress;
 public class EngineClient {
 
     public static void main(String[] args) throws Exception{
-	SocketAddress sockaddr = new InetSocketAddress("localhost", 9000);
+	SocketAddress sockaddr = new InetSocketAddress("localhost", 9010);
         Socket client = new Socket();
         int timeoutMs = 2000;   // 2 seconds
         client.connect(sockaddr, timeoutMs);
@@ -39,9 +39,10 @@ public class EngineClient {
         do{
 //            System.out.println("Enter command:");
             input = consoleIn.readLine();
-            writer.write(input);writer.newLine();
+            writer.write(input);
+            writer.newLine();
             writer.flush();
-//            System.out.println("Response:");
+            System.out.println("Response:");
 //            consoleOut.write(reader.r);
             System.out.println(reader.readLine());
         }

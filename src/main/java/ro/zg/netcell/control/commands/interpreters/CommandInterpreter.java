@@ -20,9 +20,9 @@ import ro.zg.netcell.control.CommandResponse;
 import ro.zg.netcell.control.commands.formatters.ObjectFormatter;
 import ro.zg.util.execution.ExecutionEntity;
 
-public abstract class CommandInterpreter implements ExecutionEntity<String, String>{
+public abstract class CommandInterpreter<F> implements ExecutionEntity<String, String>{
     private ExecutionEntity<Command,CommandResponse> commandExecutor;
-    private ObjectFormatter<CommandResponse> formatter;
+    private ObjectFormatter<F> formatter;
 
    
 
@@ -34,11 +34,11 @@ public abstract class CommandInterpreter implements ExecutionEntity<String, Stri
         this.commandExecutor = commandExecutor;
     }
 
-    public ObjectFormatter<CommandResponse> getFormatter() {
+    public ObjectFormatter<F> getFormatter() {
         return formatter;
     }
 
-    public void setFormatter(ObjectFormatter<CommandResponse> formatter) {
+    public void setFormatter(ObjectFormatter<F> formatter) {
         this.formatter = formatter;
     }
     

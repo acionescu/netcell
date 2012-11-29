@@ -35,7 +35,7 @@ import ro.zg.util.parser.event.AssociationEvent;
 import ro.zg.util.parser.event.GroupEvent;
 import ro.zg.util.parser.event.ParseEventHandler;
 
-public class CasCommandInterpreter extends CommandInterpreter {
+public class CasCommandInterpreter extends CommandInterpreter<CommandResponse> {
     private static Parser commandParser = new Parser();
 
     static {

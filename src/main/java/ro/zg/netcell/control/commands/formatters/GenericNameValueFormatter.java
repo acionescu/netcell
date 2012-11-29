@@ -20,7 +20,7 @@ import ro.zg.util.data.GenericNameValue;
 public class GenericNameValueFormatter extends BaseObjectFormatter<GenericNameValue>{
 
     public String format(GenericNameValue obj) throws Exception {
-	return obj.getName()+"="+formatNestedObject(obj.getValue());
+	return formatNestedObject(obj.getName())+getAssociationEelement()+formatNestedObject(obj.getValue());
     }
 
 }

@@ -24,6 +24,7 @@ import ro.zg.cfgengine.util.PackageCfgLoader;
 import ro.zg.netcell.control.Command;
 import ro.zg.netcell.control.CommandResponse;
 import ro.zg.netcell.control.NetCell;
+import ro.zg.netcell.control.commands.interpreters.CommandInterpreter;
 import ro.zg.netcell.control.commands.interpreters.cas.CasCommandInterpreter;
 import ro.zg.netcell.control.exceptions.InitializationException;
 import ro.zg.netcell.control.receivers.RmiCommandReceiver;
@@ -76,6 +77,7 @@ public class ReceiversController {
     
     public void startSubprocesses() throws InitializationException{
 	startCasReceiver();
+	startJsonReceiver();
 	startRmiReceiver();
     }
     
@@ -95,6 +97,19 @@ public class ReceiversController {
 	
 	startReceiver(rec);
     }
+    
+    private void startJsonReceiver() throws InitializationException{
+   	//TODO: This should be configured dynamically based on the tag names or other way
+	CommandInterpreter ci = (CommandInterpreter)cfgManager.getObjectById("JsonCommandInterpreter");
+   	ci.setCommandExecutor(commandExecutor);
+   	//TODO: The executor should be obtained from the Runtime Environment or based on a configuration
+   	SocketProcessor pr = (SocketProcessor)cfgManager.getObjectById("JsonCommandsProcessor");
+   	pr.setExecutor(Executors.newCachedThreadPool());
+   	//TODO: This should also be done dynamically
+   	SocketReceiver rec = (SocketReceiver)cfgManager.getObjectById("JsonCommandsSocketReceiver");
+   	
+   	startReceiver(rec);
+       }
     
     private void startRmiReceiver() throws InitializationException{
 	RmiCommandReceiver rec = (RmiCommandReceiver)cfgManager.getObjectById("RmiCommandReceiver");

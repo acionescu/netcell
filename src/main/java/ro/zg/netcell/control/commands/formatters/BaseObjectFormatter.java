@@ -20,6 +20,9 @@ public abstract class BaseObjectFormatter<T> implements ObjectFormatter<T>{
     private String startElement="";
     private String endElement="";
     private String elementSeparator=", ";
+    private String associationEelement="=";
+    private String stringDelimiter="";
+    
     public ObjectFormatter<Object> getParentFormatter() {
         return parentFormatter;
     }
@@ -55,5 +58,34 @@ public abstract class BaseObjectFormatter<T> implements ObjectFormatter<T>{
     public void setEndElement(String endElement) {
         this.endElement = endElement;
     }
+
+    /**
+     * @return the associationEelement
+     */
+    public String getAssociationEelement() {
+        return associationEelement;
+    }
+
+    /**
+     * @return the stringDelimiter
+     */
+    public String getStringDelimiter() {
+        return stringDelimiter;
+    }
+
+    /**
+     * @param associationEelement the associationEelement to set
+     */
+    public void setAssociationEelement(String associationEelement) {
+        this.associationEelement = associationEelement;
+    }
+
+    /**
+     * @param stringDelimiter the stringDelimiter to set
+     */
+    public void setStringDelimiter(String stringDelimiter) {
+        this.stringDelimiter = stringDelimiter;
+    }
+    
     
 }
