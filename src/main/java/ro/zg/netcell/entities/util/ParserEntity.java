@@ -24,6 +24,7 @@ import ro.zg.util.data.GenericNameValueContext;
 import ro.zg.util.data.GenericNameValueContextUtil;
 import ro.zg.util.parser.ParseManager;
 import ro.zg.util.parser.ParseResponse;
+import ro.zg.util.parser.ParserConfig;
 
 public class ParserEntity extends GenericEntity<GenericNameValueContext> {
     ParseManager parseManager;
@@ -31,7 +32,11 @@ public class ParserEntity extends GenericEntity<GenericNameValueContext> {
     public GenericNameValueContext execute(GenericNameValueContext input) throws Exception {
 	String inputContent = (String) input.getValue("input");
 	String symbols = (String) input.getValue("PARSER_SYMBOLS");
-	ParseResponse resp = parseManager.parse(inputContent, symbols);
+	String outputCharsToEscape = (String)input.getValue("OUTPUT_CHARS_TO_ESCAPE");
+	String outputEscapeChar = (String)input.getValue("OUTPUT_ESCAPE_CHAR");
+	
+	ParserConfig pc = new ParserConfig(symbols, outputCharsToEscape, outputEscapeChar);
+	ParseResponse resp = parseManager.parse(inputContent, pc);
 	List<?> list = resp.getObjectsList();
 	GenericNameValueContext output = new GenericNameValueContext();
 //	try {

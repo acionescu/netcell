@@ -101,7 +101,11 @@ public class ReceiversController {
     private void startJsonReceiver() throws InitializationException{
    	//TODO: This should be configured dynamically based on the tag names or other way
 	CommandInterpreter ci = (CommandInterpreter)cfgManager.getObjectById("JsonCommandInterpreter");
-   	ci.setCommandExecutor(commandExecutor);
+   	
+	if(ci == null) {
+	    return;
+	}
+	ci.setCommandExecutor(commandExecutor);
    	//TODO: The executor should be obtained from the Runtime Environment or based on a configuration
    	SocketProcessor pr = (SocketProcessor)cfgManager.getObjectById("JsonCommandsProcessor");
    	pr.setExecutor(Executors.newCachedThreadPool());
