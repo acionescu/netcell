@@ -32,20 +32,24 @@ public class ParserEntity extends GenericEntity<GenericNameValueContext> {
     public GenericNameValueContext execute(GenericNameValueContext input) throws Exception {
 	String inputContent = (String) input.getValue("input");
 	String symbols = (String) input.getValue("PARSER_SYMBOLS");
-	String outputCharsToEscape = (String)input.getValue("OUTPUT_CHARS_TO_ESCAPE");
-	String outputEscapeChar = (String)input.getValue("OUTPUT_ESCAPE_CHAR");
-	
+	String outputCharsToEscape = (String) input.getValue("OUTPUT_CHARS_TO_ESCAPE");
+	String outputEscapeChar = (String) input.getValue("OUTPUT_ESCAPE_CHAR");
+	Boolean caseInsensitive = (Boolean) input.getValue("CASE_INSENSITIVE");
+
 	ParserConfig pc = new ParserConfig(symbols, outputCharsToEscape, outputEscapeChar);
+	if (caseInsensitive != null) {
+	    pc.setCaseInsensitive(caseInsensitive);
+	}
 	ParseResponse resp = parseManager.parse(inputContent, pc);
 	List<?> list = resp.getObjectsList();
 	GenericNameValueContext output = new GenericNameValueContext();
-//	try {
-	    output.put("result", GenericNameValueContextUtil.convertToKnownType(list));
-//	} catch (Exception e) {
-//	    ExceptionContext ec = new ExceptionContext();
-//	    ec.put("param", list);
-//	    throw new ContextAwareException("CONVERSION_ERROR", e, ec);
-//	}
+	// try {
+	output.put("result", GenericNameValueContextUtil.convertToKnownType(list));
+	// } catch (Exception e) {
+	// ExceptionContext ec = new ExceptionContext();
+	// ec.put("param", list);
+	// throw new ContextAwareException("CONVERSION_ERROR", e, ec);
+	// }
 	return output;
     }
 

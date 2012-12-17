@@ -113,7 +113,7 @@ public class HttpCommandExecutor implements CommandExecutor<HttpCommandResponse>
 	    if (returnHeaders) {
 		Map<String, String> headers = new HashMap<String, String>();
 		for (Header h : response.getAllHeaders()) {
-		    headers.put(h.getName(), h.getValue());
+		    headers.put(h.getName().toLowerCase(), h.getValue().toLowerCase());
 		}
 		commandResponse.setHeaders(headers);
 	    }
