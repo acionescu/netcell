@@ -43,7 +43,7 @@ public class SqlCommandExecutor implements CommandExecutor<SqlCommandResponse>{
 	 * JNDI name of datasource defined in server
 	 */
 	private String dataSourceName;
-	private int maxRowsToFetch = 500;
+	private int maxRowsToFetch = 5000;
 	public SqlCommandExecutor(){
 		
 	}

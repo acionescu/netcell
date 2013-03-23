@@ -90,6 +90,7 @@ public class JsonrpcCommandInterpreter extends CommandInterpreter<GenericNameVal
 	     resp = getCommandExecutor().execute(jsonCommand.getCommand());
 	    }
 	    catch(Exception e) {
+		e.printStackTrace();
 		return createErrorResponseContext(context, JsonRpcExceptions.INVALID_REQUEST);
 	    }
 	    /* if this is a notification don't return anything */

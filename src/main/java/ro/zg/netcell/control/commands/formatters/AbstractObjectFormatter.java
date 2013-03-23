@@ -18,6 +18,8 @@ package ro.zg.netcell.control.commands.formatters;
 import java.util.Collection;
 import java.util.Map;
 
+import ro.zg.util.data.reflection.ReflectionUtility;
+
 public class AbstractObjectFormatter implements ObjectFormatter<Object> {
     private Map<String, BaseObjectFormatter<Object>> formatters;
     private ObjectFormatter<Object> defaultFormatter;
@@ -38,6 +40,9 @@ public class AbstractObjectFormatter implements ObjectFormatter<Object> {
 	    if (formatter == null) {
 		if (obj instanceof Collection) {
 		    formatter = formatters.get("Collection");
+		}
+		else if (obj instanceof Map) {
+		    formatter = formatters.get("Map");
 		}
 		if (formatter == null) {
 		    if (defaultFormatter != null) {
