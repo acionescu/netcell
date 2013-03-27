@@ -119,7 +119,7 @@ public class HttpCommandExecutor implements CommandExecutor<HttpCommandResponse>
 	    }
 	    if (responseEntity != null) {
 		long responseLength = responseEntity.getContentLength();
-		String responseContent = EntityUtils.toString(responseEntity);
+		String responseContent = EntityUtils.toString(responseEntity,HTTP.UTF_8);
 		if (responseLength == -1) {
 		    responseLength = responseContent.length();
 		}
