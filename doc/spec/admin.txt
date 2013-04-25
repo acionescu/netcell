@@ -1,7 +1,0 @@
-Admin Commands:
-
--get definitions
--create/update/delete flow (without autorefresh)
--simulate refresh(tries to load the changes)
--refresh the changes (makes them executable)
--activate/inactivate flow(s)/all

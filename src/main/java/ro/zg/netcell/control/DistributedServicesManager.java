@@ -15,6 +15,9 @@
  ******************************************************************************/
 package ro.zg.netcell.control;
 
+import org.apache.log4j.ConsoleAppender;
+import org.apache.log4j.Level;
+
 import ro.zg.cfgengine.core.configuration.ConfigurationManager;
 import ro.zg.cfgengine.util.UrlCfgLoader;
 import ro.zg.commons.exceptions.ContextAwareException;
@@ -48,6 +51,7 @@ public class DistributedServicesManager {
 
     public void init() throws ContextAwareException {
 	logger.info("Start initializing DistributedServicesManager");
+	
 	try {
 	    // ConfigurationManager cfgManager =
 	    // PackageCfgLoader.getInstance().load(configFile);

@@ -80,7 +80,6 @@ public class SqlCommandExecutor implements CommandExecutor<SqlCommandResponse>{
 		if (logger.isDebugEnabled()) {
 			logger.debug("Executing " + command);
 		}
-
 		SqlCommandResponse resp = null;
 		Connection conn = getConnection();
 		if (conn == null) {
