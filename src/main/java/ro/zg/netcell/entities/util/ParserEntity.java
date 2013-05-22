@@ -17,8 +17,6 @@ package ro.zg.netcell.entities.util;
 
 import java.util.List;
 
-import ro.zg.commons.exceptions.ContextAwareException;
-import ro.zg.commons.exceptions.ExceptionContext;
 import ro.zg.netcell.entities.GenericEntity;
 import ro.zg.util.data.GenericNameValueContext;
 import ro.zg.util.data.GenericNameValueContextUtil;
@@ -27,7 +25,7 @@ import ro.zg.util.parser.ParseResponse;
 import ro.zg.util.parser.ParserConfig;
 
 public class ParserEntity extends GenericEntity<GenericNameValueContext> {
-    ParseManager parseManager;
+    private ParseManager parseManager;
 
     public GenericNameValueContext execute(GenericNameValueContext input) throws Exception {
 	String inputContent = (String) input.getValue("input");
