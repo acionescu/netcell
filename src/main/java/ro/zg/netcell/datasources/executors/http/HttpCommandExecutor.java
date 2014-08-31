@@ -15,6 +15,7 @@
  ******************************************************************************/
 package ro.zg.netcell.datasources.executors.http;
 
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,7 +41,6 @@ import ro.zg.scriptdao.core.CommandContext;
 import ro.zg.scriptdao.core.CommandExecutor;
 import ro.zg.scriptdao.core.ScriptDaoCommand;
 
-import com.sun.jndi.toolkit.url.UrlUtil;
 
 public class HttpCommandExecutor implements CommandExecutor<HttpCommandResponse> {
 
@@ -66,7 +66,7 @@ public class HttpCommandExecutor implements CommandExecutor<HttpCommandResponse>
 	// requestUri = URIUtils.createURI(requestUri.getScheme(), requestUri.getHost(), requestUri.getPort(),
 	// requestUri.getPath(), URLEncoder.encode(requestUri.getQuery(),HTTP.DEFAULT_PROTOCOL_CHARSET),
 	// requestUri.getFragment());
-	String encodedUrl = UrlUtil.encode(url, HTTP.DEFAULT_PROTOCOL_CHARSET);
+	String encodedUrl = URLEncoder.encode(url, HTTP.DEFAULT_PROTOCOL_CHARSET);
 	boolean returnHeaders = false;
 	Object rh = command.getArgument("returnHeaders");
 	if (rh != null) {

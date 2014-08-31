@@ -15,9 +15,6 @@
  ******************************************************************************/
 package ro.zg.netcell.control;
 
-import java.net.URI;
-import java.net.URL;
-
 import ro.zg.util.bootstrap.GenericBootstrap;
 
 public class NetcellNodeBootstrap {

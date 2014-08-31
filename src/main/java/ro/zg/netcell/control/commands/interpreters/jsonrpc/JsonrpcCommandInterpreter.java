@@ -52,6 +52,7 @@ public class JsonrpcCommandInterpreter extends CommandInterpreter<GenericNameVal
 
 	commandParser.addSymbol(mapStart);
 	commandParser.addSymbol(listStart);
+	commandParser.setUseEscapeCharacterOn(true);
     }
 
     public String execute(String input) throws Exception {
@@ -159,7 +160,7 @@ public class JsonrpcCommandInterpreter extends CommandInterpreter<GenericNameVal
 	// cci.getCommandFromString("execute(fid=ro.problems.flows.create-entity,userId=3,entityType=ISSUE,complexType=ISSUE,parentId=25,title=,content=asta e continutul problemei din command line,allowDuplicateTitle=false)");
 
 	ParseResponse resp = commandParser
-		.parse("{\"method\":\"test.sorting.quick-sort\",\"params\":{\"input\":[3,7,5]}}");
+		.parse("{method:execute, params:{fid:ro.zg.digitallife.save-resource,id:\"test 3\",context:\"{\\\"p1\\\":\\\"v2\\\",\\\"p2\\\":6,\\\"p3\\\":66.55}\"}, id:x}");
 
 	System.out.println(resp.getObjects().pop());
 
