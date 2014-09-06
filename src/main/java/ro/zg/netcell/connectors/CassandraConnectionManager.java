@@ -1,22 +1,24 @@
 package ro.zg.netcell.connectors;
 
-import java.util.List;
-
 import ro.zg.scriptdao.constants.DataSourceConfigParameters;
 import ro.zg.util.data.ConfigurationData;
+import ro.zg.util.logging.Logger;
+import ro.zg.util.logging.MasterLogManager;
 
 import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.Cluster.Builder;
 import com.datastax.driver.core.Session;
 
 public class CassandraConnectionManager extends BaseConnectionManager<Session> {
+    private static Logger logger = MasterLogManager.getLogger(CassandraConnectionManager.class);
     // CASSANDRA
 
     public static final String HOSTS = "HOSTS";
     public static final String KEYSPACE = "KEYSPACE";
 
-    private Cluster cluster;
     private String keyspace;
+    private Cluster cluster;
+    private Session session;
 
     public void init() {
 	buildCluster();
@@ -52,14 +54,25 @@ public class CassandraConnectionManager extends BaseConnectionManager<Session> {
     }
 
     @Override
-    public Session getConnection() throws Exception {
-	ensureCluster();
+    public synchronized Session getConnection() throws Exception {
+	if (session == null || session.isClosed()) {
+	    ensureCluster();
 
-	if (keyspace != null) {
-	    return cluster.connect(keyspace);
+	    if (keyspace != null) {
+		try {
+		    session = cluster.connect(keyspace);
+		} catch (Exception e) {
+		    logger.warn("Failed to connect to cassandra cluster with config data "
+			    + dataSourceDefinition.getConfigData());
+		}
+	    }
+
+	    if (session == null) {
+		session = cluster.connect();
+	    }
+
 	}
-
-	return cluster.connect();
+	return session;
     }
 
 }
