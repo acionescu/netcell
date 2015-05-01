@@ -139,6 +139,12 @@ public class CasCommandInterpreter extends CommandInterpreter<CommandResponse> {
 	System.out.println(c);
 
     }
+
+    @Override
+    public CommandResponse executeWithoutFormattingResult(String input) throws Exception{
+	Command command = getCommandFromString(input);
+	return getCommandExecutor().execute(command);
+    }
 }
 
 class CasParserEvent implements ParseEventHandler {

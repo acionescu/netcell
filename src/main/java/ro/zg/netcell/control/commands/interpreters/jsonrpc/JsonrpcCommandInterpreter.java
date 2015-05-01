@@ -165,6 +165,32 @@ public class JsonrpcCommandInterpreter extends CommandInterpreter<GenericNameVal
 	System.out.println(resp.getObjects().pop());
 
     }
+
+    @Override
+    public GenericNameValueContext executeWithoutFormattingResult(String input) throws Exception {
+	Deque<Object> objects = commandParser.parse(input).getObjects();
+	if (objects.size() <= 0) {
+	    throw new IllegalArgumentException("The input data is empty");
+	}
+
+	GenericNameValueContext context = (GenericNameValueContext) objects.pop();
+
+	/* multiple commands */
+	if (context instanceof GenericNameValueList) {
+	    GenericNameValueList cl = (GenericNameValueList)context;
+	    GenericNameValueList jsonResponses = new GenericNameValueList();
+	    
+	    for(int i=0;i<cl.size();i++) {
+		GenericNameValueContext cc = (GenericNameValueContext) cl.getValueForIndex(i);
+		GenericNameValueContext cr = executeCommandFromContext(cc);
+		jsonResponses.addValue(cr);
+	    }
+	    
+	    return jsonResponses;
+	}
+
+	return executeCommandFromContext(context);
+    }
 }
 
 class JsonRpcParseEvent implements ParseEventHandler {

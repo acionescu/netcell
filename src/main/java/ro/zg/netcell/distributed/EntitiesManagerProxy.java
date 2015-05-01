@@ -75,7 +75,7 @@ public class EntitiesManagerProxy extends AbstractProxy implements EntitiesManag
 
     public List<String> getDefinitionTypes() throws ContextAwareException {
 	try {
-	    return (List<String>)getResultForTask(createTask("getEntities",null));
+	    return (List<String>)getResultForTask(createTask("getEntities",new Serializable[0]));
 	} catch (Exception e) {
 	    throw new ContextAwareException("PROXY_ERROR",e);
 	}

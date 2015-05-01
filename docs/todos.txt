@@ -1,0 +1,45 @@
+internal node event bus - to allow communication between internal services
+distributed service bus -  to allow communication between nodes
+
+
+
+add filters to flows
+
+- a filter is defined once and can target specific component types:
+   - flows, components, etc ( specifying * will target all types of executable components )
+   - a matching rule(regex) can be defined on each filter that will identify the targets to which it should be applied
+   - the executable components should be agnostic of the fact that they're being filtered or not
+   - each filter should have a priority so that in case of more filters an execution sequence can be established. ( if given the same priority ,
+   filters will be applied in the order they were defined )
+
+- each filter can define a before execution flow id and after execution flow id
+- each filter can stop execution and return a specific result or let it continue
+
+
+- the before flow can modify the input or stop execution
+- the after flow can modify the output or stop execution
+
+
+- the original input will be passed to the  before flow as the oi input variable
+- it can modify it, or leave it alone
+- if it's specifying an output variable on the response then execution will be halted and that variable
+will be returned as the result of the flow execution
+
+- the output of the flow execution will be passed through the after flow chain as the oo variable
+- it can modify it or leave it alone
+- if it's specifying an output variable,  then  execution will be halted and that variable
+will be returned as the result of the flow execution
+
+
+
+Impl:
+
+Define a FilteredEntity extending GenericEntity
+
+This will allow each entity to hold a list of filters.
+
+Define a Filter class that will hold the before and after filter(flows) ids
+
+These will be used by the EngineExecutionController 
+
+

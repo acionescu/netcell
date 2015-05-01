@@ -27,7 +27,7 @@ import java.net.SocketAddress;
 public class EngineClient {
 
     public static void main(String[] args) throws Exception{
-	SocketAddress sockaddr = new InetSocketAddress("localhost", 9010);
+	SocketAddress sockaddr = new InetSocketAddress("localhost", 9000);
         Socket client = new Socket();
         int timeoutMs = 2000;   // 2 seconds
         client.connect(sockaddr, timeoutMs);

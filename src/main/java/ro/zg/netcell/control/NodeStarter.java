@@ -18,6 +18,7 @@ package ro.zg.netcell.control;
 import ro.zg.netcell.receivers.control.ReceiversController;
 
 public class NodeStarter {
+    private static NetcellNode node;
 
     public static void main(String args[]) throws Exception{
 	String host = "localhost";
@@ -31,6 +32,12 @@ public class NodeStarter {
 	NetCell nc = NodeLoader.load("root");
 	ReceiversController rc = new ReceiversController();
 	rc.start("xmls", nc);
+	/* use the receivers controller as a way to interact with the node from within a component */
+	node = rc;
+    }
+    
+    public static NetcellNode getNode() {
+	return node;
     }
     
 }

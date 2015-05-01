@@ -18,13 +18,14 @@ package ro.zg.netcell.control.commands.interpreters;
 import ro.zg.netcell.control.Command;
 import ro.zg.netcell.control.CommandResponse;
 import ro.zg.netcell.control.commands.formatters.ObjectFormatter;
+import ro.zg.util.data.GenericNameValueContext;
 import ro.zg.util.execution.ExecutionEntity;
 
 public abstract class CommandInterpreter<F> implements ExecutionEntity<String, String>{
     private ExecutionEntity<Command,CommandResponse> commandExecutor;
     private ObjectFormatter<F> formatter;
 
-   
+    public abstract GenericNameValueContext executeWithoutFormattingResult(String input)throws Exception;
 
     public ExecutionEntity<Command, CommandResponse> getCommandExecutor() {
         return commandExecutor;
