@@ -15,12 +15,17 @@
  ******************************************************************************/
 package ro.zg.netcell.control;
 
+import ro.zg.commons.exceptions.ContextAwareException;
+import ro.zg.netcell.control.exceptions.InitializationException;
 import ro.zg.netcell.receivers.control.ReceiversController;
+import ro.zg.util.logging.Logger;
+import ro.zg.util.logging.MasterLogManager;
 
 public class NodeStarter {
+    private static Logger logger = MasterLogManager.getLogger(NodeStarter.class.getName());
     private static NetcellNode node;
 
-    public static void main(String args[]) throws Exception{
+    public static void main(String args[]) {
 	String host = "localhost";
 	if(args != null && args.length > 0) {
 	    host = args[0];
@@ -29,9 +34,20 @@ public class NodeStarter {
 //	System.setProperty("jgroups.bind_addr", host);
 //	NetCell nc = new NetCellLoader().load("root");
 	
-	NetCell nc = NodeLoader.load("root");
+	NetCell nc;
+	try {
+	    nc = NodeLoader.load("root");
+	} catch (ContextAwareException e) {
+	    logger.fatal("Failed to start netcell component", e);
+	    return;
+	}
 	ReceiversController rc = new ReceiversController();
-	rc.start("xmls", nc);
+	try {
+	    rc.start("xmls", nc);
+	} catch (InitializationException e) {
+	    logger.fatal("Failed to start receivers controller", e);
+	    return;
+	}
 	/* use the receivers controller as a way to interact with the node from within a component */
 	node = rc;
     }

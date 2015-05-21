@@ -23,14 +23,13 @@ import ro.zg.cfgengine.util.PackageCfgLoader;
 import ro.zg.commons.exceptions.ContextAwareException;
 import ro.zg.distributed.framework.ReflectionBasedDistributedService;
 import ro.zg.netcell.constants.DistributedServicesTypes;
-import ro.zg.netcell.distributed.ExecutionEngineDS;
 import ro.zg.util.logging.Logger;
 import ro.zg.util.logging.MasterLogManager;
 
 public class NodeLoader {
     private static String defaulCfgEntryPoint = "config" + File.separator
 	    + "config.xml";
-    private static Logger logger = MasterLogManager.getLogger("NodeLoader");
+    private static Logger logger = MasterLogManager.getLogger(NodeLoader.class.getName());
 
     private static NetCell netcellInstance;
     private static ExecutionEngineContract executionEngineInstance;

@@ -2,6 +2,8 @@ internal node event bus - to allow communication between internal services
 distributed service bus -  to allow communication between nodes
 
 
+restrict a distributed service to nodes by name
+
 
 add filters to flows
 

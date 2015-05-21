@@ -47,7 +47,7 @@ public class ScheduledJobsManager extends BaseEntityManager<ScheduledJobDefiniti
     private Scheduler scheduler;
     private ExtendedJobExecutionController jobsController;
     private int startDelay = 10;
-    private static Logger logger = MasterLogManager.getLogger("SCHEDULER");
+    private static Logger logger = MasterLogManager.getLogger(ScheduledJobsManager.class.getName());
     private Map<String, ScheduledJobDefinition> scheduledJobs = new LinkedHashMap<String, ScheduledJobDefinition>();
 
     public void init() throws ContextAwareException {

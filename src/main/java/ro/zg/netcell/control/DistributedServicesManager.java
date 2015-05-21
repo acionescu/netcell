@@ -15,9 +15,6 @@
  ******************************************************************************/
 package ro.zg.netcell.control;
 
-import org.apache.log4j.ConsoleAppender;
-import org.apache.log4j.Level;
-
 import ro.zg.cfgengine.core.configuration.ConfigurationManager;
 import ro.zg.cfgengine.util.UrlCfgLoader;
 import ro.zg.commons.exceptions.ContextAwareException;
@@ -39,7 +36,7 @@ import ro.zg.util.logging.MasterLogManager;
 
 public class DistributedServicesManager {
     private static final Logger logger = MasterLogManager
-	    .getLogger("DistributedServicesManager");
+	    .getLogger(DistributedServicesManager.class.getName());
     private ProcessingNode processingNode;
     private SynchronousProcessingNodeClient synchronousProcessingNodeClient;
     private EntitiesManagerProxy entitiesManager;

@@ -10,7 +10,7 @@ import com.datastax.driver.core.Cluster.Builder;
 import com.datastax.driver.core.Session;
 
 public class CassandraConnectionManager extends BaseConnectionManager<Session> {
-    private static Logger logger = MasterLogManager.getLogger(CassandraConnectionManager.class);
+    private static Logger logger = MasterLogManager.getLogger(CassandraConnectionManager.class.getName());
     // CASSANDRA
 
     public static final String HOSTS = "HOSTS";

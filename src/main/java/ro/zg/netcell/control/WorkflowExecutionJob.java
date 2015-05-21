@@ -29,7 +29,7 @@ import ro.zg.util.logging.Logger;
 import ro.zg.util.logging.MasterLogManager;
 
 public class WorkflowExecutionJob implements Job{
-    private static Logger logger = MasterLogManager.getLogger("SCHEDULER");
+    private static Logger logger = MasterLogManager.getLogger(WorkflowExecutionJob.class.getName());
     public void execute(JobExecutionContext context) throws JobExecutionException {
 	JobDetail jobDetail = context.getJobDetail();
 	Command command = getCommandFromJobDetail(jobDetail);

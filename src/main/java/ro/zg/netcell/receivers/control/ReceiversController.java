@@ -41,7 +41,7 @@ import ro.zg.util.logging.MasterLogManager;
 public class ReceiversController implements NetcellNode {
     public static String CFG_FILE_NAME = "receivers-controller-config.xml";
     // public static String LOGGING_CFG_FILE = "logging.xml";
-    private static Logger logger = MasterLogManager.getLogger("ReceiversControllerLogger");
+    private static Logger logger = MasterLogManager.getLogger(ReceiversController.class.getName());
 
     private String rootDir;
     private ExecutionEntity<Command, CommandResponse> commandExecutor;

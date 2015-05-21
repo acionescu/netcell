@@ -38,7 +38,7 @@ import ro.zg.util.logging.MasterLogManager;
 public class CommandRouter implements NetCell {
     private Map<String, CommandToTaskMapping> commandMappings;
     private DistributedServicesManager distributedServicesManager;
-    private Logger logger = MasterLogManager.getLogger("CommandRouter");
+    private Logger logger = MasterLogManager.getLogger(CommandRouter.class.getName());
 
     public CommandResponse execute(Command input) throws Exception {
 //	logger.debug("Executing: "+input);

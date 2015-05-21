@@ -24,7 +24,6 @@ import ro.zg.cfgengine.core.configuration.ConfigurationManager;
 import ro.zg.cfgengine.util.PackageCfgLoader;
 import ro.zg.commons.exceptions.ContextAwareException;
 import ro.zg.commons.exceptions.ExceptionContext;
-import ro.zg.netcell.entities.FlowCallerEntity;
 import ro.zg.netcell.entities.GenericEntity;
 import ro.zg.netcell.security.AccessRule;
 import ro.zg.netcell.vo.WorkflowContext;
@@ -34,8 +33,7 @@ import ro.zg.util.logging.Logger;
 import ro.zg.util.logging.MasterLogManager;
 
 public class ExecutionEngineController implements ExecutionEngineContract {
-    private static Logger logger = MasterLogManager
-	    .getLogger("ExecutionEngineController");
+    private static Logger logger = MasterLogManager.getLogger(ExecutionEngineController.class.getName());
     private String engineHandlerFile;
     private String engineConfigFile;
     private ClassLoader resourcesLoader;
@@ -61,12 +59,9 @@ public class ExecutionEngineController implements ExecutionEngineContract {
     }
 
     public void init() throws Exception {
-	engineHandlerFile = resourcesManager
-		.getResourceFullPath("ENGINE_HANDLER_FILE");
-	engineConfigFile = resourcesManager
-		.getResourceFullPath("ENGINE_CONFIG_FILE");
-	cfgManager = PackageCfgLoader.getInstance().load(engineHandlerFile,
-		engineConfigFile, resourcesLoader);
+	engineHandlerFile = resourcesManager.getResourceFullPath("ENGINE_HANDLER_FILE");
+	engineConfigFile = resourcesManager.getResourceFullPath("ENGINE_CONFIG_FILE");
+	cfgManager = PackageCfgLoader.getInstance().load(engineHandlerFile, engineConfigFile, resourcesLoader);
 	load();
     }
 
@@ -96,10 +91,10 @@ public class ExecutionEngineController implements ExecutionEngineContract {
     }
 
     private void initSpecialEntities() {
-//	FlowCallerEntity fce = (FlowCallerEntity) entities.get("flowCaller");
-//	if (fce != null) {
-//	    fce.setEngineController(this);
-//	}
+	// FlowCallerEntity fce = (FlowCallerEntity) entities.get("flowCaller");
+	// if (fce != null) {
+	// fce.setEngineController(this);
+	// }
     }
 
     public boolean containsEntityWithId(String id) {
@@ -113,21 +108,17 @@ public class ExecutionEngineController implements ExecutionEngineContract {
      * @param input
      * @return
      * @throws ContextAwareException
-     *             with message ACCESS_DENIED if at least one rule is not
-     *             satisfied <br/>
-     *             with message ACCESS_RULE_CHECK_FAILED if the execution of a
-     *             validating flow fails
+     *             with message ACCESS_DENIED if at least one rule is not satisfied <br/>
+     *             with message ACCESS_RULE_CHECK_FAILED if the execution of a validating flow fails
      */
-    private void checkIfExecutionAllowed(String flowId,
-	    GenericNameValueContext input) throws ContextAwareException {
+    private void checkIfExecutionAllowed(String flowId, GenericNameValueContext input) throws ContextAwareException {
 	/* get the access rules that match the flowId */
 	List<AccessRule> matchingRules = getMatchingAccessRules(flowId);
 
 	if (matchingRules.size() > 0) {
 	    /*
-	     * create the input for the rule, should contain all the parameters
-	     * of the original input plus the parameter "flowId" containing the
-	     * name of the flow that is being checked
+	     * create the input for the rule, should contain all the parameters of the original input plus the parameter
+	     * "flowId" containing the name of the flow that is being checked
 	     */
 	    GenericNameValueContext ruleInput = new GenericNameValueContext();
 	    input.copyTo(ruleInput);
@@ -136,24 +127,19 @@ public class ExecutionEngineController implements ExecutionEngineContract {
 	    for (AccessRule ar : matchingRules) {
 		GenericNameValueContext response = null;
 		try {
-		    response = executeEntity(ar.getValidationFlowId(),
-			    ruleInput);
+		    response = executeEntity(ar.getValidationFlowId(), ruleInput);
 		} catch (Exception e) {
 		    ExceptionContext ec = new ExceptionContext();
-		    ec.put(new GenericNameValue("validatingFlowId", ar
-			    .getValidationFlowId()));
-		    throw new ContextAwareException("ACCESS_RULE_CHECK_FAILED",
-			    e, ec);
+		    ec.put(new GenericNameValue("validatingFlowId", ar.getValidationFlowId()));
+		    throw new ContextAwareException("ACCESS_RULE_CHECK_FAILED", e, ec);
 		}
 		/* if the exit parameter is false, the access will be denied */
 		if ("false".equals(response.getValue("exit"))) {
-		    logger.warn("Execution denied to flow '" + flowId
-			    + "' due to unsatisfied access rule " + ar);
+		    logger.warn("Execution denied to flow '" + flowId + "' due to unsatisfied access rule " + ar);
 
 		    ExceptionContext ec = new ExceptionContext();
 		    ec.put(new GenericNameValue("requiredFlowId", flowId));
-		    ec.put(new GenericNameValue("unsatisfiedAccessRuleId", ar
-			    .getId()));
+		    ec.put(new GenericNameValue("unsatisfiedAccessRuleId", ar.getId()));
 		    throw new ContextAwareException("ACCESS_DENIED", ec);
 		}
 	    }
@@ -163,8 +149,7 @@ public class ExecutionEngineController implements ExecutionEngineContract {
     private List<AccessRule> getMatchingAccessRules(String flowId) {
 	List<AccessRule> rulesList = new ArrayList<AccessRule>();
 	/*
-	 * iterate over the rules and get the ones for which targetPathRegex
-	 * match the flowId
+	 * iterate over the rules and get the ones for which targetPathRegex match the flowId
 	 */
 	for (AccessRule ar : accessRulesByPath.values()) {
 	    if (flowId.matches(ar.getTargetPathRegex())) {
@@ -174,8 +159,7 @@ public class ExecutionEngineController implements ExecutionEngineContract {
 	return rulesList;
     }
 
-    private GenericNameValueContext executeEntity(String entityId,
-	    GenericNameValueContext input) throws Exception {
+    private GenericNameValueContext executeEntity(String entityId, GenericNameValueContext input) throws Exception {
 	if (entityId == null) {
 	    throw new ContextAwareException("FLOW_ID_EXPECTED");
 	}
@@ -194,21 +178,19 @@ public class ExecutionEngineController implements ExecutionEngineContract {
 	}
     }
 
-    private GenericNameValueContext checkAccessAndExecuteEntity(
-	    String entityId, GenericNameValueContext input) throws Exception {
+    private GenericNameValueContext checkAccessAndExecuteEntity(String entityId, GenericNameValueContext input)
+	    throws Exception {
 	checkIfExecutionAllowed(entityId, input);
 	return executeEntity(entityId, input);
     }
 
-    public GenericNameValueContext execute(GenericNameValueContext input)
-	    throws Exception {
+    public GenericNameValueContext execute(GenericNameValueContext input) throws Exception {
 
 	return executeEntity(input);
 
     }
 
-    private GenericNameValueContext executeEntity(GenericNameValueContext input)
-	    throws Exception {
+    private GenericNameValueContext executeEntity(GenericNameValueContext input) throws Exception {
 	GenericNameValue flow = (GenericNameValue) input.remove("fid");
 	if (flow == null) {
 	    throw new ContextAwareException("FLOW_ID_EXPECTED");
@@ -219,8 +201,7 @@ public class ExecutionEngineController implements ExecutionEngineContract {
 
     }
 
-    public GenericNameValueContext execute(WorkflowContext wfContext)
-	    throws Exception {
+    public GenericNameValueContext execute(WorkflowContext wfContext) throws Exception {
 	// if (pendingTasks > 20 && wfContext.isAsyncContext() &&
 	// !wfContext.isRetry()) {
 	// throw new ContextAwareException("NO_RESOURCES_AVAILABLE");
@@ -283,8 +264,7 @@ public class ExecutionEngineController implements ExecutionEngineContract {
      * @param entities
      *            the entities to set
      */
-    public void setEntities(
-	    Map<String, GenericEntity<GenericNameValueContext>> entities) {
+    public void setEntities(Map<String, GenericEntity<GenericNameValueContext>> entities) {
 	this.entities = entities;
 	initSpecialEntities();
     }
