@@ -15,12 +15,50 @@
  ******************************************************************************/
 package ro.zg.netcell.datasources;
 
-import ro.zg.netcell.config.BaseEngineConfigTestCase;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Properties;
 
-public class DatasourcesTestCase extends BaseEngineConfigTestCase{
+import javax.sql.DataSource;
+
+import org.apache.commons.dbcp2.BasicDataSource;
+import org.junit.Test;
+
+public class DatasourcesTestCase {
     
-    public void test(){
-	System.out.println("is this working?");
+    @Test
+    public void test() throws SQLException{
+	String url = "jdbc:postgresql://localhost:5432/problems_db";
+//	Properties props = new Properties();
+//	props.setProperty("user","metaguvernare");
+//	props.setProperty("password","meta-guvernare");
+//	
+//	Connection conn = DriverManager.getConnection(url, props);
+
+	
+	BasicDataSource ds = new BasicDataSource();
+	
+	
+	
+	ds.setUrl(url);
+	ds.setUsername("metaguvernare");
+	ds.setPassword("meta-guvernare");
+//	ds.setDriverClassName("org.postgresql.Driver");
+	
+	Connection conn = ds.getConnection();
+	
+	Statement st = conn.createStatement();
+	boolean rs = st.execute(" begin;\n" + 
+		"delete from entities_links_users where entity_link_id=889;\n" + 
+		"\n" + 
+		"delete from entities_links where entity_link_id =889;\n" + 
+		"\n" + 
+		"commit;");
+	System.out.println(rs);
+	conn.close();
     }
 
 }

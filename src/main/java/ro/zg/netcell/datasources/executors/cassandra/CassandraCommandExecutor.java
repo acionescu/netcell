@@ -10,9 +10,9 @@ import ro.zg.util.data.GenericNameValueList;
 import com.datastax.driver.core.ResultSet;
 import com.datastax.driver.core.Session;
 
-public class CassandraCommandExecutor implements CommandExecutor<CassandraCommandResponse>{
+public class CassandraCommandExecutor implements CommandExecutor<CassandraCommandResponse> {
     private static Logger logger = Logger.getLogger(CassandraCommandExecutor.class.getName());
-    
+
     @Override
     public CassandraCommandResponse executeCommand(ScriptDaoCommand command) throws Exception {
 	// TODO Auto-generated method stub
@@ -27,27 +27,33 @@ public class CassandraCommandExecutor implements CommandExecutor<CassandraComman
 
     @Override
     public CassandraCommandResponse executeCommand(CommandContext commandContext) throws Exception {
-	Session session = (Session)commandContext.getConnectionManager().getConnection();
-	
-	if(session == null) {
+	Session session = (Session) commandContext.getConnectionManager().getConnection();
+
+	if (session == null) {
 	    logger.error("Could not get a connection to cassandra.");
 	    return null;
 	}
-	
+
 	ScriptDaoCommand command = commandContext.getCommand();
 	if (logger.isDebugEnabled()) {
 	    logger.debug("Executing " + command);
 	}
-	
-	
+
 	ResultSet result = session.execute(command.getContent());
-	
-	GenericNameValueList resultsAsList = CassandraUtil.getResultsAsList(result);
-	
-	CassandraCommandResponse response = new CassandraCommandResponse(resultsAsList);
-	
-	return response;
-	
+
+	try {
+	    GenericNameValueList resultsAsList = CassandraUtil.getResultsAsList(result, session.getCluster()
+		    .getConfiguration().getProtocolOptions().getProtocolVersionEnum());
+	    if (logger.isDebugEnabled()) {
+		logger.debug("Returning response to cassandra query: " + resultsAsList);
+	    }
+	    CassandraCommandResponse response = new CassandraCommandResponse(resultsAsList);
+	    return response;
+	} catch (Exception e) {
+	    logger.error("Error when processing command " + command.getContent(), e);
+	    throw e;
+	}
+
     }
 
     @Override

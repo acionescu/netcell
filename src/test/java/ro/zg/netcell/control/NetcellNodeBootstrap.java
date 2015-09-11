@@ -24,8 +24,10 @@ public class NetcellNodeBootstrap {
 	if (os.toLowerCase().contains("windows")) {
 	    boostrapFile = "win-" + boostrapFile;
 	}
-	String filePath = ClassLoader.getSystemClassLoader()
-		.getResource(boostrapFile).getFile();
+//	String filePath = ClassLoader.getSystemClassLoader()
+//		.getResource(boostrapFile).getFile();
+	
+	String filePath = "/media/netcell-node/bootstrap.properties";
 	
 	
 //	if (os.toLowerCase().contains("windows")) {

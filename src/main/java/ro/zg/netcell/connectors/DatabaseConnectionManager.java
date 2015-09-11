@@ -17,12 +17,15 @@ package ro.zg.netcell.connectors;
 
 import java.sql.Connection;
 
-import org.apache.commons.dbcp.BasicDataSource;
+import org.apache.commons.dbcp2.BasicDataSource;
+import org.apache.log4j.Logger;
 
 import ro.zg.scriptdao.constants.DataSourceConfigParameters;
 import ro.zg.util.data.ConfigurationData;
 
 public class DatabaseConnectionManager extends BaseConnectionManager<Connection> {
+    private Logger logger = Logger.getLogger(DatabaseConnectionManager.class.getName());
+    
     private BasicDataSource dataSource;
 
     public void init() {
@@ -32,9 +35,12 @@ public class DatabaseConnectionManager extends BaseConnectionManager<Connection>
     private void buildDataSource() {
 	ConfigurationData configData = dataSourceDefinition.getConfigData();
 	dataSource = new BasicDataSource();
-	dataSource.setDriverClassName((String) configData
-		.getParameterValue(DataSourceConfigParameters.DRIVER_CLASS));
-	dataSource.setUrl(composeUrl(configData));
+//	dataSource.setDriverClassName((String) configData
+//		.getParameterValue(DataSourceConfigParameters.DRIVER_CLASS));
+	String dbUrl = composeUrl(configData);
+	dataSource.setUrl(dbUrl);
+	
+	logger.info("Connecting to database at url "+dbUrl);
 	dataSource.setUsername((String) configData.getParameterValue(DataSourceConfigParameters.USERNAME));
 	dataSource.setPassword((String) configData.getParameterValue(DataSourceConfigParameters.PASSWORD));
     }
@@ -48,6 +54,7 @@ public class DatabaseConnectionManager extends BaseConnectionManager<Connection>
 	url += configData.getParameterValue(DataSourceConfigParameters.PORT);
 	url += separator;
 	url += configData.getParameterValue(DataSourceConfigParameters.SCHEMA_NAME);
+	
 	return url;
     }
 
