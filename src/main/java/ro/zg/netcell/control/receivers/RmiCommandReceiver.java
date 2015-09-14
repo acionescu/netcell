@@ -24,11 +24,12 @@ import java.util.Collections;
 import java.util.Enumeration;
 
 import ro.zg.netcell.control.NetCell;
+import ro.zg.util.io.AbstractReceiver;
 import ro.zg.util.io.Receiver;
 import ro.zg.util.logging.Logger;
 import ro.zg.util.logging.MasterLogManager;
 
-public class RmiCommandReceiver implements Receiver {
+public class RmiCommandReceiver extends AbstractReceiver {
     private static Logger logger = MasterLogManager.getLogger(RmiCommandReceiver.class.getName());
     private String bindName;
     private int bindPort;
@@ -79,12 +80,12 @@ public class RmiCommandReceiver implements Receiver {
 	    // System.out.printf("\n");
 	}
 
-	logger.info("Using " + bindAddress + " as rmi hostname and " + bindPort + " as bind port.");
 	System.setProperty("java.rmi.server.hostname", bindAddress);
 
 	NetCell stub = (NetCell) UnicastRemoteObject.exportObject(engine, bindPort);
 	registry = LocateRegistry.createRegistry(registryPort);
 	registry.bind(bindName, stub);
+	logger.info("Started RMI command receiver using " + bindAddress + " as rmi hostname and " + bindPort + " as bind port.");
     }
 
     public void shutdown() throws Exception {

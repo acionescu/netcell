@@ -60,7 +60,6 @@ public class ReceiversController implements NetcellNode {
     private void init() throws InitializationException {
 	loadConfig();
 	startSubprocesses();
-	logger.info("Receivers controller successfully initialized.");
     }
 
     /**
