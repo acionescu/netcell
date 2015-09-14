@@ -89,11 +89,6 @@
          <artifactId>slf4j-log4j12</artifactId>
          <version>1.7.5</version>
       </dependency>
-      <!-- <dependency> -->
-      <!-- <groupId>com.googlecode.sli4j</groupId> -->
-      <!-- <artifactId>sli4j-slf4j-simple</artifactId> -->
-      <!-- <version>2.0</version> -->
-      <!-- </dependency> -->
       <dependency>
          <groupId>com.unboundid</groupId>
          <artifactId>unboundid-ldapsdk</artifactId>
@@ -108,11 +103,6 @@
          <groupId>com.github.acionescu</groupId>
          <artifactId>commons</artifactId>
          <version>0.0.4-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-         <groupId>ro.zg</groupId>
-         <artifactId>weather</artifactId>
-         <version>0.0.1-SNAPSHOT</version>
       </dependency>
       <dependency>
          <groupId>org.xerial.snappy</groupId>
