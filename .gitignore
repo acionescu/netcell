@@ -1,5 +1,6 @@
 target
 *.class
-velocity.log
+*.log
 .classpath
 .settings
+.project

@@ -1,11 +1,153 @@
+<!--
+
+    netcell - Java ESB with an embedded business process modeling engine
+    Copyright (C) 2009  Adrian Cristian Ionescu - https://github.com/acionescu
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+            http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
    <modelVersion>4.0.0</modelVersion>
-   <groupId>ro.zg.netcell</groupId>
-   <artifactId>ro.zg.netcell</artifactId>
+   <groupId>net.segoia</groupId>
+   <artifactId>netcell</artifactId>
    <name>netcell</name>
    <version>0.0.1-SNAPSHOT</version>
-   <description />
+   <description>Java ESB with an embedded business process modeling engine </description>
+   <url>https://github.com/acionescu/netcell</url>
+   <licenses>
+      <license>
+         <name>The Apache Software License, Version 2.0</name>
+         <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+         <distribution>repo</distribution>
+      </license>
+   </licenses>
+   <developers>
+      <developer>
+         <id>acionescu</id>
+         <name>Adrian Cristian Ionescu</name>
+         <email>adrian.ionescu.consulting@gmail.com</email>
+      </developer>
+   </developers>
+   <parent>
+      <groupId>org.sonatype.oss</groupId>
+      <artifactId>oss-parent</artifactId>
+      <version>7</version>
+   </parent>
+   <scm>
+      <connection>scm:git:git@github.com:acionescu/netcell.git</connection>
+      <developerConnection>scm:git:file://localhost/home/adi/workspace/projects/netcell</developerConnection>
+      <url>git@github.com:acionescu/netcell.git</url>
+   </scm>
+   <build>
+      <plugins>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.3</version>
+            <configuration>
+               <source>1.7</source>
+               <target>1.7</target>
+            </configuration>
+         </plugin>
+         <plugin>
+            <groupId>com.mycila</groupId>
+            <artifactId>license-maven-plugin</artifactId>
+            <version>2.11</version>
+            <configuration>
+               <header>src/license-template.txt</header>
+               <properties>
+                  <owner>Adrian Cristian Ionescu</owner>
+                  <inceptionYear>2009</inceptionYear>
+                  <github>https://github.com/acionescu</github>
+               </properties>
+               <includes>
+                  <include>src/main/java/**</include>
+                  <include>src/test/java/**</include>
+                  <include>**/*.xml</include>
+               </includes>
+            </configuration>
+            <executions>
+               <execution>
+                  <goals>
+                     <goal>check</goal>
+                  </goals>
+               </execution>
+            </executions>
+         </plugin>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>1.5</version>
+            <executions>
+               <execution>
+                  <id>sign-artifacts</id>
+                  <phase>verify</phase>
+                  <goals>
+                     <goal>sign</goal>
+                  </goals>
+               </execution>
+            </executions>
+         </plugin>
+         <plugin>
+            <groupId>org.sonatype.plugins</groupId>
+            <artifactId>nexus-staging-maven-plugin</artifactId>
+            <version>1.6.3</version>
+            <extensions>true</extensions>
+            <configuration>
+               <serverId>ossrh</serverId>
+               <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+               <autoReleaseAfterClose>true</autoReleaseAfterClose>
+            </configuration>
+         </plugin>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-source-plugin</artifactId>
+            <version>2.2.1</version>
+            <executions>
+               <execution>
+                  <id>attach-sources</id>
+                  <goals>
+                     <goal>jar-no-fork</goal>
+                  </goals>
+               </execution>
+            </executions>
+         </plugin>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <version>2.9.1</version>
+            <executions>
+               <execution>
+                  <id>attach-javadocs</id>
+                  <goals>
+                     <goal>jar</goal>
+                  </goals>
+               </execution>
+            </executions>
+         </plugin>
+      </plugins>
+   </build>
+   <distributionManagement>
+      <snapshotRepository>
+         <id>ossrh</id>
+         <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+      </snapshotRepository>
+      <repository>
+         <id>ossrh</id>
+         <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+      </repository>
+   </distributionManagement>
    <dependencies>
       <dependency>
          <groupId>junit</groupId>
@@ -14,14 +156,14 @@
          <scope>test</scope>
       </dependency>
       <dependency>
-         <groupId>cfg-engine</groupId>
+         <groupId>net.segoia</groupId>
          <artifactId>cfg-engine</artifactId>
-         <version>0.0.1-SNAPSHOT</version>
+         <version>0.0.1</version>
       </dependency>
       <dependency>
-         <groupId>ro.zg.util</groupId>
+         <groupId>net.segoia</groupId>
          <artifactId>script-dao</artifactId>
-         <version>1.0</version>
+         <version>1.0.0-SNAPSHOT</version>
       </dependency>
       <dependency>
          <groupId>org.apache.commons</groupId>
@@ -49,9 +191,9 @@
          <version>1.6.2</version>
       </dependency>
       <dependency>
-         <groupId>distributed-processor</groupId>
+         <groupId>net.segoia</groupId>
          <artifactId>distributed-processor</artifactId>
-         <version>0.0.1-SNAPSHOT</version>
+         <version>0.0.2</version>
       </dependency>
       <dependency>
          <groupId>org.apache.velocity</groupId>
@@ -65,14 +207,14 @@
          <version>4.0.1</version>
       </dependency>
       <dependency>
-         <groupId>ro.zg.netcell</groupId>
+         <groupId>net.segoia</groupId>
          <artifactId>netcell-commons</artifactId>
-         <version>0.0.1-SNAPSHOT</version>
+         <version>0.0.1</version>
       </dependency>
       <dependency>
-         <groupId>ro.zg.netcell</groupId>
+         <groupId>net.segoia</groupId>
          <artifactId>netcell-client</artifactId>
-         <version>0.0.1-SNAPSHOT</version>
+         <version>0.0.1</version>
       </dependency>
       <dependency>
          <groupId>org.quartz-scheduler</groupId>
@@ -90,9 +232,9 @@
          <version>2.1.5</version>
       </dependency>
       <dependency>
-         <groupId>com.github.acionescu</groupId>
+         <groupId>net.segoia</groupId>
          <artifactId>commons</artifactId>
-         <version>0.0.4-SNAPSHOT</version>
+         <version>0.0.4</version>
       </dependency>
       <dependency>
          <groupId>org.xerial.snappy</groupId>
@@ -105,27 +247,4 @@
          <version>1.3.0</version>
       </dependency>
    </dependencies>
-   <build>
-      <!-- <resources> -->
-      <!-- <resource> -->
-      <!-- <directory>resources</directory> -->
-      <!-- </resource> -->
-      <!-- </resources> -->
-      <plugins>
-         <plugin>
-            <!-- <artifactId>maven-compiler-plugin</artifactId> -->
-            <!-- <configuration> -->
-            <!-- <source>1.6</source> -->
-            <!-- <target>1.6</target> -->
-            <!-- </configuration> -->
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <version>3.1</version>
-            <configuration>
-               <source>1.7</source>
-               <target>1.7</target>
-            </configuration>
-         </plugin>
-      </plugins>
-   </build>
 </project>
