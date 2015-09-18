@@ -21,7 +21,7 @@
    <groupId>net.segoia</groupId>
    <artifactId>netcell</artifactId>
    <name>netcell</name>
-   <version>0.0.2</version>
+   <version>0.0.3-SNAPSHOT</version>
    <description>Java ESB with an embedded business process modeling engine </description>
    <url>https://github.com/acionescu/netcell</url>
    <licenses>
@@ -47,7 +47,7 @@
       <connection>scm:git:git@github.com:acionescu/netcell.git</connection>
       <developerConnection>scm:git:git@github.com:acionescu/netcell.git</developerConnection>
       <url>https://github.com/acionescu/netcell</url>
-     <tag>netcell-0.0.2</tag>
+     <tag>HEAD</tag>
   </scm>
    <build>
       <plugins>
