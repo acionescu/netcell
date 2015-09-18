@@ -25,7 +25,8 @@ import net.segoia.commons.exceptions.ContextAwareException;
 
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
-
+import org.junit.Ignore;
+@Ignore
 public class VelocityTest extends TestCase {
     private VelocityEngine velocityEngine;
 

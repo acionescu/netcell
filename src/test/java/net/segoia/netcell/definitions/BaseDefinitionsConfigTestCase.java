@@ -16,10 +16,13 @@
  */
 package net.segoia.netcell.definitions;
 
+import junit.framework.TestCase;
 import net.segoia.cfgengine.core.configuration.ConfigurationManager;
 import net.segoia.cfgengine.util.PackageCfgLoader;
-import junit.framework.TestCase;
 
+import org.junit.Ignore;
+
+@Ignore
 public class BaseDefinitionsConfigTestCase extends TestCase{
 protected ConfigurationManager cfgManager;
     

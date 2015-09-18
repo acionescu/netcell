@@ -26,7 +26,9 @@ import net.segoia.util.data.reflection.ReflectionUtility;
 
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
+import org.junit.Ignore;
 
+@Ignore
 public class DefinitionsTestCase extends BaseDefinitionsConfigTestCase {
     VelocityEngine velEngine;
     

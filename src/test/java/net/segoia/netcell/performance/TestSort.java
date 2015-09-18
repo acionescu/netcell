@@ -20,9 +20,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.segoia.netcell.config.BaseEngineConfigTestCase;
-import net.segoia.netcell.entities.GenericEntity;
 import net.segoia.util.data.GenericNameValueContext;
 
+import org.junit.Ignore;
+@Ignore
 public class TestSort extends BaseEngineConfigTestCase{
     
     private List<Integer> generateRandomList(int count, int max){
@@ -71,8 +72,8 @@ public class TestSort extends BaseEngineConfigTestCase{
 //	GenericEntity<GenericNameValueContext> entity = (GenericEntity)cfgManager.getObjectById("quick-sort");
 //	assertNotNull(entity);
 	GenericNameValueContext c = new GenericNameValueContext();
-	c.put("fid","quick-sort");
-	c.put("original",input.toString());
+	c.put("fid","test.sorting.quick-sort");
+	c.put("input",input.toString());
 	counter = System.currentTimeMillis();
 	GenericNameValueContext res = engineController.execute(c);
 	long engineTime = System.currentTimeMillis()-counter;

@@ -19,19 +19,19 @@ package net.segoia.netcell.control;
 import java.util.List;
 import java.util.Map;
 
-import net.segoia.netcell.control.Command;
-import net.segoia.netcell.control.NetCell;
-import net.segoia.netcell.control.NetCellLoader;
+import junit.framework.TestCase;
 import net.segoia.netcell.vo.definitions.DataAccessComponentDefinition;
 import net.segoia.netcell.vo.definitions.ExecutableEntityDefinition;
-import junit.framework.TestCase;
 
+import org.junit.Ignore;
+
+@Ignore
 public class NetCellControlTestCase extends TestCase {
     private NetCell nc;
 //    protected ConfigurationManager cfgManager;
 //
     public void setUp() throws Exception {
-	nc = new NetCellLoader().load("root");
+	nc = new NetCellLoader().load("/media/netcell-node/repository");
     }
     
 //    public void testLoadNetCell() throws Exception{

@@ -16,9 +16,12 @@
  */
 package net.segoia.netcell.config;
 
+import org.junit.Ignore;
+
 import net.segoia.netcell.entities.GenericEntity;
 import net.segoia.util.data.GenericNameValueContext;
 
+@Ignore
 public class EntitiesTestCase extends BaseEngineConfigTestCase{
 
    
@@ -79,6 +82,7 @@ public class EntitiesTestCase extends BaseEngineConfigTestCase{
 //	System.out.println("response= "+res.getParameters());
 //    }
     
+    @Ignore
     public void testDatabaseCall() throws Exception{
 	GenericEntity<GenericNameValueContext> entity = (GenericEntity)cfgManager.getObjectById("get-people");
 	assertNotNull(entity);
