@@ -8,7 +8,7 @@
  * Provides a Java Swing **GUI** - see [netcell-gui](https://github.com/acionescu/netcell-gui)
  * **Component based** - all operations are encapsulated as customizable components that can be (re)used while orechestrating
  different execution flows
- * Out of the box **customizable data access connectors** ( Postgresql, MySql, Oracle, Cassandra,  Http cleint, ... )
+ * Out of the box **customizable data access connectors** ( Postgresql, MySql, Oracle, Cassandra,  Http client, ... )
  * **Scheduled job execution mechanism**
  * [Apache Velocity](https://velocity.apache.org/engine/) based **dynamic command building**  - Commands to third party systems
  can be dynamically built and executed employing velocity templates
