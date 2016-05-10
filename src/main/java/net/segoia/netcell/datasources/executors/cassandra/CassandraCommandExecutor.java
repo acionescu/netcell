@@ -59,7 +59,7 @@ public class CassandraCommandExecutor implements CommandExecutor<CassandraComman
 
 	try {
 	    GenericNameValueList resultsAsList = CassandraUtil.getResultsAsList(result, session.getCluster()
-		    .getConfiguration().getProtocolOptions().getProtocolVersionEnum());
+		    .getConfiguration().getProtocolOptions().getProtocolVersion());
 	    if (logger.isDebugEnabled()) {
 		logger.debug("Returning response to cassandra query: " + resultsAsList);
 	    }

@@ -23,6 +23,7 @@ import net.segoia.util.data.GenericNameValueList;
 
 import org.apache.log4j.Logger;
 
+import com.datastax.driver.core.CodecRegistry;
 import com.datastax.driver.core.ColumnDefinitions;
 import com.datastax.driver.core.DataType;
 import com.datastax.driver.core.ProtocolVersion;
@@ -51,10 +52,10 @@ public class CassandraUtil {
 	    for (int i = 0; i < colDefSize; i++) {
 		String colName = columnDefinitions.getName(i);
 		DataType colType = columnDefinitions.getType(i);
-
+		
 		ByteBuffer bytesUnsafe = row.getBytesUnsafe(i);
 		if (bytesUnsafe != null) {
-		    rowData.put(colName, colType.deserialize(bytesUnsafe, pv));
+		    rowData.put(colName, CodecRegistry.DEFAULT_INSTANCE.codecFor(colType).deserialize(bytesUnsafe, pv));
 		}
 	    }
 

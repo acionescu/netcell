@@ -29,8 +29,7 @@ import net.segoia.util.logging.Logger;
 import net.segoia.util.logging.MasterLogManager;
 
 public class NodeLoader {
-    private static String defaulCfgEntryPoint = "config" + File.separator
-	    + "config.xml";
+    private static String defaulCfgEntryPoint = "config" + File.separator + "config.xml";
     private static Logger logger = MasterLogManager.getLogger(NodeLoader.class.getName());
 
     private static NetCell netcellInstance;
@@ -48,34 +47,32 @@ public class NodeLoader {
 	return load(rootDir, defaulCfgEntryPoint);
     }
 
-    public static NetCell load(String rootDir, String entryPoint)
-	    throws ContextAwareException {
+    public static NetCell load(String rootDir, String entryPoint) throws ContextAwareException {
 	ConfigurationManager cfgManager = null;
 	try {
 	    String configFileName = getFullEntryPointPath(rootDir, entryPoint);
 	    // ClassLoader classLoader = this.getClass().getClassLoader();
 	    ClassLoader classLoader = NodeLoader.class.getClassLoader();
-	    logger.info("Loading node from "
-		    + classLoader.getResource(configFileName));
-	    cfgManager = PackageCfgLoader.getInstance().load(configFileName,
-		    classLoader);
+	    logger.info("Loading node from " + classLoader.getResource(configFileName));
+	    cfgManager = PackageCfgLoader.getInstance().load(configFileName, classLoader);
 	} catch (ConfigurationException e) {
 	    throw new ContextAwareException("INITIALIZATION_EXCEPTION", e);
 	}
-	NetCell commandController = (NetCell) cfgManager
-		.getObjectById("CommandControllerWrapper");
+	NetCell commandController = (NetCell) cfgManager.getObjectById("CommandControllerWrapper");
 	netcellInstance = commandController;
-	
+
 	/* get local instance of the execution engine */
-	DistributedServicesManager distributedServicesManager =(DistributedServicesManager) cfgManager
+	DistributedServicesManager distributedServicesManager = (DistributedServicesManager) cfgManager
 		.getObjectById("distributedServicesManager");
-	ReflectionBasedDistributedService rfds = (ReflectionBasedDistributedService)distributedServicesManager.getDistributedService(DistributedServicesTypes.EXECUTION_ENGINE_DESC);
-	executionEngineInstance = (ExecutionEngineContract)rfds.getTargetObject();
+	ReflectionBasedDistributedService rfds = (ReflectionBasedDistributedService) distributedServicesManager
+		.getDistributedService(DistributedServicesTypes.EXECUTION_ENGINE_DESC);
+	if (rfds != null) {
+	    executionEngineInstance = (ExecutionEngineContract) rfds.getTargetObject();
+	}
 	return commandController;
     }
 
-    private static String getFullEntryPointPath(String rootDir,
-	    String entryPoint) {
+    private static String getFullEntryPointPath(String rootDir, String entryPoint) {
 	return rootDir + File.separator + entryPoint;
     }
 }

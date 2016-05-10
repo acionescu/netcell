@@ -40,26 +40,7 @@ public class DatasourcesTestCase {
 //	Connection conn = DriverManager.getConnection(url, props);
 
 	
-	BasicDataSource ds = new BasicDataSource();
 	
-	
-	
-	ds.setUrl(url);
-	ds.setUsername("metaguvernare");
-	ds.setPassword("meta-guvernare");
-//	ds.setDriverClassName("org.postgresql.Driver");
-	
-	Connection conn = ds.getConnection();
-	
-	Statement st = conn.createStatement();
-	boolean rs = st.execute(" begin;\n" + 
-		"delete from entities_links_users where entity_link_id=889;\n" + 
-		"\n" + 
-		"delete from entities_links where entity_link_id =889;\n" + 
-		"\n" + 
-		"commit;");
-	System.out.println(rs);
-	conn.close();
     }
 
 }

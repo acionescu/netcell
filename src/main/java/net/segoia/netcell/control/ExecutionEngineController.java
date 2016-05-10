@@ -58,6 +58,10 @@ public class ExecutionEngineController implements ExecutionEngineContract {
     public ExecutionEngineController() {
 
     }
+    
+    public void start() throws Exception {
+	init();
+    }
 
     public void init() throws Exception {
 	engineHandlerFile = resourcesManager.getResourceFullPath("ENGINE_HANDLER_FILE");

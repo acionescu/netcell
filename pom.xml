@@ -16,7 +16,8 @@
     limitations under the License.
 
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
    <modelVersion>4.0.0</modelVersion>
    <groupId>net.segoia</groupId>
    <artifactId>netcell</artifactId>
@@ -47,8 +48,8 @@
       <connection>scm:git:git@github.com:acionescu/netcell.git</connection>
       <developerConnection>scm:git:git@github.com:acionescu/netcell.git</developerConnection>
       <url>https://github.com/acionescu/netcell</url>
-     <tag>HEAD</tag>
-  </scm>
+      <tag>HEAD</tag>
+   </scm>
    <build>
       <plugins>
          <plugin>
@@ -204,7 +205,7 @@
       <dependency>
          <groupId>net.segoia</groupId>
          <artifactId>distributed-processor</artifactId>
-         <version>0.0.2</version>
+         <version>0.0.3-SNAPSHOT</version>
       </dependency>
       <dependency>
          <groupId>org.apache.velocity</groupId>
@@ -240,12 +241,17 @@
       <dependency>
          <groupId>com.datastax.cassandra</groupId>
          <artifactId>cassandra-driver-core</artifactId>
-         <version>2.1.5</version>
+         <version>3.0.1</version>
+      </dependency>
+      <dependency>
+         <groupId>com.datastax.cassandra</groupId>
+         <artifactId>cassandra-driver-mapping</artifactId>
+         <version>3.0.1</version>
       </dependency>
       <dependency>
          <groupId>net.segoia</groupId>
          <artifactId>commons</artifactId>
-         <version>0.0.4</version>
+         <version>0.0.5-SNAPSHOT</version>
       </dependency>
       <dependency>
          <groupId>org.xerial.snappy</groupId>
@@ -256,6 +262,11 @@
          <groupId>net.jpountz.lz4</groupId>
          <artifactId>lz4</artifactId>
          <version>1.3.0</version>
+      </dependency>
+      <dependency>
+         <groupId>org.mindrot</groupId>
+         <artifactId>jbcrypt</artifactId>
+         <version>0.3m</version>
       </dependency>
    </dependencies>
 </project>

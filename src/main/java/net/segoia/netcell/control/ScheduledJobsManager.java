@@ -51,12 +51,23 @@ public class ScheduledJobsManager extends BaseEntityManager<ScheduledJobDefiniti
     private static Logger logger = MasterLogManager.getLogger(ScheduledJobsManager.class.getName());
     private Map<String, ScheduledJobDefinition> scheduledJobs = new LinkedHashMap<String, ScheduledJobDefinition>();
 
-    public void init() throws ContextAwareException {
+    public void start() throws ContextAwareException {
+	logger.info("Scheduler - start");
 	try {
-	    loadJobs();
 	    initScheduler();
 	    scheduleJobs();
-	     scheduler.startDelayed(startDelay);
+	    scheduler.startDelayed(startDelay);
+	} catch (Exception e) {
+	    throw new ContextAwareException("SCHEDULER_START_ERROR", e);
+	}
+	logger.info("Scheduler successfuly started");
+    }
+
+    public void init() throws ContextAwareException {
+	logger.info("Scheduler - start initialization");
+	try {
+	    loadJobs();
+
 	} catch (Exception e) {
 	    throw new ContextAwareException("SCHEDULER_INIT_ERROR", e);
 	}
@@ -103,8 +114,8 @@ public class ScheduledJobsManager extends BaseEntityManager<ScheduledJobDefiniti
     }
 
     private void scheduleJob(ScheduledJobDefinition sjd) throws SchedulerException {
-	if(!(Boolean)sjd.getConfigParamValue(ScheduledJobDefinition.ACTIVE)){
-	    logger.info("Job "+sjd.getId()+" bypassed because it's not active");
+	if (!(Boolean) sjd.getConfigParamValue(ScheduledJobDefinition.ACTIVE)) {
+	    logger.info("Job " + sjd.getId() + " bypassed because it's not active");
 	    return;
 	}
 	JobDetail jd = getJobDetailFromDefinition(sjd);
@@ -119,7 +130,7 @@ public class ScheduledJobsManager extends BaseEntityManager<ScheduledJobDefiniti
 	jd.addJobListener(jobsControllerName);
 	trigger.addTriggerListener(jobsControllerName);
 	scheduler.scheduleJob(jd, trigger);
-	logger.info("Job "+sjd.getId() +" scheduled with params: "+sjd.getConfigData());
+	logger.info("Job " + sjd.getId() + " scheduled with params: " + sjd.getConfigData());
     }
 
     private JobDetail getJobDetailFromDefinition(ScheduledJobDefinition sjd) {
@@ -129,8 +140,8 @@ public class ScheduledJobsManager extends BaseEntityManager<ScheduledJobDefiniti
 	jobDetail.setJobClass(WorkflowExecutionJob.class);
 	JobDataMap dataMap = new JobDataMap();
 	dataMap.put(ScheduledJobDefinition.FLOW_ID, sjd.getConfigParamValue(ScheduledJobDefinition.FLOW_ID));
-	dataMap.put(ScheduledJobDefinition.FLOW_INPUT_PARAMS, sjd
-		.getConfigParamValue(ScheduledJobDefinition.FLOW_INPUT_PARAMS));
+	dataMap.put(ScheduledJobDefinition.FLOW_INPUT_PARAMS,
+		sjd.getConfigParamValue(ScheduledJobDefinition.FLOW_INPUT_PARAMS));
 
 	jobDetail.setJobDataMap(dataMap);
 	return jobDetail;
@@ -140,10 +151,10 @@ public class ScheduledJobsManager extends BaseEntityManager<ScheduledJobDefiniti
 	ExtendedCronTrigger trigger = new ExtendedCronTrigger();
 	trigger.setName(sjd.getId() + "-trigger");
 	trigger.setCronExpression((String) sjd.getConfigParamValue(ScheduledJobDefinition.CRON_TRIGGER));
-	trigger.setAllowedConcurentJobsCount((Integer) sjd
-		.getConfigParamValue(ScheduledJobDefinition.ALLOWED_CONCURENT_JOBS));
+	trigger.setAllowedConcurentJobsCount(
+		(Integer) sjd.getConfigParamValue(ScheduledJobDefinition.ALLOWED_CONCURENT_JOBS));
 	trigger.setMisfireInstruction((Integer) sjd.getConfigParamValue(ScheduledJobDefinition.MISSFIRE_VALUE));
-	
+
 	return trigger;
     }
 

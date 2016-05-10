@@ -34,16 +34,24 @@ import net.segoia.netcell.vo.definitions.EntityDefinitionSummary;
 import net.segoia.netcell.vo.definitions.EntityType;
 import net.segoia.util.data.GenericNameValueContext;
 import net.segoia.util.data.ListMap;
+import net.segoia.util.logging.Logger;
+import net.segoia.util.logging.MasterLogManager;
 
 public class EntitiesManager implements EntitiesManagerContract {
+    private static Logger logger = MasterLogManager.getLogger(EntitiesManager.class.getName());
     private ClassLoader resourcesLoader;
     private ResourcesManager resourcesManager;
     private Map<String, BaseEntityManager<EntityDefinition>> managers;
     private ConfigurationManager executableEntitiesCfgManager;
 
     private DefinitionsRepository definitionsRepository;
-
+    
+    public void start() throws ContextAwareException {
+	init();
+    }
+    
     public void init() throws ContextAwareException {
+	logger.info("Entities Manger - start initialization");
 	initEntitiesDefinitions();
 	initExecutableEntities();
 	refreshDefinitions();
