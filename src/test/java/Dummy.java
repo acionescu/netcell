@@ -22,6 +22,8 @@ import com.unboundid.ldap.sdk.RootDSE;
 import com.unboundid.ldap.sdk.SearchResult;
 import com.unboundid.ldap.sdk.SearchScope;
 
+import net.segoia.netcell.vo.InputParameter;
+
 public class Dummy {
     public static void main(String[] args) throws Exception {
 	// URI uri = new URI("http://dear_raed.blogspot.com/");
@@ -97,5 +99,8 @@ public class Dummy {
 	}
 
 	System.out.println(username + " bind " + res);
+	
+	
+	
     }
 }

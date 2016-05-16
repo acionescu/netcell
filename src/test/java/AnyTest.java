@@ -14,12 +14,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.segoia.netcell.control.commands.formatters;
+import org.junit.Test;
 
-public class StringFormatter extends BaseObjectFormatter<String>{
+import net.segoia.netcell.vo.InputParameter;
 
-    public String format(String obj) throws Exception {
-	return getStringDelimiter()+escape(obj)+getStringDelimiter();
+public class AnyTest {
+    
+    
+    @Test
+    public void testInputParam() {
+	InputParameter ip = new InputParameter();
+
+	ip.setType("List[Any]");
+	System.out.println(ip.getComplexType());
     }
 
 }

@@ -21,7 +21,6 @@ import java.util.List;
 import net.segoia.commons.exceptions.ContextAwareException;
 import net.segoia.commons.exceptions.ExceptionContext;
 import net.segoia.netcell.constants.ExceptionTypes;
-import net.segoia.netcell.entities.GenericEntity;
 import net.segoia.netcell.vo.InputParameter;
 import net.segoia.util.data.GenericNameValue;
 import net.segoia.util.data.GenericNameValueContext;
@@ -32,12 +31,16 @@ import net.segoia.util.data.ObjectsUtil;
 import net.segoia.util.data.type.ListType;
 import net.segoia.util.data.type.MapType;
 import net.segoia.util.data.type.ParameterType;
+import net.segoia.util.logging.Logger;
+import net.segoia.util.logging.MasterLogManager;
 import net.segoia.util.translation.TranslationRule;
 import net.segoia.util.translation.TranslationUtil;
 import net.segoia.util.validation.ParameterValidationUtil;
 import net.segoia.util.validation.ValidationRule;
 
 public class InputParamsProcessor extends GenericEntity<GenericNameValueContext> {
+    
+    private static Logger logger = MasterLogManager.getLogger(InputParamsProcessor.class);
 
     public GenericNameValueContext execute(GenericNameValueContext input) throws Exception {
 	List<InputParameter> inputParameters = (List<InputParameter>) input.getValue("inputParameters");
@@ -83,6 +86,9 @@ public class InputParamsProcessor extends GenericEntity<GenericNameValueContext>
 		    throw new ContextAwareException(ExceptionTypes.MANDATORY_PARAMETER_VALIDATION_ERROR, ec);
 		}
 		ParameterType complexType = (ParameterType) ObjectsUtil.copy(ep.getComplexType());
+		if(logger.isDebugEnabled()) {
+		    logger.debug(ep.getName()+" type : "+complexType );
+		}
 		// System.out.println(ep.getName()+" type : "+complexType);
 		if (complexType != null) {
 		    // String parameterTypeType = complexType.getParameterTypeType();

@@ -23,6 +23,7 @@ public abstract class BaseObjectFormatter<T> implements ObjectFormatter<T>{
     private String elementSeparator=", ";
     private String associationEelement="=";
     private String stringDelimiter="";
+    private EscapeFormatter escapeFormatter;
     
     public ObjectFormatter<Object> getParentFormatter() {
         return parentFormatter;
@@ -87,6 +88,25 @@ public abstract class BaseObjectFormatter<T> implements ObjectFormatter<T>{
     public void setStringDelimiter(String stringDelimiter) {
         this.stringDelimiter = stringDelimiter;
     }
+
+    /**
+     * @return the escapeFormatter
+     */
+    public EscapeFormatter getEscapeFormatter() {
+        return escapeFormatter;
+    }
+
+    /**
+     * @param escapeFormatter the escapeFormatter to set
+     */
+    public void setEscapeFormatter(EscapeFormatter escapeFormatter) {
+        this.escapeFormatter = escapeFormatter;
+    }
     
-    
+    protected String escape(String target) throws Exception{
+	if(escapeFormatter != null) {
+	    return escapeFormatter.format(target);
+	}
+	return target;
+    }
 }
