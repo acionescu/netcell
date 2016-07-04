@@ -37,6 +37,7 @@ import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
+import org.apache.http.params.HttpProtocolParams;
 
 public class HttpConnectionManager extends BaseConnectionManager<HttpClient> {
     private HttpClient httpClient;
@@ -55,7 +56,7 @@ public class HttpConnectionManager extends BaseConnectionManager<HttpClient> {
 	connPerRoute.setMaxForRoute(new HttpRoute(localhost), 50);
 	ConnManagerParams.setMaxConnectionsPerRoute(params, connPerRoute);
 	ConnManagerParams.setTimeout(params, Long.parseLong(cfgData.getParameterValue(DataSourceConfigParameters.CONNECTION_TIMEOUT).toString()));
-
+	
 	
 	SchemeRegistry schemeRegistry = new SchemeRegistry();
 	schemeRegistry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
@@ -74,6 +75,7 @@ public class HttpConnectionManager extends BaseConnectionManager<HttpClient> {
 
 	HttpConnectionParams.setSoTimeout(params, 25000);
 	httpClient = new DefaultHttpClient(cm, params);
+	HttpProtocolParams.setUserAgent(httpClient.getParams(), cfgData.getParameterValue(DataSourceConfigParameters.USER_AGENT).toString());
 
     }
 
