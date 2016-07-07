@@ -25,6 +25,9 @@
    <version>0.0.3-SNAPSHOT</version>
    <description>Java ESB with an embedded business process modeling engine </description>
    <url>https://github.com/acionescu/netcell</url>
+   <properties>
+      <additionalparam>-Xdoclint:none</additionalparam>
+   </properties>
    <licenses>
       <license>
          <name>The Apache Software License, Version 2.0</name>

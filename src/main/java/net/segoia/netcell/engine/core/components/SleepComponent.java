@@ -16,6 +16,8 @@
  */
 package net.segoia.netcell.engine.core.components;
 
+import java.math.BigDecimal;
+
 import net.segoia.netcell.entities.GenericEntity;
 import net.segoia.util.data.GenericNameValueContext;
 
@@ -23,7 +25,7 @@ public class SleepComponent extends GenericEntity<GenericNameValueContext> {
 
     @Override
     public GenericNameValueContext execute(GenericNameValueContext input) throws Exception {
-	long duration = (Long)input.getValue("duration");
+	long duration = ((BigDecimal)input.getValue("duration")).longValue();
 	
 	Thread.sleep(duration);
 	
