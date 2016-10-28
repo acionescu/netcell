@@ -16,14 +16,11 @@
  */
 package net.segoia.netcell.datasources.executors.http;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.net.URI;
-import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
-
-import net.segoia.scriptdao.core.CommandContext;
-import net.segoia.scriptdao.core.CommandExecutor;
-import net.segoia.scriptdao.core.ScriptDaoCommand;
 
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
@@ -43,6 +40,9 @@ import org.apache.http.protocol.HTTP;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
 
+import net.segoia.scriptdao.core.CommandContext;
+import net.segoia.scriptdao.core.CommandExecutor;
+import net.segoia.scriptdao.core.ScriptDaoCommand;
 
 public class HttpCommandExecutor implements CommandExecutor<HttpCommandResponse> {
 
@@ -68,8 +68,8 @@ public class HttpCommandExecutor implements CommandExecutor<HttpCommandResponse>
 	// requestUri = URIUtils.createURI(requestUri.getScheme(), requestUri.getHost(), requestUri.getPort(),
 	// requestUri.getPath(), URLEncoder.encode(requestUri.getQuery(),HTTP.DEFAULT_PROTOCOL_CHARSET),
 	// requestUri.getFragment());
-//	String encodedUrl = URLEncoder.encode(url, HTTP.DEFAULT_PROTOCOL_CHARSET);
-	
+	// String encodedUrl = URLEncoder.encode(url, HTTP.DEFAULT_PROTOCOL_CHARSET);
+
 	String encodedUrl = new URI(url).toASCIIString();
 	boolean returnHeaders = false;
 	Object rh = command.getArgument("returnHeaders");
@@ -105,7 +105,6 @@ public class HttpCommandExecutor implements CommandExecutor<HttpCommandResponse>
 	    responseEntity = response.getEntity();
 	    StatusLine statusLine = response.getStatusLine();
 
-	    
 	    commandResponse.setStatusCode(statusLine.getStatusCode());
 	    commandResponse.setProtocol(statusLine.getProtocolVersion().getProtocol());
 	    commandResponse.setReasonPhrase(statusLine.getReasonPhrase());
@@ -121,20 +120,32 @@ public class HttpCommandExecutor implements CommandExecutor<HttpCommandResponse>
 		}
 		commandResponse.setHeaders(headers);
 	    }
+
+	    /* where to save the output */
+	    String outputFolder = (String) command.getArgument("outputFolder");
+	    /* the name under which to save the output */
+	    String outputName = (String) command.getArgument("outputName");
+
 	    if (responseEntity != null) {
 		long responseLength = responseEntity.getContentLength();
-		String responseContent = EntityUtils.toString(responseEntity,HTTP.UTF_8);
-		if (responseLength == -1) {
-		    responseLength = responseContent.length();
+
+		if (outputFolder != null && outputName != null) {
+		    responseEntity.writeTo(new FileOutputStream(outputFolder + File.separator + outputName));
+		} else {
+		    String responseContent = EntityUtils.toString(responseEntity, HTTP.UTF_8);
+		    if (responseLength == -1) {
+			responseLength = responseContent.length();
+		    }
+		    commandResponse.setContent(responseContent);
 		}
+
 		commandResponse.setLength(responseLength);
-		commandResponse.setContent(responseContent);
+
 	    }
 	} finally {
-	    if(responseEntity != null) {
+	    if (responseEntity != null) {
 		responseEntity.consumeContent();
-	    }
-	    else {
+	    } else {
 		request.abort();
 	    }
 	}

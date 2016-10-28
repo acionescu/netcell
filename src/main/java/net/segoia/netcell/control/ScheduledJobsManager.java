@@ -129,6 +129,7 @@ public class ScheduledJobsManager extends BaseEntityManager<ScheduledJobDefiniti
 	String jobsControllerName = jobsController.getName();
 	jd.addJobListener(jobsControllerName);
 	trigger.addTriggerListener(jobsControllerName);
+	
 	scheduler.scheduleJob(jd, trigger);
 	logger.info("Job " + sjd.getId() + " scheduled with params: " + sjd.getConfigData());
     }

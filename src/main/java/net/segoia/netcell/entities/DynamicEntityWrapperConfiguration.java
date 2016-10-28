@@ -38,6 +38,11 @@ public class DynamicEntityWrapperConfiguration<O> implements Serializable{
     private ConfigurationData userConfig;
     
     private int entityType;
+    
+    /**
+     * Pass the global context under this name into the local context
+     */
+    private String globalInputName;
 
     public void init() {
 	if (staticParameters != null) {
@@ -122,6 +127,14 @@ public class DynamicEntityWrapperConfiguration<O> implements Serializable{
      */
     public void setUserConfig(ConfigurationData userConfig) {
         this.userConfig = userConfig;
+    }
+
+    public String getGlobalInputName() {
+        return globalInputName;
+    }
+
+    public void setGlobalInputName(String globalInputName) {
+        this.globalInputName = globalInputName;
     }
     
 }

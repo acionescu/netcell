@@ -25,9 +25,9 @@
    <version>0.0.3-SNAPSHOT</version>
    <description>Java ESB with an embedded business process modeling engine </description>
    <url>https://github.com/acionescu/netcell</url>
-   <properties>
-      <additionalparam>-Xdoclint:none</additionalparam>
-   </properties>
+<!--    <properties> -->
+<!--       <additionalparam>-Xdoclint:none</additionalparam> -->
+<!--    </properties> -->
    <licenses>
       <license>
          <name>The Apache Software License, Version 2.0</name>
@@ -178,7 +178,7 @@
       <dependency>
          <groupId>net.segoia</groupId>
          <artifactId>script-dao</artifactId>
-         <version>1.0.0</version>
+         <version>1.0.1-SNAPSHOT</version>
       </dependency>
       <dependency>
          <groupId>org.apache.commons</groupId>

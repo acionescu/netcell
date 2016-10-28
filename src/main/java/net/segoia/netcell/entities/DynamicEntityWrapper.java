@@ -32,6 +32,7 @@ public class DynamicEntityWrapper<O> extends GenericEntity<O> implements Seriali
      */
     private static final long serialVersionUID = -564798093340781210L;
     private DynamicEntityWrapperConfiguration<O> config;
+    public static final String GLOBAL_CONTEXT="_globalContext";
 
     public O execute(GenericNameValueContext input) throws Exception {
 	GenericNameValueContext globalContext = input;
@@ -46,6 +47,14 @@ public class DynamicEntityWrapper<O> extends GenericEntity<O> implements Seriali
 	String originalInputName = config.getOriginalInputName();
 	if (originalInputName != null) {
 	    localContext.put(originalInputName, input);
+	}
+	/* in case no key for original context was passed, still add it under _globalContext key */ 
+	else {
+	    GenericNameValueContext gContext = (GenericNameValueContext)input.getValue(GLOBAL_CONTEXT);
+	    if(gContext == null) {
+		gContext = input;
+	    }
+	    localContext.put(GLOBAL_CONTEXT, gContext);
 	}
 	 /* set on the context the id of the execution entity */
 	    String currentEntityId = getId();
