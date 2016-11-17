@@ -18,11 +18,12 @@ package net.segoia.netcell.entities.util.collections;
 
 import net.segoia.netcell.entities.GenericEntity;
 import net.segoia.util.data.GenericNameValueContext;
+import net.segoia.util.data.GenericNameValueContextUtil;
 
 public class GetCollectionSizeEntity extends GenericEntity<GenericNameValueContext>{
 
     public GenericNameValueContext execute(GenericNameValueContext input) throws Exception {
-	GenericNameValueContext inputCollection = (GenericNameValueContext)input.getValue("collection");
+	GenericNameValueContext inputCollection = (GenericNameValueContext)GenericNameValueContextUtil.convertToKnownType(input.getValue("collection"));
 	int size = inputCollection.size();
 	GenericNameValueContext response = new GenericNameValueContext();
 	response.put("size", size);

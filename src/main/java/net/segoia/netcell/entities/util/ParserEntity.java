@@ -34,11 +34,17 @@ public class ParserEntity extends GenericEntity<GenericNameValueContext> {
 	String outputCharsToEscape = (String) input.getValue("OUTPUT_CHARS_TO_ESCAPE");
 	String outputEscapeChar = (String) input.getValue("OUTPUT_ESCAPE_CHAR");
 	Boolean caseInsensitive = (Boolean) input.getValue("CASE_INSENSITIVE");
+	String inputEscapeChar = (String)input.getValue("INPUT_ESCAPE_CHAR");
 
 	ParserConfig pc = new ParserConfig(symbols, outputCharsToEscape, outputEscapeChar);
 	if (caseInsensitive != null) {
 	    pc.setCaseInsensitive(caseInsensitive);
 	}
+	
+	if(inputEscapeChar != null) {
+	    pc.setInputEscapeChar(inputEscapeChar);
+	}
+	
 	ParseResponse resp = parseManager.parse(inputContent, pc);
 	List<?> list = resp.getObjectsList();
 	GenericNameValueContext output = new GenericNameValueContext();

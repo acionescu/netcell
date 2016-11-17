@@ -25,9 +25,9 @@
    <version>0.0.3-SNAPSHOT</version>
    <description>Java ESB with an embedded business process modeling engine </description>
    <url>https://github.com/acionescu/netcell</url>
-<!--    <properties> -->
-<!--       <additionalparam>-Xdoclint:none</additionalparam> -->
-<!--    </properties> -->
+   <properties>
+      <additionalparam>-Xdoclint:none</additionalparam>
+   </properties>
    <licenses>
       <license>
          <name>The Apache Software License, Version 2.0</name>
@@ -60,8 +60,8 @@
             <artifactId>maven-compiler-plugin</artifactId>
             <version>3.3</version>
             <configuration>
-               <source>1.7</source>
-               <target>1.7</target>
+               <source>1.8</source>
+               <target>1.8</target>
             </configuration>
          </plugin>
          <plugin>

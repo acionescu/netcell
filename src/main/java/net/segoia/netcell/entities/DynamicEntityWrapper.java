@@ -32,7 +32,7 @@ public class DynamicEntityWrapper<O> extends GenericEntity<O> implements Seriali
      */
     private static final long serialVersionUID = -564798093340781210L;
     private DynamicEntityWrapperConfiguration<O> config;
-    public static final String GLOBAL_CONTEXT="_globalContext";
+    public static final String GLOBAL_CONTEXT = "_globalContext";
 
     public O execute(GenericNameValueContext input) throws Exception {
 	GenericNameValueContext globalContext = input;
@@ -40,31 +40,36 @@ public class DynamicEntityWrapper<O> extends GenericEntity<O> implements Seriali
 	Map<String, String> dynamicInput = config.getDynamicParameters();
 	GenericEntity<O> executor = config.getExecutor();
 	GenericNameValueContext localContext = getLocalContext(globalContext, staticContext, dynamicInput);
-	if(config.getUserConfig() != null) {
+	if (config.getUserConfig() != null) {
 	    input.putMap(config.getUserConfig().getValuesMap());
 	}
-	
+
 	String originalInputName = config.getOriginalInputName();
 	if (originalInputName != null) {
 	    localContext.put(originalInputName, input);
 	}
-	/* in case no key for original context was passed, still add it under _globalContext key */ 
+	/* in case no key for original context was passed, still add it under _globalContext key */
 	else {
-	    GenericNameValueContext gContext = (GenericNameValueContext)input.getValue(GLOBAL_CONTEXT);
-	    if(gContext == null) {
+	    GenericNameValueContext gContext = null;
+	    if (executor instanceof DynamicEntityWrapper) {
+		input.remove(GLOBAL_CONTEXT);
+	    } else {
+		gContext = (GenericNameValueContext) input.getValue(GLOBAL_CONTEXT);
+	    }
+	    if (gContext == null) {
 		gContext = input;
 	    }
 	    localContext.put(GLOBAL_CONTEXT, gContext);
 	}
-	 /* set on the context the id of the execution entity */
-	    String currentEntityId = getId();
+	/* set on the context the id of the execution entity */
+	String currentEntityId = getId();
 	try {
 
-//	    currentEntityId = (currentEntityId == null) ? "?" : currentEntityId;
-	    if(currentEntityId == null) {
+	    // currentEntityId = (currentEntityId == null) ? "?" : currentEntityId;
+	    if (currentEntityId == null) {
 		currentEntityId = executor.getId();
 	    }
-	    
+
 	    if (input.getExecutionStack() != null) {
 		localContext.setExecutionStack(input.getExecutionStack());
 	    }
@@ -90,14 +95,16 @@ public class DynamicEntityWrapper<O> extends GenericEntity<O> implements Seriali
 	    throw new ContextAwareException("GENERIC_EXECUTION_ERROR", e);
 	}
     }
+
     /* check if the last execution entity has the same id */
-    private void checkExecutionStackConsistency(String currentEntityId, String lastExecutionEntity) throws ContextAwareException{
+    private void checkExecutionStackConsistency(String currentEntityId, String lastExecutionEntity)
+	    throws ContextAwareException {
 	if (!currentEntityId.equals(lastExecutionEntity)) {
-		ExceptionContext ec = new ExceptionContext();
-		ec.put("expected", currentEntityId);
-		ec.put("actual", lastExecutionEntity);
-		throw new ContextAwareException("EXECUTION_STACK_ERROR", ec);
-	    }
+	    ExceptionContext ec = new ExceptionContext();
+	    ec.put("expected", currentEntityId);
+	    ec.put("actual", lastExecutionEntity);
+	    throw new ContextAwareException("EXECUTION_STACK_ERROR", ec);
+	}
     }
 
     /**
