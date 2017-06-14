@@ -61,9 +61,15 @@ public class DbUtil {
 	    Map<String, Object> result = new HashMap<String, Object>();
 	    for (int i = 1; i <= count; i++) {
 		int colType = meta.getColumnType(i);
+		String colTypeName = meta.getColumnTypeName(i);
+		
 		if (colType == Types.DATE || colType == Types.TIMESTAMP) {
 		    result.put(colNames.get(i - 1), rs.getTimestamp(i));
-		} else if (colType == Types.OTHER) {
+		} 
+		else if("json".equals(colTypeName)) {
+		    result.put(colNames.get(i - 1), rs.getString(i));
+		}
+		else if (colType == Types.OTHER) {
 		    result.put(colNames.get(i - 1), handleCustomDbObject(rs.getObject(i)));
 		} else {
 		    result.put(colNames.get(i - 1), rs.getObject(i));
