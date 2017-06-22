@@ -66,7 +66,7 @@ public class DbUtil {
 		if (colType == Types.DATE || colType == Types.TIMESTAMP) {
 		    result.put(colNames.get(i - 1), rs.getTimestamp(i));
 		} 
-		else if("json".equals(colTypeName)) {
+		else if("json".equals(colTypeName) || "jsonb".equals(colTypeName)) {
 		    result.put(colNames.get(i - 1), rs.getString(i));
 		}
 		else if (colType == Types.OTHER) {
