@@ -43,6 +43,7 @@ import org.apache.http.util.EntityUtils;
 import net.segoia.scriptdao.core.CommandContext;
 import net.segoia.scriptdao.core.CommandExecutor;
 import net.segoia.scriptdao.core.ScriptDaoCommand;
+import net.segoia.util.data.GenericNameValueContext;
 
 public class HttpCommandExecutor implements CommandExecutor<HttpCommandResponse> {
 
@@ -91,10 +92,12 @@ public class HttpCommandExecutor implements CommandExecutor<HttpCommandResponse>
 	    request = new HttpHead(encodedUrl);
 	}
 
-	Map<String, String> requestHeaders = (Map) command.getArgument("requestHeaders");
+	GenericNameValueContext requestHeaders = ((GenericNameValueContext) command.getArgument("requestHeaders"));
 	if (requestHeaders != null) {
-	    for (Map.Entry<String, String> entry : requestHeaders.entrySet()) {
-		request.setHeader(entry.getKey(), entry.getValue());
+	    
+	    for (Map.Entry<String, Object> entry : requestHeaders.getNameValuesAsMap().entrySet()) {
+		request.setHeader(entry.getKey(), entry.getValue().toString());
+		System.out.println("Adding http header "+entry.getKey()+":"+entry.getValue());
 	    }
 	}
 	HttpContext localContext = new BasicHttpContext();
