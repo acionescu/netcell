@@ -44,8 +44,11 @@ import net.segoia.scriptdao.core.CommandContext;
 import net.segoia.scriptdao.core.CommandExecutor;
 import net.segoia.scriptdao.core.ScriptDaoCommand;
 import net.segoia.util.data.GenericNameValueContext;
+import net.segoia.util.logging.Logger;
+import net.segoia.util.logging.MasterLogManager;
 
 public class HttpCommandExecutor implements CommandExecutor<HttpCommandResponse> {
+    private static Logger logger = MasterLogManager.getLogger(HttpCommandExecutor.class.getName());
 
     public HttpCommandResponse[] executeAsTransaction(ScriptDaoCommand[] commands) throws Exception {
 	throw new UnsupportedOperationException();
@@ -78,6 +81,8 @@ public class HttpCommandExecutor implements CommandExecutor<HttpCommandResponse>
 	    returnHeaders = (Boolean) rh;
 	}
 
+	
+	
 	HttpRequestBase request = null;
 	if ("GET".equals(method)) {
 	    request = new HttpGet(encodedUrl);
@@ -85,11 +90,15 @@ public class HttpCommandExecutor implements CommandExecutor<HttpCommandResponse>
 	    HttpPost post = new HttpPost(encodedUrl);
 	    String content = (String) command.getArgument("content");
 	    if (content != null) {
-		post.setEntity(new StringEntity(content));
+		post.setEntity(new StringEntity(content, "UTF-8"));
 	    }
 	    request = post;
 	} else if ("HEAD".equals(method)) {
 	    request = new HttpHead(encodedUrl);
+	}
+	
+	if(logger.isDebugEnabled()) {
+	    logger.debug("Sending "+method+" request to url "+url+" with content "+command.getArgument("content"));
 	}
 
 	GenericNameValueContext requestHeaders = ((GenericNameValueContext) command.getArgument("requestHeaders"));
@@ -97,7 +106,10 @@ public class HttpCommandExecutor implements CommandExecutor<HttpCommandResponse>
 	    
 	    for (Map.Entry<String, Object> entry : requestHeaders.getNameValuesAsMap().entrySet()) {
 		request.setHeader(entry.getKey(), entry.getValue().toString());
-		System.out.println("Adding http header "+entry.getKey()+":"+entry.getValue());
+		if(logger.isDebugEnabled()) {
+		    logger.debug("Adding http header "+entry.getKey()+":"+entry.getValue());
+		}
+		
 	    }
 	}
 	HttpContext localContext = new BasicHttpContext();
