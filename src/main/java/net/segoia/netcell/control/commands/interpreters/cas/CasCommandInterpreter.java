@@ -69,6 +69,7 @@ public class CasCommandInterpreter extends CommandInterpreter<CommandResponse> {
 	commandStart.addNestedSymbol(mapStart);
 
 	commandParser.addSymbol(commandStart);
+	commandParser.setUseEscapeCharacterOn(true);
     }
 
     public String execute(String input) throws Exception {
@@ -136,7 +137,8 @@ public class CasCommandInterpreter extends CommandInterpreter<CommandResponse> {
     public static void main(String[] args) throws Exception {
 	CasCommandInterpreter cci = new CasCommandInterpreter();
 	// cci.getCommandFromString("command_name (prm1 value1, prm2 value2   ,  prm3 value3   )");
-	Command c = cci.getCommandFromString("execute(fid=ro.problems.flows.create-entity,userId=3,entityType=ISSUE,complexType=ISSUE,parentId=25,title=,content=asta e continutul problemei din command line,allowDuplicateTitle=false)");
+//	Command c = cci.getCommandFromString("execute(fid=ro.problems.flows.create-entity,userId=3,entityType=ISSUE,complexType=ISSUE,parentId=25,title=,content=asta e continutul problemei din command line,allowDuplicateTitle=false)");
+	Command c = cci.getCommandFromString("send_apple_notification(deviceTokens=[a6a38ee6294dd63849847422da6d608a130755d81b953ee026a7f2489ac5fc9d], payload=\"{\\\"aps\\\":{\\\"alert\\\":\\\"Hello from Panoul de Bord\\\"}}\")");
 	System.out.println(c);
 
     }
@@ -169,12 +171,19 @@ class CasParserEvent implements ParseEventHandler {
 	return content;
     }
 
-    public Object handleGroupEvent(GroupEvent event) {
+    public Object handleGroupEvent(GroupEvent event) throws ContextAwareException {
 	String seq = event.getStartSymbol().getSequence();
 	if (seq.equals("(")) {
 	    Command c = new Command();
 	    c.setName(event.getPrefixValue().toString().trim());
+	    try {
 	    c.putAll((List)event.getObjects());
+	    }
+	    catch(Exception e) {
+		ExceptionContext ec = new ExceptionContext();
+		ec.put("objects",event.getObjects());
+		throw new ContextAwareException("CAS_PARSE_ERROR", e, ec);
+	    }
 	    return c;
 	} else if (seq.equals("[")) {
 	    GenericNameValueList list = new GenericNameValueList();
