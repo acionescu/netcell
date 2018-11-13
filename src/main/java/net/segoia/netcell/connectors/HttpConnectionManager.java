@@ -18,12 +18,9 @@ package net.segoia.netcell.connectors;
 
 import java.util.Map;
 
-import net.segoia.scriptdao.constants.DataSourceConfigParameters;
-import net.segoia.util.data.ConfigurationData;
-import net.segoia.util.data.UserInputParameter;
-
 import org.apache.http.HttpHost;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.conn.ClientConnectionManager;
 import org.apache.http.conn.params.ConnManagerParams;
 import org.apache.http.conn.params.ConnPerRouteBean;
@@ -33,11 +30,16 @@ import org.apache.http.conn.scheme.Scheme;
 import org.apache.http.conn.scheme.SchemeRegistry;
 import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.params.HttpProtocolParams;
+
+import net.segoia.scriptdao.constants.DataSourceConfigParameters;
+import net.segoia.util.data.ConfigurationData;
+import net.segoia.util.data.UserInputParameter;
 
 public class HttpConnectionManager extends BaseConnectionManager<HttpClient> {
     private HttpClient httpClient;
@@ -48,34 +50,55 @@ public class HttpConnectionManager extends BaseConnectionManager<HttpClient> {
 
     private void initHttpClient() {
 	ConfigurationData cfgData = dataSourceDefinition.getConfigData();
-	
-	HttpParams params = new BasicHttpParams();
-	ConnManagerParams.setMaxTotalConnections(params, Integer.parseInt(cfgData.getParameterValue(DataSourceConfigParameters.MAX_TOTAL_CONNECTIONS).toString()));
-	ConnPerRouteBean connPerRoute = new ConnPerRouteBean(10);
-	HttpHost localhost = new HttpHost("locahost", 80);
-	connPerRoute.setMaxForRoute(new HttpRoute(localhost), 50);
-	ConnManagerParams.setMaxConnectionsPerRoute(params, connPerRoute);
-	ConnManagerParams.setTimeout(params, Long.parseLong(cfgData.getParameterValue(DataSourceConfigParameters.CONNECTION_TIMEOUT).toString()));
-	
-	
-	SchemeRegistry schemeRegistry = new SchemeRegistry();
-	schemeRegistry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
-	schemeRegistry.register(new Scheme("https", SSLSocketFactory.getSocketFactory(), 443));
 
-	ClientConnectionManager cm = new ThreadSafeClientConnManager(params, schemeRegistry);
-	
-	
-	
-	/* set config params */
-	ConfigurationData configData = dataSourceDefinition.getConfigData();
-	Map<String, UserInputParameter> userInputParams = configData.getUserInputParams();
-	for (UserInputParameter uip : userInputParams.values()) {
-	    params.setParameter(uip.getInnerName(), uip.getValue());
-	}
+	int maxTotalConnections = Integer
+		.parseInt(cfgData.getParameterValue(DataSourceConfigParameters.MAX_TOTAL_CONNECTIONS).toString());
+	int connectionTimeout = Integer
+		.parseInt(cfgData.getParameterValue(DataSourceConfigParameters.CONNECTION_TIMEOUT).toString());
+	String userAgent = cfgData.getParameterValue(DataSourceConfigParameters.USER_AGENT).toString();
 
-	HttpConnectionParams.setSoTimeout(params, 25000);
-	httpClient = new DefaultHttpClient(cm, params);
-	HttpProtocolParams.setUserAgent(httpClient.getParams(), cfgData.getParameterValue(DataSourceConfigParameters.USER_AGENT).toString());
+//	HttpParams params = new BasicHttpParams();
+//
+//	ConnManagerParams.setMaxTotalConnections(params, maxTotalConnections);
+//	ConnPerRouteBean connPerRoute = new ConnPerRouteBean(10);
+//	HttpHost localhost = new HttpHost("locahost", 80);
+//	connPerRoute.setMaxForRoute(new HttpRoute(localhost), 50);
+//	ConnManagerParams.setMaxConnectionsPerRoute(params, connPerRoute);
+//
+//	ConnManagerParams.setTimeout(params, connectionTimeout);
+//
+//	SchemeRegistry schemeRegistry = new SchemeRegistry();
+//	schemeRegistry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
+//	schemeRegistry.register(new Scheme("https", SSLSocketFactory.getSocketFactory(), 443));
+//
+//	ClientConnectionManager cm = new ThreadSafeClientConnManager(params, schemeRegistry);
+//
+//	/* set config params */
+//	ConfigurationData configData = dataSourceDefinition.getConfigData();
+//	Map<String, UserInputParameter> userInputParams = configData.getUserInputParams();
+//	for (UserInputParameter uip : userInputParams.values()) {
+//	    params.setParameter(uip.getInnerName(), uip.getValue());
+//	}
+//
+//	HttpConnectionParams.setSoTimeout(params, 25000);
+//	httpClient = new DefaultHttpClient(cm, params);
+//
+//	HttpProtocolParams.setUserAgent(httpClient.getParams(), userAgent);
+	
+	
+
+	HttpClientBuilder httpBuilder = HttpClientBuilder.create();
+
+	RequestConfig httpRequestConfig = RequestConfig.custom().setConnectTimeout(connectionTimeout)
+		.setSocketTimeout(25000).build();
+
+	httpBuilder.setDefaultRequestConfig(httpRequestConfig);
+
+	httpBuilder.setMaxConnTotal(maxTotalConnections);
+	httpBuilder.setMaxConnPerRoute(50);
+	httpBuilder.setUserAgent(userAgent);
+
+	httpClient = httpBuilder.build();
 
     }
 
