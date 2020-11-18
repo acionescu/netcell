@@ -18,7 +18,6 @@ package net.segoia.netcell.control.receivers;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;
-import java.rmi.Remote;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
@@ -30,7 +29,7 @@ import net.segoia.util.io.AbstractReceiver;
 import net.segoia.util.logging.Logger;
 import net.segoia.util.logging.MasterLogManager;
 
-public class RmiCommandReceiver extends AbstractReceiver implements Remote{
+public class RmiCommandReceiver extends AbstractReceiver{
     private static Logger logger = MasterLogManager.getLogger(RmiCommandReceiver.class.getName());
     private String bindName;
     private int bindPort;
